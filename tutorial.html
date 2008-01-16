@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+ <title>Tutorial - hamcrest </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<h1>The Hamcrest Tutorial</h1>
+
+<h2>Introduction</h2>
+
+<p>Hamcrest is a framework for writing matcher objects allowing 'match' rules to be defined declaratively. There are a number of situations where matchers are invaluble, such as UI validation, or data filtering, but it is in the area of writing flexible tests that matchers are most commonly used. This tutorial shows you how to use Hamcrest for unit testing.</p>
+
+<p>When writing tests it is sometimes difficult to get the balance right between overspecifying the test (and making it brittle to changes), and not specifying enough (making the test less valuable since it continues to pass even when the thing being tested is broken). Having a tool that allows you to pick out precisely the aspect under test and describe the values it should have, to a controlled level of precision, helps greatly in writing tests that are "just right". Such tests fail when the behaviour of the aspect under test deviates from the expected behaviour, yet continue to pass when minor, unrelated changes to the behaviour are made.</p>
+
+
+<h2>My first Hamcrest test</h2>
+
+<p>We'll start be writing a very simple pyunit test, but instead of using PyUnit's <tt>assertEqual</tt> method, we use Hamcrest's <tt>assert_that</tt> construct and the standard set of matchers:</p>
+
+<pre class="code" style="margin-left: 2em; padding: 0.5em; border-left: 3px solid #ccc">from hamcrest import *
+import unittest
+
+
+class BiscuitTest(unittest.TestCase):
+    def testEquals(self):
+        theBiscuit = Biscuit('Ginger')
+        myBiscuit = Biscuit('Ginger')
+        assert_that(theBiscuit, equalto(myBiscuit))
+
+
+if __name__ == '__main__':
+    unittest.main()</pre>
+
+<p>The <tt>assert_that</tt> function is a stylized sentence for making a test assertion. In this example, the subject of the assertion is the object <tt>theBiscuit</tt> that is the first method parameter. The second method parameter is a matcher for <tt>Biscuit</tt> objects, here a matcher that checks one object is equal to another using the Python <tt>==</tt> operator. The test passes since the <tt>Biscuit</tt> class defines an __eq__ method.</p>
+
+<p>If you have more than one assertion in your test you can include an identifier for the tested value in the assertion:</p>
+
+<pre class="code" style="margin-left: 2em; padding: 0.5em; border-left: 3px solid #ccc">assert_that(theBiscuit.getChocolateChipCount(), equalto(10), 'chocolate chips')
+assert_that(theBiscuit.getHazelnutCount(), equalto(3), 'hazelnuts')</pre>
+
+
+<h2>A tour of common matchers</h2>
+
+<p>Hamcrest comes with a library of useful matchers. Here are some of the most important ones.</p>
+<ul>
+	<li>Core
+	<ul>
+		<li><tt>anything</tt> - always matches, useful if you don't care what the object under test is </li>
+		<li><tt>described_as</tt> - decorator to adding custom failure description </li>
+		<li><tt>is_</tt> - decorator to improve readability - see &quot;Sugar&quot;, below </li>
+	</ul>
+	</li>
+	<li>Logical
+	<ul>
+		<li><tt>allof</tt> - matches if all matchers match, short circuits (like Python <tt>&amp;&amp;</tt>)</li>
+		<li><tt>anyof</tt> - matches if any matchers match, short circuits (like Python <tt>||</tt>)</li>
+		<li><tt>not_</tt> - matches if the wrapped matcher doesn't match and vice versa</li>
+	</ul>
+	</li>
+	<li>Object
+	<ul>
+		<li><tt>equalto</tt> - test object equality using <tt>==</tt></li>
+		<li><tt>hasstring</tt> - test str(object) value</li>
+		<li><tt>instanceof</tt> - test type</li>
+		<li><tt>none</tt>, <tt>not_none</tt> - test for None</li>
+		<li><tt>sameinstance</tt> - test object identity</li>
+	</ul>
+	</li>
+	<li>Sequences
+	<ul>
+		<li><tt>hasentry</tt>, <tt>haskey</tt>, <tt>hasvalue</tt> - test a dictionary contains an entry, key or value</li>
+		<li><tt>hasitem</tt>, <tt>hasitems</tt> - test a sequence contains elements </li>
+	</ul>
+	</li>
+	<li>Number
+	<ul>
+		<li><tt>closeto</tt> - test numeric values are close to a given value </li>
+		<li><tt>greaterthan</tt>, <tt>greaterthan_or_equalto</tt>, <tt>lessthan</tt>, <tt>lessthan_or_equalto</tt> - test ordering </li>
+	</ul>
+	</li>
+	<li>Text
+	<ul>
+		<li><tt>equalto_ignoring_whitespace</tt> - test string equality ignoring differences in runs of whitespace </li>
+		<li><tt>containsstring</tt>, <tt>endswith</tt>, <tt>startswith</tt> - test string matching </li>
+	</ul>
+	</li>
+</ul>
+
+
+<h2>Sugar</h2>
+
+<p>Hamcrest strives to make your tests as readable as possible. For example, the <tt>is_</tt> matcher is a wrapper that doesn't add any extra behavior to the underlying matcher. The following assertions are all equivalent:</p>
+<pre class="code" style="margin-left: 2em; padding: 0.5em; border-left: 3px solid #ccc">assert_that(theBiscuit, equalto(myBiscuit))
+assert_that(theBiscuit, is_(equalto(myBiscuit)))
+assert_that(theBiscuit, is_(myBiscuit))</pre>
+
+<p>The last form is allowed since <tt>is_(value)</tt> wraps non-matcher arguments with <tt>equalto</tt>.</p>
+
+
+<h2>Writing custom matchers</h2>
+
+<p>Hamcrest comes bundled with lots of useful matchers, but you'll probably find that you need to create your own from time to time to fit your testing needs. This commonly occurs when you find a fragment of code that tests the same set of properties over and over again (and in different tests), and you want to bundle the fragment into a single assertion. By writing your own matcher you'll eliminate code duplication and make your tests more readable!</p>
+
+<p>Let's write our own matcher for testing if a string is comprised of only digits. This is the test we want to write:</p>
+
+<pre class="code" style="margin-left: 2em; padding: 0.5em; border-left: 3px solid #ccc">def testStringIsOnlyDigits(self):
+    assert_that('17', is_(onlydigits()))</pre>
+
+<p>And here's the implementation:</p>
+
+<pre class="code" style="margin-left: 2em; padding: 0.5em; border-left: 3px solid #ccc">from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.internal.hasmethod import hasmethod
+
+
+class IsStringOfDigits(BaseMatcher):
+
+    def matches(self, item):
+        if not hasmethod(item, 'isdigit'):
+            return False
+        return item.isdigit()
+
+    def describe_to(self, description):
+        description.append_text('string of digits')
+
+
+onlydigits = IsStringOfDigits</pre>
+
+<p>For our Matcher implementation we implement the <tt>matches</tt> method - which calls the <tt>isdigit</tt> string method after confirming that the argument (which may not be a string) has such a method - and the <tt>describe_to</tt> method - which is used to produce a failure message when a test fails. Here's an example of how the failure message looks:</p>
+
+<pre class="code" style="margin-left: 2em; padding: 0.5em; border-left: 3px solid #ccc">assert_that('17b', is_(onlydigits()))</pre>
+
+<p>fails with the message</p>
+
+<pre class="code" style="margin-left: 2em; padding: 0.5em; border-left: 3px solid #ccc">AssertionError: 
+Expected: is string of digits
+     got: '17b'</pre>
+
+<p>The factory function <tt>onlydigits</tt> is defined as an alias because no further logic is needed, but other matchers may work best with an actual factory. We import <tt>onlydigits</tt> to use the matcher in our test:</p>
+
+<pre class="code" style="margin-left: 2em; padding: 0.5em; border-left: 3px solid #ccc">from hamcrest import *
+import unittest
+
+from hamcrest_local.isstringofdigits import onlydigits
+
+
+class StringTest(unittest.TestCase):
+
+    def testStringIsOnlyDigits(self):
+        assert_that('17', is_(onlydigits()))
+
+
+if __name__ == '__main__':
+    unittest.main()</pre>
+
+<p>Even though the <tt>onlydigits</tt> function creates a new matcher each time it is called, you should not assume this is the only usage pattern for your matcher. Therefore you should make sure your matcher is stateless, so a single instance can be reused between matches.</p>
+
+</body>
+</html>
