@@ -29,4 +29,4 @@ class IsCloseTo(BaseMatcher):
                     .append_value(self.value)
 
 
-closeto = IsCloseTo
+close_to = IsCloseTo

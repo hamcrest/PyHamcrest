@@ -7,7 +7,7 @@ import unittest
 
 from hamcrest.core.core.described_as import described_as
 from hamcrest.core.core.isanything import anything
-from hamcrest.core.core.isnot import not_
+from hamcrest.core.core.isnot import is_not
 
 from matcher_test import MatcherTest
 
@@ -16,7 +16,7 @@ class DescribedAsTest(MatcherTest):
 
     def testOverridesDescriptionOfOtherMatcherWithThatPassedToConstructor(self):
         m1 = described_as('m1 description', anything())
-        m2 = described_as('m2 description', not_(anything()))
+        m2 = described_as('m2 description', is_not(anything()))
 
         self.assert_description('m1 description', m1)
         self.assert_description('m2 description', m2)
@@ -28,7 +28,7 @@ class DescribedAsTest(MatcherTest):
 
     def testDelegatesMatchingToAnotherMatcher(self):
         m1 = described_as('irrelevant', anything())
-        m2 = described_as('irrelevant', not_(anything()))
+        m2 = described_as('irrelevant', is_not(anything()))
 
         self.assert_(m1.matches(object()))
         self.assert_(not m2.matches('hi'))

@@ -5,15 +5,15 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.isnot import not_
+from hamcrest.core.core.isnot import is_not
 from hamcrest.core.matcher_assert import assert_that
-from hamcrest.library.text.stringendswith import endswith
+from hamcrest.library.text.stringendswith import ends_with
 
 from matcher_test import MatcherTest
 
 
 EXCERPT = 'EXCERPT'
-stringendswith = endswith(EXCERPT)
+stringendswith = ends_with(EXCERPT)
 
 class StringEndsWithTest(MatcherTest):
 
@@ -37,13 +37,13 @@ class StringEndsWithTest(MatcherTest):
                     'should be true if excerpt is entire string')
 
     def testHasAReadableDescription(self):
-        self.assert_description("a string ending with 'a'", endswith('a'))
+        self.assert_description("a string ending with 'a'", ends_with('a'))
 
     def testConstructorRequiresString(self):
-        self.assertRaises(TypeError, endswith, 3)
+        self.assertRaises(TypeError, ends_with, 3)
 
     def testFailsIfMatchingAgainstNonString(self):
-        assert_that(object(), not_(stringendswith))
+        assert_that(object(), is_not(stringendswith))
 
 
 if __name__ == '__main__':

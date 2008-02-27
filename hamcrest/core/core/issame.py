@@ -16,4 +16,4 @@ class IsSame(BaseMatcher):
                     .append_text(')')
 
 
-sameinstance = IsSame
+same_instance = IsSame

@@ -5,9 +5,9 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.allof import allof
-from hamcrest.core.core.isequal import equalto
-from hamcrest.core.core.isnot import not_
+from hamcrest.core.core.allof import all_of
+from hamcrest.core.core.isequal import equal_to
+from hamcrest.core.core.isnot import is_not
 from hamcrest.core.matcher_assert import assert_that
 
 from matcher_test import MatcherTest
@@ -16,29 +16,29 @@ from matcher_test import MatcherTest
 class AllOfTest(MatcherTest):
 
     def testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers(self):
-        assert_that('good', allof(equalto('good'), equalto('good')))
+        assert_that('good', all_of(equal_to('good'), equal_to('good')))
         
-        assert_that('good', not_(allof(equalto('bad'), equalto('good'))))
-        assert_that('good', not_(allof(equalto('good'), equalto('bad'))))
-        assert_that('good', not_(allof(equalto('bad'), equalto('bad'))))
+        assert_that('good', is_not(all_of(equal_to('bad'), equal_to('good'))))
+        assert_that('good', is_not(all_of(equal_to('good'), equal_to('bad'))))
+        assert_that('good', is_not(all_of(equal_to('bad'), equal_to('bad'))))
 
     def testEvaluatesToTheTheLogicalConjunctionOfManyOtherMatchers(self):
-        assert_that('good', allof(
-                                equalto('good'),
-                                equalto('good'),
-                                equalto('good'),
-                                equalto('good'),
-                                equalto('good')))
-        assert_that('good', not_(allof(
-                                equalto('good'),
-                                equalto('good'),
-                                equalto('bad'),
-                                equalto('good'),
-                                equalto('good'))))
+        assert_that('good', all_of(
+                                equal_to('good'),
+                                equal_to('good'),
+                                equal_to('good'),
+                                equal_to('good'),
+                                equal_to('good')))
+        assert_that('good', is_not(all_of(
+                                equal_to('good'),
+                                equal_to('good'),
+                                equal_to('bad'),
+                                equal_to('good'),
+                                equal_to('good'))))
 
     def testHasAReadableDescription(self):
         self.assert_description("('good' and 'bad' and 'ugly')",
-                    allof(equalto('good'), equalto('bad'), equalto('ugly')))
+                    all_of(equal_to('good'), equal_to('bad'), equal_to('ugly')))
 
 
 if __name__ == '__main__':

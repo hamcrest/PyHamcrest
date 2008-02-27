@@ -1,8 +1,8 @@
 import re
 
 from hamcrest.core.base_matcher import BaseMatcher, Matcher
-from isequal import equalto
-from isinstanceof import instanceof
+from isequal import equal_to
+from isinstanceof import instance_of
 
 
 ARG_PATTERN = re.compile('%([0-9]+)')

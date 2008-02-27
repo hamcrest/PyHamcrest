@@ -5,15 +5,15 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.isnot import not_
+from hamcrest.core.core.isnot import is_not
 from hamcrest.core.matcher_assert import assert_that
-from hamcrest.library.text.stringcontains import containsstring
+from hamcrest.library.text.stringcontains import contains_string
 
 from matcher_test import MatcherTest
 
 
 EXCERPT = 'EXCERPT'
-stringcontains = containsstring(EXCERPT)
+stringcontains = contains_string(EXCERPT)
 
 class StringContainsTest(MatcherTest):
 
@@ -37,13 +37,13 @@ class StringContainsTest(MatcherTest):
                     'should be true if excerpt is entire string')
 
     def testHasAReadableDescription(self):
-        self.assert_description("a string containing 'a'", containsstring('a'))
+        self.assert_description("a string containing 'a'", contains_string('a'))
 
     def testConstructorRequiresString(self):
-        self.assertRaises(TypeError, containsstring, 3)
+        self.assertRaises(TypeError, contains_string, 3)
 
     def testFailsIfMatchingAgainstNonString(self):
-        assert_that(object(), not_(stringcontains))
+        assert_that(object(), is_not(stringcontains))
 
 
 if __name__ == '__main__':

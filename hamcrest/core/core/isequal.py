@@ -14,4 +14,4 @@ class IsEqual(BaseMatcher):
         description.append_value(self.object)
 
 
-equalto = IsEqual
+equal_to = IsEqual

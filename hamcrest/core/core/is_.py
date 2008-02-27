@@ -1,5 +1,5 @@
 from hamcrest.core.base_matcher import BaseMatcher
-from isinstanceof import instanceof
+from isinstanceof import instance_of
 from hamcrest.core.internal.wrap_shortcut import wrap_shortcut
 
 
@@ -25,7 +25,7 @@ class Is(BaseMatcher):
 
 def _wrap_shortcut(item):
     if isinstance(item, type):
-        return instanceof(item)
+        return instance_of(item)
     else:
         return wrap_shortcut(item)
 

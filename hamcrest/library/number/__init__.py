@@ -1,4 +1,4 @@
 """Matchers that perform numeric comparisons."""
 
-from iscloseto import closeto
-from ordering_comparison import greaterthan, greaterthan_or_equalto, lessthan, lessthan_or_equalto
+from iscloseto import close_to
+from ordering_comparison import greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to

@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.library.sequence.isin import isin
+from hamcrest.library.sequence.isin import is_in
 
 from matcher_test import MatcherTest
 
@@ -16,7 +16,7 @@ class IsInTest(MatcherTest):
         self.sequence = ('a', 'b', 'c')
 
     def testReturnsTrueIfArgumentIsInSequence(self):
-        matcher = isin(self.sequence)
+        matcher = is_in(self.sequence)
         
         self.assert_matches('a', matcher, 'a')
         self.assert_matches('b', matcher, 'b')
@@ -24,7 +24,7 @@ class IsInTest(MatcherTest):
         self.assert_does_not_match('d', matcher, 'd')
 
     def testHasReadableDescription(self):
-        self.assert_description("one of ('a', 'b', 'c')", isin(self.sequence))
+        self.assert_description("one of ('a', 'b', 'c')", is_in(self.sequence))
 
 
 if __name__ == '__main__':

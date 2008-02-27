@@ -5,8 +5,8 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.isinstanceof import instanceof
-from hamcrest.core.core.isnot import not_
+from hamcrest.core.core.isinstanceof import instance_of
+from hamcrest.core.core.isnot import is_not
 from hamcrest.core.matcher_assert import assert_that
 
 from matcher_test import MatcherTest
@@ -15,15 +15,15 @@ from matcher_test import MatcherTest
 class IsInstanceOfTest(MatcherTest):
 
     def testEvaluatesToTrueIfArgumentIsInstanceOfASpecificClass(self):
-        assert_that(1, instanceof(int))
-        assert_that(None, not_(instanceof(int)))
-        assert_that('hello', not_(instanceof(int)))
+        assert_that(1, instance_of(int))
+        assert_that(None, is_not(instance_of(int)))
+        assert_that('hello', is_not(instance_of(int)))
     
     def testHasAReadableDescription(self):
-        self.assert_description('an instance of int', instanceof(int));
+        self.assert_description('an instance of int', instance_of(int));
     
     def testConstructorRequiresType(self):
-        self.assertRaises(TypeError, instanceof, 3)
+        self.assertRaises(TypeError, instance_of, 3)
         
 
 if __name__ == '__main__':

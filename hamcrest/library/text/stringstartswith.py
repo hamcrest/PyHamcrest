@@ -19,4 +19,4 @@ class StringStartsWith(BaseMatcher):
                     .append_value(self.substring)
 
 
-startswith = StringStartsWith
+starts_with = StringStartsWith

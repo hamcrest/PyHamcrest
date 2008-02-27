@@ -20,5 +20,5 @@ class IsDictContainingValue(BaseMatcher):
                     .append_description_of(self.value_matcher)
 
 
-def hasvalue(value):
+def has_value(value):
     return IsDictContainingValue(wrap_shortcut(value))

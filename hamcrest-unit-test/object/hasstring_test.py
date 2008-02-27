@@ -5,11 +5,11 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.isequal import equalto
-from hamcrest.core.core.isnot import not_
+from hamcrest.core.core.isequal import equal_to
+from hamcrest.core.core.isnot import is_not
 from hamcrest.core.matcher_assert import assert_that
 from hamcrest.core.string_description import tostring
-from hamcrest.library.object.hasstring import hasstring
+from hamcrest.library.object.hasstring import has_string
 
 from matcher_test import MatcherTest
 
@@ -25,12 +25,12 @@ class HasStringTest(MatcherTest):
 
     def testPassesResultOfToStringToNestedMatcher(self):
         ARG = FakeObject()
-        assert_that(ARG, hasstring(equalto(STR_RESULT)))
-        assert_that(ARG, not_(hasstring(equalto('OTHER STRING'))))
+        assert_that(ARG, has_string(equal_to(STR_RESULT)))
+        assert_that(ARG, is_not(has_string(equal_to('OTHER STRING'))))
 
     def testHasReadableDescription(self):
-        string_matcher = equalto(STR_RESULT)
-        matcher = hasstring(string_matcher)
+        string_matcher = equal_to(STR_RESULT)
+        matcher = has_string(string_matcher)
 
         self.assertEquals('str(' + _descriptionof(string_matcher) + ')', _descriptionof(matcher))
 

@@ -15,4 +15,4 @@ class HasString(BaseMatcher):
                     .append_text(')')
 
 
-hasstring = HasString
+has_string = HasString

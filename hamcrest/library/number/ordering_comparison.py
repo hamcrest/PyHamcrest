@@ -30,14 +30,14 @@ class OrderingComparison(BaseMatcher):
 
 
 
-def greaterthan(value):
+def greater_than(value):
     return OrderingComparison(value, -1, -1)
 
-def greaterthan_or_equalto(value):
+def greater_than_or_equal_to(value):
     return OrderingComparison(value, -1, 0)
 
-def lessthan(value):
+def less_than(value):
     return OrderingComparison(value, 1, 1)
 
-def lessthan_or_equalto(value):
+def less_than_or_equal_to(value):
     return OrderingComparison(value, 0, 1)

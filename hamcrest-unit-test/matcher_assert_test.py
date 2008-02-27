@@ -4,7 +4,7 @@ if __name__ == "__main__":
 
 import unittest
 
-from hamcrest.core.core.isequal import equalto
+from hamcrest.core.core.isequal import equal_to
 from hamcrest.core.matcher_assert import assert_that
 
 
@@ -17,7 +17,7 @@ class MatcherAssertTest(unittest.TestCase):
         expectedMessage = "identifier\nExpected: 'expected'\n     got: 'actual'\n"
 
         try:
-            assert_that(actual, equalto(expected), 'identifier')
+            assert_that(actual, equal_to(expected), 'identifier')
         except AssertionError, e:
             self.assertEquals(expectedMessage, str(e))
             return
@@ -31,7 +31,7 @@ class MatcherAssertTest(unittest.TestCase):
         expectedMessage = "\nExpected: 'expected'\n     got: 'actual'\n"
         
         try:
-            assert_that(actual, equalto(expected))
+            assert_that(actual, equal_to(expected))
         except AssertionError, e:
             self.assertEquals(expectedMessage, str(e))
             return

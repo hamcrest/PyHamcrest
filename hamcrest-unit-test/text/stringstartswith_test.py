@@ -5,15 +5,15 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.isnot import not_
+from hamcrest.core.core.isnot import is_not
 from hamcrest.core.matcher_assert import assert_that
-from hamcrest.library.text.stringstartswith import startswith
+from hamcrest.library.text.stringstartswith import starts_with
 
 from matcher_test import MatcherTest
 
 
 EXCERPT = 'EXCERPT'
-stringstartswith = startswith(EXCERPT)
+stringstartswith = starts_with(EXCERPT)
 
 class StringStartsWithTest(MatcherTest):
 
@@ -37,13 +37,13 @@ class StringStartsWithTest(MatcherTest):
                     'should be true if excerpt is entire string')
 
     def testHasAReadableDescription(self):
-        self.assert_description("a string starting with 'a'", startswith('a'))
+        self.assert_description("a string starting with 'a'", starts_with('a'))
 
     def testConstructorRequiresString(self):
-        self.assertRaises(TypeError, startswith, 3)
+        self.assertRaises(TypeError, starts_with, 3)
 
     def testFailsIfMatchingAgainstNonString(self):
-        assert_that(object(), not_(stringstartswith))
+        assert_that(object(), is_not(stringstartswith))
 
 
 if __name__ == '__main__':

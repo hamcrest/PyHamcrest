@@ -5,9 +5,9 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.isequal import equalto
-from hamcrest.library.number.ordering_comparison import lessthan
-from hamcrest.library.sequence.issequence_onlycontaining import onlycontains
+from hamcrest.core.core.isequal import equal_to
+from hamcrest.library.number.ordering_comparison import less_than
+from hamcrest.library.sequence.issequence_onlycontaining import only_contains
 
 from matcher_test import MatcherTest
 from quasisequence import QuasiSequence
@@ -22,27 +22,27 @@ class IsSequenceOnlyContainingTest(MatcherTest):
 
     def testDoesNotMatchEmptyArray(self):
         self.assert_does_not_match('empty sequence',
-                                    onlycontains(equalto('foo')), [])
+                                    only_contains(equal_to('foo')), [])
 
     def testMatchesSingletonList(self):
         self.assert_matches('singleton list',
-                            onlycontains(equalto(1)), [1])
+                            only_contains(equal_to(1)), [1])
 
     def testMatchesList(self):
         self.assert_matches('list',
-                            onlycontains(equalto(1), equalto(2), equalto(3)),
+                            only_contains(equal_to(1), equal_to(2), equal_to(3)),
                             [1, 2, 3])
 
     def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
         self.assert_matches('list',
-                            onlycontains(1, equalto(2), 3),
+                            only_contains(1, equal_to(2), 3),
                             [1, 2, 3])
 
     def testMatchesQuasiSequence(self):
         quasi = QuasiSequence()
-        self.assert_matches('quasi', onlycontains(lessthan(3)), quasi)
-        self.assert_does_not_match('other', onlycontains(1), object())
-        self.assert_does_not_match('other', onlycontains(1),
+        self.assert_matches('quasi', only_contains(less_than(3)), quasi)
+        self.assert_does_not_match('other', only_contains(1), object())
+        self.assert_does_not_match('other', only_contains(1),
                                     ObjectWithLenOnly())
 
 

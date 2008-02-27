@@ -19,4 +19,4 @@ class StringContains(BaseMatcher):
                     .append_value(self.substring)
 
 
-containsstring = StringContains
+contains_string = StringContains

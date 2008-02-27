@@ -5,8 +5,8 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.isequal import equalto
-from hamcrest.library.sequence.isdict_containingkey import haskey
+from hamcrest.core.core.isequal import equal_to
+from hamcrest.library.sequence.isdict_containingkey import has_key
 
 from matcher_test import MatcherTest
 from quasidict import QuasiDictionary
@@ -16,32 +16,32 @@ class IsDictContainingKeyTest(MatcherTest):
 
     def testMatchesSingletonDictContainingKey(self):
         d = {'a': 1}
-        self.assert_matches('Matches single key', haskey(equalto('a')), d)
+        self.assert_matches('Matches single key', has_key(equal_to('a')), d)
 
     def testMatchesDictContainingKey(self):
         d = {'a': 1, 'b': 2, 'c': 3}
-        self.assert_matches('Matches a', haskey(equalto('a')), d)
-        self.assert_matches('Matches c', haskey(equalto('c')), d)
+        self.assert_matches('Matches a', has_key(equal_to('a')), d)
+        self.assert_matches('Matches c', has_key(equal_to('c')), d)
 
     def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
         d = {'a': 1, 'b': 2, 'c': 3}
-        self.assert_matches('Matches c', haskey('c'), d)
+        self.assert_matches('Matches c', has_key('c'), d)
 
     def testHasReadableDescription(self):
-        self.assert_description("dictionary with key 'a'", haskey('a'))
+        self.assert_description("dictionary with key 'a'", has_key('a'))
 
     def testDoesNotMatchEmptyMap(self):
-        self.assert_does_not_match('Empty dictionary', haskey('Foo'), {});
+        self.assert_does_not_match('Empty dictionary', has_key('Foo'), {});
 
     def testDoesNotMatchMapMissingKey(self):
         d = {'a': 1, 'b': 2, 'c': 3}
         self.assert_does_not_match('Dictionary without matching key',
-                                    haskey('d'), d)
+                                    has_key('d'), d)
 
     def testMatchesQuasiDictionary(self):
         quasi = QuasiDictionary()
-        self.assert_matches('quasi', haskey(1), quasi)
-        self.assert_does_not_match('other', haskey(1), object())
+        self.assert_matches('quasi', has_key(1), quasi)
+        self.assert_does_not_match('other', has_key(1), object())
 
 
 if __name__ == '__main__':

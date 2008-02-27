@@ -24,5 +24,5 @@ class IsDictContaining(BaseMatcher):
 			        .append_text(']')
 
 
-def hasentry(key, value):
+def has_entry(key, value):
     return IsDictContaining(wrap_shortcut(key), wrap_shortcut(value))

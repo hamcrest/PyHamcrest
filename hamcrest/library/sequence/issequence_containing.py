@@ -1,5 +1,5 @@
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.core.allof import allof
+from hamcrest.core.core.allof import all_of
 from hamcrest.core.internal.hasmethod import hasmethod
 from hamcrest.core.internal.wrap_shortcut import wrap_shortcut
 
@@ -21,12 +21,12 @@ class IsSequenceContaining(BaseMatcher):
                     .append_description_of(self.matcher)
 
 
-def hasitem(item):
+def has_item(item):
     return IsSequenceContaining(wrap_shortcut(item))
 
 
-def hasitems(*items):
+def has_items(*items):
     all = []
     for item in items:
-        all.append(hasitem(item))
-    return apply(allof, all)
+        all.append(has_item(item))
+    return apply(all_of, all)

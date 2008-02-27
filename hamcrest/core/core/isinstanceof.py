@@ -17,4 +17,4 @@ class IsInstanceOf(BaseMatcher):
                     .append_text(self.the_class.__name__)
 
 
-instanceof = IsInstanceOf
+instance_of = IsInstanceOf

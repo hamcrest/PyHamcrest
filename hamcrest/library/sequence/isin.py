@@ -14,4 +14,4 @@ class IsIn(BaseMatcher):
                     .append_value_list('(', ', ', ')', self.sequence)
 
 
-isin = IsIn
+is_in = IsIn

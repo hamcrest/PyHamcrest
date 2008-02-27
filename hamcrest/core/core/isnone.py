@@ -1,5 +1,5 @@
 from hamcrest.core.base_matcher import BaseMatcher
-from isnot import not_
+from isnot import is_not
 
 
 class IsNone(BaseMatcher):
@@ -15,4 +15,4 @@ class IsNone(BaseMatcher):
 none = IsNone
 
 def not_none():
-    return not_(none())
+    return is_not(none())

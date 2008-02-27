@@ -1,8 +1,8 @@
 """Matchers of sequences."""
 
-from isdict_containing import hasentry
-from isdict_containingkey import haskey
-from isdict_containingvalue import hasvalue
-from isin import isin
-from issequence_containing import hasitem, hasitems
-from issequence_onlycontaining import onlycontains
+from isdict_containing import has_entry
+from isdict_containingkey import has_key
+from isdict_containingvalue import has_value
+from isin import is_in
+from issequence_containing import has_item, has_items
+from issequence_onlycontaining import only_contains

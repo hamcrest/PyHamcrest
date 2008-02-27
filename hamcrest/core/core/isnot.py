@@ -1,5 +1,5 @@
 from hamcrest.core.base_matcher import BaseMatcher, Matcher
-from isequal import equalto
+from isequal import equal_to
 
 
 class IsNot(BaseMatcher):
@@ -15,9 +15,9 @@ class IsNot(BaseMatcher):
         description.append_text('not ').append_description_of(self.matcher)
 
 
-def not_(item):
+def is_not(item):
     if isinstance(item, Matcher):
         wrapped_item = item
     else:
-        wrapped_item = equalto(item)
+        wrapped_item = equal_to(item)
     return IsNot(wrapped_item)

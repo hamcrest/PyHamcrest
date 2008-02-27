@@ -1,6 +1,6 @@
 """Matchers that perform text comparisons."""
 
-from isequal_ignoring_whitespace import equalto_ignoring_whitespace
-from stringcontains import containsstring
-from stringendswith import endswith
-from stringstartswith import startswith
+from isequal_ignoring_whitespace import equal_to_ignoring_whitespace
+from stringcontains import contains_string
+from stringendswith import ends_with
+from stringstartswith import starts_with

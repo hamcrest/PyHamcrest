@@ -33,4 +33,4 @@ def stripspace(string):
     return result.strip()
 
 
-equalto_ignoring_whitespace = IsEqualIgnoringWhiteSpace
+equal_to_ignoring_whitespace = IsEqualIgnoringWhiteSpace

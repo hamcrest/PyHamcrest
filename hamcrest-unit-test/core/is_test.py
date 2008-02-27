@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.core.core.isequal import equalto
+from hamcrest.core.core.isequal import equal_to
 from hamcrest.core.core.is_ import is_
 
 from matcher_test import MatcherTest
@@ -14,13 +14,13 @@ from matcher_test import MatcherTest
 class IsTest(MatcherTest):
 
     def testJustMatchesTheSameWayTheUnderylingMatcherDoes(self):
-        self.assert_matches('should match', is_(equalto(True)), True)
-        self.assert_matches('should match', is_(equalto(False)), False)
-        self.assert_does_not_match('should not match', is_(equalto(True)), False)
-        self.assert_does_not_match('should not match', is_(equalto(False)), True)
+        self.assert_matches('should match', is_(equal_to(True)), True)
+        self.assert_matches('should match', is_(equal_to(False)), False)
+        self.assert_does_not_match('should not match', is_(equal_to(True)), False)
+        self.assert_does_not_match('should not match', is_(equal_to(False)), True)
 
     def testGeneratesIsPrefixInDescription(self):
-        self.assert_description('is <True>', is_(equalto(True)))
+        self.assert_description('is <True>', is_(equal_to(True)))
 
     def testProvidesConvenientShortcutForIsEqualTo(self):
         self.assert_matches('should match', is_('A'), 'A');

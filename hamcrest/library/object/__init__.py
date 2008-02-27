@@ -1,3 +1,3 @@
 """Matchers that inspect objects and classes."""
 
-from hasstring import hasstring
+from hasstring import has_string

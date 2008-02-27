@@ -17,4 +17,4 @@ class AnyOf(ShortcutCombination):
         self._describe_to(description, 'or')
 
 
-anyof = AnyOf
+any_of = AnyOf

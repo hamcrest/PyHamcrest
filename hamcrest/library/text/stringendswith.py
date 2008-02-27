@@ -19,4 +19,4 @@ class StringEndsWith(BaseMatcher):
                     .append_value(self.substring)
 
 
-endswith = StringEndsWith
+ends_with = StringEndsWith

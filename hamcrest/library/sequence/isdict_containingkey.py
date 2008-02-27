@@ -20,5 +20,5 @@ class IsDictContainingKey(BaseMatcher):
                     .append_description_of(self.key_matcher)
 
 
-def haskey(key):
+def has_key(key):
     return IsDictContainingKey(wrap_shortcut(key))

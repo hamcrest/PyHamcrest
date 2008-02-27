@@ -1,5 +1,5 @@
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.core.anyof import anyof
+from hamcrest.core.core.anyof import any_of
 from hamcrest.core.internal.hasmethod import hasmethod
 from hamcrest.core.internal.wrap_shortcut import wrap_shortcut
 
@@ -25,8 +25,8 @@ class IsSequenceOnlyContaining(BaseMatcher):
                     .append_description_of(self.matcher)
 
 
-def onlycontains(*items):
+def only_contains(*items):
     matchers = []
     for item in items:
         matchers.append(wrap_shortcut(item))    
-    return IsSequenceOnlyContaining(apply(anyof, matchers))
+    return IsSequenceOnlyContaining(apply(any_of, matchers))

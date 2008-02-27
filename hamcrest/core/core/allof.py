@@ -17,4 +17,4 @@ class AllOf(ShortcutCombination):
         self._describe_to(description, 'and')
 
 
-allof = AllOf
+all_of = AllOf
