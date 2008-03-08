@@ -16,6 +16,14 @@ class FakeArgument:
     def __str__(self):
         return 'ARGUMENT DESCRIPTION'
 
+class AlwaysEqual:
+    def __eq__(self, obj):
+        return True
+
+class NeverEqual:
+    def __eq__(self, obj):
+        return False
+
 
 class IsEqualTest(MatcherTest):
 
@@ -25,6 +33,16 @@ class IsEqualTest(MatcherTest):
 
         assert_that(1, equal_to(1))
         assert_that(1, is_not(equal_to(2)))
+
+    def testCanCompareNoneValues(self):
+        assert_that(None, equal_to(None));
+
+        assert_that(None, is_not(equal_to("hi")));
+        assert_that("hi", is_not(equal_to(None)));
+
+    def testHonoursEqImplementation(self):
+        assert_that(AlwaysEqual(), equal_to(1));
+        assert_that(NeverEqual(), is_not(equal_to(1)));
 
     def testIncludesTheResultOfCallingToStringOnItsArgumentInTheDescription(self):
         self.assert_description('<ARGUMENT DESCRIPTION>', equal_to(FakeArgument()))
