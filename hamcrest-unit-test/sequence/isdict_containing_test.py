@@ -31,8 +31,7 @@ class IsDictContainingTest(MatcherTest):
                                 has_entry('a', 2))
 
     def testMatchesQuasiDictionary(self):
-        quasi = QuasiDictionary()
-        self.assert_matches('quasi', has_entry(1, '1'), quasi)
+        self.assert_matches('quasi', has_entry(1, '1'), QuasiDictionary())
         self.assert_does_not_match('other', has_entry(1, '1'), object())
         
 

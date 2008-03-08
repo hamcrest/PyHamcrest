@@ -55,8 +55,7 @@ class IsSequenceContainingTest(MatcherTest):
                             matcher5, ('e', 'c', 'b', 'd')) # 'a' missing
 
     def testMatchesQuasiSequence(self):
-        quasi = QuasiSequence()
-        self.assert_matches('quasi', has_item(1), quasi)
+        self.assert_matches('quasi', has_item(1), QuasiSequence())
         self.assert_does_not_match('other', has_item(1), object())
 
 

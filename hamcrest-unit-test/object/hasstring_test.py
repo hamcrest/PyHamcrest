@@ -16,14 +16,11 @@ from matcher_test import MatcherTest
 
 STR_RESULT = 'str result'
 
-class FakeObject:
-    def __str__(self):
-        return STR_RESULT
-
-
 class HasStringTest(MatcherTest):
 
     def testPassesResultOfToStringToNestedMatcher(self):
+        class FakeObject:
+            def __str__(self): return STR_RESULT
         ARG = FakeObject()
         assert_that(ARG, has_string(equal_to(STR_RESULT)))
         assert_that(ARG, is_not(has_string(equal_to('OTHER STRING'))))
@@ -32,7 +29,8 @@ class HasStringTest(MatcherTest):
         string_matcher = equal_to(STR_RESULT)
         matcher = has_string(string_matcher)
 
-        self.assertEquals('str(' + _descriptionof(string_matcher) + ')', _descriptionof(matcher))
+        self.assertEquals('str(' + _descriptionof(string_matcher) + ')',
+                        _descriptionof(matcher))
 
 
 def _descriptionof(matcher):

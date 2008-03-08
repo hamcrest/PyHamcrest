@@ -12,11 +12,11 @@ from hamcrest.core.matcher_assert import assert_that
 from matcher_test import MatcherTest
 
 
-ANY_NON_NULL_ARGUMENT = object()
-
 class IsNoneTest(MatcherTest):
 
     def testEvaluatesToTrueIfArgumentIsNone(self):
+        ANY_NON_NULL_ARGUMENT = object()
+        
         assert_that(None, none())
         assert_that(ANY_NON_NULL_ARGUMENT, is_not(none()))
         

@@ -39,8 +39,7 @@ class IsDictContainingKeyTest(MatcherTest):
                                     has_key('d'), d)
 
     def testMatchesQuasiDictionary(self):
-        quasi = QuasiDictionary()
-        self.assert_matches('quasi', has_key(1), quasi)
+        self.assert_matches('quasi', has_key(1), QuasiDictionary())
         self.assert_does_not_match('other', has_key(1), object())
 
 

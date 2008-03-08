@@ -13,11 +13,6 @@ from matcher_test import MatcherTest
 from quasisequence import QuasiSequence
 
 
-class ObjectWithLenOnly:
-    def __len__(self):
-        return 20
-
-
 class IsSequenceOnlyContainingTest(MatcherTest):
 
     def testDoesNotMatchEmptyArray(self):
@@ -39,11 +34,11 @@ class IsSequenceOnlyContainingTest(MatcherTest):
                             [1, 2, 3])
 
     def testMatchesQuasiSequence(self):
-        quasi = QuasiSequence()
-        self.assert_matches('quasi', only_contains(less_than(3)), quasi)
+        class ObjectWithLenOnly:
+            def __len__(self): return 20
+        self.assert_matches('quasi', only_contains(less_than(3)), QuasiSequence())
         self.assert_does_not_match('other', only_contains(1), object())
-        self.assert_does_not_match('other', only_contains(1),
-                                    ObjectWithLenOnly())
+        self.assert_does_not_match('other', only_contains(1), ObjectWithLenOnly())
 
 
 if __name__ == '__main__':
