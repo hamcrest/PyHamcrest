@@ -11,6 +11,7 @@ class Is(BaseMatcher):
         assert_that(cheese, equalto(smelly))
     vs.
         assert_that(cheese, is(equalto(smelly)))
+    
     """
     
     def __init__(self, matcher):

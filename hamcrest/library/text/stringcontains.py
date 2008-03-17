@@ -3,6 +3,7 @@ from hamcrest.core.internal.hasmethod import hasmethod
 
 
 class StringContains(BaseMatcher):
+    """Tests if the argument is a string that contains a substring."""
 
     def __init__(self, substring):
         if not isinstance(substring, str):

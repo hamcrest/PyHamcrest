@@ -8,7 +8,11 @@ from isinstanceof import instance_of
 ARG_PATTERN = re.compile('%([0-9]+)')
 
 class DescribedAs(BaseMatcher):
-    """Provides a custom description to another matcher."""
+    """Provides a custom description to another matcher.
+    
+    Optional values following the matcher are substituted for %0, %1, etc.
+
+    """
     
     def __init__(self, description_template, matcher, *values):
         self.template = description_template

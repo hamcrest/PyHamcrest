@@ -2,9 +2,11 @@ from shortcut_combination import ShortcutCombination
 
 
 class AllOf(ShortcutCombination):
-    """Calculates the logical conjunction of two matchers. Evaluation is
-    shortcut, so that the second matcher is not called if the first matcher
-    returns False.
+    """Calculates the logical conjunction of multiple matchers.
+    
+    Evaluation is shortcut, so subsequent matchers are not called if an earlier
+    matcher returns False.
+    
     """
     
     def __init__(self, *matchers):

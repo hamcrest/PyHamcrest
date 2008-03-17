@@ -3,6 +3,7 @@ from hamcrest.core.internal.hasmethod import hasmethod
 
 
 class StringEndsWith(BaseMatcher):
+    """Tests if the argument is a string that ends with a substring."""
 
     def __init__(self, substring):
         if not isinstance(substring, str):

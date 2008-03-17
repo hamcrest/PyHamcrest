@@ -6,7 +6,9 @@ def isnumeric(value):
 
 
 class IsCloseTo(BaseMatcher):
-    """Is the value a number equal to a value within some range of acceptable error?"""
+    """Is the value a number equal to a value within some range of acceptable
+    error?
+    """
     
     def __init__(self, value, error):
         if not isnumeric(value):

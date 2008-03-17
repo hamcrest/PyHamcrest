@@ -3,7 +3,8 @@ from hamcrest.core.internal.hasmethod import hasmethod
 
 
 class StringStartsWith(BaseMatcher):
-
+    """Tests if the argument is a string that starts with a substring."""
+    
     def __init__(self, substring):
         if not isinstance(substring, str):
             raise TypeError('StringStartsWith requires string')

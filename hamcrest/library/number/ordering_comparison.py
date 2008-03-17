@@ -11,7 +11,6 @@ def _comparison(compare):
 
 
 class OrderingComparison(BaseMatcher):
-    """Is the value a number equal to a value within some range of acceptable error?"""
     
     def __init__(self, value, min_compare, max_compare):
         self.value = value

@@ -6,19 +6,19 @@ from hamcrest.core.internal.wrap_shortcut import wrap_shortcut
 
 class IsSequenceContaining(BaseMatcher):
     
-    def __init__(self, matcher):
-        self.matcher = matcher
+    def __init__(self, element_matcher):
+        self.element_matcher = element_matcher
 
     def matches(self, sequence):
         if hasmethod(sequence, '__iter__'):
             for item in sequence:
-                if self.matcher.matches(item):
+                if self.element_matcher.matches(item):
                     return True
         return False
 
     def describe_to(self, description):
         description.append_text('a sequence containing ')           \
-                    .append_description_of(self.matcher)
+                    .append_description_of(self.element_matcher)
 
 
 def has_item(item):
