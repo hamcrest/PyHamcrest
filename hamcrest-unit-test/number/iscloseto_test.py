@@ -21,7 +21,6 @@ class IsCloseToTest(MatcherTest):
 
         self.assert_(not p.matches(2.0), 'number too large')
         self.assert_(not p.matches(0.0), 'number too small')
-        self.assert_(not p.matches('a'), 'not a number')
     
     def testHasAReadableDescription(self):
         self.assert_description('a numeric value within <0.5> of <1.0>',
@@ -36,7 +35,9 @@ class IsCloseToTest(MatcherTest):
         close_to(5L, 1L)
 
     def testFailsIfMatchingAgainstNonNumber(self):
-        self.assert_(not close_to(1.0, 0.5).matches('a'), 'not a number')
+        p = close_to(1.0, 0.5)
+
+        self.assert_(not p.matches('a'), 'not a number')
 
 
 if __name__ == '__main__':

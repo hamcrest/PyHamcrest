@@ -15,7 +15,7 @@ from quasisequence import QuasiSequence
 
 class IsSequenceOnlyContainingTest(MatcherTest):
 
-    def testDoesNotMatchEmptyArray(self):
+    def testDoesNotMatchEmptyList(self):
         self.assert_does_not_match('empty sequence',
                                     only_contains(equal_to('foo')), [])
 
@@ -32,6 +32,15 @@ class IsSequenceOnlyContainingTest(MatcherTest):
         self.assert_matches('list',
                             only_contains(1, equal_to(2), 3),
                             [1, 2, 3])
+
+    def testDoesNotMatchListWithMismatchingItem(self):
+        self.assert_does_not_match('list',
+                            only_contains(1, 2),
+                            [1, 2, 3])
+
+    def testHasAReadableDescription(self):
+        self.assert_description('a sequence containing items matching (<1> or <2>)',
+                            only_contains(1, 2))
 
     def testMatchesQuasiSequence(self):
         class ObjectWithLenOnly:
