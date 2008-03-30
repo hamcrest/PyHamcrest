@@ -6,17 +6,17 @@ class IsEqualIgnoringCase(BaseMatcher):
     def __init__(self, string):
         if not isinstance(string, str):
             raise TypeError('IsEqualIgnoringCase requires string')
-        self.originalString = string
-        self.lowerString = string.lower()
+        self.original_string = string
+        self.lowered_string = string.lower()
     
     def matches(self, item):
         if not isinstance(item, str):
             return False
-        return self.lowerString == item.lower()
+        return self.lowered_string == item.lower()
 
     def describe_to(self, description):
         description.append_text('eqIgnoringCase(')      \
-                    .append_value(self.originalString)  \
+                    .append_value(self.original_string)  \
                     .append_text(')')
 
 
