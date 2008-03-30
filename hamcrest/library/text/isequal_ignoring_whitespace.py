@@ -6,16 +6,17 @@ class IsEqualIgnoringWhiteSpace(BaseMatcher):
     def __init__(self, string):
         if not isinstance(string, str):
             raise TypeError('IsEqualIgnoringWhiteSpace requires string')
-        self.string = string
+        self.original_string = string
+        self.stripped_string = stripspace(string)
     
     def matches(self, item):
         if not isinstance(item, str):
             return False
-        return stripspace(self.string) == stripspace(item)
+        return self.stripped_string == stripspace(item)
 
     def describe_to(self, description):
         description.append_text('eqIgnoringWhiteSpace(')    \
-                    .append_value(self.string)              \
+                    .append_value(self.original_string)     \
                     .append_text(')')
 
 
