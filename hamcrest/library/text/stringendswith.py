@@ -3,7 +3,7 @@ from hamcrest.core.internal.hasmethod import hasmethod
 
 
 class StringEndsWith(SubstringMatcher):
-    """Tests if the argument is a string that ends with a substring."""
+    """Matches if the item is a string that ends with a given substring."""
 
     def __init__(self, substring):
         super(StringEndsWith, self).__init__(substring)
@@ -17,4 +17,5 @@ class StringEndsWith(SubstringMatcher):
         return 'ending with'
 
 
-ends_with = StringEndsWith
+"""Is the value a string ending with a given substring?"""
+ends_with = StringEndsWith  # Can use directly without a function.

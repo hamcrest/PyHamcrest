@@ -6,7 +6,6 @@ class AllOf(ShortcutCombination):
     
     Evaluation is shortcut, so subsequent matchers are not called if an earlier
     matcher returns False.
-    
     """
     
     def __init__(self, *matchers):
@@ -19,4 +18,5 @@ class AllOf(ShortcutCombination):
         self._describe_to(description, 'and')
 
 
-all_of = AllOf
+"""Evaluates to true only if ALL of the passed in matchers evaluate to true."""
+all_of = AllOf  # Can use directly without a function.

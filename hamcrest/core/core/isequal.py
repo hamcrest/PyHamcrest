@@ -14,4 +14,5 @@ class IsEqual(BaseMatcher):
         description.append_value(self.object)
 
 
-equal_to = IsEqual
+"""Is the value equal to another value?"""
+equal_to = IsEqual  # Can use directly without a function.

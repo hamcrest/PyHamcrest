@@ -8,33 +8,33 @@ import unittest
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.core.core.isnot import is_not
 from hamcrest.core.matcher_assert import assert_that
-from hamcrest.core.string_description import tostring
 from hamcrest.library.object.hasstring import has_string
 
 from matcher_test import MatcherTest
 
 
-STR_RESULT = 'str result'
+str_result = 'str result'
+
+class FakeObject:
+    def __str__(self): return str_result
+
 
 class HasStringTest(MatcherTest):
 
-    def testPassesResultOfToStringToNestedMatcher(self):
-        class FakeObject:
-            def __str__(self): return STR_RESULT
-        ARG = FakeObject()
-        assert_that(ARG, has_string(equal_to(STR_RESULT)))
-        assert_that(ARG, is_not(has_string(equal_to('OTHER STRING'))))
+    def testPassesResultOfToStrToNestedMatcher(self):
+        object = FakeObject()
+        assert_that(object, has_string(equal_to(str_result)))
+        assert_that(object, is_not(has_string(equal_to('other'))))
+
+    def testProvidesConvenientShortcutForHasStringEqualTo(self):
+        object = FakeObject()
+        assert_that(object, has_string(str_result))
+        assert_that(object, is_not(has_string('other')))
 
     def testHasReadableDescription(self):
-        string_matcher = equal_to(STR_RESULT)
+        string_matcher = equal_to(str_result)
         matcher = has_string(string_matcher)
-
-        self.assertEquals('str(' + _descriptionof(string_matcher) + ')',
-                        _descriptionof(matcher))
-
-
-def _descriptionof(matcher):
-    return tostring(matcher);
+        self.assertEquals('str(' + str(string_matcher) + ')', str(matcher))
 
 
 if __name__ == '__main__':

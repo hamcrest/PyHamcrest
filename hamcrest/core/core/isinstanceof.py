@@ -17,4 +17,5 @@ class IsInstanceOf(BaseMatcher):
                     .append_text(self.the_class.__name__)
 
 
-instance_of = IsInstanceOf
+"""Is the value an instance of a particular type?"""
+instance_of = IsInstanceOf  # Can use directly without a function.

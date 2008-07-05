@@ -6,8 +6,8 @@ if __name__ == '__main__':
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
+from hamcrest.library.collection.issequence_onlycontaining import only_contains
 from hamcrest.library.number.ordering_comparison import less_than
-from hamcrest.library.sequence.issequence_onlycontaining import only_contains
 
 from matcher_test import MatcherTest
 from quasisequence import QuasiSequence

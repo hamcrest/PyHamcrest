@@ -6,7 +6,7 @@ if __name__ == '__main__':
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.sequence.isdict_containingvalue import has_value
+from hamcrest.library.collection.isdict_containingvalue import has_value
 
 from matcher_test import MatcherTest
 from quasidict import QuasiDictionary

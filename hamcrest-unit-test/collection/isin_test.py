@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
 import unittest
 
-from hamcrest.library.sequence.isin import is_in
+from hamcrest.library.collection.isin import is_in
 
 from matcher_test import MatcherTest
 

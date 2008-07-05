@@ -5,6 +5,9 @@ class IsAnything(BaseMatcher):
     """A matcher that always returns True."""
     
     def __init__(self, description=None):
+        """You can optionally supply a meaningful string used when describing
+        itself.
+        """
         self.description = description
         if not description:
             self.description = 'ANYTHING'
@@ -16,4 +19,7 @@ class IsAnything(BaseMatcher):
         description.append_text(self.description)
 
 
-anything = IsAnything
+"""This matcher always evaluates to true.
+You can optionally supply a meaningful string used when describing itself.
+"""
+anything = IsAnything   # Can use directly without a function.

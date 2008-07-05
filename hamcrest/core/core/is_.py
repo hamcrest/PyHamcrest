@@ -7,11 +7,8 @@ class Is(BaseMatcher):
     """Decorates another Matcher, retaining the behavior but allowing tests to
     be slightly more expressive.
     
-    For example,
-        assert_that(cheese, equalto(smelly))
-    vs.
-        assert_that(cheese, is(equalto(smelly)))
-    
+    For example:  assert_that(cheese, equal_to(smelly))
+             vs.  assert_that(cheese, is_(equal_to(smelly)))
     """
     
     def __init__(self, matcher):
@@ -24,12 +21,21 @@ class Is(BaseMatcher):
         description.append_text('is ').append_description_of(self.matcher)
 
 
-def _wrap_shortcut(item):
-    if isinstance(item, type):
-        return instance_of(item)
+def _wrap_shortcut(x):
+    if isinstance(x, type):
+        return instance_of(x)
     else:
-        return wrap_shortcut(item)
+        return wrap_shortcut(x)
 
 
-def is_(item):
-    return Is(_wrap_shortcut(item))
+def is_(x):
+    """Decorates an item, providing shortcuts to the frequently used
+    expressions is_(equal_to(x)) and is_(instance_of(x)).
+    
+    For example:  assert_that(cheese, is_(equal_to(smelly)))
+             vs.  assert_that(cheese, is_(smelly))
+    
+    For example:  assert_that(cheese, is_(instance_of(Cheddar)))
+             vs.  assert_that(cheese, is_(Cheddar))
+    """
+    return Is(_wrap_shortcut(x))

@@ -6,7 +6,6 @@ class AnyOf(ShortcutCombination):
     
     Evaluation is shortcut, so subsequent matchers are not called if an earlier
     matcher returns True.
-    
     """
     
     def __init__(self, *matchers):
@@ -19,4 +18,5 @@ class AnyOf(ShortcutCombination):
         self._describe_to(description, 'or')
 
 
-any_of = AnyOf
+"""Evaluates to true if ANY of the passed in matchers evaluate to true."""
+any_of = AnyOf  # Can use directly without a function.

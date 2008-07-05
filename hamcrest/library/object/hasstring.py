@@ -1,8 +1,10 @@
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.internal.wrap_shortcut import wrap_shortcut
 
 
 class HasString(BaseMatcher):
-    
+    """Matches if str(item) satisfies a nested matcher."""
+
     def __init__(self, str_matcher):
         self.str_matcher = str_matcher
 
@@ -15,4 +17,11 @@ class HasString(BaseMatcher):
                     .append_text(')')
 
 
-has_string = HasString
+def has_string(x):
+    """Evaluates whether str(item) satisfies a given matcher, providing a
+    shortcut to the frequently used has_string(equal_to(x))
+    
+    For example:  has_string(equal_to(x))
+             vs.  has_string(x)
+    """
+    return HasString(wrap_shortcut(x))

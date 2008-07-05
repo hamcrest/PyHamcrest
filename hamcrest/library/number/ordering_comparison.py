@@ -30,13 +30,17 @@ class OrderingComparison(BaseMatcher):
 
 
 def greater_than(value):
+    """Is value > expected?"""
     return OrderingComparison(value, -1, -1)
 
 def greater_than_or_equal_to(value):
+    """Is value >= expected?"""
     return OrderingComparison(value, -1, 0)
 
 def less_than(value):
+    """Is value < expected?"""
     return OrderingComparison(value, 1, 1)
 
 def less_than_or_equal_to(value):
+    """Is value <= expected?"""
     return OrderingComparison(value, 0, 1)

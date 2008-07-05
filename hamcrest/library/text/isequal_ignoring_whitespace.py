@@ -2,6 +2,7 @@ from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsEqualIgnoringWhiteSpace(BaseMatcher):
+    """Matches if strings are equal ignoring white space."""
 
     def __init__(self, string):
         if not isinstance(string, str):
@@ -34,4 +35,5 @@ def stripspace(string):
     return result.strip()
 
 
-equal_to_ignoring_whitespace = IsEqualIgnoringWhiteSpace
+"""Are the strings equal, ignoring white space?"""
+equal_to_ignoring_whitespace = IsEqualIgnoringWhiteSpace    # Can use directly without a function.

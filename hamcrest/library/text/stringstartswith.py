@@ -3,7 +3,7 @@ from hamcrest.core.internal.hasmethod import hasmethod
 
 
 class StringStartsWith(SubstringMatcher):
-    """Tests if the argument is a string that starts with a substring."""
+    """Matches if the item is a string that starts with a given substring."""
     
     def __init__(self, substring):
         super(StringStartsWith, self).__init__(substring)
@@ -17,4 +17,5 @@ class StringStartsWith(SubstringMatcher):
         return 'starting with'
 
 
-starts_with = StringStartsWith
+"""Is the value a string starting with a given substring?"""
+starts_with = StringStartsWith  # Can use directly without a function.

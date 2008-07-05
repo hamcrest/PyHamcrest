@@ -15,9 +15,15 @@ class IsNot(BaseMatcher):
         description.append_text('not ').append_description_of(self.matcher)
 
 
-def is_not(item):
-    if isinstance(item, Matcher):
-        wrapped_item = item
+def is_not(x):
+    """Inverts the rule, providing a shortcut to the frequently used
+    is_not(equal_to(x)).
+    
+    For example:  assert_that(cheese, is_not(equal_to(smelly)))
+             vs.  assert_that(cheese, is_not(smelly))
+    """
+    if isinstance(x, Matcher):
+        wrapped_x = x
     else:
-        wrapped_item = equal_to(item)
-    return IsNot(wrapped_item)
+        wrapped_x = equal_to(x)
+    return IsNot(wrapped_x)

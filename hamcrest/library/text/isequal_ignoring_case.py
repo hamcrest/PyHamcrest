@@ -2,6 +2,7 @@ from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsEqualIgnoringCase(BaseMatcher):
+    """Matches if strings are equal ignoring case."""
 
     def __init__(self, string):
         if not isinstance(string, str):
@@ -20,4 +21,5 @@ class IsEqualIgnoringCase(BaseMatcher):
                     .append_text(')')
 
 
-equal_to_ignoring_case = IsEqualIgnoringCase
+"""Are the strings equal, ignoring case?"""
+equal_to_ignoring_case = IsEqualIgnoringCase    # Can use directly without a function.

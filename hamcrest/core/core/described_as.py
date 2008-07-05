@@ -34,4 +34,5 @@ class DescribedAs(BaseMatcher):
             description.append_text(self.template[text_start:])
 
 
-described_as = DescribedAs
+"""Wraps an existing matcher and overrides the description when it fails."""
+described_as = DescribedAs  # Can use directly without a function.

@@ -31,4 +31,7 @@ class IsCloseTo(BaseMatcher):
                     .append_value(self.value)
 
 
-close_to = IsCloseTo
+"""Is the value a number equal to a value within some range of acceptable
+error?
+"""
+close_to = IsCloseTo    # Can use directly without a function.

@@ -3,7 +3,7 @@ from hamcrest.core.internal.hasmethod import hasmethod
 
 
 class StringContains(SubstringMatcher):
-    """Tests if the argument is a string that contains a substring."""
+    """Matches if the item is a string that contains a given substring."""
 
     def __init__(self, substring):
         super(StringContains, self).__init__(substring)
@@ -17,4 +17,5 @@ class StringContains(SubstringMatcher):
         return 'containing'
 
 
-contains_string = StringContains
+"""Is the value a string containing a given substring?"""
+contains_string = StringContains    # Can use directly without a function.

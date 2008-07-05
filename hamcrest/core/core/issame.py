@@ -16,4 +16,5 @@ class IsSame(BaseMatcher):
                     .append_text(')')
 
 
-same_instance = IsSame
+"""Evaluates to true only when the argument is this same object."""
+same_instance = IsSame  # Can use directly without a function.
