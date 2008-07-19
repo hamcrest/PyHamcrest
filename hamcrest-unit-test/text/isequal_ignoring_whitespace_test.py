@@ -35,7 +35,8 @@ class IsEqualIgnoringWhiteSpaceTest(MatcherTest):
         assert_that(object(), is_not(matcher))
 
     def testDescribesItselfAsIgnoringWhiteSpace(self):
-        self.assert_description("eqIgnoringWhiteSpace('Hello World   how\\n are we? ')", matcher)
+        self.assert_description("equal_to_ignoring_whitespace('Hello World   how\\n are we? ')",
+                                matcher)
 
 
 if __name__ == '__main__':

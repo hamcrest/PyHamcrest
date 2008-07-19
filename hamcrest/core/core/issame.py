@@ -11,8 +11,8 @@ class IsSame(BaseMatcher):
         return id(item) == id(self.object)
 
     def describe_to(self, description):
-        description.append_text('same(')        \
-                    .append_value(self.object)  \
+        description.append_text('same_instance(')   \
+                    .append_value(self.object)      \
                     .append_text(')')
 
 

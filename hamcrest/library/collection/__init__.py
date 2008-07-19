@@ -1,4 +1,4 @@
-"""Matchers of sequences."""
+"""Matchers of collections."""
 
 from isdict_containing import has_entry
 from isdict_containingkey import has_key

@@ -22,7 +22,7 @@ class IsSameTest(MatcherTest):
         assert_that(o2, is_not(same_instance(o1)))
 
     def testHasAReadableDescription(self):
-        self.assert_description("same('ARG')", same_instance('ARG'))
+        self.assert_description("same_instance('ARG')", same_instance('ARG'))
 
 
 if __name__ == '__main__':

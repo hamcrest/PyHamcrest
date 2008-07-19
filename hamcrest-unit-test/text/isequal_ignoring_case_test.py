@@ -34,7 +34,7 @@ class IsEqualIgnoringCaseTest(MatcherTest):
         assert_that(object(), is_not(matcher))
 
     def testDescribesItselfAsCaseInsensitive(self):
-        self.assert_description("eqIgnoringCase('heLLo')", matcher)
+        self.assert_description("equal_to_ignoring_case('heLLo')", matcher)
 
 if __name__ == '__main__':
     unittest.main()

@@ -16,8 +16,8 @@ class IsEqualIgnoringWhiteSpace(BaseMatcher):
         return self.stripped_string == stripspace(item)
 
     def describe_to(self, description):
-        description.append_text('eqIgnoringWhiteSpace(')    \
-                    .append_value(self.original_string)     \
+        description.append_text('equal_to_ignoring_whitespace(')    \
+                    .append_value(self.original_string)             \
                     .append_text(')')
 
 
