@@ -17,10 +17,10 @@ class BaseMatcher(Matcher):
         raise NotImplementedError('_matches')
     
     def matches(self, item, mismatch_description=None):
-        matchResult = self._matches(item)
-        if not matchResult and mismatch_description:
+        match_result = self._matches(item)
+        if not match_result and mismatch_description:
             self.describe_mismatch(item, mismatch_description)
-        return matchResult
+        return match_result
 
     def describe_mismatch(self, item, mismatch_description):
         mismatch_description.append_text('was ').append_value(item)
