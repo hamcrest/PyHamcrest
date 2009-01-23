@@ -14,7 +14,7 @@ class IsSequenceOnlyContaining(BaseMatcher):
     def __init__(self, matcher):
         self.matcher = matcher
 
-    def matches(self, sequence):
+    def _matches(self, sequence):
         if not hasmethod(sequence, '__len__') or not hasmethod(sequence, '__iter__'):
             return False
         

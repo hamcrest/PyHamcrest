@@ -8,7 +8,7 @@ class StringEndsWith(SubstringMatcher):
     def __init__(self, substring):
         super(StringEndsWith, self).__init__(substring)
     
-    def matches(self, item):
+    def _matches(self, item):
         if not hasmethod(item, 'endswith'):
             return False
         return item.endswith(self.substring)

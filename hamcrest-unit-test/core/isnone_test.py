@@ -26,7 +26,7 @@ class IsNoneTest(MatcherTest):
     def testHasAReadableDescription(self):
         self.assert_description('None', none());
         self.assert_description('not None', not_none());
-        
+
 
 if __name__ == '__main__':
     unittest.main()

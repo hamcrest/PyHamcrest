@@ -6,7 +6,7 @@ class IsIn(BaseMatcher):
     def __init__(self, sequence):
         self.sequence = sequence
 
-    def matches(self, item):
+    def _matches(self, item):
         return item in self.sequence
 
     def describe_to(self, description):

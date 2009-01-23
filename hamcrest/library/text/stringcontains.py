@@ -8,7 +8,7 @@ class StringContains(SubstringMatcher):
     def __init__(self, substring):
         super(StringContains, self).__init__(substring)
     
-    def matches(self, item):
+    def _matches(self, item):
         if not hasmethod(item, 'find'):
             return False
         return item.find(self.substring) >= 0

@@ -5,7 +5,7 @@ from isnot import is_not
 class IsNone(BaseMatcher):
     """Matches if value is None."""
     
-    def matches(self, item):
+    def _matches(self, item):
         return item is None
 
     def describe_to(self, description):

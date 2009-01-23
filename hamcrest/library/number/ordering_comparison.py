@@ -17,7 +17,7 @@ class OrderingComparison(BaseMatcher):
         self.min_compare = min_compare
         self.max_compare = max_compare
 
-    def matches(self, item):
+    def _matches(self, item):
         compare = cmp(self.value, item)
         return self.min_compare <= compare and compare <= self.max_compare
 

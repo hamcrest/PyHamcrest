@@ -19,7 +19,7 @@ class IsCloseTo(BaseMatcher):
         self.value = value
         self.error = error
 
-    def matches(self, item):
+    def _matches(self, item):
         if not isnumeric(item):
             return False
         return abs(item - self.value) <= self.error

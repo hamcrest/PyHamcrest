@@ -14,7 +14,7 @@ class Is(BaseMatcher):
     def __init__(self, matcher):
         self.matcher = matcher
 
-    def matches(self, item):
+    def _matches(self, item):
         return self.matcher.matches(item)
 
     def describe_to(self, description):

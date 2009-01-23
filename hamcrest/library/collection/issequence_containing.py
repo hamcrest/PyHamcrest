@@ -9,7 +9,7 @@ class IsSequenceContaining(BaseMatcher):
     def __init__(self, element_matcher):
         self.element_matcher = element_matcher
 
-    def matches(self, sequence):
+    def _matches(self, sequence):
         if hasmethod(sequence, '__iter__'):
             for item in sequence:
                 if self.element_matcher.matches(item):

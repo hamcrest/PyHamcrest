@@ -10,7 +10,7 @@ class IsEqualIgnoringWhiteSpace(BaseMatcher):
         self.original_string = string
         self.stripped_string = stripspace(string)
     
-    def matches(self, item):
+    def _matches(self, item):
         if not isinstance(item, str):
             return False
         return self.stripped_string == stripspace(item)

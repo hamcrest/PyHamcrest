@@ -15,7 +15,7 @@ class TestingBaseMatcher(BaseMatcher):
 
 class BaseMatcherTest(unittest.TestCase):
 
-    def testDescribesItselfWithToStr(self):
+    def testDescribesItselfWithStrFunction(self):
         matcher = TestingBaseMatcher()
         self.assertEquals('SOME DESCRIPTION', str(matcher))
 

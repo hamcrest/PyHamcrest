@@ -10,7 +10,7 @@ class IsEqualIgnoringCase(BaseMatcher):
         self.original_string = string
         self.lowered_string = string.lower()
     
-    def matches(self, item):
+    def _matches(self, item):
         if not isinstance(item, str):
             return False
         return self.lowered_string == item.lower()

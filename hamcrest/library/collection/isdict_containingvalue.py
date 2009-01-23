@@ -8,7 +8,7 @@ class IsDictContainingValue(BaseMatcher):
     def __init__(self, value_matcher):
         self.value_matcher = value_matcher
 
-    def matches(self, dictionary):
+    def _matches(self, dictionary):
         if hasmethod(dictionary, 'itervalues'):
             for value in dictionary.itervalues():
                 if self.value_matcher.matches(value):

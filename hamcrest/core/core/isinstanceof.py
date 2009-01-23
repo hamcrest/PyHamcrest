@@ -9,7 +9,7 @@ class IsInstanceOf(BaseMatcher):
             raise TypeError('IsInstanceOf requires type')
         self.the_class = the_class
 
-    def matches(self, item):
+    def _matches(self, item):
         return isinstance(item, self.the_class)
 
     def describe_to(self, description):

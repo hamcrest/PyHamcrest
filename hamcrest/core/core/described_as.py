@@ -19,7 +19,7 @@ class DescribedAs(BaseMatcher):
         self.matcher = matcher
         self.values = values
 
-    def matches(self, item):
+    def _matches(self, item):
         return self.matcher.matches(item)
 
     def describe_to(self, description):

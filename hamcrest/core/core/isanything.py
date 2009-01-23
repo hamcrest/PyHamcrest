@@ -12,7 +12,7 @@ class IsAnything(BaseMatcher):
         if not description:
             self.description = 'ANYTHING'
 
-    def matches(self, item):
+    def _matches(self, item):
         return True
 
     def describe_to(self, description):

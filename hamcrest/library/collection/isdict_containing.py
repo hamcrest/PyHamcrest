@@ -9,7 +9,7 @@ class IsDictContaining(BaseMatcher):
         self.key_matcher = key_matcher
         self.value_matcher = value_matcher
 
-    def matches(self, dictionary):
+    def _matches(self, dictionary):
         if hasmethod(dictionary, 'iteritems'):
             for key, value in dictionary.iteritems():
                 if self.key_matcher.matches(key) and self.value_matcher.matches(value):

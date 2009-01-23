@@ -7,7 +7,7 @@ class IsEqual(BaseMatcher):
     def __init__(self, equals):
         self.object = equals
 
-    def matches(self, item):
+    def _matches(self, item):
         return item == self.object
 
     def describe_to(self, description):

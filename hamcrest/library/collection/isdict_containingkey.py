@@ -8,7 +8,7 @@ class IsDictContainingKey(BaseMatcher):
     def __init__(self, key_matcher):
         self.key_matcher = key_matcher
 
-    def matches(self, dictionary):
+    def _matches(self, dictionary):
         if hasmethod(dictionary, 'iterkeys'):
             for key in dictionary.iterkeys():
                 if self.key_matcher.matches(key):

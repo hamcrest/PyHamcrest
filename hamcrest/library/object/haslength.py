@@ -9,7 +9,7 @@ class HasLength(BaseMatcher):
     def __init__(self, len_matcher):
         self.len_matcher = len_matcher
 
-    def matches(self, item):
+    def _matches(self, item):
         if not hasmethod(item, '__len__'):
             return False
         return self.len_matcher.matches(len(item))
