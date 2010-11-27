@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 from hamcrest.core.base_matcher import BaseMatcher
 
 
@@ -9,7 +14,7 @@ class IsEqualIgnoringCase(BaseMatcher):
             raise TypeError('IsEqualIgnoringCase requires string')
         self.original_string = string
         self.lowered_string = string.lower()
-    
+
     def _matches(self, item):
         if not isinstance(item, str):
             return False

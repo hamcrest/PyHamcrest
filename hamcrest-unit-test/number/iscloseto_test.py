@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -21,7 +26,7 @@ class IsCloseToTest(MatcherTest):
 
         self.assert_(not p.matches(2.0), 'number too large')
         self.assert_(not p.matches(0.0), 'number too small')
-    
+
     def testHasAReadableDescription(self):
         self.assert_description('a numeric value within <0.5> of <1.0>',
                                 close_to(1.0, 0.5))

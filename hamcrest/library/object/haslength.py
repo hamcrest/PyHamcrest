@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.internal.hasmethod import hasmethod
 from hamcrest.core.internal.wrap_shortcut import wrap_shortcut
@@ -23,7 +28,7 @@ class HasLength(BaseMatcher):
 def has_length(x):
     """Evaluates whether len(item) satisfies a given matcher, providing a
     shortcut to the frequently used has_length(equal_to(x))
-    
+
     For example:  has_length(equal_to(x))
              vs.  has_length(x)
     """

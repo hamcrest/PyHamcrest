@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 import os
 import sys
 import unittest
@@ -20,7 +25,7 @@ def alltests():
                 module = __import__(name)
                 suite.addTest(testloader.loadTestsFromModule(module))
         sys.path.pop(0)
-    
+
     return suite
 
 

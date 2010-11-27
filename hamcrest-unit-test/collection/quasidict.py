@@ -1,10 +1,15 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 class QuasiDictionary:
     def iteritems(self):
         return QuasiDictionaryItemIterator()
-        
+
     def iterkeys(self):
         return QuasiDictionaryKeyIterator()
-        
+
     def itervalues(self):
         return QuasiDictionaryValueIterator()
 
@@ -12,7 +17,7 @@ class QuasiDictionary:
 class BaseQuasiDictionaryIterator:
     def __init__(self):
         self.index = 1
-    
+
     def __iter__(self):
         return self
 

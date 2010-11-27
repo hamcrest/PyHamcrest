@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -23,7 +28,7 @@ class DescribedAsTest(MatcherTest):
 
     def testAppendsValuesToDescription(self):
         m = described_as('value 1 = %0, value 2 = %1', anything(), 33, 97)
-        
+
         self.assert_description('value 1 = <33>, value 2 = <97>', m)
 
     def testDelegatesMatchingToAnotherMatcher(self):

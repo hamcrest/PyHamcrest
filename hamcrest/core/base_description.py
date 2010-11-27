@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 from description import Description
 from internal.selfdescribingvalue import SelfDescribingValue
 
@@ -24,10 +29,10 @@ class BaseDescription(Description):
     def append_value_list(self, start, separator, end, list):
         return self.append_list(start, separator, end,
                                 map(SelfDescribingValue, list))
-    
+
     def append_list(self, start, separator, end, list):
         separate = False
-        
+
         self.append(start)
         for item in list:
             if separate: self.append(separator)

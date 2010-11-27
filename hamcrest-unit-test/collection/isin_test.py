@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -16,7 +21,7 @@ class IsInTest(MatcherTest):
 
     def testReturnsTrueIfArgumentIsInSequence(self):
         matcher = is_in(sequence)
-        
+
         self.assert_matches('a', matcher, 'a')
         self.assert_matches('b', matcher, 'b')
         self.assert_matches('c', matcher, 'c')

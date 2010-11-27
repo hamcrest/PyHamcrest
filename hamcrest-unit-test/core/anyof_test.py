@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -19,7 +24,7 @@ class AllOfTest(MatcherTest):
         assert_that('good', any_of(equal_to('good'), equal_to('good')))
         assert_that('good', any_of(equal_to('bad'), equal_to('good')))
         assert_that('good', any_of(equal_to('good'), equal_to('bad')))
-        
+
         assert_that('good', is_not(any_of(equal_to('bad'), equal_to('bad'))))
 
     def testEvaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers(self):

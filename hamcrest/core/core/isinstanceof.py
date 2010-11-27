@@ -1,9 +1,14 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsInstanceOf(BaseMatcher):
     """Tests whether the value is an instance of a class."""
-    
+
     def __init__(self, the_class):
         if not isinstance(the_class, type):
             raise TypeError('IsInstanceOf requires type')

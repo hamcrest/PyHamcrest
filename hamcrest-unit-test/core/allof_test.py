@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -17,7 +22,7 @@ class AllOfTest(MatcherTest):
 
     def testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers(self):
         assert_that('good', all_of(equal_to('good'), equal_to('good')))
-        
+
         assert_that('good', is_not(all_of(equal_to('bad'), equal_to('good'))))
         assert_that('good', is_not(all_of(equal_to('good'), equal_to('bad'))))
         assert_that('good', is_not(all_of(equal_to('bad'), equal_to('bad'))))
@@ -39,18 +44,18 @@ class AllOfTest(MatcherTest):
     def testHasAReadableDescription(self):
         self.assert_description("('good' and 'bad' and 'ugly')",
                     all_of(equal_to('good'), equal_to('bad'), equal_to('ugly')))
-    
+
     def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
         self.assert_no_mismatch_description(
                                 all_of(equal_to('good'), equal_to('good')),
                                 'good')
-    
+
     def testMismatchDescriptionDescribesFirstFailingMatch(self):
         self.assert_mismatch_description(
                                 "'good' was 'bad'",
                                 all_of(equal_to('bad'), equal_to('good')),
                                 'bad')
-    
+
     def testDescribeMismatch(self):
         self.assert_describe_mismatch(
                                 "'good' was 'bad'",

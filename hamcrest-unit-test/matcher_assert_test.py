@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == "__main__":
     import sys
     sys.path.insert(0, '..')
@@ -21,32 +26,32 @@ class MatcherAssertTest(unittest.TestCase):
         except AssertionError, e:
             self.assertEquals(expectedMessage, str(e))
             return
-        
+
         self.fail('should have failed')
-    
+
     def testDescriptionCanBeElided(self):
         expected = 'expected'
         actual = 'actual'
-        
+
         expectedMessage = "\nExpected: 'expected'\n     got: 'actual'\n"
-        
+
         try:
             assert_that(actual, equal_to(expected))
         except AssertionError, e:
             self.assertEquals(expectedMessage, str(e))
             return
-        
+
         self.fail('should have failed')
 
     def testCanTestBoolDirectly(self):
     	assert_that(True, 'success reason message')
-    	
+
     	try:
     		assert_that(False, 'failing reason message')
         except AssertionError, e:
             self.assertEquals('failing reason message', str(e))
             return
-    	
+
         self.fail('should have failed')
 
 

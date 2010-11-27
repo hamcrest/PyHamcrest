@@ -1,10 +1,15 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.internal.hasmethod import hasmethod
 from hamcrest.core.internal.wrap_shortcut import wrap_shortcut
 
 
 class IsDictContainingKey(BaseMatcher):
-    
+
     def __init__(self, key_matcher):
         self.key_matcher = key_matcher
 

@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 import unittest
 
 from hamcrest.core.string_description import StringDescription
@@ -15,21 +20,21 @@ class MatcherTest(unittest.TestCase):
         description = StringDescription()
         description.append_description_of(matcher);
         self.assertEqual(expected, str(description))
-    
+
     def assert_no_mismatch_description(self, matcher, arg):
         description = StringDescription()
         result = matcher.matches(arg, description)
         self.assertTrue(result, 'Precondition: Matcher should match item')
         self.assertEquals('', str(description),
                         'Expected no mismatch description')
-        
+
     def assert_mismatch_description(self, expected, matcher, arg):
         description = StringDescription()
         result = matcher.matches(arg, description)
         self.assertFalse(result, 'Precondition: Matcher should not match item')
         self.assertEquals(expected, str(description),
                         'Expected mismatch description')
-    
+
     def assert_describe_mismatch(self, expected, matcher, arg):
         description = StringDescription()
         matcher.describe_mismatch(arg, description)

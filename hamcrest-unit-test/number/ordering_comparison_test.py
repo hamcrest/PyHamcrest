@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -34,7 +39,7 @@ class OrderingComparisonTest(MatcherTest):
         assert_that(0, less_than_or_equal_to(1))
         assert_that(1, less_than_or_equal_to(1))
         assert_that(2, is_not(less_than_or_equal_to(1)))
-    
+
     def testHasAReadableDescription(self):
         self.assert_description('a value greater than <1>', greater_than(1))
         # Following test reveals typo in java hamcrest:

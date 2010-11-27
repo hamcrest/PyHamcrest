@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 import re
 
 from hamcrest.core.base_matcher import BaseMatcher, Matcher
@@ -9,11 +14,11 @@ ARG_PATTERN = re.compile('%([0-9]+)')
 
 class DescribedAs(BaseMatcher):
     """Provides a custom description to another matcher.
-    
+
     Optional values following the matcher are substituted for %0, %1, etc.
 
     """
-    
+
     def __init__(self, description_template, matcher, *values):
         self.template = description_template
         self.matcher = matcher
@@ -29,7 +34,7 @@ class DescribedAs(BaseMatcher):
             arg_index = int(match.group()[1:])
             description.append_value(self.values[arg_index])
             text_start = match.end()
-        
+
         if text_start < len(self.template):
             description.append_text(self.template[text_start:])
 

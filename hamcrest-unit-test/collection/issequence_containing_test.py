@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -37,19 +42,19 @@ class IsSequenceContainingTest(MatcherTest):
         matcher1 = has_items(equal_to('a'), equal_to('b'), equal_to('c'))
         self.assert_matches('should match sequence containing all items',
                             matcher1, ('a', 'b', 'c'))
-        
+
         matcher2 = has_items('a', 'b', 'c')
         self.assert_matches('should match sequence containing all items (without matchers)',
                             matcher2, ('a', 'b', 'c'))
-        
+
         matcher3 = has_items(equal_to('a'), equal_to('b'), equal_to('c'))
         self.assert_matches('should match sequence containing all items in any order',
                             matcher3, ('c', 'b', 'a'))
-        
+
         matcher4 = has_items(equal_to('a'), equal_to('b'), equal_to('c'))
         self.assert_matches('should match sequence containing all items plus others',
                             matcher4, ('e', 'c', 'b', 'a', 'd'))
-        
+
         matcher5 = has_items(equal_to('a'), equal_to('b'), equal_to('c'))
         self.assert_does_not_match('should not match sequence unless it contains all items',
                             matcher5, ('e', 'c', 'b', 'd')) # 'a' missing

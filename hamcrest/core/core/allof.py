@@ -1,16 +1,21 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 from hamcrest.core.base_matcher import BaseMatcher
 
 
 class AllOf(BaseMatcher):
     """Calculates the logical conjunction of multiple matchers.
-    
+
     Evaluation is shortcut, so subsequent matchers are not called if an earlier
     matcher returns False.
     """
-    
+
     def __init__(self, *matchers):
         self.matchers = matchers
-    
+
     def matches(self, item, mismatch_description=None):
         for matcher in self.matchers:
             if not matcher.matches(item):
@@ -20,10 +25,10 @@ class AllOf(BaseMatcher):
                     matcher.describe_mismatch(item, mismatch_description)
                 return False
         return True
-    
+
     def describe_mismatch(self, item, mismatch_description):
         self.matches(item, mismatch_description)
-    
+
     def describe_to(self, description):
         description.append_list('(', ' and ', ')', self.matchers)
 

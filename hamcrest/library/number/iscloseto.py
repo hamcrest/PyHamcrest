@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 from hamcrest.core.base_matcher import BaseMatcher
 
 
@@ -9,13 +14,13 @@ class IsCloseTo(BaseMatcher):
     """Is the value a number equal to a value within some range of acceptable
     error?
     """
-    
+
     def __init__(self, value, error):
         if not isnumeric(value):
             raise TypeError('IsCloseTo value must be number')
         if not isnumeric(error):
             raise TypeError('IsCloseTo error must be number')
-        
+
         self.value = value
         self.error = error
 

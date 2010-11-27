@@ -1,3 +1,8 @@
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2010 www.hamcrest.org"
+__license__ = "BSD, see License.txt"
+__version__ = "1.0"
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -33,7 +38,7 @@ class IsDictContainingTest(MatcherTest):
     def testMatchesQuasiDictionary(self):
         self.assert_matches('quasi', has_entry(1, '1'), QuasiDictionary())
         self.assert_does_not_match('other', has_entry(1, '1'), object())
-        
+
 
 if __name__ == '__main__':
     unittest.main()
