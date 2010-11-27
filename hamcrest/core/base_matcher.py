@@ -13,6 +13,7 @@ class BaseMatcher(Matcher):
     Most implementations can just implement _matches, leaving the handling of
     any mismatch description to the matches method. But if it makes more sense
     to generate the mismatch description during the matching, override matches.
+
     """
 
     def __str__(self):

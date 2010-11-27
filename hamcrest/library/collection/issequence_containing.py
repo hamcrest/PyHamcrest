@@ -10,6 +10,7 @@ from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
 
 
 class IsSequenceContaining(BaseMatcher):
+    """Matches a sequence if any element satisfies a given matcher."""
 
     def __init__(self, element_matcher):
         self.element_matcher = element_matcher
@@ -27,11 +28,22 @@ class IsSequenceContaining(BaseMatcher):
 
 
 def has_item(item):
+    """Matches a sequence if any element satifies a given matcher.
+
+    Arguments:
+    item -- A matcher, or a value for equal_to matching.
+
+    """
     return IsSequenceContaining(wrap_shortcut(item))
 
 
 def has_items(*items):
-    all = []
+    """Matches a sequence if all matchers are satisfied by any of the
+    sequence's elements.
+
+    """
+
+    matchers = []
     for item in items:
-        all.append(has_item(item))
-    return apply(all_of, all)
+        matchers.append(has_item(item))
+    return apply(all_of, matchers)

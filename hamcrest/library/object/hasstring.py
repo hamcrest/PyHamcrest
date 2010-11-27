@@ -8,7 +8,7 @@ from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
 
 
 class HasString(BaseMatcher):
-    """Matches if str(item) satisfies a nested matcher."""
+    """Does str(item) satisfy a given matcher?"""
 
     def __init__(self, str_matcher):
         self.str_matcher = str_matcher
@@ -23,10 +23,14 @@ class HasString(BaseMatcher):
 
 
 def has_string(x):
-    """Evaluates whether str(item) satisfies a given matcher, providing a
-    shortcut to the frequently used has_string(equal_to(x))
+    """Evaluates whether str(item) satisfies a given matcher.
 
-    For example:  has_string(equal_to(x))
-             vs.  has_string(x)
+    Arguments:
+    x -- A matcher, or a value for equal_to matching.
+
+    Examples:
+        has_string(starts_with('foo'))
+        has_string('bar')
+
     """
     return HasString(wrap_shortcut(x))

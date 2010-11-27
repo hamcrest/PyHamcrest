@@ -9,7 +9,7 @@ from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
 
 
 class HasLength(BaseMatcher):
-    """Matches if len(item) satisfies a nested matcher."""
+    """Does len(item) satisfy a given matcher?"""
 
     def __init__(self, len_matcher):
         self.len_matcher = len_matcher
@@ -26,10 +26,14 @@ class HasLength(BaseMatcher):
 
 
 def has_length(x):
-    """Evaluates whether len(item) satisfies a given matcher, providing a
-    shortcut to the frequently used has_length(equal_to(x))
+    """Evaluates whether len(item) satisfies a given matcher.
 
-    For example:  has_length(equal_to(x))
-             vs.  has_length(x)
+    Arguments:
+    x -- A matcher, or a value for equal_to matching.
+
+    Examples:
+        has_length(greater_than(6))
+        has_length(5)
+
     """
     return HasLength(wrap_shortcut(x))

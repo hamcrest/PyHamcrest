@@ -26,5 +26,6 @@ class IsEqualIgnoringCase(BaseMatcher):
                     .append_text(')')
 
 
-"""Are the strings equal, ignoring case?"""
-equal_to_ignoring_case = IsEqualIgnoringCase    # Can use directly without a function.
+def equal_to_ignoring_case(string):
+    """Are the strings equal, ignoring case?"""
+    return IsEqualIgnoringCase(string)

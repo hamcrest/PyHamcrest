@@ -17,8 +17,10 @@ class IsNone(BaseMatcher):
         description.append_text('None')
 
 
-"""Matches if value is None."""
-none = IsNone   # Can use directly without a function.
+def none():
+    """Matches if value is None."""
+    return IsNone()
+
 
 def not_none():
     """Matches if value is not None."""

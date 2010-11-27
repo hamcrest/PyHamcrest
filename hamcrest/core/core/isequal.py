@@ -19,5 +19,6 @@ class IsEqual(BaseMatcher):
         description.append_value(self.object)
 
 
-"""Is the value equal to another value?"""
-equal_to = IsEqual  # Can use directly without a function.
+def equal_to(operand):
+    """Is the value equal to another value?"""
+    return IsEqual(operand)

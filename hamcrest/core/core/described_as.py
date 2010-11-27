@@ -13,11 +13,7 @@ from isinstanceof import instance_of
 ARG_PATTERN = re.compile('%([0-9]+)')
 
 class DescribedAs(BaseMatcher):
-    """Provides a custom description to another matcher.
-
-    Optional values following the matcher are substituted for %0, %1, etc.
-
-    """
+    """Provides a custom description to another matcher."""
 
     def __init__(self, description_template, matcher, *values):
         self.template = description_template
@@ -39,5 +35,10 @@ class DescribedAs(BaseMatcher):
             description.append_text(self.template[text_start:])
 
 
-"""Wraps an existing matcher and overrides the description when it fails."""
-described_as = DescribedAs  # Can use directly without a function.
+def described_as(matcher, *values):
+    """Wraps an existing matcher and overrides the description when it fails.
+
+    Optional values following the matcher are substituted for %0, %1, etc.
+
+    """
+    return DescribedAs(matcher, *values)

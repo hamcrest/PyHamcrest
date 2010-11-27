@@ -11,6 +11,7 @@ class AnyOf(BaseMatcher):
 
     Evaluation is shortcut, so subsequent matchers are not called if an earlier
     matcher returns True.
+
     """
 
     def __init__(self, *matchers):
@@ -26,5 +27,6 @@ class AnyOf(BaseMatcher):
         description.append_list('(', ' or ', ')', self.matchers)
 
 
-"""Evaluates to true if ANY of the passed in matchers evaluate to true."""
-any_of = AnyOf  # Can use directly without a function.
+def any_of(*matchers):
+    """Evaluates to true if ANY of the passed in matchers evaluate to True."""
+    return AnyOf(*matchers)

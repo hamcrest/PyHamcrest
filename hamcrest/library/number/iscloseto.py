@@ -13,6 +13,7 @@ def isnumeric(value):
 class IsCloseTo(BaseMatcher):
     """Is the value a number equal to a value within some range of acceptable
     error?
+
     """
 
     def __init__(self, value, error):
@@ -36,7 +37,9 @@ class IsCloseTo(BaseMatcher):
                     .append_value(self.value)
 
 
-"""Is the value a number equal to a value within some range of acceptable
-error?
-"""
-close_to = IsCloseTo    # Can use directly without a function.
+def close_to(value, error):
+    """Is the value a number equal to a value within some range of acceptable
+    error?
+
+    """
+    return IsCloseTo(value, error)

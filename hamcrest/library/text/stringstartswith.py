@@ -22,5 +22,6 @@ class StringStartsWith(SubstringMatcher):
         return 'starting with'
 
 
-"""Is the value a string starting with a given substring?"""
-starts_with = StringStartsWith  # Can use directly without a function.
+def starts_with(substring):
+    """Is the value a string starting with a given substring?"""
+    return StringStartsWith(substring)

@@ -26,7 +26,7 @@ class Is(BaseMatcher):
         description.append_text('is ').append_description_of(self.matcher)
 
 
-def _wrap_shortcut(x):
+def wrap_value_or_type(x):
     if isinstance(x, type):
         return instance_of(x)
     else:
@@ -43,4 +43,4 @@ def is_(x):
     For example:  assert_that(cheese, is_(instance_of(Cheddar)))
              vs.  assert_that(cheese, is_(Cheddar))
     """
-    return Is(_wrap_shortcut(x))
+    return Is(wrap_value_or_type(x))

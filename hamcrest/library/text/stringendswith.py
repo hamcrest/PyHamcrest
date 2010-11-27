@@ -22,5 +22,6 @@ class StringEndsWith(SubstringMatcher):
         return 'ending with'
 
 
-"""Is the value a string ending with a given substring?"""
-ends_with = StringEndsWith  # Can use directly without a function.
+def ends_with(substring):
+    """Is the value a string ending with a given substring?"""
+    return StringEndsWith(substring)

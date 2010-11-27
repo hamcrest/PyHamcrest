@@ -10,9 +10,10 @@ from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
 
 
 class IsSequenceOnlyContaining(BaseMatcher):
-    """Matches collections that only contain elements satisfying a given matcher.
+    """Matches sequences that only contain elements satisfying a given
+    matcher.
 
-    This matcher will never match an empty collection.
+    This matcher will never match an empty sequence.
 
     """
 
@@ -36,10 +37,10 @@ class IsSequenceOnlyContaining(BaseMatcher):
 
 
 def only_contains(*items):
-    """Matches collections that only contain elements satisfying any of a list
+    """Matches sequences that only contain elements satisfying any of a list
     of items.
 
-    For example, [1,2,3] would satisfy only_contains(less_than(4)).
+    For example, [3,1,2] would satisfy only_contains(less_than(4)).
 
     If an item is not a matcher, it is equivalent to equal_to(item), so the
     list in the example above would also satisfy only_contains(1,2,3).

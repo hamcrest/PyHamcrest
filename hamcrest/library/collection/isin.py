@@ -7,6 +7,7 @@ from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsIn(BaseMatcher):
+    """Is the value present in the given sequence?"""
 
     def __init__(self, sequence):
         self.sequence = sequence
@@ -19,4 +20,6 @@ class IsIn(BaseMatcher):
                     .append_value_list('(', ', ', ')', self.sequence)
 
 
-is_in = IsIn
+def is_in(sequence):
+    """Is the value present in the given sequence?"""
+    return IsIn(sequence)

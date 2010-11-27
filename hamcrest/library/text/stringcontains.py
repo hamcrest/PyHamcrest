@@ -22,5 +22,6 @@ class StringContains(SubstringMatcher):
         return 'containing'
 
 
-"""Is the value a string containing a given substring?"""
-contains_string = StringContains    # Can use directly without a function.
+def contains_string(substring):
+    """Is the value a string containing a given substring?"""
+    return StringContains(substring)

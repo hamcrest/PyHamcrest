@@ -40,5 +40,6 @@ def stripspace(string):
     return result.strip()
 
 
-"""Are the strings equal, ignoring white space?"""
-equal_to_ignoring_whitespace = IsEqualIgnoringWhiteSpace    # Can use directly without a function.
+def equal_to_ignoring_whitespace(string):
+    """Are the strings equal, ignoring white space?"""
+    return IsEqualIgnoringWhiteSpace(string)

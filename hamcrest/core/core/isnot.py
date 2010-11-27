@@ -4,6 +4,7 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 from hamcrest.core.base_matcher import BaseMatcher, Matcher
+from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
 from isequal import equal_to
 
 
@@ -26,9 +27,6 @@ def is_not(x):
 
     For example:  assert_that(cheese, is_not(equal_to(smelly)))
              vs.  assert_that(cheese, is_not(smelly))
+
     """
-    if isinstance(x, Matcher):
-        wrapped_x = x
-    else:
-        wrapped_x = equal_to(x)
-    return IsNot(wrapped_x)
+    return IsNot(wrap_shortcut(x))

@@ -9,6 +9,10 @@ from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
 
 
 class IsDictContaining(BaseMatcher):
+    """Matches dictionaries containing a key-value pair satisfying a given pair
+    of matchers.
+
+    """
 
     def __init__(self, key_matcher, value_matcher):
         self.key_matcher = key_matcher
@@ -30,4 +34,12 @@ class IsDictContaining(BaseMatcher):
 
 
 def has_entry(key, value):
+    """Matches dictionaries containing a key-value pair satisfying a given pair
+    of matchers.
+
+    Arguments:
+    key -- A matcher - or a value for equal_to matching - for the key.
+    value -- A matcher - or a value for equal_to matching - for the value.
+
+    """
     return IsDictContaining(wrap_shortcut(key), wrap_shortcut(value))
