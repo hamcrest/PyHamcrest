@@ -4,7 +4,7 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 from description import Description
-from internal.selfdescribingvalue import SelfDescribingValue
+from selfdescribingvalue import SelfDescribingValue
 
 
 class BaseDescription(Description):
