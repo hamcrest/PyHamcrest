@@ -24,7 +24,7 @@ class IsSequenceOnlyContaining(BaseMatcher):
             return False
 
         if len(sequence) == 0:
-			return False
+            return False
         for item in sequence:
             if not self.matcher.matches(item):
                 return False

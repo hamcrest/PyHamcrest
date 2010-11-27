@@ -44,10 +44,10 @@ class MatcherAssertTest(unittest.TestCase):
         self.fail('should have failed')
 
     def testCanTestBoolDirectly(self):
-    	assert_that(True, 'success reason message')
+        assert_that(True, 'success reason message')
 
-    	try:
-    		assert_that(False, 'failing reason message')
+        try:
+            assert_that(False, 'failing reason message')
         except AssertionError, e:
             self.assertEquals('failing reason message', str(e))
             return

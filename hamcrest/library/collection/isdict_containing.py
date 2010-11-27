@@ -25,8 +25,8 @@ class IsDictContaining(BaseMatcher):
         description.append_text('dictionary containing [')          \
                     .append_description_of(self.key_matcher)        \
                     .append_text(': ')                              \
-			        .append_description_of(self.value_matcher)      \
-			        .append_text(']')
+                    .append_description_of(self.value_matcher)      \
+                    .append_text(']')
 
 
 def has_entry(key, value):
