@@ -4,8 +4,8 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.internal.hasmethod import hasmethod
-from hamcrest.core.internal.wrap_shortcut import wrap_shortcut
+from hamcrest.core.helpers.hasmethod import hasmethod
+from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
 
 
 class IsDictContainingKey(BaseMatcher):

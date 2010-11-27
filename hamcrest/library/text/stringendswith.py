@@ -4,7 +4,7 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 from hamcrest.library.text.substringmatcher import SubstringMatcher
-from hamcrest.core.internal.hasmethod import hasmethod
+from hamcrest.core.helpers.hasmethod import hasmethod
 
 
 class StringEndsWith(SubstringMatcher):
