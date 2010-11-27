@@ -4,7 +4,7 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 from hamcrest.core.base_matcher import BaseMatcher, Matcher
-from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 from isequal import equal_to
 
 
@@ -29,4 +29,4 @@ def is_not(x):
              vs.  assert_that(cheese, is_not(smelly))
 
     """
-    return IsNot(wrap_shortcut(x))
+    return IsNot(wrap_matcher(x))

@@ -7,7 +7,13 @@ from hamcrest.core.base_matcher import Matcher
 from hamcrest.core.core.isequal import equal_to
 
 
-def wrap_shortcut(x):
+def wrap_matcher(x):
+    """Wraps argument in a matcher, if necessary.
+
+    Returns the argument as-is if it is already a matcher, otherwise wrapped an
+    equal_to matcher.
+
+    """
     if isinstance(x, Matcher):
         return x
     else:

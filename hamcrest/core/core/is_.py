@@ -4,7 +4,7 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 from isinstanceof import instance_of
 
 
@@ -30,7 +30,7 @@ def wrap_value_or_type(x):
     if isinstance(x, type):
         return instance_of(x)
     else:
-        return wrap_shortcut(x)
+        return wrap_matcher(x)
 
 
 def is_(x):

@@ -4,7 +4,7 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class HasString(BaseMatcher):
@@ -33,4 +33,4 @@ def has_string(x):
         has_string('bar')
 
     """
-    return HasString(wrap_shortcut(x))
+    return HasString(wrap_matcher(x))

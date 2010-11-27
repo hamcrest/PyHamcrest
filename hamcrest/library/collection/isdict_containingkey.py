@@ -5,7 +5,7 @@ __version__ = "1.0"
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.hasmethod import hasmethod
-from hamcrest.core.helpers.wrap_shortcut import wrap_shortcut
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class IsDictContainingKey(BaseMatcher):
@@ -32,4 +32,4 @@ def has_key(key):
     Arguments:
     key -- A matcher - or a value for equal_to matching - for the key.
     """
-    return IsDictContainingKey(wrap_shortcut(key))
+    return IsDictContainingKey(wrap_matcher(key))
