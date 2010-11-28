@@ -5,7 +5,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = 'Hamcrest',
+    name = 'PyHamcrest',
     version = '1.0',
     author = 'Jon Reid',
     author_email = 'jon.m.reid@gmail.com',
