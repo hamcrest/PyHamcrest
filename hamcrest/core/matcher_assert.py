@@ -23,8 +23,8 @@ def assert_that(arg1, arg2, arg3=''):
 
     assert_that can also verify a boolean condition:
         assert_that(assertion, reason)
-    This is equivalent to the unittest.TestCase.assert_ method, but because it
-    is a standalone function, it offers greater flexibility in test writing.
+    This is equivalent to the assert_ method of unittest.TestCase, but because
+    it's a standalone function, it offers greater flexibility in test writing.
 
     """
     if isinstance(arg2, Matcher):

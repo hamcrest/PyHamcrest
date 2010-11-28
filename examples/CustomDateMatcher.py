@@ -2,10 +2,11 @@ import sys
 sys.path.append('..')
 
 from hamcrest.core.base_matcher import BaseMatcher
-import datetime
+from hamcrest.core.helpers.hasmethod import hasmethod
 
 from hamcrest import *
 import unittest
+import datetime
 
 
 class IsGivenDayOfWeek(BaseMatcher):
@@ -16,9 +17,9 @@ class IsGivenDayOfWeek(BaseMatcher):
 
     def _matches(self, item):
         """Test whether item matches."""
-        if not isinstance(item, datetime.date):
+        if not hasmethod(item, 'weekday'):
             return False
-        return datetime.date.weekday(item) == self.day
+        return item.weekday() == self.day
 
     def describe_to(self, description):
         """Describe the matcher."""
