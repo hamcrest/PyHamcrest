@@ -1,3 +1,4 @@
+include CHANGES.txt
 include LICENSE.txt
-include README
+include README.txt
 recursive-include examples *.py

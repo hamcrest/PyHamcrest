@@ -18,7 +18,7 @@ setup(
     packages = find_packages(),
     test_suite = 'hamcrest-unit-test.alltests',
     provides = ['hamcrest'],
-    long_description=read('README'),
+    long_description=read('README.txt'),
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
