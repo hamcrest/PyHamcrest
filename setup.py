@@ -8,6 +8,7 @@ setup(
     name = 'Hamcrest',
     version = '1.0',
     author = 'Jon Reid',
+    author_email = 'jon.m.reid@gmail.com',
     maintainer_email = 'hamcrest-dev@googlegroups.com',
     description = 'Hamcrest framework for matcher objects',
     license = 'BSD',
