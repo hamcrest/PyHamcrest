@@ -11,11 +11,12 @@ setup(
     maintainer_email = 'hamcrest-dev@googlegroups.com',
     description = 'Hamcrest framework for matcher objects',
     license = 'BSD',
+    platforms=['All'],
     keywords = 'hamcrest matchers pyunit unit test testing unittest unittesting',
     url = 'http://code.google.com/p/hamcrest/',
     packages = find_packages(),
     test_suite = 'hamcrest-unit-test.alltests',
-    provides = ['hamcrest',],
+    provides = ['hamcrest'],
     long_description=read('README'),
     classifiers = [
         'Development Status :: 5 - Production/Stable',
