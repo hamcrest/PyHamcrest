@@ -68,30 +68,41 @@ A tour of common matchers
 Hamcrest comes with a library of useful matchers. Here are some of the most important ones.
 
   * Core
+
     * ``anything`` - always matches, useful if you don't care what the object
         under test is
     * ``described_as`` - decorator to adding custom failure description
     * ``is_`` - decorator to improve readability - see "Syntactic sugar", below
+
   * Logical
+
     * ``all_of`` - matches if all matchers match, short circuits (like Python &&)
     * ``any_of`` - matches if any matchers match, short circuits (like Python ||)
     * ``is_not`` - matches if the wrapped matcher doesn't match and vice versa
+
   * Object
+
     * ``equal_to`` - tests object equality using ``==``
     * ``has_length`` - tests whether len(item) satisfies a given matcher
     * ``has_string`` - tests whether str(item) satisfies another matcher
     * ``instance_of`` - tests type
     * ``none``, ``not_none`` - tests for None
     * ``same_instance`` - tests object identity
+
   * Sequences
+
     * ``has_entry``, ``has_key``, ``has_value`` - tests that a dictionary
         contains an entry, key or value
     * ``has_item``, ``has_items`` - tests that a sequence contains elements
+
   * Number
+
     * ``close_to`` - tests that numeric values are close to a given value
     * ``greater_than``, ``greater_than_or_equal_to``, ``less_than``,
         ``less_than_or_equal_to`` - tests ordering
+
   * Text
+
     * ``equal_to_ignoring_case`` - tests string equality ignoring case
     * ``equal_to_ignoring_whitespace`` - test strings equality ignoring
         differences in runs of whitespace
@@ -168,7 +179,7 @@ failure message looks::
 
     assert_that(datetime.date(2008, 04, 06), is_(on_a_saturday()))
 
-fails with the message
+fails with the message::
 
     AssertionError:
     Expected: is calendar date falling on Saturday
