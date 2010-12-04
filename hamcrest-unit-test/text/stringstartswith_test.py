@@ -50,6 +50,15 @@ class StringStartsWithTest(MatcherTest):
     def testFailsIfMatchingAgainstNonString(self):
         assert_that(object(), is_not(stringstartswith))
 
+    def testCanApplyUnicodeStringToUnicodeMatcher(self):
+        assert_that(u'foo bar baz', starts_with(u'foo'))
+
+    def testCanApplyPlainStringToUnicodeMatcher(self):
+        assert_that('foo bar baz', starts_with(u'foo'))
+
+    def testCanApplyUnicodeStringToPlainMatcher(self):
+        assert_that(u'foo bar baz', starts_with('foo'))
+
 
 if __name__ == '__main__':
     unittest.main()

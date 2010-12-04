@@ -10,13 +10,13 @@ class IsEqualIgnoringCase(BaseMatcher):
     """Matches if strings are equal ignoring case."""
 
     def __init__(self, string):
-        if not isinstance(string, str):
+        if not isinstance(string, basestring):
             raise TypeError('IsEqualIgnoringCase requires string')
         self.original_string = string
         self.lowered_string = string.lower()
 
     def _matches(self, item):
-        if not isinstance(item, str):
+        if not isinstance(item, basestring):
             return False
         return self.lowered_string == item.lower()
 

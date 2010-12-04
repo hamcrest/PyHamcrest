@@ -9,7 +9,7 @@ from hamcrest.core.base_matcher import BaseMatcher
 class SubstringMatcher(BaseMatcher):
 
     def __init__(self, substring):
-        if not isinstance(substring, str):
+        if not isinstance(substring, basestring):
             raise TypeError(self.__class__.__name__ + ' requires string')
         self.substring = substring
 

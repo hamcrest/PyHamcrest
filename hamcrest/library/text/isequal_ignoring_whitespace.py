@@ -10,13 +10,13 @@ class IsEqualIgnoringWhiteSpace(BaseMatcher):
     """Matches if strings are equal ignoring white space."""
 
     def __init__(self, string):
-        if not isinstance(string, str):
+        if not isinstance(string, basestring):
             raise TypeError('IsEqualIgnoringWhiteSpace requires string')
         self.original_string = string
         self.stripped_string = stripspace(string)
 
     def _matches(self, item):
-        if not isinstance(item, str):
+        if not isinstance(item, basestring):
             return False
         return self.stripped_string == stripspace(item)
 

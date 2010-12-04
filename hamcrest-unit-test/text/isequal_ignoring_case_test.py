@@ -40,6 +40,16 @@ class IsEqualIgnoringCaseTest(MatcherTest):
 
     def testDescribesItselfAsCaseInsensitive(self):
         self.assert_description("equal_to_ignoring_case('heLLo')", matcher)
+    
+    def testCanApplyUnicodeStringToUnicodeMatcher(self):
+        assert_that(u'HelLo', equal_to_ignoring_case(u'heLLo'))
+
+    def testCanApplyPlainStringToUnicodeMatcher(self):
+        assert_that('HelLo', equal_to_ignoring_case(u'heLLo'))
+
+    def testCanApplyUnicodeStringToPlainMatcher(self):
+        assert_that(u'HelLo', equal_to_ignoring_case('heLLo'))
+
 
 if __name__ == '__main__':
     unittest.main()

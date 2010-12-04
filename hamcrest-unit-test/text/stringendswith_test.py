@@ -50,6 +50,15 @@ class StringEndsWithTest(MatcherTest):
     def testFailsIfMatchingAgainstNonString(self):
         assert_that(object(), is_not(stringendswith))
 
+    def testCanApplyUnicodeStringToUnicodeMatcher(self):
+        assert_that(u'foo bar baz', ends_with(u'baz'))
+
+    def testCanApplyPlainStringToUnicodeMatcher(self):
+        assert_that('foo bar baz', ends_with(u'baz'))
+
+    def testCanApplyUnicodeStringToPlainMatcher(self):
+        assert_that(u'foo bar baz', ends_with('baz'))
+
 
 if __name__ == '__main__':
     unittest.main()

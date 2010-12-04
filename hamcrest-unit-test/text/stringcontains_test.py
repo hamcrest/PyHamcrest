@@ -50,6 +50,15 @@ class StringContainsTest(MatcherTest):
     def testFailsIfMatchingAgainstNonString(self):
         assert_that(object(), is_not(stringcontains))
 
+    def testCanApplyUnicodeStringToUnicodeMatcher(self):
+        assert_that(u'foo bar baz', contains_string(u'bar'))
+
+    def testCanApplyPlainStringToUnicodeMatcher(self):
+        assert_that('foo bar baz', contains_string(u'bar'))
+
+    def testCanApplyUnicodeStringToPlainMatcher(self):
+        assert_that(u'foo bar baz', contains_string('bar'))
+
 
 if __name__ == '__main__':
     unittest.main()

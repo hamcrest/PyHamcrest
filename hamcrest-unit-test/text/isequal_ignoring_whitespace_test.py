@@ -43,6 +43,15 @@ class IsEqualIgnoringWhiteSpaceTest(MatcherTest):
         self.assert_description("equal_to_ignoring_whitespace('Hello World   how\\n are we? ')",
                                 matcher)
 
+    def testCanApplyUnicodeStringToUnicodeMatcher(self):
+        assert_that(u'foo bar', equal_to_ignoring_whitespace(u'foo\n  bar'))
+
+    def testCanApplyPlainStringToUnicodeMatcher(self):
+        assert_that('foo bar', equal_to_ignoring_whitespace(u'foo\n  bar'))
+
+    def testCanApplyUnicodeStringToPlainMatcher(self):
+        assert_that(u'foo bar', equal_to_ignoring_whitespace('foo\n  bar'))
+
 
 if __name__ == '__main__':
     unittest.main()

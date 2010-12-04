@@ -1,4 +1,6 @@
 == Version 1.0 ==
 
-28 Oct 2010: First official release
+04 Dec 2010: First official release
+* Text matchers now support Unicode strings
+
 15 Jan 2008: Initial submission
