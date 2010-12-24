@@ -1,3 +1,8 @@
+== Version 1.1 == CHANGES IN PROGRESS
+
+* New matcher "contains" matches sequence containing matching items in order.
+
+
 == Version 1.0 ==
 
 04 Dec 2010: First official release

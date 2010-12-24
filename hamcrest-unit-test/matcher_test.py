@@ -32,11 +32,9 @@ class MatcherTest(unittest.TestCase):
         description = StringDescription()
         result = matcher.matches(arg, description)
         self.assertFalse(result, 'Precondition: Matcher should not match item')
-        self.assertEquals(expected, str(description),
-                        'Expected mismatch description')
+        self.assertEquals(expected, str(description))
 
     def assert_describe_mismatch(self, expected, matcher, arg):
         description = StringDescription()
         matcher.describe_mismatch(arg, description)
-        self.assertEquals(expected, str(description),
-                        'Expected mismatch description')
+        self.assertEquals(expected, str(description))

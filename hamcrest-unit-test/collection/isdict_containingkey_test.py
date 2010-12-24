@@ -43,9 +43,9 @@ class IsDictContainingKeyTest(MatcherTest):
         self.assert_does_not_match('Dictionary without matching key',
                                     has_key('d'), d)
 
-    def testMatchesQuasiDictionary(self):
-        self.assert_matches('quasi', has_key(1), QuasiDictionary())
-        self.assert_does_not_match('other', has_key(1), object())
+    def testMatchesAnyConformingDictionary(self):
+        self.assert_matches('quasi-dictionary', has_key(1), QuasiDictionary())
+        self.assert_does_not_match('non-dictionary', has_key(1), object())
 
 
 if __name__ == '__main__':

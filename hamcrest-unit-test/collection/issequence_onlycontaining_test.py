@@ -47,12 +47,14 @@ class IsSequenceOnlyContainingTest(MatcherTest):
         self.assert_description('a sequence containing items matching (<1> or <2>)',
                             only_contains(1, 2))
 
-    def testMatchesQuasiSequence(self):
+    def testMatchesAnyConformingSequence(self):
         class ObjectWithLenOnly:
             def __len__(self): return 20
-        self.assert_matches('quasi', only_contains(less_than(3)), QuasiSequence())
-        self.assert_does_not_match('other', only_contains(1), object())
-        self.assert_does_not_match('other', only_contains(1), ObjectWithLenOnly())
+        self.assert_matches('quasi-sequence',
+                            only_contains(less_than(3)), QuasiSequence())
+        self.assert_does_not_match('non-sequence', only_contains(1), object())
+        self.assert_does_not_match('non-sequence with length',
+                            only_contains(1), ObjectWithLenOnly())
 
 
 if __name__ == '__main__':

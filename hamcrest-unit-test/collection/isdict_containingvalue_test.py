@@ -43,9 +43,9 @@ class IsDictContainingValueTest(MatcherTest):
         self.assert_does_not_match('Dictionary without matching value',
                                     has_value(4), d)
 
-    def testMatchesQuasiDictionary(self):
-        self.assert_matches('quasi', has_value('1'), QuasiDictionary())
-        self.assert_does_not_match('other', has_value('1'), object())
+    def testMatchesAnyConformingDictionary(self):
+        self.assert_matches('quasi-dictionary', has_value('1'), QuasiDictionary())
+        self.assert_does_not_match('non-dictionary', has_value('1'), object())
 
 
 if __name__ == '__main__':
