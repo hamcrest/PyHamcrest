@@ -1,6 +1,7 @@
 == Version 1.1 == CHANGES IN PROGRESS
 
 * New matcher "contains" matches sequence containing matching items in order.
+* New matcher "contains_inanyorder" matches sequence containing matching items in any order.
 
 
 == Version 1.0 ==

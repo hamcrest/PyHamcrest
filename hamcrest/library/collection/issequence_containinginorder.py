@@ -8,7 +8,7 @@ from hamcrest.core.helpers.hasmethod import hasmethod
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
-class MatchSequence(object):
+class MatchingInOrder(object):
     def __init__(self, matchers, mismatch_description):
         self.matchers = matchers
         self.mismatch_description = mismatch_description
@@ -28,7 +28,9 @@ class MatchSequence(object):
     def ismatched(self, item):
         matcher = self.matchers[self.next_match_index]
         if not matcher.matches(item):
-            self.describe_mismatch(matcher, item)
+            if self.mismatch_description:
+                self.mismatch_description.append_text('item ' + str(self.next_match_index) + ': ')
+                matcher.describe_mismatch(item, self.mismatch_description)
             return False
         self.next_match_index += 1
         return True
@@ -40,11 +42,6 @@ class MatchSequence(object):
                                          .append_value(item)
             return False
         return True
-
-    def describe_mismatch(self, matcher, item):
-        if self.mismatch_description:
-            self.mismatch_description.append_text('item ' + str(self.next_match_index) + ': ')
-        matcher.describe_mismatch(item, self.mismatch_description)
 
 
 class IsSequenceContainingInOrder(BaseMatcher):
@@ -59,7 +56,7 @@ class IsSequenceContainingInOrder(BaseMatcher):
     def matches(self, sequence, mismatch_description=None):
         if not hasmethod(sequence, '__iter__'):
             return False
-        matchsequence = MatchSequence(self.matchers, mismatch_description)
+        matchsequence = MatchingInOrder(self.matchers, mismatch_description)
         for item in sequence:
             if not matchsequence.matches(item):
                 return False
