@@ -12,19 +12,26 @@ from string_description import StringDescription
 def assert_that(arg1, arg2, arg3=''):
     """Asserts a match, or a boolean condition.
 
-    If the assertion fails, assert_match raises an AssertionError. In the
-    context of unittest.TestCase, this will be reported as a test failure.
+    If the assertion fails, ``assert_that`` raises an :py:exc:`AssertionError`.
+    In the context of :py:class:`unittest.TestCase`, this will be reported as a
+    test failure.
 
-    When specified with a Matcher as the second argument, assert_that verifies
-    a match:
+    When specified with a ``Matcher`` as the second argument, ``assert_that``
+    verifies a match::
+
         assert_that(actual, matcher)
-    or
+
+    or ::
+
         assert_that(actual, matcher, reason)
 
-    assert_that can also verify a boolean condition:
+    ``assert_that`` can also verify a boolean condition::
+
         assert_that(assertion, reason)
-    This is equivalent to the assert_ method of unittest.TestCase, but because
-    it's a standalone function, it offers greater flexibility in test writing.
+
+    This is equivalent to the :py:meth:`assert_` method of
+    :py:class:`unittest.TestCase`, but because it's a standalone function, it
+    offers greater flexibility in test writing.
 
     """
     if isinstance(arg2, Matcher):

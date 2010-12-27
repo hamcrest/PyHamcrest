@@ -30,8 +30,7 @@ class IsSequenceContaining(BaseMatcher):
 def has_item(item):
     """Matches a sequence if any element satifies a given matcher.
 
-    Arguments:
-    item -- A matcher, or a value for equal_to matching.
+    :param item: A matcher, or a value for equal_to matching.
 
     """
     return IsSequenceContaining(wrap_matcher(item))

@@ -8,7 +8,7 @@ from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class HasString(BaseMatcher):
-    """Does str(item) satisfy a given matcher?"""
+    """Does ``str(item)`` satisfy a given matcher?"""
 
     def __init__(self, str_matcher):
         self.str_matcher = str_matcher
@@ -23,12 +23,12 @@ class HasString(BaseMatcher):
 
 
 def has_string(x):
-    """Evaluates whether str(item) satisfies a given matcher.
+    """Evaluates whether ``str(item)`` satisfies a given matcher.
 
-    Arguments:
-    x -- A matcher, or a value for equal_to matching.
+    :param x: A matcher, or a value for equal_to matching.
 
-    Examples:
+    Examples::
+
         has_string(starts_with('foo'))
         has_string('bar')
 

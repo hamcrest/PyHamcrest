@@ -29,7 +29,7 @@ class IsDictContainingValue(BaseMatcher):
 def has_value(value):
     """Matches dictionaries containing a value satisfying a given matcher.
 
-    Arguments:
-    value -- A matcher - or a value for equal_to matching - for the value.
+    :param value: A matcher - or a value for equal_to matching - for the value.
+
     """
     return IsDictContainingValue(wrap_matcher(value))

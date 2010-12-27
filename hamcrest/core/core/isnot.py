@@ -23,10 +23,15 @@ class IsNot(BaseMatcher):
 
 def is_not(x):
     """Inverts the rule, providing a shortcut to the frequently used
-    is_not(equal_to(x)).
+    ``is_not(equal_to(x))``.
 
-    For example:  assert_that(cheese, is_not(equal_to(smelly)))
-             vs.  assert_that(cheese, is_not(smelly))
+    For example::
+
+        assert_that(cheese, is_not(equal_to(smelly)))
+
+    vs. ::
+
+        assert_that(cheese, is_not(smelly))
 
     """
     return IsNot(wrap_matcher(x))

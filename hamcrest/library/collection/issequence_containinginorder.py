@@ -73,8 +73,7 @@ class IsSequenceContainingInOrder(BaseMatcher):
 def contains(*items):
     """Matches a sequence if its elements, in order, satisfy a list of matchers.
 
-    Arguments:
-    items -- Each item is a matcher, or a value for equal_to matching.
+    :param items: Each item is a matcher, or a value for equal_to matching.
 
     """
 

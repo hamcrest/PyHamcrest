@@ -1,6 +1,8 @@
 Matcher Library
 ===============
 
+Library of Matcher implementations
+
 .. toctree::
 
     core_matchers

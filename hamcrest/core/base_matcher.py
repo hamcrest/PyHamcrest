@@ -8,11 +8,12 @@ from string_description import tostring
 
 
 class BaseMatcher(Matcher):
-    """Base class for all Matcher implementations.
+    """Base class for all ``Matcher`` implementations.
 
-    Most implementations can just implement _matches, leaving the handling of
-    any mismatch description to the matches method. But if it makes more sense
-    to generate the mismatch description during the matching, override matches.
+    Most implementations can just implement ``_matches``, leaving the handling
+    of any mismatch description to the matches method. But if it makes more
+    sense to generate the mismatch description during the matching, override
+    ``matches``.
 
     """
 

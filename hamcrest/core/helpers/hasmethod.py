@@ -4,7 +4,7 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 def hasmethod(obj, methodname):
-    """Does obj have a method named methodname?"""
+    """Does ``obj`` have a method named ``methodname``?"""
 
     if not hasattr(obj, methodname):
         return False

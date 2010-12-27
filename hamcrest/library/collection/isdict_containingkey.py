@@ -29,7 +29,7 @@ class IsDictContainingKey(BaseMatcher):
 def has_key(key):
     """Matches dictionaries containing a key satisfying a given matcher.
 
-    Arguments:
-    key -- A matcher - or a value for equal_to matching - for the key.
+    :param key: A matcher - or a value for equal_to matching - for the key.
+
     """
     return IsDictContainingKey(wrap_matcher(key))

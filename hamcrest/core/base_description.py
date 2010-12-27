@@ -8,7 +8,7 @@ from selfdescribingvalue import SelfDescribingValue
 
 
 class BaseDescription(Description):
-    """Base class for all Description implementations."""
+    """Base class for all ``Description`` implementations."""
 
     def append_text(self, text):
         self.append(text)

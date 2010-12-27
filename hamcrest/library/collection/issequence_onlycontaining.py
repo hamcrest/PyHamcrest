@@ -40,10 +40,10 @@ def only_contains(*items):
     """Matches sequences that only contain elements satisfying any of a list
     of items.
 
-    For example, [3,1,2] would satisfy only_contains(less_than(4)).
+    For example, ``[3,1,2]`` would satisfy ``only_contains(less_than(4))``.
 
-    If an item is not a matcher, it is equivalent to equal_to(item), so the
-    list in the example above would also satisfy only_contains(1,2,3).
+    If an item is not a matcher, it is equivalent to ``equal_to(item)``, so the
+    list in the example above would also satisfy ``only_contains(1,2,3)``.
 
     """
     matchers = []

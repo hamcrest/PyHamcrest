@@ -10,7 +10,7 @@ class AnyOf(BaseMatcher):
     """Calculates the logical disjunction of multiple matchers.
 
     Evaluation is shortcut, so subsequent matchers are not called if an earlier
-    matcher returns True.
+    matcher returns ``True``.
 
     """
 
@@ -28,5 +28,8 @@ class AnyOf(BaseMatcher):
 
 
 def any_of(*matchers):
-    """Evaluates to true if ANY of the passed in matchers evaluate to True."""
+    """Evaluates to ``True`` if *any* of the passed in matchers evaluate to
+    ``True``.
+
+    """
     return AnyOf(*matchers)

@@ -10,8 +10,7 @@ from hamcrest.core.core.isequal import equal_to
 def wrap_matcher(x):
     """Wraps argument in a matcher, if necessary.
 
-    Returns the argument as-is if it is already a matcher, otherwise wrapped an
-    equal_to matcher.
+    :returns: the argument as-is if it is already a matcher, otherwise wrapped in an ``equal_to`` matcher.
 
     """
     if isinstance(x, Matcher):

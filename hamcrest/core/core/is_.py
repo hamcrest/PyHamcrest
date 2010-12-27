@@ -12,8 +12,14 @@ class Is(BaseMatcher):
     """Decorates another Matcher, retaining the behavior but allowing tests to
     be slightly more expressive.
 
-    For example:  assert_that(cheese, equal_to(smelly))
-             vs.  assert_that(cheese, is_(equal_to(smelly)))
+    For example::
+
+        assert_that(cheese, equal_to(smelly))
+
+    vs. ::
+
+        assert_that(cheese, is_(equal_to(smelly)))
+
     """
 
     def __init__(self, matcher):
@@ -35,12 +41,23 @@ def wrap_value_or_type(x):
 
 def is_(x):
     """Decorates an item, providing shortcuts to the frequently used
-    expressions is_(equal_to(x)) and is_(instance_of(x)).
+    expressions ``is_(equal_to(x))`` and ``is_(instance_of(x))``.
 
-    For example:  assert_that(cheese, is_(equal_to(smelly)))
-             vs.  assert_that(cheese, is_(smelly))
+    For example::
 
-    For example:  assert_that(cheese, is_(instance_of(Cheddar)))
-             vs.  assert_that(cheese, is_(Cheddar))
+        assert_that(cheese, is_(equal_to(smelly)))
+
+    vs. ::
+
+        assert_that(cheese, is_(smelly))
+
+    Also::
+
+        assert_that(cheese, is_(instance_of(Cheddar)))
+
+    vs. ::
+
+        assert_that(cheese, is_(Cheddar))
+
     """
     return Is(wrap_value_or_type(x))

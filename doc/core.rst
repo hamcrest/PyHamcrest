@@ -6,44 +6,51 @@ Core API
     helpers
 
 
-matcher
--------
+BaseDescription
+---------------
 
-.. automodule:: hamcrest.core.matcher
+.. automodule:: hamcrest.core.base_description
+    :show-inheritance:
     :members:
 
-base_matcher
-------------
+BaseMatcher
+-----------
 
 .. automodule:: hamcrest.core.base_matcher
+    :show-inheritance:
     :members:
 
-description
+Description
 -----------
 
 .. automodule:: hamcrest.core.description
+    :show-inheritance:
     :members:
 
-base_description
-----------------
+Matcher
+-------
 
-.. automodule:: hamcrest.core.base_description
+.. automodule:: hamcrest.core.matcher
+    :show-inheritance:
     :members:
 
-string_description
-------------------
-
-.. automodule:: hamcrest.core.string_description
-    :members:
-
-selfdescribing
+SelfDescribing
 --------------
 
 .. automodule:: hamcrest.core.selfdescribing
+    :show-inheritance:
     :members:
 
-selfdescribingvalue
+SelfDescribingValue
 -------------------
 
 .. automodule:: hamcrest.core.selfdescribingvalue
+    :show-inheritance:
+    :members:
+
+StringDescription
+-----------------
+
+.. automodule:: hamcrest.core.string_description
+    :show-inheritance:
     :members:

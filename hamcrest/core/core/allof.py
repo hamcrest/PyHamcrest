@@ -10,7 +10,7 @@ class AllOf(BaseMatcher):
     """Calculates the logical conjunction of multiple matchers.
 
     Evaluation is shortcut, so subsequent matchers are not called if an earlier
-    matcher returns False.
+    matcher returns ``False``.
 
     """
 
@@ -35,8 +35,8 @@ class AllOf(BaseMatcher):
 
 
 def all_of(*matchers):
-    """Evaluates to true only if ALL of the passed in matchers evaluate to
-    True.
+    """Evaluates to ``True`` only if *all* of the passed in matchers evaluate
+    to ``True``.
 
     """
     return AllOf(*matchers)

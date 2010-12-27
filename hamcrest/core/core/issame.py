@@ -28,5 +28,5 @@ class IsSame(BaseMatcher):
 
 
 def same_instance(object):
-    """Evaluates to True only when the argument is this same object."""
+    """Evaluates to ``True`` only when the argument is this same object."""
     return IsSame(object)

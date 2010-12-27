@@ -7,7 +7,7 @@ from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsAnything(BaseMatcher):
-    """A matcher that always returns True."""
+    """A matcher that always returns ``True``."""
 
     def __init__(self, description):
         self.description = description
@@ -22,7 +22,7 @@ class IsAnything(BaseMatcher):
 
 
 def anything(description=None):
-    """This matcher always evaluates to True.
+    """This matcher always evaluates to ``True``.
 
     You can optionally supply a meaningful string used when describing itself.
 

@@ -7,8 +7,8 @@ from hamcrest.core.selfdescribing import SelfDescribing
 
 
 class SelfDescribingValue(SelfDescribing):
-    """Wrap any value in a SelfDescribingValue to satisfy the SelfDescribing
-    interface.
+    """Wrap any value in a ``SelfDescribingValue`` to satisfy the
+    ``SelfDescribing`` interface.
 
     """
 

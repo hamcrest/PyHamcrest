@@ -9,7 +9,7 @@ from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class HasLength(BaseMatcher):
-    """Does len(item) satisfy a given matcher?"""
+    """Does ``len(item)`` satisfy a given matcher?"""
 
     def __init__(self, len_matcher):
         self.len_matcher = len_matcher
@@ -26,12 +26,12 @@ class HasLength(BaseMatcher):
 
 
 def has_length(x):
-    """Evaluates whether len(item) satisfies a given matcher.
+    """Evaluates whether ``len(item)`` satisfies a given matcher.
 
-    Arguments:
-    x -- A matcher, or a value for equal_to matching.
+    :param x: A matcher, or a value for equal_to matching.
 
-    Examples:
+    Examples::
+
         has_length(greater_than(6))
         has_length(5)
 
