@@ -2,6 +2,7 @@
 
 * New matcher "contains" matches sequence containing matching items in order.
 * New matcher "contains_inanyorder" matches sequence containing matching items in any order.
+* Added Sphinx documentation support.
 
 
 == Version 1.0 ==
