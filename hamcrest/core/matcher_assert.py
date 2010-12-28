@@ -16,8 +16,8 @@ def assert_that(arg1, arg2, arg3=''):
     In the context of :py:class:`unittest.TestCase`, this will be reported as a
     test failure.
 
-    When specified with a ``Matcher`` as the second argument, ``assert_that``
-    verifies a match::
+    When specified with a :py:class:`~hamcrest.core.matcher.Matcher` as the
+    second argument, ``assert_that`` verifies a match::
 
         assert_that(actual, matcher)
 
@@ -29,7 +29,7 @@ def assert_that(arg1, arg2, arg3=''):
 
         assert_that(assertion, reason)
 
-    This is equivalent to the :py:meth:`assert_` method of
+    This is equivalent to the :py:meth:`~unittest.TestCase.assert_` method of
     :py:class:`unittest.TestCase`, but because it's a standalone function, it
     offers greater flexibility in test writing.
 

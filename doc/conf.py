@@ -27,6 +27,7 @@ sys.path.insert(0, os.path.abspath('..'))
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 
+autodoc_default_flags = ['members', 'show-inheritance']
 intersphinx_mapping = {'python': ('http://docs.python.org/2.6', None)}
 
 # Add any paths that contain templates here, relative to this directory.
@@ -69,10 +70,10 @@ release = '1.1'
 exclude_patterns = ['_build']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
-#default_role = None
+default_role = ':py:obj:'
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
-#add_function_parentheses = True
+add_function_parentheses = False
 
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
@@ -207,6 +208,14 @@ latex_documents = [
 # If false, no module index is generated.
 #latex_domain_indices = True
 
+# PyHamcrest customization: Don't skip BaseMatcher's _matches method
+def skip_member(app, what, name, obj, skip, options):
+    if skip and str(obj).find('BaseMatcher._matches') >= 0:
+        return False
+    return skip
+
+def setup(app):
+    app.connect('autodoc-skip-member', skip_member)
 
 # -- Options for manual page output --------------------------------------------
 

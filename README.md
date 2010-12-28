@@ -22,8 +22,8 @@ My first Hamcrest test
 ======================
 
 We'll start by writing a very simple PyUnit test, but instead of using PyUnit's
-``assertEqual`` function, we'll use Hamcrest's ``assert_that`` construct and
-the standard set of matchers::
+``assertEqual`` method, we'll use Hamcrest's ``assert_that`` construct and the
+standard set of matchers::
 
     from hamcrest import *
     import unittest
@@ -63,47 +63,48 @@ A tour of common matchers
 
 Hamcrest comes with a library of useful matchers. Here are some of the most important ones.
 
-  * Core
+* Core
 
-    * ``anything`` - always matches, useful if you don't care what the object
-        under test is
-    * ``described_as`` - decorator to adding custom failure description
-    * ``is_`` - decorator to improve readability - see "Syntactic sugar", below
+  * ``anything`` - always matches, useful if you don't care what the object
+    under test is
+  * ``described_as`` - decorator to adding custom failure description
+  * ``is_`` - decorator to improve readability - see `Syntactic sugar`, below
 
-  * Logical
+* Logical
 
-    * ``all_of`` - matches if all matchers match, short circuits (like Python &&)
-    * ``any_of`` - matches if any matchers match, short circuits (like Python ||)
-    * ``is_not`` - matches if the wrapped matcher doesn't match and vice versa
+  * ``all_of`` - matches if all matchers match, short circuits (like Python
+    ``and``)
+  * ``any_of`` - matches if any matchers match, short circuits (like Python
+    ``or``)
+  * ``is_not`` - matches if the wrapped matcher doesn't match and vice versa
 
-  * Object
+* Object
 
-    * ``equal_to`` - tests object equality using ``==``
-    * ``has_length`` - tests whether len(item) satisfies a given matcher
-    * ``has_string`` - tests whether str(item) satisfies another matcher
-    * ``instance_of`` - tests type
-    * ``none``, ``not_none`` - tests for None
-    * ``same_instance`` - tests object identity
+  * ``equal_to`` - tests object equality using ``==``
+  * ``has_length`` - tests whether ``len(item)`` satisfies a given matcher
+  * ``has_string`` - tests whether ``str(item)`` satisfies another matcher
+  * ``instance_of`` - tests type
+  * ``none``, ``not_none`` - tests for ``None``
+  * ``same_instance`` - tests object identity
 
-  * Sequences
+* Sequences
 
-    * ``has_entry``, ``has_key``, ``has_value`` - tests that a dictionary
-        contains an entry, key or value
-    * ``has_item``, ``has_items`` - tests that a sequence contains elements
+  * ``has_entry``, ``has_key``, ``has_value`` - tests that a dictionary
+    contains an entry, key or value
+  * ``has_item``, ``has_items`` - tests that a sequence contains elements
 
-  * Number
+* Number
 
-    * ``close_to`` - tests that numeric values are close to a given value
-    * ``greater_than``, ``greater_than_or_equal_to``, ``less_than``,
-        ``less_than_or_equal_to`` - tests ordering
+  * ``close_to`` - tests that numeric values are close to a given value
+  * ``greater_than``, ``greater_than_or_equal_to``, ``less_than``,
+    ``less_than_or_equal_to`` - tests ordering
 
-  * Text
+* Text
 
-    * ``equal_to_ignoring_case`` - tests string equality ignoring case
-    * ``equal_to_ignoring_whitespace`` - test strings equality ignoring
-        differences in runs of whitespace
-    * ``contains_string``, ``ends_with``, ``starts_with`` - tests string
-        matching
+  * ``equal_to_ignoring_case`` - tests string equality ignoring case
+  * ``equal_to_ignoring_whitespace`` - test strings equality ignoring
+    differences in runs of whitespace
+  * ``contains_string``, ``ends_with``, ``starts_with`` - tests string matching
 
 
 Syntactic sugar
@@ -181,8 +182,8 @@ fails with the message::
     Expected: is calendar date falling on Saturday
          got: <2008-04-06>
 
-Let's stay this matcher is saved in a module named isgivendayofweek. We could
-use it in our test by importing the factory function ``on_a_saturday``::
+Let's say this matcher is saved in a module named ``isgivendayofweek``. We
+could use it in our test by importing the factory function ``on_a_saturday``::
 
     from hamcrest import *
     import unittest

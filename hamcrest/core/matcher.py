@@ -12,9 +12,11 @@ class Matcher(SelfDescribing):
     A matcher is able to describe itself to give feedback when it fails.
 
     Matcher implementations should *not* directly implement this protocol.
-    Instead, *extend* the ``BaseMatcher`` class, which will ensure that the
-    ``Matcher`` API can grow to support new features and remain compatible with
-    all ``Matcher`` implementations.
+    Instead, *extend* the :py:class:`~hamcrest.core.base_matcher.BaseMatcher`
+    class, which will ensure that the
+    :py:class:`~hamcrest.core.matcher.Matcher` API can grow to support new
+    features and remain compatible with all
+    :py:class:`~hamcrest.core.matcher.Matcher` implementations.
 
     """
 
@@ -25,8 +27,8 @@ class Matcher(SelfDescribing):
         provided, it will generate a description of why the matcher has not
         accepted the item.
 
-        :param item: The object against which the matcher is evaluated
-        :returns: ``True`` if ``item`` matches, otherwise ``False``
+        :param item: The object against which the matcher is evaluated.
+        :returns: ``True`` if ``item`` matches, otherwise ``False``.
 
         """
         raise NotImplementedError('matches')
@@ -41,8 +43,10 @@ class Matcher(SelfDescribing):
         This method assumes that ``matches(item)`` is ``False``, but will not
         check this.
 
-        :param item: The item that the ``Matcher`` has rejected
-        :param mismatch_description: The description to be built or appended to
+        :param item: The item that the
+            :py:class:`~hamcrest.core.matcher.Matcher` has rejected.
+        :param mismatch_description: The description to be built or appended
+            to.
 
         """
         raise NotImplementedError('describe_mismatch')

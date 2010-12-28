@@ -39,11 +39,13 @@ And here's the implementation::
     def on_a_saturday():
         return IsGivenDayOfWeek(5)
 
-For our Matcher implementation we implement the ``_matches`` method - which
+For our Matcher implementation we implement the
+:py:meth:`~hamcrest.core.base_matcher.BaseMatcher._matches` method - which
 calls the ``weekday`` method after confirming that the argument (which may not
-be a date) has such a method - and the ``describe_to`` method - which is used
-to produce a failure message when a test fails. Here's an example of how the
-failure message looks::
+be a date) has such a method - and the
+:py:func:`~hamcrest.core.selfdescribing.SelfDescribing.describe_to` method -
+which is used to produce a failure message when a test fails. Here's an example
+of how the failure message looks::
 
     assert_that(datetime.date(2008, 04, 06), is_(on_a_saturday()))
 
@@ -53,8 +55,8 @@ fails with the message::
     Expected: is calendar date falling on Saturday
          got: <2008-04-06>
 
-Let's stay this matcher is saved in a module named isgivendayofweek. We could
-use it in our test by importing the factory function ``on_a_saturday``::
+Let's say this matcher is saved in a module named ``isgivendayofweek``. We
+could use it in our test by importing the factory function ``on_a_saturday``::
 
     from hamcrest import *
     import unittest

@@ -37,8 +37,11 @@ def has_entry(key, value):
     """Matches dictionaries containing a key-value pair satisfying a given pair
     of matchers.
 
-    :param key: A matcher - or a value for equal_to matching - for the key.
-    :param value: A matcher - or a value for equal_to matching - for the value.
+    :param key: A matcher - or a value for
+        :py:func:`~hamcrest.core.core.isequal.equal_to` matching - for the key.
+    :param value: A matcher - or a value for
+        :py:func:`~hamcrest.core.core.isequal.equal_to` matching - for the
+        value.
 
     """
     return IsDictContaining(wrap_matcher(key), wrap_matcher(value))

@@ -4,10 +4,10 @@ __license__ = "BSD, see License.txt"
 __version__ = "1.0"
 
 class Description(object):
-    """A description of a ``Matcher``.
+    """A description of a :py:class:`~hamcrest.core.matcher.Matcher`.
 
-    A ``Matcher`` will describe itself to a description which can later be used
-    for reporting.
+    A :py:class:`~hamcrest.core.matcher.Matcher` will describe itself to a
+    description which can later be used for reporting.
 
     """
 
@@ -20,7 +20,8 @@ class Description(object):
         raise NotImplementedError('append_text')
 
     def append_description_of(self, value):
-        """Appends the description of a ``SelfDescribing`` value to this
+        """Appends the description of a
+        :py:class:`~hamcrest.core.selfdescribing.SelfDescribing` value to this
         description.
 
         :returns: ``self``, for chaining

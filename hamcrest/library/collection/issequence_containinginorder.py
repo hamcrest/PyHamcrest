@@ -73,7 +73,8 @@ class IsSequenceContainingInOrder(BaseMatcher):
 def contains(*items):
     """Matches a sequence if its elements, in order, satisfy a list of matchers.
 
-    :param items: Each item is a matcher, or a value for equal_to matching.
+    :param items: Each item is a matcher, or a value for
+        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
 
     """
 
