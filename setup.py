@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = 'PyHamcrest',
-    version = '1.0',
+    version = '1.1',
     author = 'Jon Reid',
     author_email = 'jon.m.reid@gmail.com',
     maintainer_email = 'hamcrest-dev@googlegroups.com',

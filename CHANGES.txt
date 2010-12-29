@@ -1,7 +1,14 @@
-== Version 1.1 == CHANGES IN PROGRESS
+Latest sources: https://github.com/jonreid/PyHamcrest
+Latest package: http://pypi.python.org/pypi/PyHamcrest
+For more information: http://code.google.com/p/hamcrest/
+
+
+== Version 1.1 ==
 
 * New matcher "contains" matches sequence containing matching items in order.
+
 * New matcher "contains_inanyorder" matches sequence containing matching items in any order.
+
 * Added Sphinx documentation support.
 
 
