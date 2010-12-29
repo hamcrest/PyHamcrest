@@ -1,1 +1,4 @@
 *.pyc
+PyHamcrest.egg-info/
+build/
+dist/
