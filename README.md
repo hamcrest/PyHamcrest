@@ -1,7 +1,7 @@
-* Full documentation: http://packages.python.org/PyHamcrest
-* Latest package: http://pypi.python.org/pypi/PyHamcrest
-* Latest sources: https://github.com/jonreid/PyHamcrest
-* For more information: http://code.google.com/p/hamcrest
+* [Full documentation](http://packages.python.org/PyHamcrest)
+* [Latest package](http://pypi.python.org/pypi/PyHamcrest)
+* [Latest sources](https://github.com/jonreid/PyHamcrest)
+* [Hamcrest information](http://code.google.com/p/hamcrest)
 
 
 Introduction
