@@ -4,11 +4,11 @@ PyHamcrest Tutorial
 Introduction
 ------------
 
-Hamcrest is a framework for writing matcher objects, allowing you to
+PyHamcrest is a framework for writing matcher objects, allowing you to
 declaratively define "match" rules. There are a number of situations where
 matchers are invaluable, such as UI validation, or data filtering, but it is in
 the area of writing flexible tests that matchers are most commonly used. This
-tutorial shows you how to use Hamcrest for unit testing.
+tutorial shows you how to use PyHamcrest for unit testing.
 
 When writing tests it is sometimes difficult to get the balance right between
 overspecifying the test (and making it brittle to changes), and not specifying
@@ -21,11 +21,11 @@ from the expected behavior, yet continue to pass when minor, unrelated changes
 to the behaviour are made.
 
 
-My first Hamcrest test
-----------------------
+My first PyHamcrest test
+------------------------
 
 We'll start by writing a very simple PyUnit test, but instead of using PyUnit's
-:py:meth:`~unittest.TestCase.assertEqual` method, we'll use Hamcrest's
+:py:meth:`~unittest.TestCase.assertEqual` method, we'll use PyHamcrest's
 :py:func:`~hamcrest.core.matcher_assert.assert_that` construct and the standard set of matchers::
 
     from hamcrest import *
@@ -67,7 +67,8 @@ offers greater flexibility in test writing.
 A tour of common matchers
 -------------------------
 
-Hamcrest comes with a library of useful matchers. Here are some of the most important ones.
+PyHamcrest comes with a library of useful matchers. Here are some of the most
+important ones.
 
 * Core
 
@@ -100,7 +101,7 @@ Hamcrest comes with a library of useful matchers. Here are some of the most impo
     :py:func:`~hamcrest.core.core.isnone.not_none` - tests for ``None``
   * :py:func:`~hamcrest.core.core.issame.same_instance` - tests object identity
 
-* Sequences
+* Collection
 
   * :py:func:`~hamcrest.library.collection.isdict_containing.has_entry`,
     :py:func:`~hamcrest.library.collection.isdict_containingkey.has_key`,
@@ -137,7 +138,7 @@ Hamcrest comes with a library of useful matchers. Here are some of the most impo
 Syntactic sugar
 ---------------
 
-Hamcrest strives to make your tests as readable as possible. For example, the
+PyHamcrest strives to make your tests as readable as possible. For example, the
 :py:func:`~hamcrest.core.core.is_.is_` matcher is a wrapper that doesn't add
 any extra behavior to the underlying matcher. The following assertions are all
 equivalent::

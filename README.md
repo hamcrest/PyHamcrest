@@ -7,11 +7,11 @@
 Introduction
 ============
 
-Hamcrest is a framework for writing matcher objects, allowing you to
+PyHamcrest is a framework for writing matcher objects, allowing you to
 declaratively define "match" rules. There are a number of situations where
 matchers are invaluable, such as UI validation, or data filtering, but it is in
 the area of writing flexible tests that matchers are most commonly used. This
-tutorial shows you how to use Hamcrest for unit testing.
+tutorial shows you how to use PyHamcrest for unit testing.
 
 When writing tests it is sometimes difficult to get the balance right between
 overspecifying the test (and making it brittle to changes), and not specifying
@@ -24,12 +24,12 @@ from the expected behavior, yet continue to pass when minor, unrelated changes
 to the behaviour are made.
 
 
-My first Hamcrest test
-======================
+My first PyHamcrest test
+========================
 
 We'll start by writing a very simple PyUnit test, but instead of using PyUnit's
-``assertEqual`` method, we'll use Hamcrest's ``assert_that`` construct and the
-standard set of matchers::
+``assertEqual`` method, we'll use PyHamcrest's ``assert_that`` construct and
+the standard set of matchers::
 
     from hamcrest import *
     import unittest
@@ -67,7 +67,8 @@ it's a standalone function, it offers greater flexibility in test writing.
 A tour of common matchers
 =========================
 
-Hamcrest comes with a library of useful matchers. Here are some of the most important ones.
+PyHamcrest comes with a library of useful matchers. Here are some of the most
+important ones.
 
 * Core
 
@@ -93,7 +94,7 @@ Hamcrest comes with a library of useful matchers. Here are some of the most impo
   * ``none``, ``not_none`` - tests for ``None``
   * ``same_instance`` - tests object identity
 
-* Sequences
+* Collection
 
   * ``has_entry``, ``has_key``, ``has_value`` - tests that a dictionary
     contains an entry, key or value
@@ -116,7 +117,7 @@ Hamcrest comes with a library of useful matchers. Here are some of the most impo
 Syntactic sugar
 ===============
 
-Hamcrest strives to make your tests as readable as possible. For example, the
+PyHamcrest strives to make your tests as readable as possible. For example, the
 ``is_`` matcher is a wrapper that doesn't add any extra behavior to the
 underlying matcher. The following assertions are all equivalent::
 
@@ -136,7 +137,7 @@ with ``equal_to``. But if the argument is a type, it is wrapped with
 Writing custom matchers
 =======================
 
-Hamcrest comes bundled with lots of useful matchers, but you'll probably find
+PyHamcrest comes bundled with lots of useful matchers, but you'll probably find
 that you need to create your own from time to time to fit your testing needs.
 This commonly occurs when you find a fragment of code that tests the same set
 of properties over and over again (and in different tests), and you want to

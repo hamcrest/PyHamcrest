@@ -1,7 +1,7 @@
 Writing Custom Matchers
 =======================
 
-Hamcrest comes bundled with lots of useful matchers, but you'll probably find
+PyHamcrest comes bundled with lots of useful matchers, but you'll probably find
 that you need to create your own from time to time to fit your testing needs.
 This commonly occurs when you find a fragment of code that tests the same set
 of properties over and over again (and in different tests), and you want to
