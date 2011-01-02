@@ -4,6 +4,7 @@ __license__ = "BSD, see License.txt"
 
 from description import Description
 from selfdescribingvalue import SelfDescribingValue
+from helpers.hasmethod import hasmethod
 
 
 class BaseDescription(Description):
@@ -17,7 +18,10 @@ class BaseDescription(Description):
         return self
 
     def append_description_of(self, value):
-        value.describe_to(self)
+        if hasmethod(value, 'describe_to'):
+            value.describe_to(self)
+        else:
+            self.append_value(value)
         return self
 
     def append_value(self, value):
