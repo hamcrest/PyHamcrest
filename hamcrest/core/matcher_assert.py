@@ -46,9 +46,9 @@ def _assert_match(actual, matcher, reason):
         description.append_text(reason)             \
                    .append_text('\nExpected: ')     \
                    .append_description_of(matcher)  \
-                   .append_text('\n     got: ')     \
-                   .append_value(actual)            \
-                   .append_text('\n')
+                   .append_text('\n     but: ')
+        matcher.describe_mismatch(actual, description)
+        description.append_text('\n')
         raise AssertionError(str(description))
 
 

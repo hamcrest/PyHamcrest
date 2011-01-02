@@ -4,6 +4,11 @@ Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
 
+== Version 1.2 == *IN PROGRESS*
+
+* Fixed assert_that to give full description of mismatch diagnosis, not just the mismatched value.
+
+
 == Version 1.1 ==
 
 * New matchers:
