@@ -15,13 +15,13 @@ class IsSame(BaseMatcher):
         return item is self.object
 
     def describe_to(self, description):
-        description.append_text('same_instance(')   \
-                    .append_value(self.object)      \
-                    .append_text(')')
+        description.append_text('same_instance(')           \
+                   .append_description_of(self.object)      \
+                   .append_text(')')
 
     def describe_mismatch(self, item, mismatch_description):
-        mismatch_description.append_text('was ')        \
-                            .append_value(item)         \
+        mismatch_description.append_text('was ')            \
+                            .append_description_of(item)    \
                             .append_text(' with id ')
         mismatch_description.append(str(id(item)))
 

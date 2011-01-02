@@ -19,17 +19,17 @@ class MatchInAnyOrder(object):
         if not self.matchers:
             return True
         if self.mismatch_description:
-            self.mismatch_description.append_text('No item matches: ') \
-                                .append_list('', ', ', '', self.matchers) \
-                                .append_text(' in ') \
-                                .append_value_list('[', ', ', ']', sequence)
+            self.mismatch_description.append_text('No item matches: ')      \
+                                .append_list('', ', ', '', self.matchers)   \
+                                .append_text(' in ')                        \
+                                .append_list('[', ', ', ']', sequence)
         return False
 
     def isnotsurplus(self, item):
         if not self.matchers:
             if self.mismatch_description:
-                self.mismatch_description.append_text('Not matched: ') \
-                                         .append_value(item)
+                self.mismatch_description.append_text('Not matched: ')  \
+                                         .append_description_of(item)
             return False
         return True
 
@@ -41,8 +41,8 @@ class MatchInAnyOrder(object):
                 return True
             index += 1
         if self.mismatch_description:
-            self.mismatch_description.append_text('Not matched: ') \
-                                     .append_value(item)
+            self.mismatch_description.append_text('Not matched: ')  \
+                                     .append_description_of(item)
         return False
 
 

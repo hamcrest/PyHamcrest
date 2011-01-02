@@ -3,6 +3,7 @@ __copyright__ = "Copyright 2010 www.hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.matcher import Matcher
 
 
 class IsEqual(BaseMatcher):
@@ -15,7 +16,12 @@ class IsEqual(BaseMatcher):
         return item == self.object
 
     def describe_to(self, description):
-        description.append_value(self.object)
+        nested_matcher = isinstance(self.object, Matcher)
+        if nested_matcher:
+            description.append_text('<')
+        description.append_description_of(self.object)
+        if nested_matcher:
+            description.append_text('>')
 
 
 def equal_to(operand):

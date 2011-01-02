@@ -30,4 +30,4 @@ class BaseMatcher(Matcher):
         return match_result
 
     def describe_mismatch(self, item, mismatch_description):
-        mismatch_description.append_text('was ').append_value(item)
+        mismatch_description.append_text('was ').append_description_of(item)

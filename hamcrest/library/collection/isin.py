@@ -16,7 +16,7 @@ class IsIn(BaseMatcher):
 
     def describe_to(self, description):
         description.append_text('one of ')      \
-                    .append_value_list('(', ', ', ')', self.sequence)
+                   .append_list('(', ', ', ')', self.sequence)
 
 
 def is_in(sequence):

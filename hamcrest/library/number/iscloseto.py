@@ -31,9 +31,9 @@ class IsCloseTo(BaseMatcher):
 
     def describe_to(self, description):
         description.append_text('a numeric value within ')  \
-                    .append_value(self.error)               \
-                    .append_text(' of ')                    \
-                    .append_value(self.value)
+                   .append_description_of(self.error)       \
+                   .append_text(' of ')                     \
+                   .append_description_of(self.value)
 
 
 def close_to(value, error):

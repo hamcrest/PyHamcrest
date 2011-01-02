@@ -20,9 +20,9 @@ class IsEqualIgnoringCase(BaseMatcher):
         return self.lowered_string == item.lower()
 
     def describe_to(self, description):
-        description.append_text('equal_to_ignoring_case(')  \
-                    .append_value(self.original_string)     \
-                    .append_text(')')
+        description.append_text('equal_to_ignoring_case(')          \
+                   .append_description_of(self.original_string)    \
+                   .append_text(')')
 
 
 def equal_to_ignoring_case(string):

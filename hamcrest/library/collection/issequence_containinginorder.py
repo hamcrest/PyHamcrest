@@ -37,8 +37,8 @@ class MatchingInOrder(object):
     def isnotsurplus(self, item):
         if len(self.matchers) <= self.next_match_index:
             if self.mismatch_description:
-                self.mismatch_description.append_text('Not matched: ') \
-                                         .append_value(item)
+                self.mismatch_description.append_text('Not matched: ')  \
+                                         .append_description_of(item)
             return False
         return True
 

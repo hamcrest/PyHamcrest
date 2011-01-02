@@ -26,10 +26,13 @@ class OrderingComparison(BaseMatcher):
         return self.min_compare <= compare and compare <= self.max_compare
 
     def describe_to(self, description):
-        description.append_text('a value ').append_text(_comparison(self.min_compare))
+        description.append_text('a value ')                         \
+                   .append_text(_comparison(self.min_compare))
         if self.min_compare != self.max_compare:
-            description.append_text(' or ').append_text(_comparison(self.max_compare))
-        description.append_text(' ').append_value(self.value)
+            description.append_text(' or ')                         \
+                       .append_text(_comparison(self.max_compare))
+        description.append_text(' ')                                \
+                   .append_description_of(self.value)
 
 
 

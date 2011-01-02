@@ -14,6 +14,6 @@ class SubstringMatcher(BaseMatcher):
 
     def describe_to(self, description):
         description.append_text('a string ')            \
-                    .append_text(self.relationship())   \
-                    .append_text(' ')                   \
-                    .append_value(self.substring)
+                   .append_text(self.relationship())    \
+                   .append_text(' ')                    \
+                   .append_description_of(self.substring)

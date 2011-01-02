@@ -19,11 +19,11 @@ class Description(object):
         raise NotImplementedError('append_text')
 
     def append_description_of(self, value):
-        """Appends the description of a value to this description.
+        """Appends description of given value to this description.
 
         If the value implements
-        :py:meth:`~hamcrest.core.selfdescribing.describe_to` then it will be
-        called.
+        :py:meth:`~hamcrest.core.selfdescribing.SelfDescribing.describe_to`,
+        then it will be used.
 
         :returns: ``self``, for chaining
 
@@ -34,7 +34,8 @@ class Description(object):
         """Appends an arbitary value to the description.
 
         **Deprecated:** Call
-        :py:meth:`~hamcrest.core.description.append_description_of` instead.
+        :py:meth:`~hamcrest.core.description.Description.append_description_of`
+        instead.
 
         :returns: ``self``, for chaining
 

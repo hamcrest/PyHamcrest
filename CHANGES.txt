@@ -6,7 +6,14 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 == Version 1.2 == *IN PROGRESS*
 
-* Fixed assert_that to give full description of mismatch diagnosis, not just the mismatched value. This means PyHamcrest will give even more useful information!
+* Fixed assert_that to describe the diagnosis of the mismatch, not just the mismatched value. PyHamcrest will now give even more useful information.
+
+* Expanded BaseDescription.append_description_of to handle all types of values, not just self-describing values.
+
+* Deprecated:
+ - Description.append_value no longer needed; call append_description_of instead.
+ - BaseDescription.append_value_list no longer needed; call append_list instead.
+ - SelfDescribingValue no longer needed.
 
 
 == Version 1.1 ==
