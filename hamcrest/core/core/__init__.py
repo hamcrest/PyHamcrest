@@ -3,7 +3,6 @@
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2010 www.hamcrest.org"
 __license__ = "BSD, see License.txt"
-__version__ = "1.0"
 
 from allof import all_of
 from anyof import any_of
