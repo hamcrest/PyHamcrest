@@ -6,7 +6,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 == Version 1.2 == *IN PROGRESS*
 
-* Fixed assert_that to give full description of mismatch diagnosis, not just the mismatched value.
+* Fixed assert_that to give full description of mismatch diagnosis, not just the mismatched value. This means PyHamcrest will give even more useful information!
 
 
 == Version 1.1 ==
