@@ -4,8 +4,9 @@ Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
 
-== Version 1.2 == *IN PROGRESS*
+== Version 1.2 ==
 
+03 Jan 2011
 * Fixed assert_that to describe the diagnosis of the mismatch, not just the mismatched value. PyHamcrest will now give even more useful information.
 
 * Expanded BaseDescription.append_description_of to handle all types of values, not just self-describing values.
@@ -18,6 +19,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 == Version 1.1 ==
 
+28 Dec 2010
 * New matchers:
   - "contains" matches sequence containing matching items in order.
   - "contains_inanyorder" matches sequence containing matching items in any order.
@@ -27,7 +29,9 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 == Version 1.0 ==
 
-04 Dec 2010: First official release
+04 Dec 2010
+* First official release
 * Text matchers now support Unicode strings
 
-15 Jan 2008: Initial submission
+15 Jan 2008
+* Initial submission
