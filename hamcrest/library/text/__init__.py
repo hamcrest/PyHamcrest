@@ -1,7 +1,7 @@
 """Matchers that perform text comparisons."""
 
 __author__ = "Jon Reid"
-__copyright__ = "Copyright 2010 www.hamcrest.org"
+__copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 from isequal_ignoring_case import equal_to_ignoring_case
