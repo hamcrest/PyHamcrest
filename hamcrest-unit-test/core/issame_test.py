@@ -38,7 +38,7 @@ class IsSameTest(MatcherTest):
 
         matcher.describe_mismatch(o2, description)
         expected = re.compile('was <<object object at 0x[0-9a-fA-F]+>> with id [0-9]+')
-        self.assert_(expected.match(str(description)))
+        self.assertTrue(expected.match(str(description)))
 
 
 if __name__ == '__main__':

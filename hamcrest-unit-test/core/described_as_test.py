@@ -34,8 +34,8 @@ class DescribedAsTest(MatcherTest):
         m1 = described_as('irrelevant', anything())
         m2 = described_as('irrelevant', is_not(anything()))
 
-        self.assert_(m1.matches(object()))
-        self.assert_(not m2.matches('hi'))
+        self.assertTrue(m1.matches(object()))
+        self.assertTrue(not m2.matches('hi'))
 
 
 if __name__ == '__main__':
