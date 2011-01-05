@@ -4,6 +4,9 @@ __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher
 
+if 'cmp' not in globals():
+    from  unittest.util import three_way_cmp as cmp
+
 
 def _comparison(compare):
     if compare > 0:
