@@ -38,7 +38,7 @@ class HasStringTest(MatcherTest):
     def testHasReadableDescription(self):
         string_matcher = equal_to(str_result)
         matcher = has_string(string_matcher)
-        self.assertEquals('str(' + str(string_matcher) + ')', str(matcher))
+        self.assertEqual('str(' + str(string_matcher) + ')', str(matcher))
 
 
 if __name__ == '__main__':

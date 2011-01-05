@@ -41,7 +41,7 @@ class HasStringTest(MatcherTest):
     def testHasReadableDescription(self):
         length_matcher = equal_to(len_result)
         matcher = has_length(length_matcher)
-        self.assertEquals('len(' + str(length_matcher) + ')', str(matcher))
+        self.assertEqual('len(' + str(length_matcher) + ')', str(matcher))
 
 
 if __name__ == '__main__':
