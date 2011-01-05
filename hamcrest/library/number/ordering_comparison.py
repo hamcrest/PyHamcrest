@@ -3,54 +3,37 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher
-
-if 'cmp' not in globals():
-    from  unittest.util import three_way_cmp as cmp
-
-
-def _comparison(compare):
-    if compare > 0:
-        return 'less than'
-    elif compare == 0:
-        return 'equal to'
-    else:
-        return 'greater than'
+import operator
 
 
 class OrderingComparison(BaseMatcher):
 
-    def __init__(self, value, min_compare, max_compare):
+    def __init__(self, value, compare_func, comparison):
         self.value = value
-        self.min_compare = min_compare
-        self.max_compare = max_compare
+        self.compare_func = compare_func
+        self.comparison = comparison
 
     def _matches(self, item):
-        compare = cmp(self.value, item)
-        return self.min_compare <= compare and compare <= self.max_compare
+        return self.compare_func(item, self.value)
 
     def describe_to(self, description):
-        description.append_text('a value ')                         \
-                   .append_text(_comparison(self.min_compare))
-        if self.min_compare != self.max_compare:
-            description.append_text(' or ')                         \
-                       .append_text(_comparison(self.max_compare))
-        description.append_text(' ')                                \
-                   .append_description_of(self.value)
+        description.append_text('a value ').append_text(self.comparison)
+        description.append_text(' ').append_description_of(self.value)
 
 
 
 def greater_than(value):
     """Is value > expected?"""
-    return OrderingComparison(value, -1, -1)
+    return OrderingComparison(value, operator.gt, 'greater than')
 
 def greater_than_or_equal_to(value):
     """Is value >= expected?"""
-    return OrderingComparison(value, -1, 0)
+    return OrderingComparison(value, operator.ge, 'greater than or equal to')
 
 def less_than(value):
     """Is value < expected?"""
-    return OrderingComparison(value, 1, 1)
+    return OrderingComparison(value, operator.lt, 'less than')
 
 def less_than_or_equal_to(value):
     """Is value <= expected?"""
-    return OrderingComparison(value, 0, 1)
+    return OrderingComparison(value, operator.le, 'equal to or less than')
