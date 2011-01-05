@@ -23,7 +23,7 @@ class MatcherAssertTest(unittest.TestCase):
         try:
             assert_that(actual, equal_to(expected), 'identifier')
         except AssertionError, e:
-            self.assertEquals(expectedMessage, str(e))
+            self.assertEqual(expectedMessage, str(e))
             return
 
         self.fail('should have failed')
@@ -37,7 +37,7 @@ class MatcherAssertTest(unittest.TestCase):
         try:
             assert_that(actual, equal_to(expected))
         except AssertionError, e:
-            self.assertEquals(expectedMessage, str(e))
+            self.assertEqual(expectedMessage, str(e))
             return
 
         self.fail('should have failed')
@@ -48,7 +48,7 @@ class MatcherAssertTest(unittest.TestCase):
         try:
             assert_that(False, 'failing reason message')
         except AssertionError, e:
-            self.assertEquals('failing reason message', str(e))
+            self.assertEqual('failing reason message', str(e))
             return
 
         self.fail('should have failed')
