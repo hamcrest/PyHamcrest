@@ -22,22 +22,22 @@ stringcontains = contains_string(EXCERPT)
 class StringContainsTest(MatcherTest):
 
     def testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring(self):
-        self.assert_(stringcontains.matches(EXCERPT + 'END'),
+        self.assertTrue(stringcontains.matches(EXCERPT + 'END'),
                     'should be true if excerpt at beginning')
-        self.assert_(stringcontains.matches('START' + EXCERPT),
+        self.assertTrue(stringcontains.matches('START' + EXCERPT),
                     'should be true if excerpt at end')
-        self.assert_(stringcontains.matches('START' + EXCERPT + 'END'),
+        self.assertTrue(stringcontains.matches('START' + EXCERPT + 'END'),
                     'should be true if excerpt in middle')
-        self.assert_(stringcontains.matches(EXCERPT + EXCERPT),
+        self.assertTrue(stringcontains.matches(EXCERPT + EXCERPT),
                     'should be true if excerpt is repeated')
 
-        self.assert_(not stringcontains.matches('Something else'),
+        self.assertTrue(not stringcontains.matches('Something else'),
                     'should be false if excerpt is not in string')
-        self.assert_(not stringcontains.matches(EXCERPT[1:]),
+        self.assertTrue(not stringcontains.matches(EXCERPT[1:]),
                     'should be false if part of excerpt is in string')
 
     def testEvaluatesToTrueIfArgumentIsEqualToSubstring(self):
-        self.assert_(stringcontains.matches(EXCERPT),
+        self.assertTrue(stringcontains.matches(EXCERPT),
                     'should be true if excerpt is entire string')
 
     def testHasAReadableDescription(self):

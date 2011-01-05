@@ -22,22 +22,22 @@ stringendswith = ends_with(EXCERPT)
 class StringEndsWithTest(MatcherTest):
 
     def testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring(self):
-        self.assert_(not stringendswith.matches(EXCERPT + 'END'),
+        self.assertTrue(not stringendswith.matches(EXCERPT + 'END'),
                     'should be false if excerpt at beginning')
-        self.assert_(stringendswith.matches('START' + EXCERPT),
+        self.assertTrue(stringendswith.matches('START' + EXCERPT),
                     'should be true if excerpt at end')
-        self.assert_(not stringendswith.matches('START' + EXCERPT + 'END'),
+        self.assertTrue(not stringendswith.matches('START' + EXCERPT + 'END'),
                     'should be false if excerpt in middle')
-        self.assert_(stringendswith.matches(EXCERPT + EXCERPT),
+        self.assertTrue(stringendswith.matches(EXCERPT + EXCERPT),
                     'should be true if excerpt is repeated')
 
-        self.assert_(not stringendswith.matches('Something else'),
+        self.assertTrue(not stringendswith.matches('Something else'),
                     'should be false if excerpt is not in string')
-        self.assert_(not stringendswith.matches(EXCERPT[:-2]),
+        self.assertTrue(not stringendswith.matches(EXCERPT[:-2]),
                     'should false if part of excerpt is at end of string')
 
     def testEvaluatesToTrueIfArgumentIsEqualToSubstring(self):
-        self.assert_(stringendswith.matches(EXCERPT),
+        self.assertTrue(stringendswith.matches(EXCERPT),
                     'should be true if excerpt is entire string')
 
     def testHasAReadableDescription(self):
