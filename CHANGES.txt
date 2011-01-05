@@ -4,9 +4,9 @@ Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
 
-== Version 1.2 ==
+== Version 1.2.1 ==
 
-03 Jan 2011
+04 Jan 2011
 * Fixed assert_that to describe the diagnosis of the mismatch, not just the mismatched value. PyHamcrest will now give even more useful information.
 
 * Expanded BaseDescription.append_description_of to handle all types of values, not just self-describing values.
@@ -15,6 +15,9 @@ Hamcrest information: http://code.google.com/p/hamcrest
  - Description.append_value no longer needed; call append_description_of instead.
  - BaseDescription.append_value_list no longer needed; call append_list instead.
  - SelfDescribingValue no longer needed.
+
+1.2.1 fixes to 1.2:
+- Corrected manifest so install works. Fix provided by falsetru.
 
 
 == Version 1.1 ==
