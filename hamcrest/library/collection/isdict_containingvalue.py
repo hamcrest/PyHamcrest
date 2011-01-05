@@ -14,8 +14,8 @@ class IsDictContainingValue(BaseMatcher):
         self.value_matcher = value_matcher
 
     def _matches(self, dictionary):
-        if hasmethod(dictionary, 'itervalues'):
-            for value in dictionary.itervalues():
+        if hasmethod(dictionary, 'values'):
+            for value in dictionary.values():
                 if self.value_matcher.matches(value):
                     return True
         return False
