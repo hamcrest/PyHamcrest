@@ -3,6 +3,7 @@
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
+__unittest = True
 
 from matcher import Matcher
 from string_description import StringDescription
