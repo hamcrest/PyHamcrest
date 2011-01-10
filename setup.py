@@ -1,4 +1,6 @@
+import sys
 import os
+import re
 from setuptools import setup, find_packages
 
 def read(fname):
@@ -6,10 +8,13 @@ def read(fname):
 
 # Can't use "from hamcrest import __version__" on Python 3. (SyntaxError)
 # use dirty hack
-import re
 matched = re.match('__version__.*', read(os.path.join('hamcrest', '__init__.py')))
 if matched:
     exec(matched.group())
+
+extra = {}
+if sys.version_info >= (3,):
+    extra['use_2to3'] = True
 
 setup(
     name = 'PyHamcrest',
@@ -38,5 +43,5 @@ setup(
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing',
         ],
-    use_2to3 = True,
+    **extra
     )
