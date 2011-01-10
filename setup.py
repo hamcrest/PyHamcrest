@@ -20,7 +20,7 @@ setup(
     keywords = 'hamcrest matchers pyunit unit test testing unittest unittesting',
     url = 'http://code.google.com/p/hamcrest/',
     download_url = 'http://pypi.python.org/packages/source/P/PyHamcrest/PyHamcrest-%s.tar.gz' % __version__,
-    packages = find_packages(),
+    packages = find_packages(exclude=['hamcrest-unit-test', 'hamcrest-unit-test.*']),
     test_suite = 'hamcrest-unit-test.alltests',
     provides = ['hamcrest'],
     long_description=read('README.md'),
