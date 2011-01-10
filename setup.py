@@ -1,9 +1,13 @@
 import os
 from setuptools import setup, find_packages
-from hamcrest.version import __version__
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+import re
+matched = re.match('__version__.*', read(os.path.join('hamcrest', '__init__.py')))
+if matched:
+    exec(matched.group())
 
 setup(
     name = 'PyHamcrest',
