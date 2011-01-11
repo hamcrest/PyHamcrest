@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-# Can't use "from hamcrest import __version__" on Python 3. (SyntaxError)
+# Can't use "from hamcrest import __version__" on Python 3. (ImportError)
 # use dirty hack
 matched = re.match('__version__.*', read(os.path.join('hamcrest', '__init__.py')))
 if matched:
