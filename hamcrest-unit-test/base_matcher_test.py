@@ -21,7 +21,7 @@ class BaseMatcherTest(unittest.TestCase):
 
     def testDescribesItselfWithStrFunction(self):
         matcher = TestingBaseMatcher()
-        self.assertEquals('SOME DESCRIPTION', str(matcher))
+        self.assertEqual('SOME DESCRIPTION', str(matcher))
 
 
 if __name__ == "__main__":

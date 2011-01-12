@@ -3,13 +3,13 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 class QuasiDictionary:
-    def iteritems(self):
+    def items(self):
         return QuasiDictionaryItemIterator()
 
-    def iterkeys(self):
+    def keys(self):
         return QuasiDictionaryKeyIterator()
 
-    def itervalues(self):
+    def values(self):
         return QuasiDictionaryValueIterator()
 
 
