@@ -16,6 +16,7 @@ class TestingBaseMatcher(BaseMatcher):
     def describe_to(self, description):
         description.append_text('SOME DESCRIPTION')
 
+#==============================================================================
 
 class BaseMatcherTest(unittest.TestCase):
 
