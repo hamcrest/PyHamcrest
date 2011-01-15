@@ -10,9 +10,9 @@ if __name__ == '__main__':
 import unittest
 import re
 
+from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.issame import same_instance
 from hamcrest.core.core.isnot import is_not
-from hamcrest.core.matcher_assert import assert_that
 from hamcrest.core.string_description import StringDescription
 
 from matcher_test import MatcherTest

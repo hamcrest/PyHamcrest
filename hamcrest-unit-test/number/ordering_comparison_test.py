@@ -9,8 +9,8 @@ if __name__ == '__main__':
 
 import unittest
 
+from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isnot import is_not
-from hamcrest.core.matcher_assert import assert_that
 from hamcrest.library.number.ordering_comparison import greater_than
 from hamcrest.library.number.ordering_comparison import greater_than_or_equal_to
 from hamcrest.library.number.ordering_comparison import less_than

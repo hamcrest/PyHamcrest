@@ -9,8 +9,8 @@ if __name__ == '__main__':
 
 import unittest
 
+from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isnot import is_not
-from hamcrest.core.matcher_assert import assert_that
 from hamcrest.library.text.stringendswith import ends_with
 
 from matcher_test import MatcherTest
