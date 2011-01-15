@@ -9,8 +9,8 @@ if __name__ == '__main__':
 
 import unittest
 
+from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isnot import is_not
-from hamcrest.core.matcher_assert import assert_that
 from hamcrest.library.text.isequal_ignoring_case import equal_to_ignoring_case
 
 from matcher_test import MatcherTest
@@ -39,7 +39,7 @@ class IsEqualIgnoringCaseTest(MatcherTest):
 
     def testDescribesItselfAsCaseInsensitive(self):
         self.assert_description("equal_to_ignoring_case('heLLo')", matcher)
-    
+
     def testCanApplyUnicodeStringToUnicodeMatcher(self):
         assert_that(u'HelLo', equal_to_ignoring_case(u'heLLo'))
 
