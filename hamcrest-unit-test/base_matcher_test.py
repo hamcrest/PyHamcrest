@@ -19,7 +19,7 @@ class TestingBaseMatcher(BaseMatcher):
 
 class BaseMatcherTest(unittest.TestCase):
 
-    def testDescribesItselfWithStrFunction(self):
+    def testStrFunctionShouldDescribeMatcher(self):
         matcher = TestingBaseMatcher()
         self.assertEqual('SOME DESCRIPTION', str(matcher))
 
