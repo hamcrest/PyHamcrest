@@ -29,6 +29,15 @@ class IsInstanceOfTest(MatcherTest):
     def testConstructorRequiresType(self):
         self.assertRaises(TypeError, instance_of, 3)
 
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(instance_of(int), 3)
+
+    def testMismatchDescriptionShowsActualArgument(self):
+        self.assert_mismatch_description("was 'bad'", instance_of(int), 'bad')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch("was 'bad'", instance_of(int), 'bad')
+
 
 if __name__ == '__main__':
     unittest.main()

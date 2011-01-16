@@ -15,6 +15,7 @@ class IsNone(BaseMatcher):
     def describe_to(self, description):
         description.append_text('None')
 
+#------------------------------------------------------------------------------
 
 def none():
     """Matches if value is ``None``."""

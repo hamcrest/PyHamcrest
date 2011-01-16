@@ -53,16 +53,10 @@ class IsEqualTest(MatcherTest):
         self.assert_no_mismatch_description(equal_to('hi'), 'hi')
 
     def testMismatchDescriptionShowsActualArgument(self):
-        self.assert_mismatch_description(
-                                "was 'bad'",
-                                equal_to('good'),
-                                'bad')
+        self.assert_mismatch_description("was 'bad'", equal_to('good'), 'bad')
 
     def testDescribeMismatch(self):
-        self.assert_describe_mismatch(
-                                "was 'bad'",
-                                equal_to('good'),
-                                'bad')
+        self.assert_describe_mismatch("was 'bad'", equal_to('good'), 'bad')
 
 
 if __name__ == '__main__':
