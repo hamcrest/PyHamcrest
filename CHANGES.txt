@@ -13,6 +13,8 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 * Fixed described_as to use its nested matcher to generate the mismatch diagnosis.
 
+* Changed BaseDescription to describe None as "None" instead of "<None>".
+
 
 == Version 1.2.1 ==
 

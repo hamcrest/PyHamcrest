@@ -20,6 +20,7 @@ class IsInstanceOf(BaseMatcher):
         description.append_text('an instance of ')              \
                     .append_text(self.expected_type.__name__)
 
+#------------------------------------------------------------------------------
 
 def instance_of(expected_type):
     """Is the value an instance of a particular type?"""
