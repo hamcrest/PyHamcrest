@@ -25,6 +25,7 @@ class AnyOf(BaseMatcher):
     def describe_to(self, description):
         description.append_list('(', ' or ', ')', self.matchers)
 
+#------------------------------------------------------------------------------
 
 def any_of(*matchers):
     """Evaluates to ``True`` if *any* of the passed in matchers evaluate to

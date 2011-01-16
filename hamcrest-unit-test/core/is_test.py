@@ -9,11 +9,23 @@ if __name__ == '__main__':
 
 import unittest
 
+from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.core.core.is_ import is_
 
 from matcher_test import MatcherTest
 
+
+class FakeMatcher(BaseMatcher):
+
+    def matches(self, item, mismatch_description=None):
+        self.describe_mismatch(item, mismatch_description)
+        return False
+
+    def describe_mismatch(self, item, mismatch_description):
+        mismatch_description.append_text('MISMATCH')
+
+#------------------------------------------------------------------------------
 
 class IsTest(MatcherTest):
 
@@ -36,6 +48,21 @@ class IsTest(MatcherTest):
     def testProvidesConvenientShortcutForIsInstanceOf(self):
         self.assert_matches('should match', is_(str), 'A');
         self.assert_does_not_match('should not match', is_(int), 'A');
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(is_('A'), 'A')
+
+    def testMismatchDescriptionUsesNestedMatcherToDescribeMismatch(self):
+        self.assert_mismatch_description(
+                                "MISMATCH",
+                                is_(FakeMatcher()),
+                                'hi')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch(
+                                "MISMATCH",
+                                is_(FakeMatcher()),
+                                'hi')
 
 
 if __name__ == '__main__':

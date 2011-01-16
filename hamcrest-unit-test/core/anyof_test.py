@@ -44,6 +44,23 @@ class AllOfTest(MatcherTest):
         self.assert_description("('good' or 'bad' or 'ugly')",
                     any_of(equal_to('good'), equal_to('bad'), equal_to('ugly')))
 
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(
+                                any_of(equal_to('good'), equal_to('bad')),
+                                'good')
+
+    def testMismatchDescriptionDescribesFirstFailingMatch(self):
+        self.assert_mismatch_description(
+                                "was 'ugly'",
+                                any_of(equal_to('bad'), equal_to('good')),
+                                'ugly')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch(
+                                "was 'ugly'",
+                                any_of(equal_to('bad'), equal_to('good')),
+                                'ugly')
+
 
 if __name__ == '__main__':
     unittest.main()

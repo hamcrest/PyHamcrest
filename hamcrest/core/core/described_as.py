@@ -19,8 +19,11 @@ class DescribedAs(BaseMatcher):
         self.matcher = matcher
         self.values = values
 
-    def _matches(self, item):
-        return self.matcher.matches(item)
+    def matches(self, item, mismatch_description=None):
+        return self.matcher.matches(item, mismatch_description)
+
+    def describe_mismatch(self, item, mismatch_description):
+        self.matcher.describe_mismatch(item, mismatch_description)
 
     def describe_to(self, description):
         text_start = 0
@@ -33,6 +36,7 @@ class DescribedAs(BaseMatcher):
         if text_start < len(self.template):
             description.append_text(self.template[text_start:])
 
+#------------------------------------------------------------------------------
 
 def described_as(matcher, *values):
     """Wraps an existing matcher and overrides the description when it fails.
