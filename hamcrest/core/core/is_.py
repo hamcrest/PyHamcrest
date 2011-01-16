@@ -24,8 +24,11 @@ class Is(BaseMatcher):
     def __init__(self, matcher):
         self.matcher = matcher
 
-    def _matches(self, item):
-        return self.matcher.matches(item)
+    def matches(self, item, mismatch_description=None):
+        return self.matcher.matches(item, mismatch_description)
+
+    def describe_mismatch(self, item, mismatch_description):
+        return self.matcher.describe_mismatch(item, mismatch_description)
 
     def describe_to(self, description):
         description.append_text('is ').append_description_of(self.matcher)

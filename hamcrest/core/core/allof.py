@@ -32,6 +32,7 @@ class AllOf(BaseMatcher):
     def describe_to(self, description):
         description.append_list('(', ' and ', ')', self.matchers)
 
+#------------------------------------------------------------------------------
 
 def all_of(*matchers):
     """Evaluates to ``True`` only if *all* of the passed in matchers evaluate
