@@ -33,7 +33,7 @@ class DescribedAsTest(MatcherTest):
 
     def testDelegatesMatchingToNestedMatcher(self):
         m1 = described_as('irrelevant', anything())
-        m2 = described_as('irrelevant', is_not(anything()))
+        m2 = described_as('irrelevant', NeverMatch())
 
         self.assertTrue(m1.matches(object()))
         self.assertTrue(not m2.matches('hi'))

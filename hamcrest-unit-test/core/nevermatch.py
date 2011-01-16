@@ -10,7 +10,8 @@ class NeverMatch(BaseMatcher):
     mismatch_description = 'NEVERMATCH'
 
     def matches(self, item, mismatch_description=None):
-        self.describe_mismatch(item, mismatch_description)
+        if mismatch_description:
+            self.describe_mismatch(item, mismatch_description)
         return False
 
     def describe_mismatch(self, item, mismatch_description):

@@ -14,22 +14,12 @@ from hamcrest.core.core.isequal import equal_to
 from hamcrest.core.core.is_ import is_
 
 from matcher_test import MatcherTest
+from nevermatch import NeverMatch
 
-
-class FakeMatcher(BaseMatcher):
-
-    def matches(self, item, mismatch_description=None):
-        self.describe_mismatch(item, mismatch_description)
-        return False
-
-    def describe_mismatch(self, item, mismatch_description):
-        mismatch_description.append_text('MISMATCH')
-
-#------------------------------------------------------------------------------
 
 class IsTest(MatcherTest):
 
-    def testJustMatchesTheSameWayTheUnderylingMatcherDoes(self):
+    def testDelegatesMatchingToNestedMatcher(self):
         self.assert_matches('should match', is_(equal_to(True)), True)
         self.assert_matches('should match', is_(equal_to(False)), False)
         self.assert_does_not_match('should not match', is_(equal_to(True)), False)
@@ -52,16 +42,16 @@ class IsTest(MatcherTest):
     def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
         self.assert_no_mismatch_description(is_('A'), 'A')
 
-    def testMismatchDescriptionUsesNestedMatcherToDescribeMismatch(self):
+    def testDelegatesMismatchDescriptionToNestedMatcher(self):
         self.assert_mismatch_description(
-                                "MISMATCH",
-                                is_(FakeMatcher()),
+                                NeverMatch.mismatch_description,
+                                is_(NeverMatch()),
                                 'hi')
 
-    def testDescribeMismatch(self):
+    def testDelegatesDescribeMismatchToNestedMatcher(self):
         self.assert_describe_mismatch(
-                                "MISMATCH",
-                                is_(FakeMatcher()),
+                                NeverMatch.mismatch_description,
+                                is_(NeverMatch()),
                                 'hi')
 
 
