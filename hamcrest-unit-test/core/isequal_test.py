@@ -31,7 +31,7 @@ class IsEqualTest(MatcherTest):
         assert_that(None, is_not(equal_to("hi")));
         assert_that("hi", is_not(equal_to(None)));
 
-    def testHonoursEqImplementation(self):
+    def testHonorsEqImplementation(self):
         class AlwaysEqual:
             def __eq__(self, obj): return True
         class NeverEqual:
@@ -43,11 +43,26 @@ class IsEqualTest(MatcherTest):
         argument_description = 'ARGUMENT DESCRIPTION'
         class Argument:
             def __str__(self): return argument_description
-        self.assert_description('<' + argument_description + '>', equal_to(Argument()))
+        self.assert_description('<ARGUMENT DESCRIPTION>', equal_to(Argument()))
 
     def testReturnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake(self):
         inner_matcher = equal_to('NestedMatcher')
-        self.assert_description('<' + str(inner_matcher) + '>', equal_to(inner_matcher))
+        self.assert_description("<'NestedMatcher'>", equal_to(inner_matcher))
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(equal_to('hi'), 'hi')
+
+    def testMismatchDescriptionShowsActualArgument(self):
+        self.assert_mismatch_description(
+                                "was 'bad'",
+                                equal_to('good'),
+                                'bad')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch(
+                                "was 'bad'",
+                                equal_to('good'),
+                                'bad')
 
 
 if __name__ == '__main__':

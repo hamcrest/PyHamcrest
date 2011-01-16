@@ -19,6 +19,7 @@ class IsAnything(BaseMatcher):
     def describe_to(self, description):
         description.append_text(self.description)
 
+#------------------------------------------------------------------------------
 
 def anything(description=None):
     """This matcher always evaluates to ``True``.

@@ -11,7 +11,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
   Unit tests are not converted by the install procedure. Run "2to3 -nw ." separately to convert them.
   Many thanks to falsetru for this contribution.
 
-* Fixed described_as to delegate mismatch description to nested matcher.
+* Fixed described_as to use its nested matcher to generate the mismatch diagnosis.
 
 
 == Version 1.2.1 ==
