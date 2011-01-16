@@ -26,8 +26,11 @@ class IsAnythingTest(MatcherTest):
         self.assert_description('ANYTHING', anything())
 
     def testCanOverrideDescription(self):
-        description = 'description'
+        description = 'DESCRIPTION'
         self.assert_description(description, anything(description))
+
+    def testMatchAlwaysSucceedsSoShouldNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(anything(), 'hi')
 
 
 if __name__ == "__main__":
