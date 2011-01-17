@@ -2,10 +2,10 @@ if __name__ == "__main__":
     import sys
     sys.path.insert(0, '..')
 
-import unittest
+from hamcrest.core.string_description import *
 
 from hamcrest.core.selfdescribing import SelfDescribing
-from hamcrest.core.string_description import StringDescription
+import unittest
 
 
 class FakeSelfDescribing(SelfDescribing):

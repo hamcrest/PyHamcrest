@@ -13,7 +13,7 @@ class MatcherTest(unittest.TestCase):
         self.assertTrue(matcher.matches(arg), message)
 
     def assert_does_not_match(self, message, matcher, arg):
-        self.assertTrue(not matcher.matches(arg), message)
+        self.assertFalse(matcher.matches(arg), message)
 
     def assert_description(self, expected, matcher):
         description = StringDescription()

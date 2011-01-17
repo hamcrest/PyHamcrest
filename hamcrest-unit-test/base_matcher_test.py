@@ -6,9 +6,9 @@ if __name__ == "__main__":
     import sys
     sys.path.insert(0, '..')
 
-import unittest
-
 from hamcrest.core.base_matcher import *
+
+import unittest
 
 
 class TestingBaseMatcher(BaseMatcher):

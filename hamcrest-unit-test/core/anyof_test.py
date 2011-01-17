@@ -7,38 +7,47 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
+from hamcrest.core.core.anyof import *
 
-from hamcrest.core.assert_that import assert_that
-from hamcrest.core.core.anyof import any_of
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.core.core.isnot import is_not
-
 from matcher_test import MatcherTest
 
 
 class AllOfTest(MatcherTest):
 
-    def testEvaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers(self):
-        assert_that('good', any_of(equal_to('good'), equal_to('good')))
-        assert_that('good', any_of(equal_to('bad'), equal_to('good')))
-        assert_that('good', any_of(equal_to('good'), equal_to('bad')))
+    def testMatchesIfArgumentSatisfiesEitherOrBothOfTwoOtherMatchers(self):
+        self.assert_matches('first matcher',
+                            any_of(equal_to('good'), equal_to('bad')),
+                            'good')
+        self.assert_matches('second matcher',
+                            any_of(equal_to('bad'), equal_to('good')),
+                            'good')
+        self.assert_matches('both matchers',
+                            any_of(equal_to('good'), equal_to('good')),
+                            'good')
 
-        assert_that('good', is_not(any_of(equal_to('bad'), equal_to('bad'))))
+    def testNoMatchIfArgumentFailsToSatisfyEitherOfTwoOtherMatchers(self):
+        self.assert_does_not_match('either matcher',
+                                   any_of(equal_to('bad'), equal_to('bad')),
+                                   'good')
 
-    def testEvaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers(self):
-        assert_that('good', any_of(
-                                equal_to('bad'),
-                                equal_to('good'),
-                                equal_to('bad'),
-                                equal_to('bad'),
-                                equal_to('bad')))
-        assert_that('good', is_not(any_of(
-                                equal_to('bad'),
-                                equal_to('bad'),
-                                equal_to('bad'),
-                                equal_to('bad'),
-                                equal_to('bad'))))
+    def testMatchesIfArgumentSatisfiesAnyOfManyOtherMatchers(self):
+        self.assert_matches('matcher in the middle',
+                            any_of(equal_to('bad'),
+                                   equal_to('bad'),
+                                   equal_to('good'),
+                                   equal_to('bad'),
+                                   equal_to('bad')),
+                            'good')
+
+    def testNoMatchIfArgumentFailsToSatisfyAnyOfManyOtherMatchers(self):
+        self.assert_does_not_match('all matchers',
+                                   any_of(equal_to('bad'),
+                                          equal_to('bad'),
+                                          equal_to('bad'),
+                                          equal_to('bad'),
+                                          equal_to('bad')),
+                                  'good')
 
     def testHasAReadableDescription(self):
         self.assert_description("('good' or 'bad' or 'ugly')",
