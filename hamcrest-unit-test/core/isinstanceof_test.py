@@ -20,11 +20,11 @@ class IsInstanceOfTest(MatcherTest):
         self.assert_does_not_match('different class', instance_of(int), 'hi')
         self.assert_does_not_match('None', instance_of(int), None)
 
+    def testMatcherCreationRequiresType(self):
+        self.assertRaises(TypeError, instance_of, 'not a type')
+
     def testHasAReadableDescription(self):
         self.assert_description('an instance of int', instance_of(int));
-
-    def testConstructorRequiresType(self):
-        self.assertRaises(TypeError, instance_of, 3)
 
     def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
         self.assert_no_mismatch_description(instance_of(int), 3)
