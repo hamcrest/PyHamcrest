@@ -7,44 +7,50 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
+from hamcrest.library.collection.isdict_containingkey import *
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.isdict_containingkey import has_key
-
 from matcher_test import MatcherTest
 from quasidict import QuasiDictionary
 
 
 class IsDictContainingKeyTest(MatcherTest):
 
-    def testMatchesSingletonDictContainingKey(self):
-        d = {'a': 1}
-        self.assert_matches('Matches single key', has_key(equal_to('a')), d)
+    def testMatchesSingletonDictionaryContainingKey(self):
+        dict = {'a': 1}
+        self.assert_matches('same single key', has_key(equal_to('a')), dict)
 
-    def testMatchesDictContainingKey(self):
-        d = {'a': 1, 'b': 2, 'c': 3}
-        self.assert_matches('Matches a', has_key(equal_to('a')), d)
-        self.assert_matches('Matches c', has_key(equal_to('c')), d)
+    def testMatchesDictionaryContainingKey(self):
+        dict = {'a': 1, 'b': 2, 'c': 3}
+        self.assert_matches('Matches a', has_key(equal_to('a')), dict)
+        self.assert_matches('Matches c', has_key(equal_to('c')), dict)
 
     def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
-        d = {'a': 1, 'b': 2, 'c': 3}
-        self.assert_matches('Matches c', has_key('c'), d)
+        dict = {'a': 1, 'b': 2, 'c': 3}
+        self.assert_matches('Matches c', has_key('c'), dict)
 
-    def testHasReadableDescription(self):
-        self.assert_description("dictionary with key 'a'", has_key('a'))
+    def testDoesNotMatchEmptyDictionary(self):
+        self.assert_does_not_match('empty', has_key('foo'), {});
 
-    def testDoesNotMatchEmptyMap(self):
-        self.assert_does_not_match('Empty dictionary', has_key('Foo'), {});
-
-    def testDoesNotMatchMapMissingKey(self):
-        d = {'a': 1, 'b': 2, 'c': 3}
-        self.assert_does_not_match('Dictionary without matching key',
-                                    has_key('d'), d)
+    def testDoesNotMatchDictionaryMissingKey(self):
+        dict = {'a': 1, 'b': 2, 'c': 3}
+        self.assert_does_not_match('no matching key', has_key('d'), dict)
 
     def testMatchesAnyConformingDictionary(self):
         self.assert_matches('quasi-dictionary', has_key(1), QuasiDictionary())
         self.assert_does_not_match('non-dictionary', has_key(1), object())
+
+    def testHasReadableDescription(self):
+        self.assert_description("dictionary containing key 'a'", has_key('a'))
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(has_key('a'), {'a': 1})
+
+    def testMismatchDescriptionShowsActualArgument(self):
+        self.assert_mismatch_description("was 'bad'", has_key('a'), 'bad')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch("was 'bad'", has_key('a'), 'bad')
 
 
 if __name__ == '__main__':
