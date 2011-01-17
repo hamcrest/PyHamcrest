@@ -19,6 +19,7 @@ class IsNot(BaseMatcher):
     def describe_to(self, description):
         description.append_text('not ').append_description_of(self.matcher)
 
+#------------------------------------------------------------------------------
 
 def is_not(x):
     """Inverts the rule, providing a shortcut to the frequently used
