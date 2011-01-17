@@ -7,15 +7,11 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
-import re
+from hamcrest.core.core.issame import *
 
-from hamcrest.core.assert_that import assert_that
-from hamcrest.core.core.issame import same_instance
-from hamcrest.core.core.isnot import is_not
 from hamcrest.core.string_description import StringDescription
-
 from matcher_test import MatcherTest
+import re
 
 
 class IsSameTest(MatcherTest):
@@ -24,20 +20,36 @@ class IsSameTest(MatcherTest):
         o1 = object()
         o2 = object()
 
-        assert_that(o1, same_instance(o1))
-        assert_that(o2, is_not(same_instance(o1)))
+        self.assert_matches('same', same_instance(o1), o1)
+        self.assert_does_not_match('different', same_instance(o1), o2)
 
-    def testHasAReadableDescription(self):
-        self.assert_description("same_instance('ARG')", same_instance('ARG'))
+    def testDescriptionIncludesMemoryAddress(self):
+        description = StringDescription()
+        expected = re.compile("same instance as 0x[0-9a-fA-F]+ 'abc'")
+
+        description.append_description_of(same_instance('abc'));
+        self.assertTrue(expected.match(str(description)))
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        o1 = object()
+        self.assert_no_mismatch_description(same_instance(o1), o1)
+
+    def testMismatchDescriptionShowsActualArgumentAddress(self):
+        matcher = same_instance('foo')
+        description = StringDescription()
+        expected = re.compile("was 0x[0-9a-fA-F]+ 'hi'")
+
+        result = matcher.matches('hi', description)
+        self.assertFalse(result, 'Precondition: Matcher should not match item')
+        self.assertTrue(expected.match(str(description)))
 
     def testDescribeMismatch(self):
-        o1 = object()
-        o2 = object()
-        matcher = same_instance(o1)
+        matcher = same_instance('foo')
         description = StringDescription()
+        expected = re.compile("was 0x[0-9a-fA-F]+ 'hi'")
 
-        matcher.describe_mismatch(o2, description)
-        expected = re.compile('was <<object object at 0x[0-9a-fA-F]+>> with id [0-9]+')
+        matcher.describe_mismatch('hi', description)
+        expected = re.compile("was 0x[0-9a-fA-F]+ 'hi'")
         self.assertTrue(expected.match(str(description)))
 
 
