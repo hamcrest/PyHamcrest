@@ -6,10 +6,9 @@ if __name__ == "__main__":
     import sys
     sys.path.insert(0, '..')
 
-import unittest
-
 from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isequal import equal_to
+import unittest
 
 
 class AssertThatTest(unittest.TestCase):

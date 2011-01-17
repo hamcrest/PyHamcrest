@@ -7,11 +7,7 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
-
-from hamcrest.core.assert_that import assert_that
-from hamcrest.core.core.isequal import equal_to
-from hamcrest.core.core.isnot import is_not
+from hamcrest.core.core.isequal import *
 
 from matcher_test import MatcherTest
 
@@ -19,25 +15,22 @@ from matcher_test import MatcherTest
 class IsEqualTest(MatcherTest):
 
     def testComparesObjectsUsingEquality(self):
-        assert_that('hi', equal_to('hi'))
-        assert_that('bye', is_not(equal_to('hi')))
-
-        assert_that(1, equal_to(1))
-        assert_that(1, is_not(equal_to(2)))
+        self.assert_matches('equal numbers', equal_to(1), 1)
+        self.assert_does_not_match('unequal numbers', equal_to(1), 2)
 
     def testCanCompareNoneValues(self):
-        assert_that(None, equal_to(None));
+        self.assert_matches('None equals None', equal_to(None), None)
 
-        assert_that(None, is_not(equal_to("hi")));
-        assert_that("hi", is_not(equal_to(None)));
+        self.assert_does_not_match('None as argument', equal_to('hi'), None)
+        self.assert_does_not_match('None in equal_to', equal_to(None), 'hi')
 
-    def testHonorsEqImplementation(self):
+    def testHonorsArgumentEqImplementationEvenWithNone(self):
         class AlwaysEqual:
             def __eq__(self, obj): return True
         class NeverEqual:
             def __eq__(self, obj): return False
-        assert_that(AlwaysEqual(), equal_to(1));
-        assert_that(NeverEqual(), is_not(equal_to(1)));
+        self.assert_matches("always equal", equal_to(None), AlwaysEqual())
+        self.assert_does_not_match("never equal", equal_to(None), NeverEqual())
 
     def testIncludesTheResultOfCallingToStringOnItsArgumentInTheDescription(self):
         argument_description = 'ARGUMENT DESCRIPTION'

@@ -7,12 +7,9 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
+from hamcrest.core.core.is_ import *
 
-from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.core.core.is_ import is_
-
 from matcher_test import MatcherTest
 from nevermatch import NeverMatch
 
