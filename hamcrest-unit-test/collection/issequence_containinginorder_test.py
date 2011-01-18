@@ -7,11 +7,9 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
+from hamcrest.library.collection.issequence_containinginorder import *
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.issequence_containinginorder import contains
-
 from matcher_test import MatcherTest
 from quasisequence import QuasiSequence
 
@@ -53,15 +51,15 @@ class IsSequenceContainingInOrderTest(MatcherTest):
     def testEmptySequenceMatchesEmptySequence(self):
         self.assert_matches("Empty sequence", contains(), [])
 
+    def testMatchesAnyConformingSequence(self):
+        self.assert_matches('quasi-sequence', contains(1,2), QuasiSequence())
+        self.assert_does_not_match('non-sequence', contains(1,2), object())
+
     def testDescribeMismatch(self):
         self.assert_describe_mismatch('item 1: was <3>', contains(1,2), [1,3])
 
     def testHasAReadableDescription(self):
         self.assert_description("sequence containing [<1>, <2>]", contains(1,2))
-
-    def testMatchesAnyConformingSequence(self):
-        self.assert_matches('quasi-sequence', contains(1,2), QuasiSequence())
-        self.assert_does_not_match('non-sequence', contains(1,2), object())
 
 
 if __name__ == '__main__':

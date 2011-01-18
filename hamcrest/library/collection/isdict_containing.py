@@ -25,7 +25,7 @@ class IsDictContaining(BaseMatcher):
         return False
 
     def describe_to(self, description):
-        description.append_text('dictionary containing [')          \
+        description.append_text('a dictionary containing [')        \
                     .append_description_of(self.key_matcher)        \
                     .append_text(': ')                              \
                     .append_description_of(self.value_matcher)      \
