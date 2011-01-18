@@ -21,9 +21,10 @@ class IsDictContainingValue(BaseMatcher):
         return False
 
     def describe_to(self, description):
-        description.append_text('dictionary containing value ')     \
+        description.append_text('a dictionary containing value ')   \
                     .append_description_of(self.value_matcher)
 
+#------------------------------------------------------------------------------
 
 def has_value(value):
     """Matches dictionaries containing a value satisfying a given matcher.

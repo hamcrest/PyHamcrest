@@ -41,7 +41,7 @@ class IsDictContainingKeyTest(MatcherTest):
         self.assert_does_not_match('non-dictionary', has_key(1), object())
 
     def testHasReadableDescription(self):
-        self.assert_description("dictionary containing key 'a'", has_key('a'))
+        self.assert_description("a dictionary containing key 'a'", has_key('a'))
 
     def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
         self.assert_no_mismatch_description(has_key('a'), {'a': 1})

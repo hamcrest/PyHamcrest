@@ -41,7 +41,7 @@ class IsDictContainingValueTest(MatcherTest):
         self.assert_does_not_match('non-dictionary', has_value('1'), object())
 
     def testHasReadableDescription(self):
-        self.assert_description("dictionary containing value 'a'", has_value('a'))
+        self.assert_description("a dictionary containing value 'a'", has_value('a'))
 
     def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
         self.assert_no_mismatch_description(has_value(1), {'a': 1})

@@ -18,6 +18,7 @@ class IsIn(BaseMatcher):
         description.append_text('one of ')      \
                    .append_list('(', ', ', ')', self.sequence)
 
+#------------------------------------------------------------------------------
 
 def is_in(sequence):
     """Is the value present in the given sequence?"""

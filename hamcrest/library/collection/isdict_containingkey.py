@@ -21,7 +21,7 @@ class IsDictContainingKey(BaseMatcher):
         return False
 
     def describe_to(self, description):
-        description.append_text('dictionary containing key ')   \
+        description.append_text('a dictionary containing key ')     \
                     .append_description_of(self.key_matcher)
 
 #------------------------------------------------------------------------------

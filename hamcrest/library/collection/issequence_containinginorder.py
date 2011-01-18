@@ -42,6 +42,7 @@ class MatchingInOrder(object):
             return False
         return True
 
+#------------------------------------------------------------------------------
 
 class IsSequenceContainingInOrder(BaseMatcher):
     """Matches a sequence if its elements, in order, satisfy a list of
@@ -68,6 +69,7 @@ class IsSequenceContainingInOrder(BaseMatcher):
         description.append_text('sequence containing ') \
                    .append_list('[', ', ', ']', self.matchers)
 
+#------------------------------------------------------------------------------
 
 def contains(*items):
     """Matches a sequence if its elements, in order, satisfy a list of matchers.
