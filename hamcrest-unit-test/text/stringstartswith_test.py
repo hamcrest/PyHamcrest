@@ -43,7 +43,7 @@ class StringStartsWithTest(MatcherTest):
     def testHasAReadableDescription(self):
         self.assert_description("a string starting with 'a'", starts_with('a'))
 
-    def testConstructorRequiresString(self):
+    def testMatcherCreationRequiresString(self):
         self.assertRaises(TypeError, starts_with, 3)
 
     def testFailsIfMatchingAgainstNonString(self):

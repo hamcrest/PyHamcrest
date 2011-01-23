@@ -43,7 +43,7 @@ class StringContainsTest(MatcherTest):
     def testHasAReadableDescription(self):
         self.assert_description("a string containing 'a'", contains_string('a'))
 
-    def testConstructorRequiresString(self):
+    def testMatcherCreationRequiresString(self):
         self.assertRaises(TypeError, contains_string, 3)
 
     def testFailsIfMatchingAgainstNonString(self):

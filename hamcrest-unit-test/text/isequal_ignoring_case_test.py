@@ -7,10 +7,6 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
-
-from hamcrest.core.assert_that import assert_that
-from hamcrest.core.core.isnot import is_not
 from hamcrest.library.text.isequal_ignoring_case import equal_to_ignoring_case
 
 from matcher_test import MatcherTest
@@ -21,33 +17,45 @@ matcher = equal_to_ignoring_case('heLLo')
 class IsEqualIgnoringCaseTest(MatcherTest):
 
     def testIgnoresCaseOfCharsInString(self):
-        assert_that('HELLO', matcher)
-        assert_that('hello', matcher)
-        assert_that('HelLo', matcher)
+        self.assert_matches('all upper', matcher, 'HELLO')
+        self.assert_matches('all lower', matcher, 'hello')
+        self.assert_matches('mixed up', matcher, 'HelLo')
 
-        assert_that('bye', is_not(matcher))
+        self.assert_does_not_match('no match', matcher, 'bye')
 
     def testFailsIfAdditionalWhitespaceIsPresent(self):
-        assert_that('heLLo ', is_not(matcher))
-        assert_that(' heLLo', is_not(matcher))
+        self.assert_does_not_match('whitespace suffix', matcher, 'heLLo ')
+        self.assert_does_not_match('whitespace prefix', matcher, ' heLLo')
 
-    def testConstructorRequiresString(self):
+    def testMatcherCreationRequiresString(self):
         self.assertRaises(TypeError, equal_to_ignoring_case, 3)
 
     def testFailsIfMatchingAgainstNonString(self):
-        assert_that(object(), is_not(matcher))
-
-    def testDescribesItselfAsCaseInsensitive(self):
-        self.assert_description("equal_to_ignoring_case('heLLo')", matcher)
+        self.assert_does_not_match('non-string', matcher, object())
 
     def testCanApplyUnicodeStringToUnicodeMatcher(self):
-        assert_that(u'HelLo', equal_to_ignoring_case(u'heLLo'))
+        self.assert_matches('unicode-unicode',
+                            equal_to_ignoring_case(u'heLLo'), u'HelLo')
 
     def testCanApplyPlainStringToUnicodeMatcher(self):
-        assert_that('HelLo', equal_to_ignoring_case(u'heLLo'))
+        self.assert_matches('unicode-ascii',
+                            equal_to_ignoring_case(u'heLLo'), 'HelLo')
 
     def testCanApplyUnicodeStringToPlainMatcher(self):
-        assert_that(u'HelLo', equal_to_ignoring_case('heLLo'))
+        self.assert_matches('ascii-unicode',
+                            equal_to_ignoring_case('heLLo'), u'HelLo')
+
+    def testHasAReadableDescription(self):
+        self.assert_description("'heLLo' ignoring case", matcher)
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(matcher, 'hello')
+
+    def testMismatchDescription(self):
+        self.assert_mismatch_description("was 'bad'", matcher, 'bad')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch("was 'bad'", matcher, 'bad')
 
 
 if __name__ == '__main__':

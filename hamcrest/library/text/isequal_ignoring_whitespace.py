@@ -5,6 +5,21 @@ __license__ = "BSD, see License.txt"
 from hamcrest.core.base_matcher import BaseMatcher
 
 
+def stripspace(string):
+    result = ''
+    last_was_space = True
+    for character in string:
+        if character.isspace():
+            if not last_was_space:
+                result += ' '
+            last_was_space = True
+        else:
+            result += character
+            last_was_space = False
+    return result.strip()
+
+#------------------------------------------------------------------------------
+
 class IsEqualIgnoringWhiteSpace(BaseMatcher):
     """Matches if strings are equal ignoring white space."""
 
@@ -20,24 +35,10 @@ class IsEqualIgnoringWhiteSpace(BaseMatcher):
         return self.stripped_string == stripspace(item)
 
     def describe_to(self, description):
-        description.append_text('equal_to_ignoring_whitespace(')    \
-                   .append_description_of(self.original_string)    \
-                   .append_text(')')
+        description.append_description_of(self.original_string)    \
+                   .append_text(' ignoring whitespace')
 
-
-def stripspace(string):
-    result = ''
-    last_was_space = True
-    for character in string:
-        if character.isspace():
-            if not last_was_space:
-                result += ' '
-            last_was_space = True
-        else:
-            result += character
-            last_was_space = False
-    return result.strip()
-
+#------------------------------------------------------------------------------
 
 def equal_to_ignoring_whitespace(string):
     """Are the strings equal, ignoring white space?"""

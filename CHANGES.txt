@@ -25,6 +25,8 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 * Improved "less_than_or_equal_to" description.
 
+* Improved "equal_to_ignoring_case" and "equal_to_ignoring_whitespace" descriptions.
+
 
 == Version 1.2.1 ==
 

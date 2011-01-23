@@ -23,6 +23,7 @@ class HasLength(BaseMatcher):
                     .append_description_of(self.len_matcher)    \
                     .append_text(')')
 
+#------------------------------------------------------------------------------
 
 def has_length(x):
     """Evaluates whether ``len(item)`` satisfies a given matcher.

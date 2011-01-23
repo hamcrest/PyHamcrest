@@ -7,11 +7,7 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
-
-from hamcrest.core.assert_that import assert_that
-from hamcrest.core.core.isnot import is_not
-from hamcrest.library.text.isequal_ignoring_whitespace import equal_to_ignoring_whitespace
+from hamcrest.library.text.isequal_ignoring_whitespace import *
 
 from matcher_test import MatcherTest
 
@@ -21,35 +17,57 @@ matcher = equal_to_ignoring_whitespace('Hello World   how\n are we? ')
 class IsEqualIgnoringWhiteSpaceTest(MatcherTest):
 
     def testPassesIfWordsAreSameButWhitespaceDiffers(self):
-        assert_that('Hello World how are we?', matcher)
-        assert_that('   Hello World   how are \n\n\twe?', matcher)
+        self.assert_matches('less whitespace',
+                            matcher, 'Hello World how are we?')
+        self.assert_matches('more whitespace',
+                            matcher, '   Hello World   how are \n\n\twe?')
 
     def testFailsIfTextOtherThanWhitespaceDiffers(self):
-        assert_that('Hello PLANET how are we?', is_not(matcher))
-        assert_that('Hello World how are we', is_not(matcher))
+        self.assert_does_not_match('wrong word',
+                                   matcher, 'Hello PLANET how are we?')
+        self.assert_does_not_match('incomplete',
+                                   matcher, 'Hello World how are we')
 
     def testFailsIfWhitespaceIsAddedOrRemovedInMidWord(self):
-        assert_that('HelloWorld how are we?', is_not(matcher))
-        assert_that('Hello Wo rld how are we?', is_not(matcher))
+        self.assert_does_not_match('need whitespace between Hello and World',
+                                   matcher, 'HelloWorld how are we?')
+        self.assert_does_not_match('wrong whitespace within World',
+                                   matcher, 'Hello Wo rld how are we?')
 
-    def testConstructorRequiresString(self):
+    def testMatcherCreationRequiresString(self):
         self.assertRaises(TypeError, equal_to_ignoring_whitespace, 3)
 
     def testFailsIfMatchingAgainstNonString(self):
-        assert_that(object(), is_not(matcher))
-
-    def testDescribesItselfAsIgnoringWhiteSpace(self):
-        self.assert_description("equal_to_ignoring_whitespace('Hello World   how\\n are we? ')",
-                                matcher)
+        self.assert_does_not_match('non-string', matcher, object())
 
     def testCanApplyUnicodeStringToUnicodeMatcher(self):
-        assert_that(u'foo bar', equal_to_ignoring_whitespace(u'foo\n  bar'))
+        self.assert_matches('unicode-unicode',
+                            equal_to_ignoring_whitespace(u'foo\nbar'),
+                            u'foo bar')
 
     def testCanApplyPlainStringToUnicodeMatcher(self):
-        assert_that('foo bar', equal_to_ignoring_whitespace(u'foo\n  bar'))
+        self.assert_matches('unicode-ascii',
+                            equal_to_ignoring_whitespace(u'foo\nbar'),
+                            'foo bar')
 
     def testCanApplyUnicodeStringToPlainMatcher(self):
-        assert_that(u'foo bar', equal_to_ignoring_whitespace('foo\n  bar'))
+        self.assert_matches('ascii-unicode',
+                            equal_to_ignoring_whitespace('foo\n bar'),
+                            u'foo bar')
+
+    def testDescribesItselfAsIgnoringWhiteSpace(self):
+        self.assert_description("'foo\\nbar' ignoring whitespace",
+                                equal_to_ignoring_whitespace('foo\nbar'))
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(
+                        equal_to_ignoring_whitespace('foo\nbar'), 'foo bar')
+
+    def testMismatchDescription(self):
+        self.assert_mismatch_description("was 'bad'", matcher, 'bad')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch("was 'bad'", matcher, 'bad')
 
 
 if __name__ == '__main__':
