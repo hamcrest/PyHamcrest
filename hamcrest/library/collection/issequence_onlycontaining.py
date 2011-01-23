@@ -20,7 +20,8 @@ class IsSequenceOnlyContaining(BaseMatcher):
         self.matcher = matcher
 
     def _matches(self, sequence):
-        if not hasmethod(sequence, '__len__') or not hasmethod(sequence, '__iter__'):
+        if not hasmethod(sequence, '__len__')   \
+        or not hasmethod(sequence, '__iter__'):
             return False
 
         if len(sequence) == 0:
@@ -34,6 +35,7 @@ class IsSequenceOnlyContaining(BaseMatcher):
         description.append_text('a sequence containing items matching ')    \
                     .append_description_of(self.matcher)
 
+#------------------------------------------------------------------------------
 
 def only_contains(*items):
     """Matches sequences that only contain elements satisfying any of a list

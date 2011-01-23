@@ -20,6 +20,7 @@ class HasString(BaseMatcher):
                     .append_description_of(self.str_matcher)    \
                     .append_text(')')
 
+#------------------------------------------------------------------------------
 
 def has_string(x):
     """Evaluates whether ``str(item)`` satisfies a given matcher.

@@ -15,20 +15,20 @@ from matcher_test import MatcherTest
 class IsCloseToTest(MatcherTest):
 
     def testEvaluatesToTrueIfArgumentIsEqualToAValueWithinSomeError(self):
-        p = close_to(1.0, 0.5)
+        matcher = close_to(1.0, 0.5)
 
-        self.assert_matches('equal', p, 1.0)
-        self.assert_matches('less but within delta', p, 0.5)
-        self.assert_matches('greater but within delta', p, 1.5)
+        self.assert_matches('equal', matcher, 1.0)
+        self.assert_matches('less but within delta', matcher, 0.5)
+        self.assert_matches('greater but within delta', matcher, 1.5)
 
-        self.assert_does_not_match('too small', p, 0.4)
-        self.assert_does_not_match('too large', p, 1.6)
+        self.assert_does_not_match('too small', matcher, 0.4)
+        self.assert_does_not_match('too large', matcher, 1.6)
 
-    def testConstructorAcceptsOtherNumericTypes(self):
+    def testMatcherCreationAcceptsOtherNumericTypes(self):
         close_to(5, 1)
         close_to(5L, 1L)
 
-    def testConstructorRequiresNumbers(self):
+    def testMatcherCreationRequiresNumbers(self):
         self.assertRaises(TypeError, close_to, 'a', 0.5)
         self.assertRaises(TypeError, close_to, 1.0, 'a')
 
