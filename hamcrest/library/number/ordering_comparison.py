@@ -8,17 +8,19 @@ import operator
 
 class OrderingComparison(BaseMatcher):
 
-    def __init__(self, value, compare_func, comparison):
+    def __init__(self, value, comparison_function, comparison_description):
         self.value = value
-        self.compare_func = compare_func
-        self.comparison = comparison
+        self.comparison_function = comparison_function
+        self.comparison_description = comparison_description
 
     def _matches(self, item):
-        return self.compare_func(item, self.value)
+        return self.comparison_function(item, self.value)
 
     def describe_to(self, description):
-        description.append_text('a value ').append_text(self.comparison)
-        description.append_text(' ').append_description_of(self.value)
+        description.append_text('a value ')                     \
+                   .append_text(self.comparison_description)    \
+                   .append_text(' ')                            \
+                   .append_description_of(self.value)
 
 
 
@@ -36,4 +38,4 @@ def less_than(value):
 
 def less_than_or_equal_to(value):
     """Is value <= expected?"""
-    return OrderingComparison(value, operator.le, 'equal to or less than')
+    return OrderingComparison(value, operator.le, 'less than or equal to')

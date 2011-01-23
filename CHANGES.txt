@@ -23,6 +23,8 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 * Improved "close_to" mismatch description.
 
+* Improved "less_than_or_equal_to" description.
+
 
 == Version 1.2.1 ==
 
