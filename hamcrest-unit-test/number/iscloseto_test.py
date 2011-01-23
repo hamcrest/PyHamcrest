@@ -7,9 +7,7 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
-
-from hamcrest.library.number.iscloseto import close_to
+from hamcrest.library.number.iscloseto import *
 
 from matcher_test import MatcherTest
 
@@ -19,29 +17,44 @@ class IsCloseToTest(MatcherTest):
     def testEvaluatesToTrueIfArgumentIsEqualToAValueWithinSomeError(self):
         p = close_to(1.0, 0.5)
 
-        self.assertTrue(p.matches(1.0))
-        self.assertTrue(p.matches(0.5))
-        self.assertTrue(p.matches(1.5))
+        self.assert_matches('equal', p, 1.0)
+        self.assert_matches('less but within delta', p, 0.5)
+        self.assert_matches('greater but within delta', p, 1.5)
 
-        self.assertTrue(not p.matches(2.0), 'number too large')
-        self.assertTrue(not p.matches(0.0), 'number too small')
-
-    def testHasAReadableDescription(self):
-        self.assert_description('a numeric value within <0.5> of <1.0>',
-                                close_to(1.0, 0.5))
-
-    def testConstructorRequiresNumbers(self):
-        self.assertRaises(TypeError, close_to, 'a', 0.5)
-        self.assertRaises(TypeError, close_to, 1.0, 'a')
+        self.assert_does_not_match('too small', p, 0.4)
+        self.assert_does_not_match('too large', p, 1.6)
 
     def testConstructorAcceptsOtherNumericTypes(self):
         close_to(5, 1)
         close_to(5L, 1L)
 
-    def testFailsIfMatchingAgainstNonNumber(self):
-        p = close_to(1.0, 0.5)
+    def testConstructorRequiresNumbers(self):
+        self.assertRaises(TypeError, close_to, 'a', 0.5)
+        self.assertRaises(TypeError, close_to, 1.0, 'a')
 
-        self.assertTrue(not p.matches('a'), 'not a number')
+    def testFailsIfMatchingAgainstNonNumber(self):
+        self.assert_does_not_match('not a number', close_to(1.0, 0.5), 'a')
+
+    def testHasAReadableDescription(self):
+        self.assert_description('a numeric value within <0.5> of <1.0>',
+                                close_to(1.0, 0.5))
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(close_to(1.0, 0.5), 1.0)
+
+    def testMismatchDescriptionShowsActualDeltaIfArgumentIsNumeric(self):
+        self.assert_mismatch_description('<1.7> differed by <0.7>',
+                                         close_to(1.0, 0.5), 1.7)
+
+    def testMismatchDescriptionShowsActualArgumentIfNotNumeric(self):
+        self.assert_mismatch_description("was 'bad'", close_to(1.0, 0.5), 'bad')
+
+    def testDescribeMismatchShowsActualDeltaIfArgumentIsNumeric(self):
+        self.assert_describe_mismatch('<1.7> differed by <0.7>',
+                                      close_to(1.0, 0.5), 1.7)
+
+    def testDescribeMismatchShowsActualArgumentIfNotNumeric(self):
+        self.assert_describe_mismatch("was 'bad'", close_to(1.0, 0.5), 'bad')
 
 
 if __name__ == '__main__':
