@@ -16,9 +16,8 @@ class HasString(BaseMatcher):
         return self.str_matcher.matches(str(item))
 
     def describe_to(self, description):
-        description.append_text('str(')                         \
-                    .append_description_of(self.str_matcher)    \
-                    .append_text(')')
+        description.append_text('object with str ')             \
+                    .append_description_of(self.str_matcher)
 
 #------------------------------------------------------------------------------
 

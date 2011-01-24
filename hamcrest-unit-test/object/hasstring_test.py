@@ -7,38 +7,44 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
+from hamcrest.library.object.hasstring import *
 
-from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.core.core.isnot import is_not
-from hamcrest.library.object.hasstring import has_string
-
 from matcher_test import MatcherTest
 
 
-str_result = 'str result'
+class FakeWithStr(object):
 
-class FakeObject:
-    def __str__(self): return str_result
+    def __str__(self):
+        return 'FakeWithStr'
 
 
 class HasStringTest(MatcherTest):
 
     def testPassesResultOfToStrToNestedMatcher(self):
-        object = FakeObject()
-        assert_that(object, has_string(equal_to(str_result)))
-        assert_that(object, is_not(has_string(equal_to('other'))))
+        self.assert_matches('equal',
+                            has_string(equal_to('FakeWithStr')), FakeWithStr())
+        self.assert_does_not_match('unequal',
+                                   has_string(equal_to('FakeWithStr')), 3)
 
     def testProvidesConvenientShortcutForHasStringEqualTo(self):
-        object = FakeObject()
-        assert_that(object, has_string(str_result))
-        assert_that(object, is_not(has_string('other')))
+        self.assert_matches('equal', has_string('FakeWithStr'), FakeWithStr())
+        self.assert_does_not_match('unequal', has_string('FakeWithStr'), 3)
 
     def testHasReadableDescription(self):
-        string_matcher = equal_to(str_result)
-        matcher = has_string(string_matcher)
-        self.assertEqual('str(' + str(string_matcher) + ')', str(matcher))
+        self.assert_description("object with str 'foo'", has_string('foo'))
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(has_string('FakeWithStr'),
+                                            FakeWithStr())
+
+    def testMismatchDescription(self):
+        self.assert_mismatch_description("was <FakeWithStr>",
+                                         has_string('foo'), FakeWithStr())
+
+    def testDescribeMismatchDescription(self):
+        self.assert_describe_mismatch("was <FakeWithStr>",
+                                      has_string('foo'), FakeWithStr())
 
 
 if __name__ == '__main__':
