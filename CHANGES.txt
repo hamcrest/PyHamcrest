@@ -11,21 +11,11 @@ Hamcrest information: http://code.google.com/p/hamcrest
   Unit tests are not converted by the install procedure. Run "2to3 -nw ." separately to convert them.
   Many thanks to falsetru for this contribution.
 
-* Fixed "described_as" to use its nested matcher to generate the mismatch diagnosis.
-
-* Changed BaseDescription to describe None as "None" instead of "<None>".
-
-* Changed "same_instance" description and mismatch description to be more readable and show the respective memory addresses.
-
-* Improved "hasKey" description.
-
-* Improved "hasValue" description.
-
-* Improved "close_to" mismatch description.
-
-* Improved "less_than_or_equal_to" description.
-
-* Improved "equal_to_ignoring_case" and "equal_to_ignoring_whitespace" descriptions.
+* Improved descriptions and mismatch descriptions of several matchers, including:
+  - Fixed "described_as" to use nested matcher to generate mismatch description.
+  - "same_instance" is more readable, and includes object memory addresses.
+  - If object has a length, "has_length" mismatch describes actual length.
+  - Improved readability of several matchers.
 
 
 == Version 1.2.1 ==

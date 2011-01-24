@@ -18,10 +18,15 @@ class HasLength(BaseMatcher):
             return False
         return self.len_matcher.matches(len(item))
 
+    def describe_mismatch(self, item, mismatch_description):
+        super(HasLength, self).describe_mismatch(item, mismatch_description)
+        if hasmethod(item, '__len__'):
+            mismatch_description.append_text(' with length of ')    \
+                                .append_description_of(len(item))
+
     def describe_to(self, description):
-        description.append_text('len(')                         \
-                    .append_description_of(self.len_matcher)    \
-                    .append_text(')')
+        description.append_text('object with length of ')           \
+                    .append_description_of(self.len_matcher)
 
 #------------------------------------------------------------------------------
 
