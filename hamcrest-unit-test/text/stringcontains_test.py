@@ -7,56 +7,58 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-import unittest
-
-from hamcrest.core.assert_that import assert_that
-from hamcrest.core.core.isnot import is_not
-from hamcrest.library.text.stringcontains import contains_string
-
+from hamcrest.library.text.stringcontains import *
 from matcher_test import MatcherTest
 
 
 EXCERPT = 'EXCERPT'
-stringcontains = contains_string(EXCERPT)
+matcher = contains_string(EXCERPT)
 
 class StringContainsTest(MatcherTest):
 
     def testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring(self):
-        self.assertTrue(stringcontains.matches(EXCERPT + 'END'),
-                    'should be true if excerpt at beginning')
-        self.assertTrue(stringcontains.matches('START' + EXCERPT),
-                    'should be true if excerpt at end')
-        self.assertTrue(stringcontains.matches('START' + EXCERPT + 'END'),
-                    'should be true if excerpt in middle')
-        self.assertTrue(stringcontains.matches(EXCERPT + EXCERPT),
-                    'should be true if excerpt is repeated')
+        self.assert_matches('excerpt at beginning', matcher, EXCERPT + 'END')
+        self.assert_matches('excerpt at end', matcher, 'START' + EXCERPT)
+        self.assert_matches('excerpt in middle',
+                            matcher, 'START' + EXCERPT + 'END')
+        self.assert_matches('excerpt repeated', matcher, EXCERPT + EXCERPT)
 
-        self.assertTrue(not stringcontains.matches('Something else'),
-                    'should be false if excerpt is not in string')
-        self.assertTrue(not stringcontains.matches(EXCERPT[1:]),
-                    'should be false if part of excerpt is in string')
+        self.assert_does_not_match('excerpt not in string',matcher, 'whatever')
+        self.assert_does_not_match('only part of excerpt',matcher, EXCERPT[1:])
 
     def testEvaluatesToTrueIfArgumentIsEqualToSubstring(self):
-        self.assertTrue(stringcontains.matches(EXCERPT),
-                    'should be true if excerpt is entire string')
-
-    def testHasAReadableDescription(self):
-        self.assert_description("a string containing 'a'", contains_string('a'))
+        self.assert_matches('excerpt is entire string', matcher, EXCERPT)
 
     def testMatcherCreationRequiresString(self):
         self.assertRaises(TypeError, contains_string, 3)
 
     def testFailsIfMatchingAgainstNonString(self):
-        assert_that(object(), is_not(stringcontains))
+        self.assert_does_not_match('non-string', matcher, object())
 
     def testCanApplyUnicodeStringToUnicodeMatcher(self):
-        assert_that(u'foo bar baz', contains_string(u'bar'))
+        self.assert_matches('unicode-unicode',
+                            contains_string(u'bar'), u'foo bar baz')
 
     def testCanApplyPlainStringToUnicodeMatcher(self):
-        assert_that('foo bar baz', contains_string(u'bar'))
+        self.assert_matches('unicode-ascii',
+                            contains_string(u'bar'), 'foo bar baz')
 
     def testCanApplyUnicodeStringToPlainMatcher(self):
-        assert_that(u'foo bar baz', contains_string('bar'))
+        self.assert_matches('ascii-unicode',
+                            contains_string('bar'), u'foo bar baz')
+
+    def testHasAReadableDescription(self):
+        self.assert_description("a string containing 'EXCERPT'", matcher)
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(matcher, EXCERPT)
+
+    def testMismatchDescription(self):
+        self.assert_mismatch_description("was 'bad'", matcher, 'bad')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch("was 'bad'", matcher, 'bad')
+
 
 
 if __name__ == '__main__':

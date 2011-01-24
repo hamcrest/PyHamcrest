@@ -20,6 +20,7 @@ class StringStartsWith(SubstringMatcher):
     def relationship(self):
         return 'starting with'
 
+#------------------------------------------------------------------------------
 
 def starts_with(substring):
     """Is the value a string starting with a given substring?"""
