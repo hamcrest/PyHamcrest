@@ -67,6 +67,8 @@ class IsSequenceContainingInAnyOrderTest(MatcherTest):
         self.assert_describe_mismatch('not matched: <3>',
                                       contains_inanyorder(1,2), [1,3])
 
+    def testDescribeMismatchOfNonSequence(self):
+        self.assert_describe_mismatch("was <3>", contains_inanyorder(1,2), 3)
 
 
 if __name__ == '__main__':

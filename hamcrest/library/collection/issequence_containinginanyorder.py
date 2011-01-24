@@ -58,6 +58,9 @@ class IsSequenceContainingInAnyOrder(BaseMatcher):
 
     def matches(self, sequence, mismatch_description=None):
         if not hasmethod(sequence, '__iter__'):
+            if mismatch_description:
+                super(IsSequenceContainingInAnyOrder, self)             \
+                    .describe_mismatch(sequence, mismatch_description)
             return False
         matchsequence = MatchInAnyOrder(self.matchers, mismatch_description)
         for item in sequence:
