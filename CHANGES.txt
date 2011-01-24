@@ -12,9 +12,11 @@ Hamcrest information: http://code.google.com/p/hamcrest
   Many thanks to falsetru for this contribution.
 
 * Improved descriptions and mismatch descriptions of several matchers, including:
+  - Fixed "contains" and "contains_inanyorder" to describe mismatch if item is not a sequence.
   - Fixed "described_as" to use nested matcher to generate mismatch description.
   - "same_instance" is more readable, and includes object memory addresses.
   - If object has a length, "has_length" mismatch describes actual length.
+  - Describe None as "None" instead of "<None>".
   - Improved readability of several matchers.
 
 

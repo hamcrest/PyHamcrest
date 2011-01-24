@@ -55,12 +55,14 @@ class IsSequenceContainingInOrderTest(MatcherTest):
         self.assert_matches('quasi-sequence', contains(1,2), QuasiSequence())
         self.assert_does_not_match('non-sequence', contains(1,2), object())
 
-    def testDescribeMismatch(self):
-        self.assert_describe_mismatch('item 1: was <3>', contains(1,2), [1,3])
-
     def testHasAReadableDescription(self):
         self.assert_description("sequence containing [<1>, <2>]", contains(1,2))
 
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch('item 1: was <3>', contains(1,2), [1,3])
+
+    def testDescribeMismatchOfNonSequence(self):
+        self.assert_describe_mismatch("was <3>", contains(1,2), 3)
 
 if __name__ == '__main__':
     unittest.main()

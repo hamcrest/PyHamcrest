@@ -52,10 +52,13 @@ class IsSequenceOnlyContainingTest(MatcherTest):
 
     def testHasAReadableDescription(self):
         self.assert_description('a sequence containing items matching (<1> or <2>)',
-                                only_contains(1, 2))
+                                only_contains(1,2))
 
     def testDescribeMismatch(self):
-        self.assert_describe_mismatch("was 'bad'", only_contains(1, 2), 'bad')
+        self.assert_describe_mismatch("was 'bad'", only_contains(1,2), 'bad')
+
+    def testDescribeMismatchOfNonSequence(self):
+        self.assert_describe_mismatch("was <3>", only_contains(1,2), 3)
 
 
 if __name__ == '__main__':
