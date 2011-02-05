@@ -43,10 +43,10 @@ class IsSequenceContainingTest(MatcherTest):
         self.assert_no_mismatch_description(has_item('a'), ['a', 'b'])
 
     def testMismatchDescriptionShowsActualArgument(self):
-        self.assert_mismatch_description("was 'bad'", has_item('a'), 'bad')
+        self.assert_mismatch_description("was <42>", has_item('a'), 42)
 
     def testDescribeMismatch(self):
-        self.assert_describe_mismatch("was 'bad'", has_item('a'), 'bad')
+        self.assert_describe_mismatch("was <42>", has_item('a'), 42)
 
 #------------------------------------------------------------------------------
 
@@ -86,12 +86,12 @@ class IsSequenceContainingItemsTest(MatcherTest):
         self.assert_no_mismatch_description(has_items('a', 'b'), ['a', 'b'])
 
     def testMismatchDescriptionShowsFirstUnmetMatcherAndActualArgument(self):
-        self.assert_mismatch_description("a sequence containing 'a' was 'bad'",
-                                         has_items('a', 'b'), 'bad')
+        self.assert_mismatch_description("a sequence containing 'a' was <42>",
+                                         has_items('a', 'b'), 42)
 
     def testDescribeMismatch(self):
-        self.assert_describe_mismatch("a sequence containing 'a' was 'bad'",
-                                      has_items('a', 'b'), 'bad')
+        self.assert_describe_mismatch("a sequence containing 'a' was <42>",
+                                      has_items('a', 'b'), 42)
 
 
 if __name__ == '__main__':
