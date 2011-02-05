@@ -27,13 +27,13 @@ class IsSequenceOnlyContainingTest(MatcherTest):
 
     def testMatchesAllItemsWithMultipleMatchers(self):
         self.assert_matches('multiple matchers',
-                            only_contains(less_than(3), equal_to('hi')),
-                            [0, 'hi', 1, 2])
+                            only_contains(less_than(3), equal_to(7)),
+                            [0, 7, 1, 2])
 
     def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
         self.assert_matches('Values automatically wrapped with equal_to',
-                            only_contains(less_than(3), 'hi'),
-                            [0, 'hi', 1, 2])
+                            only_contains(less_than(3), 7),
+                            [0, 7, 1, 2])
 
     def testDoesNotMatchListWithMismatchingItem(self):
         self.assert_does_not_match('3 is not less than 3',
