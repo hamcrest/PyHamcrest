@@ -9,7 +9,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
   - Install the "distribute" package, http://pypi.python.org/pypi/distribute
   - Run "python3 setup.py install"
   Unit tests are not converted by the install procedure. Run "2to3 -nw ." separately to convert them.
-  Many thanks to falsetru for this contribution.
+  Many thanks to Jeong-Min Lee for this contribution.
 
 * Improved descriptions and mismatch descriptions of several matchers, including:
   - Fixed "contains" and "contains_inanyorder" to describe mismatch if item is not a sequence.
@@ -34,7 +34,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
  - SelfDescribingValue no longer needed.
 
 1.2.1 fixes to 1.2:
-- Corrected manifest so install works. Fix provided by falsetru.
+- Corrected manifest so install works. Fix provided by Jeong-Min Lee.
 
 
 == Version 1.1 ==
