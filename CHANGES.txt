@@ -17,6 +17,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
   - "same_instance" is more readable, and includes object memory addresses.
   - If object has a length, "has_length" mismatch describes actual length.
   - Describe None as "None" instead of "<None>".
+  - Don't wrap angle brackets around a description that already has them.
   - Improved readability of several matchers.
 
 

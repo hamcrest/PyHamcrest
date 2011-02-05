@@ -6,6 +6,7 @@ from hamcrest.core.string_description import *
 
 from hamcrest.core.selfdescribing import SelfDescribing
 import unittest
+import re
 
 
 class FakeSelfDescribing(SelfDescribing):
@@ -31,6 +32,12 @@ class StringDescriptionTest(unittest.TestCase):
     def testWrapsNonSelfDescribingObjectInAngleBrackets(self):
         self.description.append_description_of(42)
         self.assertEqual('<42>', str(self.description))
+
+    def testShouldNotAddAngleBracketsIfObjectDescriptionAlreadyHasThem(self):
+        self.description.append_description_of(object())
+        expected = re.compile("<object object at 0x[0-9a-fA-F]+>")
+        self.assertTrue(expected.match(str(self.description)))
+
 
 if __name__ == "__main__":
     unittest.main()

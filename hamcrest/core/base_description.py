@@ -27,9 +27,13 @@ class BaseDescription(Description):
         elif isinstance(value, str):
             self.append_string_in_python_syntax(value)
         else:
-            self.append('<')
-            self.append(str(value))
-            self.append('>')
+            description = str(value)
+            if description[:1] == '<' and description[-1:] == '>':
+                self.append(description)
+            else:
+                self.append('<')
+                self.append(description)
+                self.append('>')
         return self
 
     def append_value(self, value):
