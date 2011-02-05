@@ -9,7 +9,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
 * PyHamcrest is now compatible with Python 3! To install PyHamcrest on Python 3:
   - Install the "distribute" package, http://pypi.python.org/pypi/distribute
   - Run "python3 setup.py install"
-  Unit tests are not converted by the install procedure. Run "2to3 -nw ." separately to convert them.
+  Unit tests are not converted by the install procedure. Run "2to3 -nw ." separately to convert them. You may discover import statements in the __init__.py files (and one in core/base_description.py) that need dot prefixes.
   Many thanks to Jeong-Min Lee for this contribution.
 
 * Improved descriptions and mismatch descriptions of several matchers, including:
