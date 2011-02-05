@@ -5,8 +5,8 @@ if __name__ == "__main__":
 from hamcrest.core.string_description import *
 
 from hamcrest.core.selfdescribing import SelfDescribing
-import unittest
 import re
+import unittest
 
 
 class FakeSelfDescribing(SelfDescribing):

@@ -11,6 +11,7 @@ from hamcrest.core.core.isnot import *
 
 from hamcrest.core.core.isequal import equal_to
 from matcher_test import MatcherTest
+import unittest
 
 
 class IsNotTest(MatcherTest):

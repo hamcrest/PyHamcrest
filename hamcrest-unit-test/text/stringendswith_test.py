@@ -10,6 +10,7 @@ if __name__ == '__main__':
 from hamcrest.library.text.stringendswith import *
 
 from matcher_test import MatcherTest
+import unittest
 
 
 EXCERPT = 'EXCERPT'

@@ -12,6 +12,7 @@ from hamcrest.library.object.haslength import *
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.library.number.ordering_comparison import greater_than
 from matcher_test import MatcherTest
+import unittest
 
 
 class FakeWithLen(object):
