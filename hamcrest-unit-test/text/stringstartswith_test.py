@@ -12,6 +12,7 @@ from hamcrest.library.text.stringstartswith import *
 from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isnot import is_not
 from matcher_test import MatcherTest
+import unittest
 
 
 EXCERPT = 'EXCERPT'

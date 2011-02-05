@@ -13,6 +13,7 @@ from hamcrest.core.core.isequal import equal_to
 from hamcrest.library.number.ordering_comparison import less_than
 from matcher_test import MatcherTest
 from quasisequence import QuasiSequence
+import unittest
 
 
 class IsSequenceOnlyContainingTest(MatcherTest):

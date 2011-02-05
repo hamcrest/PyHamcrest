@@ -12,6 +12,7 @@ from hamcrest.core.core.is_ import *
 from hamcrest.core.core.isequal import equal_to
 from matcher_test import MatcherTest
 from nevermatch import NeverMatch
+import unittest
 
 
 class IsTest(MatcherTest):

@@ -11,6 +11,8 @@ from hamcrest.library.number.ordering_comparison import *
 
 from datetime import date
 from matcher_test import MatcherTest
+import unittest
+
 
 
 class OrderingComparisonTest(MatcherTest):

@@ -10,6 +10,7 @@ if __name__ == '__main__':
 from hamcrest.library.text.isequal_ignoring_case import equal_to_ignoring_case
 
 from matcher_test import MatcherTest
+import unittest
 
 
 matcher = equal_to_ignoring_case('heLLo')

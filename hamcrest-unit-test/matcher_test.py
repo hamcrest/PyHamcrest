@@ -2,9 +2,9 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-import unittest
-
 from hamcrest.core.string_description import StringDescription
+
+import unittest
 
 
 class MatcherTest(unittest.TestCase):

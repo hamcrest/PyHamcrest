@@ -12,6 +12,7 @@ from hamcrest.core.core.issame import *
 from hamcrest.core.string_description import StringDescription
 from matcher_test import MatcherTest
 import re
+import unittest
 
 
 class IsSameTest(MatcherTest):

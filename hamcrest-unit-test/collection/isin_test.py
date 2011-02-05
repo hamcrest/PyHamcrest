@@ -10,6 +10,7 @@ if __name__ == '__main__':
 from hamcrest.library.collection.isin import *
 
 from matcher_test import MatcherTest
+import unittest
 
 
 sequence = ('a', 'b', 'c')

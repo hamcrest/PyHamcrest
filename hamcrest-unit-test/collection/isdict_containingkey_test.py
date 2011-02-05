@@ -12,6 +12,7 @@ from hamcrest.library.collection.isdict_containingkey import *
 from hamcrest.core.core.isequal import equal_to
 from matcher_test import MatcherTest
 from quasidict import QuasiDictionary
+import unittest
 
 
 class IsDictContainingKeyTest(MatcherTest):

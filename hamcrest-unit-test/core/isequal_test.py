@@ -10,6 +10,7 @@ if __name__ == '__main__':
 from hamcrest.core.core.isequal import *
 
 from matcher_test import MatcherTest
+import unittest
 
 
 class IsEqualTest(MatcherTest):

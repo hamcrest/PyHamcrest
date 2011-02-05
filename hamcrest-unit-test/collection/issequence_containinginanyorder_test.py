@@ -12,6 +12,7 @@ from hamcrest.library.collection.issequence_containinginanyorder import *
 from hamcrest.core.core.isequal import equal_to
 from matcher_test import MatcherTest
 from quasisequence import QuasiSequence
+import unittest
 
 
 class IsSequenceContainingInAnyOrderTest(MatcherTest):

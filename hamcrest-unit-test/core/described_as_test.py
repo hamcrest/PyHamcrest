@@ -12,6 +12,7 @@ from hamcrest.core.core.described_as import *
 from hamcrest.core.core.isanything import anything
 from matcher_test import MatcherTest
 from nevermatch import NeverMatch
+import unittest
 
 
 class DescribedAsTest(MatcherTest):

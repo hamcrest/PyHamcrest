@@ -9,6 +9,7 @@ if __name__ == '__main__':
 
 from hamcrest.library.text.stringcontains import *
 from matcher_test import MatcherTest
+import unittest
 
 
 EXCERPT = 'EXCERPT'

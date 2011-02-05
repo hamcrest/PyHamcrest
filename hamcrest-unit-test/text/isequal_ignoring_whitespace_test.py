@@ -10,6 +10,7 @@ if __name__ == '__main__':
 from hamcrest.library.text.isequal_ignoring_whitespace import *
 
 from matcher_test import MatcherTest
+import unittest
 
 
 matcher = equal_to_ignoring_whitespace('Hello World   how\n are we? ')
