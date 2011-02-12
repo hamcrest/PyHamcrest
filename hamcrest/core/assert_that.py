@@ -9,7 +9,7 @@ from matcher import Matcher
 from string_description import StringDescription
 
 
-def assert_that(arg1, arg2, arg3=''):
+def assert_that(arg1, arg2=None, arg3=''):
     """Asserts a match, or a boolean condition.
 
     If the assertion fails, ``assert_that`` raises an :py:exc:`AssertionError`.
@@ -29,9 +29,13 @@ def assert_that(arg1, arg2, arg3=''):
 
         assert_that(assertion, reason)
 
-    This is equivalent to the :py:meth:`~unittest.TestCase.assert_` method of
-    :py:class:`unittest.TestCase`, but because it's a standalone function, it
-    offers greater flexibility in test writing.
+    or ::
+
+        assert_that(assertion)
+
+    This is equivalent to the :py:meth:`~unittest.TestCase.assertTrue` method
+    of :py:class:`unittest.TestCase`, but because it's a standalone function,
+    it offers greater flexibility in test writing.
 
     """
     if isinstance(arg2, Matcher):
@@ -52,6 +56,8 @@ def _assert_match(actual, matcher, reason):
         raise AssertionError(str(description))
 
 
-def _assert_bool(assertion, reason):
+def _assert_bool(assertion, reason=None):
     if not assertion:
+        if not reason:
+            reason = 'Assertion failed'
         raise AssertionError(reason)

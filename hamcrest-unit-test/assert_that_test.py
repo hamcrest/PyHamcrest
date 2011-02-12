@@ -53,6 +53,17 @@ class AssertThatTest(unittest.TestCase):
 
         self.fail('should have failed')
 
+    def testCanTestBoolDirectlyWithoutReason(self):
+        assert_that(True)
+
+        try:
+            assert_that(False)
+        except AssertionError, e:
+            self.assertEqual('Assertion failed', str(e))
+            return
+
+        self.fail('should have failed')
+
 
 if __name__ == "__main__":
     unittest.main()
