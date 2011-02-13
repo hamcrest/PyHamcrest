@@ -23,15 +23,15 @@ class IsTest(MatcherTest):
         self.assert_does_not_match('should not match', is_(equal_to(True)), False)
         self.assert_does_not_match('should not match', is_(equal_to(False)), True)
 
-    def testGeneratesIsPrefixInDescription(self):
-        self.assert_description('is <True>', is_(equal_to(True)))
+    def testDescriptionShouldPassThrough(self):
+        self.assert_description('<True>', is_(equal_to(True)))
 
     def testProvidesConvenientShortcutForIsEqualTo(self):
         self.assert_matches('should match', is_('A'), 'A');
         self.assert_matches('should match', is_('B'), 'B');
         self.assert_does_not_match('should not match', is_('A'), 'B');
         self.assert_does_not_match('should not match', is_('B'), 'A');
-        self.assert_description("is 'A'", is_('A'));
+        self.assert_description("'A'", is_('A'));
 
     def testProvidesConvenientShortcutForIsInstanceOf(self):
         self.assert_matches('should match', is_(str), 'A');
