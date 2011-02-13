@@ -20,9 +20,7 @@ class BaseDescription(Description):
         return self
 
     def append_description_of(self, value):
-        if value is None:
-            self.append_text('None')
-        elif hasmethod(value, 'describe_to'):
+        if hasmethod(value, 'describe_to'):
             value.describe_to(self)
         elif isinstance(value, str):
             self.append_string_in_python_syntax(value)
