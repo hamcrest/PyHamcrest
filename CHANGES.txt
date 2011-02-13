@@ -7,6 +7,9 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 * assert_that can be invoked with a single boolean argument; the reason message is now optional. This is a convenience replacement for assertTrue. Change provided by Jeong-Min Lee.
 
+* New matchers:
+ - "has_entries" matches dictionary containing key-value pairs satisfying a given list of alternating keys and value matchers.
+
 
 == Version 1.3 ==
 
