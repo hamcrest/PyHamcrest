@@ -31,7 +31,7 @@ class Is(BaseMatcher):
         return self.matcher.describe_mismatch(item, mismatch_description)
 
     def describe_to(self, description):
-        description.append_text('is ').append_description_of(self.matcher)
+        description.append_description_of(self.matcher)
 
 #------------------------------------------------------------------------------
 
