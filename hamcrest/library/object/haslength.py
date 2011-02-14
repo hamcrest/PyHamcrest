@@ -25,7 +25,7 @@ class HasLength(BaseMatcher):
                                 .append_description_of(len(item))
 
     def describe_to(self, description):
-        description.append_text('object with length of ')           \
+        description.append_text('an object with length of ')    \
                     .append_description_of(self.len_matcher)
 
 #------------------------------------------------------------------------------
