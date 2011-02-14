@@ -3,8 +3,9 @@ Latest package: http://pypi.python.org/pypi/PyHamcrest
 Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
-== Version 1.4 ==  *IN PROGRESS*
+== Version 1.4 ==
 
+13 Feb 2011
 * New matchers:
  - "has_entries" matches dictionary containing key-value pairs satisfying a given list of alternating keys and value matchers.
 

@@ -74,7 +74,7 @@ important ones.
 
   * ``anything`` - always matches, useful if you don't care what the object
     under test is
-  * ``described_as`` - decorator to adding custom failure description
+  * ``described_as`` - decorator to add custom failure description
   * ``is_`` - decorator to improve readability - see `Syntactic sugar`, below
 
 * Logical
@@ -96,9 +96,9 @@ important ones.
 
 * Collection
 
-  * ``has_entry``, ``has_key``, ``has_value`` - tests that a dictionary
+  * ``has_entry``, ``has_entries``, ``has_key``, ``has_value`` - tests that a dictionary
     contains an entry, key or value
-  * ``has_item``, ``has_items`` - tests that a sequence contains elements
+  * ``has_item``, ``contains``, ``contains_inanyorder`` - tests that a sequence contains elements
 
 * Number
 
