@@ -9,6 +9,11 @@ isdict_containing
 
 .. automodule:: hamcrest.library.collection.isdict_containing
 
+isdict_containingentries
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.library.collection.isdict_containingentries
+
 isdict_containingkey
 ^^^^^^^^^^^^^^^^^^^^
 

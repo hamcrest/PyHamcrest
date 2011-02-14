@@ -75,7 +75,7 @@ important ones.
   * :py:func:`~hamcrest.core.core.isanything.anything` - always matches, useful
     if you don't care what the object under test is
   * :py:func:`~hamcrest.core.core.described_as.described_as` - decorator to
-    adding custom failure description
+    add custom failure description
   * :py:func:`~hamcrest.core.core.is_.is_` - decorator to improve readability -
     see :ref:`sugar`, below
 
@@ -104,11 +104,13 @@ important ones.
 * Collection
 
   * :py:func:`~hamcrest.library.collection.isdict_containing.has_entry`,
+    :py:func:`~hamcrest.library.collection.isdict_containingentries.has_entries`,
     :py:func:`~hamcrest.library.collection.isdict_containingkey.has_key`,
     :py:func:`~hamcrest.library.collection.isdict_containingvalue.has_value` -
     tests that a dictionary contains an entry, key or value
   * :py:func:`~hamcrest.library.collection.issequence_containing.has_item`,
-    :py:func:`~hamcrest.library.collection.issequence_containing.has_items` -
+    :py:func:`~hamcrest.library.collection.issequence_containinginorder.contains`,
+    :py:func:`~hamcrest.library.collection.issequence_containinginanyorder.contains_inanyorder` -
     tests that a sequence contains elements
 
 * Number
