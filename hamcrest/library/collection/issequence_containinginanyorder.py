@@ -72,8 +72,8 @@ class IsSequenceContainingInAnyOrder(BaseMatcher):
         self.matches(item, mismatch_description)
 
     def describe_to(self, description):
-        description.append_text('sequence over ') \
-                   .append_list('[', ', ', ']', self.matchers) \
+        description.append_text('a sequence over ')             \
+                   .append_list('[', ', ', ']', self.matchers)  \
                    .append_text(' in any order')
 
 #------------------------------------------------------------------------------

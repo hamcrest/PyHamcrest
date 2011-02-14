@@ -61,7 +61,7 @@ class IsSequenceContainingInAnyOrderTest(MatcherTest):
                                    object())
 
     def testHasAReadableDescription(self):
-        self.assert_description("sequence over [<1>, <2>] in any order",
+        self.assert_description("a sequence over [<1>, <2>] in any order",
                                 contains_inanyorder(1,2))
 
     def testDescribeMismatch(self):

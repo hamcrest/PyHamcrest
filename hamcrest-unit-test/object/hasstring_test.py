@@ -33,7 +33,7 @@ class HasStringTest(MatcherTest):
         self.assert_does_not_match('unequal', has_string('FakeWithStr'), 3)
 
     def testHasReadableDescription(self):
-        self.assert_description("object with str 'foo'", has_string('foo'))
+        self.assert_description("an object with str 'foo'", has_string('foo'))
 
     def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
         self.assert_no_mismatch_description(has_string('FakeWithStr'),

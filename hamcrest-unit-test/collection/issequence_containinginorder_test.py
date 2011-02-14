@@ -57,7 +57,7 @@ class IsSequenceContainingInOrderTest(MatcherTest):
         self.assert_does_not_match('non-sequence', contains(1,2), object())
 
     def testHasAReadableDescription(self):
-        self.assert_description("sequence containing [<1>, <2>]", contains(1,2))
+        self.assert_description("a sequence containing [<1>, <2>]", contains(1,2))
 
     def testDescribeMismatch(self):
         self.assert_describe_mismatch('item 1: was <3>', contains(1,2), [1,3])

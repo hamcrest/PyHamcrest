@@ -48,7 +48,7 @@ class HasLengthTest(MatcherTest):
         self.assert_does_not_match('no length', has_length(42), object())
 
     def testHasReadableDescription(self):
-        self.assert_description('object with length of a value greater than <5>',
+        self.assert_description('an object with length of a value greater than <5>',
                                 has_length(greater_than(5)))
 
     def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):

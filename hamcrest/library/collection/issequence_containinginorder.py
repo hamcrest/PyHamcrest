@@ -69,7 +69,7 @@ class IsSequenceContainingInOrder(BaseMatcher):
         self.matches(item, mismatch_description)
 
     def describe_to(self, description):
-        description.append_text('sequence containing ') \
+        description.append_text('a sequence containing ')   \
                    .append_list('[', ', ', ']', self.matchers)
 
 #------------------------------------------------------------------------------
