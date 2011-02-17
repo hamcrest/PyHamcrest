@@ -2,3 +2,4 @@
 PyHamcrest.egg-info/
 build/
 dist/
+.tox
