@@ -16,7 +16,7 @@ extra_attributes = {}
 if sys.version_info >= (3,):
     extra_attributes['use_2to3'] = True
 
-setup(
+params = dict(
     name = 'PyHamcrest',
     version = __version__,
     author = 'Jon Reid',
@@ -27,7 +27,7 @@ setup(
     keywords = 'hamcrest matchers pyunit unit test testing unittest unittesting',
     url = 'http://code.google.com/p/hamcrest/',
     download_url = 'http://pypi.python.org/packages/source/P/PyHamcrest/PyHamcrest-%s.tar.gz' % __version__,
-    packages = find_packages(exclude=['hamcrest-unit-test', 'hamcrest-unit-test.*']),
+    packages = find_packages(),
     test_suite = 'hamcrest-unit-test.alltests',
     provides = ['hamcrest'],
     long_description=read('README.md'),
@@ -38,10 +38,16 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
+        'Programming Language :: Python :: 2.5',
         'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.1',
         'Topic :: Software Development',
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing',
         ],
     **extra_attributes
     )
+
+all_params = dict(params.items(), **extra_attributes)
+setup(**all_params)

@@ -81,7 +81,7 @@ def has_entries(*keys_valuematchers):
         raise SyntaxError('has_entries requires key-value pairs')
     keys = []
     value_matchers = []
-    for index in range(len(keys_valuematchers)/2):
+    for index in range(int(len(keys_valuematchers)/2)):
         keys.append(keys_valuematchers[2 * index])
         value_matchers.append(wrap_matcher(keys_valuematchers[2 * index + 1]))
     return IsDictContainingEntries(keys, value_matchers)
