@@ -7,6 +7,8 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 * Python 3.1 support, contributed by Chris Rose.
 
+* Changed sameInstance mismatch description to omit address when describing None argument.
+
 
 == Version 1.4 ==
 

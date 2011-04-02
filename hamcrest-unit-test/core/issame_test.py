@@ -44,6 +44,9 @@ class IsSameTest(MatcherTest):
         self.assertFalse(result, 'Precondition: Matcher should not match item')
         self.assertTrue(expected.match(str(description)))
 
+    def testMismatchDescriptionWithNilShouldNotIncludeAddress(self):
+        self.assert_mismatch_description("was <None>", same_instance('foo'), None)
+
     def testDescribeMismatch(self):
         matcher = same_instance('foo')
         description = StringDescription()
@@ -52,6 +55,10 @@ class IsSameTest(MatcherTest):
         matcher.describe_mismatch('hi', description)
         expected = re.compile("was 0x[0-9a-fA-F]+ 'hi'")
         self.assertTrue(expected.match(str(description)))
+
+    def testDescribeMismatchWithNilShouldNotIncludeAddress(self):
+        self.assert_describe_mismatch("was <None>", same_instance('foo'), None)
+
 
 
 if __name__ == '__main__':
