@@ -3,6 +3,11 @@ Latest package: http://pypi.python.org/pypi/PyHamcrest
 Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
+== NEXT VERSION IN PROGRESS
+
+* Python 3.1 support, contributed by Chris Rose.
+
+
 == Version 1.4 ==
 
 13 Feb 2011
