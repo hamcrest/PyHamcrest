@@ -3,6 +3,7 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class AllOf(BaseMatcher):
@@ -39,4 +40,4 @@ def all_of(*matchers):
     to ``True``.
 
     """
-    return AllOf(*matchers)
+    return AllOf(*[wrap_matcher(m) for m in matchers])

@@ -14,7 +14,18 @@ from matcher_test import MatcherTest
 import unittest
 
 
-class AllOfTest(MatcherTest):
+class AnyOfTest(MatcherTest):
+
+    def testMatchesWhenParametersAreNotMatchers(self):
+        self.assert_matches('first matcher',
+                            any_of('good', 'bad'),
+                            'good')
+        self.assert_matches('second matcher',
+                            any_of('bad', 'good'),
+                            'good')
+        self.assert_matches('both matchers',
+                            any_of('good', 'good'),
+                            'good')
 
     def testMatchesIfArgumentSatisfiesEitherOrBothOfTwoOtherMatchers(self):
         self.assert_matches('first matcher',

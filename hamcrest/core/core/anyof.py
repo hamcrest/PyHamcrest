@@ -3,7 +3,7 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher
-
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 class AnyOf(BaseMatcher):
     """Calculates the logical disjunction of multiple matchers.
@@ -32,4 +32,4 @@ def any_of(*matchers):
     ``True``.
 
     """
-    return AnyOf(*matchers)
+    return AnyOf(*[wrap_matcher(m) for m in matchers])
