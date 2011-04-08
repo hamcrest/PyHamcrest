@@ -41,3 +41,8 @@ StringDescription
 -----------------
 
 .. automodule:: hamcrest.core.string_description
+
+match_equality
+^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.core.match_equality
