@@ -6,7 +6,6 @@ if __name__ == "__main__":
     import sys
     sys.path.insert(0, '..')
 
-from hamcrest.core.match_equality import match_equality
 from hamcrest.core import *
 from hamcrest.core.string_description import tostring
 

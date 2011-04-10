@@ -7,7 +7,7 @@ __unittest = True
 
 from string_description import tostring
 
-class MatchWrapper(object):
+class EqualityWrapper(object):
 
     def __init__(self, matcher):
         self.matcher = matcher
@@ -39,4 +39,4 @@ def match_equality(matcher):
 
     """
     from helpers.wrap_matcher import wrap_matcher
-    return MatchWrapper(wrap_matcher(matcher))
+    return EqualityWrapper(wrap_matcher(matcher))
