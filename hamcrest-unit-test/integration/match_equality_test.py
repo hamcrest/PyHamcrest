@@ -5,10 +5,12 @@ __license__ = "BSD, see License.txt"
 if __name__ == "__main__":
     import sys
     sys.path.insert(0, '..')
+    sys.path.insert(0, '../..')
 
-from hamcrest.core import *
+from hamcrest.library.integration.match_equality import *
+
+from hamcrest.core.core.isequal import equal_to
 from hamcrest.core.string_description import tostring
-
 import unittest
 
 
