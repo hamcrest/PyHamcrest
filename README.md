@@ -133,6 +133,9 @@ with ``equal_to``. But if the argument is a type, it is wrapped with
     assert_that(theBiscuit, is_(instance_of(Biscuit)))
     assert_that(theBiscuit, is_(Biscuit))
 
+*Note that PyHamcrest's ``is_`` matcher is unrelated to Python's ``is``
+operator. The matcher for object identity is ``same_instance``.*
+
 
 Writing custom matchers
 =======================
