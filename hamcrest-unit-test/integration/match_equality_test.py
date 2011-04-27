@@ -1,7 +1,3 @@
-__author__ = "Chris Rose"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 if __name__ == "__main__":
     import sys
     sys.path.insert(0, '..')
@@ -12,6 +8,10 @@ from hamcrest.library.integration.match_equality import *
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.core.string_description import tostring
 import unittest
+
+__author__ = "Chris Rose"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 class MatchEqualityWrapperTest(unittest.TestCase):

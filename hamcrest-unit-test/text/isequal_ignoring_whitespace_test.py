@@ -1,7 +1,3 @@
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -11,6 +7,10 @@ from hamcrest.library.text.isequal_ignoring_whitespace import *
 
 from matcher_test import MatcherTest
 import unittest
+
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 matcher = equal_to_ignoring_whitespace('Hello World   how\n are we? ')

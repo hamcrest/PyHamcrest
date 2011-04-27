@@ -1,12 +1,12 @@
 """Equality matching support for integration with Hamcrest-unaware libraries"""
 
+from hamcrest.core.string_description import tostring
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 __unittest = True
-
-from hamcrest.core.string_description import tostring
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class EqualityWrapper(object):

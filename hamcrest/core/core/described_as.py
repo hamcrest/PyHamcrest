@@ -1,12 +1,12 @@
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 import re
 
 from hamcrest.core.base_matcher import BaseMatcher, Matcher
 from isequal import equal_to
 from isinstanceof import instance_of
+
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 ARG_PATTERN = re.compile('%([0-9]+)')

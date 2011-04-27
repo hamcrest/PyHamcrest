@@ -1,7 +1,3 @@
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -14,6 +10,10 @@ from hamcrest.library.number.ordering_comparison import less_than
 from matcher_test import MatcherTest
 from quasisequence import QuasiSequence
 import unittest
+
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 class IsSequenceOnlyContainingTest(MatcherTest):
