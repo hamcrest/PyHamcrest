@@ -31,6 +31,12 @@ class StringContainsInOrderTest(MatcherTest):
         self.assert_does_not_match('missing string two', matcher, 'string one then string three')
         self.assert_does_not_match('missing string three', matcher, 'string one then string two')
 
+    def testMatcherCreationRequiresString(self):
+        self.assertRaises(TypeError, string_contains_in_order, 3)
+
+    def testFailsIfMatchingAgainstNonString(self):
+        self.assert_does_not_match('non-string', matcher, object())
+
     def testHasAReadableDescription(self):
         self.assert_description("a string containing 'string one', 'string two', 'string three' in order", matcher)
 
@@ -42,8 +48,3 @@ class StringContainsInOrderTest(MatcherTest):
 
     def testDescribeMismatch(self):
         self.assert_describe_mismatch("was 'bad'", matcher, 'bad')
-
-    def XtestMismatchDescription(self):
-        description = StringDescription()
-        matcher.describe_mismatch('foo', description)
-        self.assertEqual("was 'foo'", str(description))
