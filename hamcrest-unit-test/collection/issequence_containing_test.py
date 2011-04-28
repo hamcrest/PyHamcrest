@@ -48,7 +48,6 @@ class IsSequenceContainingTest(MatcherTest):
     def testDescribeMismatch(self):
         self.assert_describe_mismatch("was <42>", has_item('a'), 42)
 
-#------------------------------------------------------------------------------
 
 class IsSequenceContainingItemsTest(MatcherTest):
 

@@ -24,7 +24,6 @@ class IsDictContainingValue(BaseMatcher):
         description.append_text('a dictionary containing value ')   \
                     .append_description_of(self.value_matcher)
 
-#------------------------------------------------------------------------------
 
 def has_value(value):
     """Matches dictionaries containing a value satisfying a given matcher.

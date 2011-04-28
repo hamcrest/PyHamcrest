@@ -35,7 +35,6 @@ class IsSequenceOnlyContaining(BaseMatcher):
         description.append_text('a sequence containing items matching ')    \
                     .append_description_of(self.matcher)
 
-#------------------------------------------------------------------------------
 
 def only_contains(*items):
     """Matches sequences that only contain elements satisfying any of a list

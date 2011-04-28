@@ -23,7 +23,6 @@ class EqualityWrapper(object):
     def __repr__(self):
         return tostring(self.matcher)
 
-#------------------------------------------------------------------------------
 
 def match_equality(matcher):
     """Wraps a matcher to define equality in terms of satisfying the matcher.

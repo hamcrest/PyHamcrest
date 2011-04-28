@@ -24,7 +24,6 @@ class IsDictContainingKey(BaseMatcher):
         description.append_text('a dictionary containing key ')     \
                     .append_description_of(self.key_matcher)
 
-#------------------------------------------------------------------------------
 
 def has_key(key):
     """Matches dictionaries containing a key satisfying a given matcher.

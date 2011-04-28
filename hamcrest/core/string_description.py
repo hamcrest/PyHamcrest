@@ -15,7 +15,6 @@ def tostring(selfdescribing):
     """
     return str(StringDescription().append_description_of(selfdescribing))
 
-#------------------------------------------------------------------------------
 
 class StringDescription(BaseDescription):
     """A :py:class:`~hamcrest.core.description.Description` that is stored as a

@@ -33,7 +33,6 @@ class IsNoneTest(MatcherTest):
     def testDescribeMismatch(self):
         self.assert_describe_mismatch("was 'bad'", none(), 'bad')
 
-#------------------------------------------------------------------------------
 
 class NotNoneTest(MatcherTest):
 

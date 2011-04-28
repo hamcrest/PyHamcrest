@@ -23,7 +23,6 @@ class IsEqual(BaseMatcher):
         if nested_matcher:
             description.append_text('>')
 
-#------------------------------------------------------------------------------
 
 def equal_to(operand):
     """Is the value equal to another value?"""

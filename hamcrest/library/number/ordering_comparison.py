@@ -22,7 +22,6 @@ class OrderingComparison(BaseMatcher):
                    .append_text(' ')                            \
                    .append_description_of(self.value)
 
-#------------------------------------------------------------------------------
 
 def greater_than(value):
     """Is value > expected?"""

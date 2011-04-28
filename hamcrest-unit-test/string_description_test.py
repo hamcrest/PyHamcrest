@@ -18,7 +18,6 @@ class FakeSelfDescribing(SelfDescribing):
     def describe_to(self, description):
         description.append_text('DESCRIPTION')
 
-#==============================================================================
 
 class StringDescriptionTest(unittest.TestCase):
 

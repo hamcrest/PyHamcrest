@@ -9,7 +9,6 @@ __license__ = "BSD, see License.txt"
 def isnumeric(value):
     return isinstance(value, (int, long, float))
 
-#------------------------------------------------------------------------------
 
 class IsCloseTo(BaseMatcher):
     """Is the argument a number close to a value, within some delta?"""
@@ -43,7 +42,6 @@ class IsCloseTo(BaseMatcher):
                    .append_text(' of ')                     \
                    .append_description_of(self.value)
 
-#------------------------------------------------------------------------------
 
 def close_to(value, delta):
     """Is the argument a number close to a value, within some delta?"""

@@ -27,7 +27,6 @@ class IsSame(BaseMatcher):
                                 .append_text(' ')
         mismatch_description.append_description_of(item)
 
-#------------------------------------------------------------------------------
 
 def same_instance(object):
     """Evaluates to ``True`` only when the argument is this same object."""

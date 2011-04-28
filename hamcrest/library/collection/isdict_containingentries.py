@@ -66,7 +66,6 @@ class IsDictContainingEntries(BaseMatcher):
         self.describe_keyvalue(index, description)
         description.append_text('}')
 
-#------------------------------------------------------------------------------
 
 def has_entries(*keys_valuematchers):
     """Matches dictionaries containing key-value pairs satisfying a given list

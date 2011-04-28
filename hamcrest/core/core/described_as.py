@@ -36,7 +36,6 @@ class DescribedAs(BaseMatcher):
         if text_start < len(self.template):
             description.append_text(self.template[text_start:])
 
-#------------------------------------------------------------------------------
 
 def described_as(matcher, *values):
     """Wraps an existing matcher and overrides the description when it fails.

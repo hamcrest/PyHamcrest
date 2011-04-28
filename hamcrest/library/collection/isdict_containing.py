@@ -31,7 +31,6 @@ class IsDictContaining(BaseMatcher):
                     .append_description_of(self.value_matcher)      \
                     .append_text(']')
 
-#------------------------------------------------------------------------------
 
 def has_entry(key, value):
     """Matches dictionaries containing a key-value pair satisfying a given pair

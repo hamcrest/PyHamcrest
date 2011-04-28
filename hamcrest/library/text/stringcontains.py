@@ -20,7 +20,6 @@ class StringContains(SubstringMatcher):
     def relationship(self):
         return 'containing'
 
-#------------------------------------------------------------------------------
 
 def contains_string(substring):
     """Is the value a string containing a given substring?"""

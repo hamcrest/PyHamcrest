@@ -20,7 +20,6 @@ class StringEndsWith(SubstringMatcher):
     def relationship(self):
         return 'ending with'
 
-#------------------------------------------------------------------------------
 
 def ends_with(substring):
     """Is the value a string ending with a given substring?"""

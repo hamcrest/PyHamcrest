@@ -19,7 +19,6 @@ class HasString(BaseMatcher):
         description.append_text('an object with str ')          \
                     .append_description_of(self.str_matcher)
 
-#------------------------------------------------------------------------------
 
 def has_string(x):
     """Evaluates whether ``str(item)`` satisfies a given matcher.

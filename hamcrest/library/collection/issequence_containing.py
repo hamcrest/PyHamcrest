@@ -25,7 +25,6 @@ class IsSequenceContaining(BaseMatcher):
         description.append_text('a sequence containing ')           \
                     .append_description_of(self.element_matcher)
 
-#------------------------------------------------------------------------------
 
 def has_item(item):
     """Matches a sequence if any element satifies a given matcher.
