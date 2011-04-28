@@ -6,6 +6,11 @@ __license__ = "BSD, see License.txt"
 
 
 class StringContainsInOrder(BaseMatcher):
+    """Matches if the item is a string containing a given list of substrings,
+    in order.
+
+    """
+
     def __init__(self, *substrings):
         self.substrings = substrings
 
@@ -22,4 +27,5 @@ class StringContainsInOrder(BaseMatcher):
 
 
 def string_contains_in_order(*substrings):
+    """Is the value a string containing a given list of substrings, in order?"""
     return StringContainsInOrder(*substrings)
