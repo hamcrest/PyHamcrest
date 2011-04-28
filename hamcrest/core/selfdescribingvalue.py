@@ -1,10 +1,10 @@
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 from hamcrest.core.selfdescribing import SelfDescribing
 
 import warnings
+
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 class SelfDescribingValue(SelfDescribing):

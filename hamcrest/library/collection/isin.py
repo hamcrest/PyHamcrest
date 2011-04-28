@@ -1,8 +1,8 @@
+from hamcrest.core.base_matcher import BaseMatcher
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsIn(BaseMatcher):
@@ -18,7 +18,6 @@ class IsIn(BaseMatcher):
         description.append_text('one of ')      \
                    .append_list('(', ', ', ')', self.sequence)
 
-#------------------------------------------------------------------------------
 
 def is_in(sequence):
     """Is the value present in the given sequence?"""

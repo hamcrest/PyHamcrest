@@ -1,11 +1,11 @@
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.anyof import any_of
 from hamcrest.core.helpers.hasmethod import hasmethod
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 class IsSequenceOnlyContaining(BaseMatcher):
@@ -35,7 +35,6 @@ class IsSequenceOnlyContaining(BaseMatcher):
         description.append_text('a sequence containing items matching ')    \
                     .append_description_of(self.matcher)
 
-#------------------------------------------------------------------------------
 
 def only_contains(*items):
     """Matches sequences that only contain elements satisfying any of a list

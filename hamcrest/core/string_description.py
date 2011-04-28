@@ -1,8 +1,8 @@
+from base_description import BaseDescription
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-from base_description import BaseDescription
 
 
 def tostring(selfdescribing):
@@ -15,7 +15,6 @@ def tostring(selfdescribing):
     """
     return str(StringDescription().append_description_of(selfdescribing))
 
-#------------------------------------------------------------------------------
 
 class StringDescription(BaseDescription):
     """A :py:class:`~hamcrest.core.description.Description` that is stored as a

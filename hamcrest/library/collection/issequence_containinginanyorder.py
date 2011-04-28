@@ -1,10 +1,10 @@
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.hasmethod import hasmethod
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 class MatchInAnyOrder(object):
@@ -45,7 +45,6 @@ class MatchInAnyOrder(object):
                                      .append_description_of(item)
         return False
 
-#------------------------------------------------------------------------------
 
 class IsSequenceContainingInAnyOrder(BaseMatcher):
     """Matches a sequence if its elements, in any order, satisfy a list of
@@ -76,7 +75,6 @@ class IsSequenceContainingInAnyOrder(BaseMatcher):
                    .append_list('[', ', ', ']', self.matchers)  \
                    .append_text(' in any order')
 
-#------------------------------------------------------------------------------
 
 def contains_inanyorder(*items):
     """Matches a sequence if its elements, in any order, satisfy a list of

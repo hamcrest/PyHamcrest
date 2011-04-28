@@ -1,8 +1,8 @@
+from hamcrest.core.base_matcher import BaseMatcher
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsInstanceOf(BaseMatcher):
@@ -20,7 +20,6 @@ class IsInstanceOf(BaseMatcher):
         description.append_text('an instance of ')              \
                     .append_text(self.expected_type.__name__)
 
-#------------------------------------------------------------------------------
 
 def instance_of(expected_type):
     """Is the value an instance of a particular type?"""

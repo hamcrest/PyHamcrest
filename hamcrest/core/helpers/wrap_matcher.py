@@ -1,9 +1,9 @@
+from hamcrest.core.base_matcher import Matcher
+from hamcrest.core.core.isequal import equal_to
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-from hamcrest.core.base_matcher import Matcher
-from hamcrest.core.core.isequal import equal_to
 
 
 def wrap_matcher(x):

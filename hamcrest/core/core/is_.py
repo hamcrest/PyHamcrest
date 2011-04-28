@@ -33,7 +33,6 @@ class Is(BaseMatcher):
     def describe_to(self, description):
         description.append_description_of(self.matcher)
 
-#------------------------------------------------------------------------------
 
 def wrap_value_or_type(x):
     if isinstance(x, type):

@@ -8,13 +8,16 @@ from hamcrest.core.selfdescribing import SelfDescribing
 import re
 import unittest
 
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
+
 
 class FakeSelfDescribing(SelfDescribing):
 
     def describe_to(self, description):
         description.append_text('DESCRIPTION')
 
-#==============================================================================
 
 class StringDescriptionTest(unittest.TestCase):
 

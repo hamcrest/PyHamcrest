@@ -18,7 +18,6 @@ def stripspace(string):
             last_was_space = False
     return result.strip()
 
-#------------------------------------------------------------------------------
 
 class IsEqualIgnoringWhiteSpace(BaseMatcher):
     """Matches if strings are equal ignoring white space."""
@@ -38,7 +37,6 @@ class IsEqualIgnoringWhiteSpace(BaseMatcher):
         description.append_description_of(self.original_string)    \
                    .append_text(' ignoring whitespace')
 
-#------------------------------------------------------------------------------
 
 def equal_to_ignoring_whitespace(string):
     """Are the strings equal, ignoring white space?"""

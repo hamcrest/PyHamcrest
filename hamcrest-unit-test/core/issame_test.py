@@ -1,7 +1,3 @@
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -13,6 +9,10 @@ from hamcrest.core.string_description import StringDescription
 from matcher_test import MatcherTest
 import re
 import unittest
+
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 class IsSameTest(MatcherTest):
@@ -58,7 +58,6 @@ class IsSameTest(MatcherTest):
 
     def testDescribeMismatchWithNilShouldNotIncludeAddress(self):
         self.assert_describe_mismatch("was <None>", same_instance('foo'), None)
-
 
 
 if __name__ == '__main__':

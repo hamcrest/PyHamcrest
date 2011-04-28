@@ -1,7 +1,3 @@
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -11,6 +7,10 @@ from hamcrest.core.core.isnone import *
 
 from matcher_test import MatcherTest
 import unittest
+
+__author__ = "Jon Reid"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 
 class IsNoneTest(MatcherTest):
@@ -33,7 +33,6 @@ class IsNoneTest(MatcherTest):
     def testDescribeMismatch(self):
         self.assert_describe_mismatch("was 'bad'", none(), 'bad')
 
-#------------------------------------------------------------------------------
 
 class NotNoneTest(MatcherTest):
 

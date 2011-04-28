@@ -1,8 +1,8 @@
+from hamcrest.core.base_matcher import BaseMatcher
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-from hamcrest.core.base_matcher import BaseMatcher
 
 
 class AllOf(BaseMatcher):
@@ -32,7 +32,6 @@ class AllOf(BaseMatcher):
     def describe_to(self, description):
         description.append_list('(', ' and ', ')', self.matchers)
 
-#------------------------------------------------------------------------------
 
 def all_of(*matchers):
     """Evaluates to ``True`` only if *all* of the passed in matchers evaluate

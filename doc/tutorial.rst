@@ -158,3 +158,7 @@ also equivalent::
     assert_that(theBiscuit, instance_of(Biscuit))
     assert_that(theBiscuit, is_(instance_of(Biscuit)))
     assert_that(theBiscuit, is_(Biscuit))
+
+*Note that PyHamcrest's ``is_`` matcher is unrelated to Python's ``is``
+operator. The matcher for object identity is
+:py:func:`~hamcrest.core.core.issame.same_instance`.*
