@@ -14,27 +14,36 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
+matcher = string_contains_in_order('string one', 'string two', 'string three')
+
 class StringContainsInOrderTest(MatcherTest):
-    def setUp(self):
-        self. matcher = StringContainsInOrder('string one','string two','string three')
 
     def testMatchesIfOrderIsCorrect(self):
-        self.assertTrue(self.matcher.matches('string one then string two followed by string three'),'correct order')
+        self.assert_matches('correct order', matcher,
+                            'string one then string two followed by string three')
 
     def testDoesNotMatchIfOrderIsIncorrect(self):
-        self.assertFalse(self.matcher.matches('string two then string one followed by string three'),'incorrect order')
+        self.assert_does_not_match('incorrect order', matcher,
+                                    'string two then string one followed by string three')
 
     def testDoesNotMatchIfExpectedSubstringsAreMissing(self):
-        self.assertFalse(self.matcher.matches('string two then string three'),'missing string one')
-        self.assertFalse(self.matcher.matches('string one then string three'),'missing string two')
-        self.assertFalse(self.matcher.matches('string one then string two'),'missing string three')
+        self.assert_does_not_match('missing string one', matcher, 'string two then string three')
+        self.assert_does_not_match('missing string two', matcher, 'string one then string three')
+        self.assert_does_not_match('missing string three', matcher, 'string one then string two')
 
-    def testDescribesSelf(self):
-        description = StringDescription()
-        self.matcher.describe_to(description)
-        self.assertEqual("a string containing 'string one', 'string two', 'string three' in order", str(description))
+    def testHasAReadableDescription(self):
+        self.assert_description("a string containing 'string one', 'string two', 'string three' in order", matcher)
+
+    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
+        self.assert_no_mismatch_description(matcher, 'string one then string two followed by string three')
 
     def testMismatchDescription(self):
+        self.assert_mismatch_description("was 'bad'", matcher, 'bad')
+
+    def testDescribeMismatch(self):
+        self.assert_describe_mismatch("was 'bad'", matcher, 'bad')
+
+    def XtestMismatchDescription(self):
         description = StringDescription()
-        self.matcher.describe_mismatch('foo', description)
+        matcher.describe_mismatch('foo', description)
         self.assertEqual("was 'foo'", str(description))
