@@ -5,7 +5,9 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 == NEXT VERSION IN PROGRESS
 
-* Python 3.1 support. Thanks to: Chris Rose
+* Packaging:
+ - Python 3.1 support. Thanks to: Chris Rose
+ - Easier installation with bootstrapping. Thanks to: Chris Rose
 
 * Mock integration:
  - "match_equality" wraps a matcher to define equality in terms of satisfying
