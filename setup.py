@@ -9,14 +9,22 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
+def local(fname):
+    return os.path.join(os.path.dirname(__file__), fname)
+
 def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    return open(local(fname)).read()
 
 # On Python 3, we can't "from hamcrest import __version__" (get ImportError),
 # so we extract the variable assignment and execute it ourselves.
-matched = re.match('__version__.*', read(os.path.join('hamcrest', '__init__.py')))
-if matched:
-    exec(matched.group())
+fh = open(local('hamcrest/__init__.py'))
+try:
+    for line in fh:
+        if re.match('__version__.*', line):
+            exec(line)
+finally:
+    if fh:
+        fh.close()
 
 extra_attributes = {}
 if sys.version_info >= (3,):
