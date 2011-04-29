@@ -30,7 +30,7 @@ class IsSequenceContainingInAnyOrderTest(MatcherTest):
                             contains_inanyorder(equal_to(1), equal_to(2)),
                             [2,1])
 
-    def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         self.assert_matches("Values automatically wrapped with equal_to",
                             contains_inanyorder(1,2), [2,1])
 

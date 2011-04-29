@@ -26,7 +26,7 @@ class IsSequenceContainingTest(MatcherTest):
                                     has_item(equal_to('a')), ['b', 'c'])
         self.assert_does_not_match('empty', has_item(equal_to('a')), [])
 
-    def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         self.assert_matches("sequence contains 'a'",
                             has_item('a'), ['a', 'b', 'c'])
         self.assert_does_not_match("sequence without 'a'",
@@ -56,7 +56,7 @@ class IsSequenceContainingItemsTest(MatcherTest):
                             has_items(equal_to('a'), equal_to('b'), equal_to('c')),
                             ('a', 'b', 'c'))
 
-    def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         self.assert_matches('Values automatically wrapped with equal_to',
                             has_items('a', 'b', 'c'),
                             ('a', 'b', 'c'))

@@ -16,17 +16,6 @@ __license__ = "BSD, see License.txt"
 
 class AnyOfTest(MatcherTest):
 
-    def testMatchesWhenParametersAreNotMatchers(self):
-        self.assert_matches('first matcher',
-                            any_of('good', 'bad'),
-                            'good')
-        self.assert_matches('second matcher',
-                            any_of('bad', 'good'),
-                            'good')
-        self.assert_matches('both matchers',
-                            any_of('good', 'good'),
-                            'good')
-
     def testMatchesIfArgumentSatisfiesEitherOrBothOfTwoOtherMatchers(self):
         self.assert_matches('first matcher',
                             any_of(equal_to('good'), equal_to('bad')),
@@ -36,6 +25,17 @@ class AnyOfTest(MatcherTest):
                             'good')
         self.assert_matches('both matchers',
                             any_of(equal_to('good'), equal_to('good')),
+                            'good')
+
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
+        self.assert_matches('first matcher',
+                            any_of('good', 'bad'),
+                            'good')
+        self.assert_matches('second matcher',
+                            any_of('bad', 'good'),
+                            'good')
+        self.assert_matches('both matchers',
+                            any_of('good', 'good'),
                             'good')
 
     def testNoMatchIfArgumentFailsToSatisfyEitherOfTwoOtherMatchers(self):

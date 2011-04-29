@@ -25,7 +25,7 @@ class IsSequenceContainingInOrderTest(MatcherTest):
                             contains(equal_to(1), equal_to(2), equal_to(3)),
                             [1,2,3])
 
-    def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         self.assert_matches("Values automatically wrapped with equal_to",
                             contains(1, 2, 3),
                             [1,2,3])
