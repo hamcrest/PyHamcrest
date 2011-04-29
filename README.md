@@ -73,8 +73,7 @@ it's a standalone function, it offers greater flexibility in test writing.
 A tour of common matchers
 =========================
 
-PyHamcrest comes with a library of useful matchers. Here are some of the most
-important ones.
+PyHamcrest comes with a library of useful matchers:
 
 * Core
 
@@ -104,7 +103,7 @@ important ones.
 
   * ``has_entry``, ``has_entries``, ``has_key``, ``has_value`` - tests that a dictionary
     contains an entry, key or value
-  * ``has_item``, ``contains``, ``contains_inanyorder`` - tests that a sequence contains elements
+  * ``has_item``, ``contains``, ``contains_inanyorder``, ``only_contains`` - tests that a sequence contains elements
 
 * Number
 
@@ -117,7 +116,7 @@ important ones.
   * ``equal_to_ignoring_case`` - tests string equality ignoring case
   * ``equal_to_ignoring_whitespace`` - test strings equality ignoring
     differences in runs of whitespace
-  * ``contains_string``, ``ends_with``, ``starts_with`` - tests string matching
+  * ``contains_string``, ``ends_with``, ``starts_with``, ``string_contains_in_order`` - tests string matching
 
 
 Syntactic sugar
