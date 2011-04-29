@@ -11,7 +11,7 @@ class MatchingInOrder(object):
     def __init__(self, matchers, mismatch_description):
         self.matchers = matchers
         self.mismatch_description = mismatch_description
-        self.next_match_index = 0;
+        self.next_match_index = 0
 
     def matches(self, item):
         return self.isnotsurplus(item) and self.ismatched(item)

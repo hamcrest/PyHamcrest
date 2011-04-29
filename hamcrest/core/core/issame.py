@@ -18,7 +18,7 @@ class IsSame(BaseMatcher):
         description.append_text('same instance as ')            \
                    .append_text(hex(id(self.object)))           \
                    .append_text(' ')                            \
-                   .append_description_of(self.object)          \
+                   .append_description_of(self.object)
 
     def describe_mismatch(self, item, mismatch_description):
         mismatch_description.append_text('was ')

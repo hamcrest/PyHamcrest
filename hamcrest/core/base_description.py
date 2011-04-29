@@ -56,7 +56,8 @@ class BaseDescription(Description):
 
         self.append(start)
         for item in list:
-            if separate: self.append(separator)
+            if separate:
+                self.append(separator)
             self.append_description_of(item)
             separate = True
         self.append(end)
