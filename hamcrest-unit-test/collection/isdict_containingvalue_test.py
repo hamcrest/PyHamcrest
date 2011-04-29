@@ -26,7 +26,7 @@ class IsDictContainingValueTest(MatcherTest):
         self.assert_matches('Matches 1', has_value(equal_to(1)), dict)
         self.assert_matches('Matches 3', has_value(equal_to(3)), dict)
 
-    def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         dict = {'a': 1, 'b': 2, 'c': 3}
         self.assert_matches('Matches 3', has_value(3), dict)
 

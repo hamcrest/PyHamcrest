@@ -26,7 +26,7 @@ class IsDictContainingKeyTest(MatcherTest):
         self.assert_matches('Matches a', has_key(equal_to('a')), dict)
         self.assert_matches('Matches c', has_key(equal_to('c')), dict)
 
-    def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         dict = {'a': 1, 'b': 2, 'c': 3}
         self.assert_matches('Matches c', has_key('c'), dict)
 

@@ -23,7 +23,7 @@ class IsDictContainingTest(MatcherTest):
         self.assert_matches('has b:2', has_entry(equal_to('b'), equal_to(2)), dict)
         self.assert_does_not_match('no c:3', has_entry(equal_to('c'), equal_to(3)), dict)
 
-    def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         dict = {'a': 1, 'b': 2}
         self.assert_matches('has a:1', has_entry('a', equal_to(1)), dict)
         self.assert_matches('has b:2', has_entry(equal_to('b'), 2), dict)

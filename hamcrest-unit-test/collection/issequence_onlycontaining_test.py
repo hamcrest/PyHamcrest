@@ -30,7 +30,7 @@ class IsSequenceOnlyContainingTest(MatcherTest):
                             only_contains(less_than(3), equal_to(7)),
                             [0, 7, 1, 2])
 
-    def testProvidesConvenientShortcutForMatchingWithIsEqualTo(self):
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         self.assert_matches('Values automatically wrapped with equal_to',
                             only_contains(less_than(3), 7),
                             [0, 7, 1, 2])

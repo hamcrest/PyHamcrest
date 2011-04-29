@@ -21,6 +21,11 @@ class AllOfTest(MatcherTest):
                             all_of(equal_to('good'), equal_to('good')),
                             'good')
 
+    def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
+        self.assert_matches('both matchers',
+                            all_of('good', 'good'),
+                            'good')
+
     def testNoMatchIfArgumentFailsToSatisfyEitherOfTwoOtherMatchers(self):
         self.assert_does_not_match('first matcher',
                                    all_of(equal_to('bad'), equal_to('good')),
