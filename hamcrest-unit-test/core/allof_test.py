@@ -16,6 +16,11 @@ __license__ = "BSD, see License.txt"
 
 class AllOfTest(MatcherTest):
 
+    def testMatchesIfArgumentsAreNotMatchers(self):
+        self.assert_matches('both matchers',
+                            all_of('good', 'good'),
+                            'good')
+
     def testMatchesIfArgumentSatisfiesBothOfTwoOtherMatchers(self):
         self.assert_matches('both matchers',
                             all_of(equal_to('good'), equal_to('good')),

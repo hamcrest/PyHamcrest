@@ -9,13 +9,23 @@ from hamcrest.core.core.isequal import equal_to
 from matcher_test import MatcherTest
 import unittest
 
-
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-class AllOfTest(MatcherTest):
+class AnyOfTest(MatcherTest):
+
+    def testMatchesWhenParametersAreNotMatchers(self):
+        self.assert_matches('first matcher',
+                            any_of('good', 'bad'),
+                            'good')
+        self.assert_matches('second matcher',
+                            any_of('bad', 'good'),
+                            'good')
+        self.assert_matches('both matchers',
+                            any_of('good', 'good'),
+                            'good')
 
     def testMatchesIfArgumentSatisfiesEitherOrBothOfTwoOtherMatchers(self):
         self.assert_matches('first matcher',

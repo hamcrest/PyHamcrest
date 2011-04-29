@@ -1,4 +1,5 @@
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -31,4 +32,4 @@ def any_of(*matchers):
     ``True``.
 
     """
-    return AnyOf(*matchers)
+    return AnyOf(*[wrap_matcher(m) for m in matchers])
