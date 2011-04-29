@@ -11,6 +11,7 @@ __license__ = "BSD, see License.txt"
 
 ARG_PATTERN = re.compile('%([0-9]+)')
 
+
 class DescribedAs(BaseMatcher):
     """Provides a custom description to another matcher."""
 
