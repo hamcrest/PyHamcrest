@@ -3,8 +3,9 @@ Latest package: http://pypi.python.org/pypi/PyHamcrest
 Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
-== NEXT VERSION IN PROGRESS
+== Version 1.5 ==
 
+29 Apr 2011
 * Packaging:
  - Python 3.1 support. Thanks to: Chris Rose
  - Easier installation with bootstrapping. Thanks to: Chris Rose
@@ -18,9 +19,9 @@ Hamcrest information: http://code.google.com/p/hamcrest
  - "string_contains_in_order" matches string containing given list of substrings, in order. Thanks to: Romilly Cocking
 
 * Improved matchers:
- - Changed "any_of" and "all_of" to implicitly wrap non-matcher values in EqualTo. Thanks to: Chris Rose
+ - For consistency, changed "any_of" and "all_of" to implicitly wrap non-matcher values in EqualTo. Thanks to: Chris Rose
  - Changed "sameInstance" mismatch description to omit address when describing
- None argument.
+ None.
 
 
 == Version 1.4 ==

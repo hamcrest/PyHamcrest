@@ -28,3 +28,8 @@ stringstartswith
 ^^^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.text.stringstartswith
+
+stringcontainsinorder
+^^^^^^^^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.library.text.stringcontainsinorder
