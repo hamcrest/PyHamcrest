@@ -27,13 +27,16 @@ def greater_than(value):
     """Is value > expected?"""
     return OrderingComparison(value, operator.gt, 'greater than')
 
+
 def greater_than_or_equal_to(value):
     """Is value >= expected?"""
     return OrderingComparison(value, operator.ge, 'greater than or equal to')
 
+
 def less_than(value):
     """Is value < expected?"""
     return OrderingComparison(value, operator.lt, 'less than')
+
 
 def less_than_or_equal_to(value):
     """Is value <= expected?"""

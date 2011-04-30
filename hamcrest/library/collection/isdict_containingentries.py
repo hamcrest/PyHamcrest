@@ -55,7 +55,7 @@ class IsDictContainingEntries(BaseMatcher):
         """Describes key-value pair at given index."""
         description.append_description_of(self.keys[index])             \
                    .append_text(': ')                                   \
-                   .append_description_of(self.value_matchers[index])   \
+                   .append_description_of(self.value_matchers[index])
 
     def describe_to(self, description):
         description.append_text('a dictionary containing {')
@@ -80,7 +80,7 @@ def has_entries(*keys_valuematchers):
         raise SyntaxError('has_entries requires key-value pairs')
     keys = []
     value_matchers = []
-    for index in range(int(len(keys_valuematchers)/2)):
+    for index in range(int(len(keys_valuematchers) / 2)):
         keys.append(keys_valuematchers[2 * index])
         value_matchers.append(wrap_matcher(keys_valuematchers[2 * index + 1]))
     return IsDictContainingEntries(keys, value_matchers)
