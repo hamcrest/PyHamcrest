@@ -27,9 +27,12 @@ class AnyOf(BaseMatcher):
         description.append_list('(', ' or ', ')', self.matchers)
 
 
-def any_of(*matchers):
+def any_of(*items):
     """Evaluates to ``True`` if *any* of the passed in matchers evaluate to
     ``True``.
 
+    :param items: Each item is a matcher, or a value for
+        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+
     """
-    return AnyOf(*[wrap_matcher(m) for m in matchers])
+    return AnyOf(*[wrap_matcher(item) for item in items])

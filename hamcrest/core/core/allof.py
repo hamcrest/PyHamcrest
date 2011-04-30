@@ -34,9 +34,12 @@ class AllOf(BaseMatcher):
         description.append_list('(', ' and ', ')', self.matchers)
 
 
-def all_of(*matchers):
+def all_of(*items):
     """Evaluates to ``True`` only if *all* of the passed in matchers evaluate
     to ``True``.
 
+    :param items: Each item is a matcher, or a value for
+        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+
     """
-    return AllOf(*[wrap_matcher(m) for m in matchers])
+    return AllOf(*[wrap_matcher(item) for item in items])
