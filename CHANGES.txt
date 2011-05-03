@@ -3,6 +3,12 @@ Latest package: http://pypi.python.org/pypi/PyHamcrest
 Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
+=== NEXT VERSION IN PROGRESS
+
+* Packaging:
+ - Python 3.2 support. Thanks to: Chris Rose
+
+
 == Version 1.5 ==
 
 29 Apr 2011
@@ -11,9 +17,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
  - Easier installation with bootstrapping. Thanks to: Chris Rose
 
 * Mock integration:
- - "match_equality" wraps a matcher to define equality in terms of satisfying
- the matcher. This allows Hamcrest matchers to be used in libraries that are not
- Hamcrest-aware, such as Michael Foord’s mock library. Thanks to: Chris Rose
+ - "match_equality" wraps a matcher to define equality in terms of satisfying the matcher. This allows Hamcrest matchers to be used in libraries that are not Hamcrest-aware, such as Michael Foord's mock library. Thanks to: Chris Rose
 
 * New matcher:
  - "string_contains_in_order" matches string containing given list of substrings, in order. Thanks to: Romilly Cocking
