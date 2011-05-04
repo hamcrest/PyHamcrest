@@ -77,7 +77,7 @@ def has_entries(*keys_valuematchers):
 
     """
     if len(keys_valuematchers) % 2:
-        raise SyntaxError('has_entries requires key-value pairs')
+        raise ValueError('has_entries requires key-value pairs')
     keys = []
     value_matchers = []
     for index in range(int(len(keys_valuematchers) / 2)):

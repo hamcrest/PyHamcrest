@@ -17,7 +17,7 @@ __license__ = "BSD, see License.txt"
 class IsDictContainingEntriesTest(MatcherTest):
 
     def testMatcherCreationRequiresEvenNumberOfArgs(self):
-        self.assertRaises(SyntaxError, has_entries, 'a')
+        self.assertRaises(ValueError, has_entries, 'a')
 
     def testDoesNotMatchNonDictionary(self):
         self.assert_does_not_match('non-dictionary',
