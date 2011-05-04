@@ -8,7 +8,7 @@ print '\n'.join(sys.path)
 from hamcrest.library.object.hasproperty import *
 
 from hamcrest.core.core.isequal import equal_to
-from matcher_test import MatcherTest
+from hamcrest_unit_test.matcher_test import MatcherTest
 import unittest
 
 __author__ = "Chris Rose"
