@@ -80,10 +80,20 @@ def has_entries(*keys_valuematchers, **kv_args):
         straight values for :py:func:`~hamcrest.core.core.isequal.equal_to`
         matching.
 
+        If only one parameter is passed here, it must be a mapping
+        object. In that case, matching will be done against its
+        keys/values.
+
+    :param kv_args: These name value pairs will be matched by the
+        matcher as well. Any values provided here will supercede those
+        provided in the positional argument list.
+
     """
     if len(keys_valuematchers) == 1:
         try:
             base_dict = keys_valuematchers[0].copy()
+            for key in base_dict:
+                base_dict[key] = wrap_matcher(base_dict[key])
         except AttributeError:
             raise ValueError('single-argument calls to has_entries must pass a dict as the argument')
     else:
