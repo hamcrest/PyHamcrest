@@ -13,30 +13,34 @@ class IsDictContainingEntries(BaseMatcher):
 
     """
 
-    def __init__(self, keys, value_matchers):
-        self.keys = keys
+    def __init__(self, value_matchers):
         self.value_matchers = value_matchers
 
+    def _not_a_dictionary(self, dictionary, mismatch_description):
+        if mismatch_description:
+            mismatch_description.append_description_of(dictionary) \
+                                .append_text(' is not a mapping object')
+        return False
+
     def matches(self, dictionary, mismatch_description=None):
-        if not isinstance(dictionary, dict):
-            if mismatch_description:
-                super(IsDictContainingEntries, self).   \
-                    describe_mismatch(dictionary, mismatch_description)
-            return False
+        for key in self.value_matchers:
 
-        for index in range(len(self.keys)):
-            key = self.keys[index]
+            try:
+                if not key in dictionary:
+                    if mismatch_description:
+                        mismatch_description.append_text('no ')             \
+                                            .append_description_of(key)     \
+                                            .append_text(' key in ')        \
+                                            .append_description_of(dictionary)
+                    return False
+            except TypeError:
+                return self._not_a_dictionary(dictionary, mismatch_description)
 
-            if not key in dictionary:
-                if mismatch_description:
-                    mismatch_description.append_text('no ')             \
-                                        .append_description_of(key)     \
-                                        .append_text(' key in ')        \
-                                        .append_description_of(dictionary)
-                return False
-
-            value_matcher = self.value_matchers[index]
-            actual_value = dictionary[key]
+            value_matcher = self.value_matchers[key]
+            try:
+                actual_value = dictionary[key]
+            except TypeError:
+                return self._not_a_dictionary(dictionary, mismatch_description)
 
             if not value_matcher.matches(actual_value):
                 if mismatch_description:
@@ -53,21 +57,22 @@ class IsDictContainingEntries(BaseMatcher):
 
     def describe_keyvalue(self, index, description):
         """Describes key-value pair at given index."""
-        description.append_description_of(self.keys[index])             \
+        description.append_description_of(index)                        \
                    .append_text(': ')                                   \
                    .append_description_of(self.value_matchers[index])
 
     def describe_to(self, description):
         description.append_text('a dictionary containing {')
-        for index in range(len(self.keys) - 1):
-            self.describe_keyvalue(index, description)
-            description.append_text(', ')
-        index = len(self.keys) - 1
-        self.describe_keyvalue(index, description)
+        first = True
+        for key in self.value_matchers:
+            if not first:
+                description.append_text(', ')
+            self.describe_keyvalue(key, description)
+            first = False
         description.append_text('}')
 
 
-def has_entries(*keys_valuematchers):
+def has_entries(*keys_valuematchers, **kv_args):
     """Matches dictionaries containing key-value pairs satisfying a given list
     of alternating keys and value matchers.
 
@@ -76,11 +81,19 @@ def has_entries(*keys_valuematchers):
         matching.
 
     """
-    if len(keys_valuematchers) % 2:
-        raise ValueError('has_entries requires key-value pairs')
-    keys = []
-    value_matchers = []
-    for index in range(int(len(keys_valuematchers) / 2)):
-        keys.append(keys_valuematchers[2 * index])
-        value_matchers.append(wrap_matcher(keys_valuematchers[2 * index + 1]))
-    return IsDictContainingEntries(keys, value_matchers)
+    if len(keys_valuematchers) == 1:
+        try:
+            base_dict = keys_valuematchers[0].copy()
+        except AttributeError:
+            raise ValueError('single-argument calls to has_entries must pass a dict as the argument')
+    else:
+        if len(keys_valuematchers) % 2:
+            raise ValueError('has_entries requires key-value pairs')
+        base_dict = {}
+        for index in range(int(len(keys_valuematchers) / 2)):
+            base_dict[keys_valuematchers[2 * index]] = wrap_matcher(keys_valuematchers[2 * index + 1])
+
+    for key, value in kv_args.items():
+        base_dict[key] = wrap_matcher(value)
+
+    return IsDictContainingEntries(base_dict)
