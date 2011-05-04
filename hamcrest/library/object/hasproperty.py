@@ -1,3 +1,7 @@
+__author__ = "Chris Rose"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
+
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core import anything
 from hamcrest.core.string_description import StringDescription
