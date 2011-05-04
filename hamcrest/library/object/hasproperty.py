@@ -49,6 +49,17 @@ class IsObjectWithProperty(BaseMatcher):
         return str(d)
 
 def has_property(name, value=None):
+    """Matches objects that have a property matching the given value matcher.
+
+    :param name: The name of the property that the object must have. If the object
+        does not have this property, the matcher will fail.
+
+    :param value: The value to match. If the value is not provided, the
+        matcher will match against anything(), which transforms this
+        matcher into a property existence check.
+
+    """
+
     if value is None:
         value = anything()
 
