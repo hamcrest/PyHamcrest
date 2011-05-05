@@ -114,6 +114,14 @@ class HasPropertyTest(MatcherTest):
         self.assert_mismatch_description("property 'field' was 'value'",
                                          has_property('field', 'another_value'), OnePropertyNewStyle())
 
+    def testMismatchDescription(self):
+        self.assert_describe_mismatch("<OnePropertyNewStyle> did not have the 'not_there' property",
+                                      has_property('not_there'),
+                                      OnePropertyNewStyle())
+
+    def testNoMismatchDescriptionOnMatch(self):
+        self.assert_no_mismatch_description(has_property('field', 'value'), OnePropertyNewStyle())
+
 
 if __name__ == '__main__':
     unittest.main()
