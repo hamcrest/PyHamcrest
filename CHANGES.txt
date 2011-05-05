@@ -6,7 +6,7 @@ Hamcrest information: http://code.google.com/p/hamcrest
 === NEXT VERSION IN PROGRESS
 
 * Packaging:
- - Python 3.2 support. Thanks to: Chris Rose
+ - Python 3.2 support. [Chris Rose]
 
 
 == Version 1.5 ==
