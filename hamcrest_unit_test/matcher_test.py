@@ -1,6 +1,9 @@
 from hamcrest.core.string_description import StringDescription
 
 import unittest
+import logging
+
+log = logging.getLogger(__name__)
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -10,7 +13,13 @@ __license__ = "BSD, see License.txt"
 class MatcherTest(unittest.TestCase):
 
     def assert_matches(self, message, matcher, arg):
-        self.assertTrue(matcher.matches(arg), message)
+        try:
+            self.assertTrue(matcher.matches(arg), message)
+        except AssertionError:
+            description = StringDescription()
+            matcher.describe_mismatch(arg, description)
+            log.error(str(description))
+            raise
 
     def assert_does_not_match(self, message, matcher, arg):
         self.assertFalse(matcher.matches(arg), message)

@@ -13,3 +13,8 @@ hasstring
 ^^^^^^^^^
 
 .. automodule:: hamcrest.library.object.hasstring
+
+has_property
+^^^^^^^^^^^^
+
+.. automodule:: hamcrest.library.object.hasproperty
