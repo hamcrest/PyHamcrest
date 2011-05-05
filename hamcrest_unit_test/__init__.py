@@ -1,3 +1,6 @@
+import logging
+logging.basicConfig()
+
 from alltests import alltests
 
 __author__ = "Jon Reid"
