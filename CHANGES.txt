@@ -5,8 +5,18 @@ Hamcrest information: http://code.google.com/p/hamcrest
 
 === NEXT VERSION IN PROGRESS
 
+(All changes by Chris Rose unless otherwise noted.)
+
 * Packaging:
- - Python 3.2 support. [Chris Rose]
+ - Python 3.2 support.
+
+* New matchers:
+ - has_property('property_name', value_matcher)
+
+* Improved matchers:
+ - hasEntries supports two new calling conventions:
+    has_entries({'key' : value_matcher, 'key_2' : other_value_matcher})
+    has_entries(key=value_matcher, key_2=other_value_matcher)
 
 
 == Version 1.5 ==
