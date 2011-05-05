@@ -1,13 +1,12 @@
-__author__ = "Chris Rose"
-__copyright__ = "Copyright 2011 hamcrest.org"
-__license__ = "BSD, see License.txt"
-
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core import anything
 from hamcrest.core.string_description import StringDescription
 from hamcrest.core.helpers.hasmethod import hasmethod
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher as wrap_shortcut
 
+__author__ = "Chris Rose"
+__copyright__ = "Copyright 2011 hamcrest.org"
+__license__ = "BSD, see License.txt"
 
 class IsObjectWithProperty(BaseMatcher):
 
