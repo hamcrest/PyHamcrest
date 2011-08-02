@@ -1,8 +1,6 @@
 import re
 
-from hamcrest.core.base_matcher import BaseMatcher, Matcher
-from isequal import equal_to
-from isinstanceof import instance_of
+from hamcrest.core.base_matcher import BaseMatcher
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
