@@ -38,10 +38,10 @@ class DescribedAs(BaseMatcher):
             description.append_text(self.template[text_start:])
 
 
-def described_as(matcher, *values):
+def described_as(description_template, matcher, *values):
     """Wraps an existing matcher and overrides the description when it fails.
 
     Optional values following the matcher are substituted for %0, %1, etc.
 
     """
-    return DescribedAs(matcher, *values)
+    return DescribedAs(description_template, matcher, *values)
