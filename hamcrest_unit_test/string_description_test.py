@@ -41,6 +41,9 @@ class StringDescriptionTest(unittest.TestCase):
         expected = re.compile("<object object at 0x[0-9a-fA-F]+>")
         self.assertTrue(expected.match(str(self.description)))
 
+    def testDescribeUnicodeString(self):
+        self.description.append_description_of(u'\u05d0')
+        self.assertEqual("u'\\u05d0'", str(self.description))
 
 if __name__ == "__main__":
     unittest.main()
