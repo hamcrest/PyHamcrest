@@ -24,6 +24,8 @@ class BaseDescription(Description):
             value.describe_to(self)
         elif isinstance(value, str):
             self.append_string_in_python_syntax(value)
+        elif isinstance(value, unicode):
+            self.append(repr(value))
         else:
             description = str(value)
             if description[:1] == '<' and description[-1:] == '>':
