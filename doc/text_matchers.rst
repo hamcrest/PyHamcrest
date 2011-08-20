@@ -1,11 +1,11 @@
 Text Matchers
 -------------
 
-Matchers that perform text comparisons
+Matchers that perform text comparisons.
 
 
 contains_string
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.text.stringcontains
 

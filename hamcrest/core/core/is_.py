@@ -8,18 +8,6 @@ from isinstanceof import instance_of
 
 
 class Is(BaseMatcher):
-    """Decorates another Matcher, retaining the behavior but allowing tests to
-    be slightly more expressive.
-
-    For example::
-
-        assert_that(cheese, equal_to(smelly))
-
-    vs. ::
-
-        assert_that(cheese, is_(equal_to(smelly)))
-
-    """
 
     def __init__(self, matcher):
         self.matcher = matcher
@@ -42,24 +30,43 @@ def wrap_value_or_type(x):
 
 
 def is_(x):
-    """Decorates an item, providing shortcuts to the frequently used
-    expressions ``is_(equal_to(x))`` and ``is_(instance_of(x))``.
+    """Decorates another matcher, or provides shortcuts to the frequently used
+    ``is(equal_to(x))`` and ``is(instance_of(x))``.
 
-    For example::
+    :param x: The matcher to satisfy,  or a type for
+        :py:func:`~hamcrest.core.core.isinstanceof.instance_of` matching, or an
+        expected value for :py:func:`~hamcrest.core.core.isequal.equal_to`
+        matching.
 
-        assert_that(cheese, is_(equal_to(smelly)))
+    This matcher compares the evaluated object to the given matcher.
 
-    vs. ::
+    .. note::
 
-        assert_that(cheese, is_(smelly))
+        Despite its similar name, this matcher has nothing to do with Python's
+        ``is`` operator.
 
-    Also::
+    If the ``x`` argument is a matcher, its behavior is retained, but the test
+    may be more expressive. Example::
+
+        assert_that(value, less_than(5))
+        assert_that(value, is_(less_than(5)))
+
+    If the ``x`` argument is a type, it is wrapped in an
+    :py:func:`~hamcrest.core.core.isinstanceof.instance_of` matcher. This makes
+    the following statements equivalent::
 
         assert_that(cheese, is_(instance_of(Cheddar)))
-
-    vs. ::
-
         assert_that(cheese, is_(Cheddar))
+
+    Otherwise, if the ``x`` argument is not a matcher, it is wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher. This makes the
+    following statements equivalent::
+
+        assert_that(cheese, is_(equal_to(smelly)))
+        assert_that(cheese, is_(smelly))
+
+    Choose the style that makes your expression most readable. This will vary
+    depending on context.
 
     """
     return Is(wrap_value_or_type(x))

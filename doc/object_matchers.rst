@@ -1,7 +1,7 @@
 Object Matchers
 ---------------
 
-Matchers that inspect objects
+Matchers that inspect objects.
 
 
 equal_to

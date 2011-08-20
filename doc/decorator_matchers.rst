@@ -1,16 +1,17 @@
 Decorator Matchers
 ------------------
 
-Fundamental matchers of objects and values, and composite matchers
+Matchers that decorate other matchers for better expression.
 
 
 described_as
 ^^^^^^^^^^^^
 
 .. automodule:: hamcrest.core.core.described_as
-    :exclude-members: assert_that
+    :exclude-members: described_as
+.. autofunction:: described_as(description, matcher[, value1[, ...]])
 
-is_
-^^^
+is\_
+^^^^
 
 .. automodule:: hamcrest.core.core.is_

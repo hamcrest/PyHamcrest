@@ -1,7 +1,7 @@
 Number Matchers
 ---------------
 
-Matchers that perform numeric comparisons
+Matchers that perform numeric comparisons.
 
 
 close_to

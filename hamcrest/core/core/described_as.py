@@ -11,7 +11,6 @@ ARG_PATTERN = re.compile('%([0-9]+)')
 
 
 class DescribedAs(BaseMatcher):
-    """Provides a custom description to another matcher."""
 
     def __init__(self, description_template, matcher, *values):
         self.template = description_template
@@ -36,10 +35,15 @@ class DescribedAs(BaseMatcher):
             description.append_text(self.template[text_start:])
 
 
-def described_as(description_template, matcher, *values):
-    """Wraps an existing matcher and overrides the description when it fails.
+def described_as(description, matcher, *values):
+    """Adds custom failure description to a given matcher.
 
-    Optional values following the matcher are substituted for %0, %1, etc.
+    :param description: Overrides the matcher's description.
+    :param matcher: The matcher to satisfy.
+    :param value1,...: Optional comma-separated list of substitution values.
+
+    The description may contain substitution placeholders %0, %1, etc. These
+    will be replaced by any values that follow the matcher.
 
     """
-    return DescribedAs(description_template, matcher, *values)
+    return DescribedAs(description, matcher, *values)

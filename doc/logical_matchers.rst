@@ -1,7 +1,7 @@
 Logical Matchers
 ----------------
 
-Fundamental matchers of objects and values, and composite matchers
+Boolean logic using other matchers.
 
 
 all_of

@@ -48,7 +48,7 @@ def close_to(value, delta):
 
     :param value: The value to compare against as the expected value.
     :param delta: The maximum delta between the values for which the numbers
-    are considered close.
+        are considered close.
 
     This matcher compares the evaluated object against ``value`` to see if the
     difference is within a positive ``delta``.
