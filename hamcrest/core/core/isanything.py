@@ -6,7 +6,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsAnything(BaseMatcher):
-    """A matcher that always returns ``True``."""
 
     def __init__(self, description):
         self.description = description
@@ -21,9 +20,12 @@ class IsAnything(BaseMatcher):
 
 
 def anything(description=None):
-    """This matcher always evaluates to ``True``.
+    """Matches anything.
 
-    You can optionally supply a meaningful string used when describing itself.
+    :param description: Optional string used to describe this matcher.
+
+    This matcher always evaluates to ``True``. Specify this in composite
+    matchers when the value of a particular element is unimportant.
 
     """
     return IsAnything(description)

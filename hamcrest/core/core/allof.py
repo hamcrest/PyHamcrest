@@ -7,12 +7,6 @@ __license__ = "BSD, see License.txt"
 
 
 class AllOf(BaseMatcher):
-    """Calculates the logical conjunction of multiple matchers.
-
-    Evaluation is shortcut, so subsequent matchers are not called if an earlier
-    matcher returns ``False``.
-
-    """
 
     def __init__(self, *matchers):
         self.matchers = matchers
@@ -35,11 +29,16 @@ class AllOf(BaseMatcher):
 
 
 def all_of(*items):
-    """Evaluates to ``True`` only if *all* of the passed in matchers evaluate
-    to ``True``.
+    """Matches if all of the given matchers evaluate to ``True``.
 
-    :param items: Each item is a matcher, or a value for
-        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+    :param matcher1,...:  A comma-separated list of matchers.
+
+    The matchers are evaluated from left to right using short-circuit
+    evaluation, so evaluation stops as soon as a matcher returns ``False``.
+
+    Any argument that is not a matcher is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
 
     """
     return AllOf(*[wrap_matcher(item) for item in items])

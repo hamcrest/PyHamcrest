@@ -22,7 +22,8 @@ class HasString(BaseMatcher):
 def has_string(match):
     """Matches if ``str(item)`` satisfies a given matcher.
 
-    :param match: The matcher to satisfy.
+    :param match: The matcher to satisfy, or an expected value for
+        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
 
     This matcher invokes the :py:func:`str` function on the evaluated object to
     get its length, passing the result to a given matcher for evaluation. If

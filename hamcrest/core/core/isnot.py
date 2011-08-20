@@ -8,7 +8,6 @@ from isequal import equal_to
 
 
 class IsNot(BaseMatcher):
-    """Calculates the logical negation of a matcher."""
 
     def __init__(self, matcher):
         self.matcher = matcher
@@ -20,17 +19,20 @@ class IsNot(BaseMatcher):
         description.append_text('not ').append_description_of(self.matcher)
 
 
-def is_not(x):
-    """Inverts the rule, providing a shortcut to the frequently used
-    ``is_not(equal_to(x))``.
+def is_not(match):
+    """Inverts the given matcher to its logical negation.
 
-    For example::
+    :param match: The matcher to negate.
+
+    This matcher compares the evaluated object to the negation of the given
+    matcher. If the ``match`` argument is not a matcher, it is implicitly
+    wrapped in an :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to
+    check for equality, and thus matches for inequality.
+
+    Examples::
 
         assert_that(cheese, is_not(equal_to(smelly)))
-
-    vs. ::
-
         assert_that(cheese, is_not(smelly))
 
     """
-    return IsNot(wrap_matcher(x))
+    return IsNot(wrap_matcher(match))
