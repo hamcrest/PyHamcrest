@@ -4,13 +4,18 @@ Object Matchers
 Matchers that inspect objects
 
 
-haslength
-^^^^^^^^^
+equal_to
+^^^^^^^^
+
+.. automodule:: hamcrest.core.core.isequal
+
+has_length
+^^^^^^^^^^
 
 .. automodule:: hamcrest.library.object.haslength
 
-hasstring
-^^^^^^^^^
+has_string
+^^^^^^^^^^
 
 .. automodule:: hamcrest.library.object.hasstring
 
@@ -18,3 +23,20 @@ has_property
 ^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.object.hasproperty
+    :exclude-members: has_property
+.. autofunction:: has_property(name[, match])
+
+instance_of
+^^^^^^^^^^^
+
+.. automodule:: hamcrest.core.core.isinstanceof
+
+none, not_none
+^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.core.core.isnone
+
+same_instance
+^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.core.core.issame

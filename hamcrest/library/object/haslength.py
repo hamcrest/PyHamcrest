@@ -8,7 +8,6 @@ from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class HasLength(BaseMatcher):
-    """Does ``len(item)`` satisfy a given matcher?"""
 
     def __init__(self, len_matcher):
         self.len_matcher = len_matcher
@@ -29,11 +28,16 @@ class HasLength(BaseMatcher):
                     .append_description_of(self.len_matcher)
 
 
-def has_length(x):
-    """Evaluates whether ``len(item)`` satisfies a given matcher.
+def has_length(match):
+    """Matches if ``len(item)`` satisfies a given matcher.
 
-    :param x: A matcher, or a value for
-        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+    :param match: The matcher to satisfy.
+
+    This matcher invokes the :py:func:`len` function on the evaluated object to
+    get its length, passing the result to a given matcher for evaluation. If
+    the ``match`` argument is not a matcher, it is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    :equality.
 
     Examples::
 
@@ -41,4 +45,4 @@ def has_length(x):
         has_length(5)
 
     """
-    return HasLength(wrap_matcher(x))
+    return HasLength(wrap_matcher(match))

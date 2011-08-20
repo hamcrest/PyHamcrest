@@ -8,6 +8,7 @@ __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+
 class IsObjectWithProperty(BaseMatcher):
 
     def __init__(self, property_name, value_matcher):
@@ -51,19 +52,35 @@ class IsObjectWithProperty(BaseMatcher):
         self.describe_to(d)
         return str(d)
 
-def has_property(name, value=None):
-    """Matches objects that have a property matching the given value matcher.
 
-    :param name: The name of the property that the object must have. If the object
-        does not have this property, the matcher will fail.
+def has_property(name, match=None):
+    """Matches if object has a property with a given name that satisfies a
+    given matcher.
 
-    :param value: The value to match. If the value is not provided, the
-        matcher will match against anything(), which transforms this
-        matcher into a property existence check.
+    :param name: The name of the property.
+    :param match: Optional matcher to satisfy.
+
+    This matcher determines if the evaluated object has a property with a given
+    name. If no such property is found, ``has_property`` is not satisfied.
+
+    If the property is found, its value is passed to a given matcher for
+    evaluation. If the ``match`` argument is not a matcher, it is implicitly
+    wrapped in an :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to
+    check for equality.
+
+    If the ``match`` argument is not provided, the
+    :py:func:`~hamcrest.core.core.isanything.anything` matcher is used so that
+    ``has_property`` is satisfied if a matching property is found.
+
+    Examples::
+
+        has_property('name', starts_with('J'))
+        has_property('name', 'Jon')
+        has_property('name')
 
     """
 
-    if value is None:
-        value = anything()
+    if match is None:
+        match = anything()
 
-    return IsObjectWithProperty(name, wrap_shortcut(value))
+    return IsObjectWithProperty(name, wrap_shortcut(match))

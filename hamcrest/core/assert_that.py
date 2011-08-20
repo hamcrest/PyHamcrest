@@ -1,5 +1,3 @@
-"""Unit test integration"""
-
 from matcher import Matcher
 from string_description import StringDescription
 
@@ -10,32 +8,32 @@ __unittest = True
 
 
 def assert_that(arg1, arg2=None, arg3=''):
-    """Asserts a match, or a boolean condition.
+    """Asserts that actual value satisfies matcher. (Can also assert plain
+    boolean condition.)
 
-    If the assertion fails, ``assert_that`` raises an :py:exc:`AssertionError`.
-    In the context of :py:class:`unittest.TestCase`, this will be reported as a
-    test failure.
+    :param actual: The object to evaluate as the actual value.
+    :param matcher: The matcher to satisfy as the expected condition.
+    :param reason: Optional explanation to include in failure description.
 
-    When specified with a :py:class:`~hamcrest.core.matcher.Matcher` as the
-    second argument, ``assert_that`` verifies a match::
+    ``assert_that`` passes the actual value to the matcher for evaluation. If
+    the matcher is not satisfied, an exception is thrown describing the
+    mismatch.
 
-        assert_that(actual, matcher)
+    ``assert_that`` is designed to integrate well with PyUnit and other unit
+    testing frameworks. The exception raised for an unmet assertion is an
+    :py:exc:`AssertionError`, which PyUnit reports as a test failure.
 
-    or ::
+    With a different set of parameters, ``assert_that`` can also verify a
+    boolean condition:
 
-        assert_that(actual, matcher, reason)
+    .. function:: assert_that(assertion[, reason])
 
-    ``assert_that`` can also verify a boolean condition::
-
-        assert_that(assertion, reason)
-
-    or ::
-
-        assert_that(assertion)
+    :param assertion:  Boolean condition to verify.
+    :param reason:  Optional explanation to include in failure description.
 
     This is equivalent to the :py:meth:`~unittest.TestCase.assertTrue` method
-    of :py:class:`unittest.TestCase`, but because it's a standalone function,
-    it offers greater flexibility in test writing.
+    of :py:class:`unittest.TestCase`, but offers greater flexibility in test
+    writing by being a standalone function.
 
     """
     if isinstance(arg2, Matcher):

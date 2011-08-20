@@ -5,8 +5,9 @@ Library of Matcher implementations
 
 .. toctree::
 
-    core_matchers
-    collection_matchers
-    number_matchers
     object_matchers
+    number_matchers
     text_matchers
+    logical_matchers
+    collection_matchers
+    decorator_matchers

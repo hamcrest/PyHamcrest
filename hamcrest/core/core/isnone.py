@@ -7,7 +7,6 @@ from isnot import is_not
 
 
 class IsNone(BaseMatcher):
-    """Matches if value is ``None``."""
 
     def _matches(self, item):
         return item is None
@@ -17,10 +16,10 @@ class IsNone(BaseMatcher):
 
 
 def none():
-    """Matches if value is ``None``."""
+    """Matches if object is ``None``."""
     return IsNone()
 
 
 def not_none():
-    """Matches if value is not ``None``."""
+    """Matches if object is not ``None``."""
     return is_not(none())

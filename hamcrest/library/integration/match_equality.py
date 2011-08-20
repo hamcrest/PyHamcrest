@@ -1,5 +1,3 @@
-"""Equality matching support for integration with Hamcrest-unaware libraries"""
-
 from hamcrest.core.string_description import tostring
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
@@ -32,7 +30,7 @@ def match_equality(matcher):
 
         assert match_equality(matcher) == object
 
-    Or they might provide a method uses equality for its test::
+    Or they might provide a method that uses equality for its test::
 
         library.method_that_tests_eq(match_equality(matcher))
 

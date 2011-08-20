@@ -7,7 +7,6 @@ from hamcrest.core.matcher import Matcher
 
 
 class IsEqual(BaseMatcher):
-    """Is the value equal to another value?"""
 
     def __init__(self, equals):
         self.object = equals
@@ -24,6 +23,10 @@ class IsEqual(BaseMatcher):
             description.append_text('>')
 
 
-def equal_to(operand):
-    """Is the value equal to another value?"""
-    return IsEqual(operand)
+def equal_to(obj):
+    """Matches if object is equal to a given object.
+
+    :param obj: The object to compare against as the expected value.
+
+    This matcher compares the evaluated object to ``obj`` for equality."""
+    return IsEqual(obj)

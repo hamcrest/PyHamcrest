@@ -7,7 +7,6 @@ from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class HasString(BaseMatcher):
-    """Does ``str(item)`` satisfy a given matcher?"""
 
     def __init__(self, str_matcher):
         self.str_matcher = str_matcher
@@ -20,11 +19,16 @@ class HasString(BaseMatcher):
                     .append_description_of(self.str_matcher)
 
 
-def has_string(x):
-    """Evaluates whether ``str(item)`` satisfies a given matcher.
+def has_string(match):
+    """Matches if ``str(item)`` satisfies a given matcher.
 
-    :param x: A matcher, or a value for
-        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+    :param match: The matcher to satisfy.
+
+    This matcher invokes the :py:func:`str` function on the evaluated object to
+    get its length, passing the result to a given matcher for evaluation. If
+    the ``match`` argument is not a matcher, it is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
 
     Examples::
 
@@ -32,4 +36,4 @@ def has_string(x):
         has_string('bar')
 
     """
-    return HasString(wrap_matcher(x))
+    return HasString(wrap_matcher(match))

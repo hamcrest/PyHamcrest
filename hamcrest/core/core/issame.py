@@ -6,7 +6,6 @@ from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsSame(BaseMatcher):
-    """Is the value the same object as another value?"""
 
     def __init__(self, object):
         self.object = object
@@ -28,6 +27,13 @@ class IsSame(BaseMatcher):
         mismatch_description.append_description_of(item)
 
 
-def same_instance(object):
-    """Evaluates to ``True`` only when the argument is this same object."""
-    return IsSame(object)
+def same_instance(obj):
+    """Matches if evaluated object is the same instance as a given object.
+
+    :param obj: The object to compare against as the expected value.
+
+    This matcher invokes the ``is`` identity operator to determine if the
+    evaluated object is the the same object as ``obj``.
+
+    """
+    return IsSame(obj)

@@ -6,7 +6,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsInstanceOf(BaseMatcher):
-    """Tests whether the value is an instance of a class."""
 
     def __init__(self, expected_type):
         if not isinstance(expected_type, type):
@@ -21,6 +20,17 @@ class IsInstanceOf(BaseMatcher):
                     .append_text(self.expected_type.__name__)
 
 
-def instance_of(expected_type):
-    """Is the value an instance of a particular type?"""
-    return IsInstanceOf(expected_type)
+def instance_of(atype):
+    """Matches if object is an instance of, or inherits from, a given type.
+
+    :param atype: The type to compare against as the expected type.
+
+    This matcher checks whether the evaluated object is an instance of
+    ``atype`` or an instance of any class that inherits from ``atype``.
+
+    Example::
+
+        instance_of(str)
+
+    """
+    return IsInstanceOf(atype)
