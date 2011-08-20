@@ -24,20 +24,36 @@ class OrderingComparison(BaseMatcher):
 
 
 def greater_than(value):
-    """Is value > expected?"""
+    """Matches if object is greater than a given value.
+
+    :param value: The value to compare against.
+
+    """
     return OrderingComparison(value, operator.gt, 'greater than')
 
 
 def greater_than_or_equal_to(value):
-    """Is value >= expected?"""
+    """Matches if object is greater than or equal to a given value.
+
+    :param value: The value to compare against.
+
+    """
     return OrderingComparison(value, operator.ge, 'greater than or equal to')
 
 
 def less_than(value):
-    """Is value < expected?"""
+    """Matches if object is less than a given value.
+
+    :param value: The value to compare against.
+
+    """
     return OrderingComparison(value, operator.lt, 'less than')
 
 
 def less_than_or_equal_to(value):
-    """Is value <= expected?"""
+    """Matches if object is less than or equal to a given value.
+
+    :param value: The value to compare against.
+
+    """
     return OrderingComparison(value, operator.le, 'less than or equal to')
