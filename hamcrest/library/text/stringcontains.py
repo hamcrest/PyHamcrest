@@ -7,7 +7,6 @@ from hamcrest.core.helpers.hasmethod import hasmethod
 
 
 class StringContains(SubstringMatcher):
-    """Matches if the item is a string that contains a given substring."""
 
     def __init__(self, substring):
         super(StringContains, self).__init__(substring)
@@ -22,5 +21,18 @@ class StringContains(SubstringMatcher):
 
 
 def contains_string(substring):
-    """Is the value a string containing a given substring?"""
+    """Matches if object is a string containing a given string.
+
+    :param string: The string to search for.
+
+    This matcher first checks whether the evaluated object is a string. If so,
+    it checks whether it contains ``string``.
+
+    Example::
+
+        contains_string("def")
+
+    will match "abcdefg".
+
+    """
     return StringContains(substring)

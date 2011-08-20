@@ -20,7 +20,6 @@ def stripspace(string):
 
 
 class IsEqualIgnoringWhiteSpace(BaseMatcher):
-    """Matches if strings are equal ignoring white space."""
 
     def __init__(self, string):
         if not isinstance(string, basestring):
@@ -39,5 +38,19 @@ class IsEqualIgnoringWhiteSpace(BaseMatcher):
 
 
 def equal_to_ignoring_whitespace(string):
-    """Are the strings equal, ignoring white space?"""
+    """Matches if object is a string equal to a given string, ignoring
+    differences in whitespace.
+
+    :param string: The string to compare against as the expected value.
+
+    This matcher first checks whether the evaluated object is a string. If so,
+    it compares it with ``string``, ignoring differences in runs of whitespace.
+
+    Example::
+
+        equal_to_ignoring_case("hello world")
+
+    will match ``"hello   world"``.
+
+    """
     return IsEqualIgnoringWhiteSpace(string)

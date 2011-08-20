@@ -4,32 +4,34 @@ Text Matchers
 Matchers that perform text comparisons
 
 
-isequal_ignoring_case
-^^^^^^^^^^^^^^^^^^^^^
-
-.. automodule:: hamcrest.library.text.isequal_ignoring_case
-
-isequal_ignoring_whitespace
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. automodule:: hamcrest.library.text.isequal_ignoring_whitespace
-
-stringcontains
+contains_string
 ^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.text.stringcontains
 
-stringendswith
-^^^^^^^^^^^^^^
+ends_with
+^^^^^^^^^
 
 .. automodule:: hamcrest.library.text.stringendswith
 
-stringstartswith
-^^^^^^^^^^^^^^^^
+equal_to_ignoring_case
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.library.text.isequal_ignoring_case
+
+equal_to_ignoring_whitespace
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.library.text.isequal_ignoring_whitespace
+
+starts_with
+^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.text.stringstartswith
 
-stringcontainsinorder
-^^^^^^^^^^^^^^^^^^^^^
+string_contains_in_order
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.text.stringcontainsinorder
+    :exclude-members: string_contains_in_order
+.. autofunction:: string_contains_in_order(string1[, string2[, ...]])

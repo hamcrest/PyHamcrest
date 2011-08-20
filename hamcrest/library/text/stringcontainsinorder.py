@@ -7,15 +7,12 @@ __license__ = "BSD, see License.txt"
 
 
 class StringContainsInOrder(BaseMatcher):
-    """Matches if the item is a string containing a given list of substrings,
-    in order.
-
-    """
 
     def __init__(self, *substrings):
         for substring in substrings:
             if not isinstance(substring, basestring):
-                raise TypeError(self.__class__.__name__ + ' requires string arguments')
+                raise TypeError(self.__class__.__name__
+                                + ' requires string arguments')
         self.substrings = substrings
 
     def _matches(self, item):
@@ -29,9 +26,26 @@ class StringContainsInOrder(BaseMatcher):
         return True
 
     def describe_to(self, description):
-        description.append_list('a string containing ', ', ', ' in order', self.substrings)
+        description.append_list('a string containing ', ', ', ' in order',
+                                self.substrings)
 
 
 def string_contains_in_order(*substrings):
-    """Is the value a string containing a given list of substrings, in order?"""
+    """Matches if object is a string containing a given list of substrings in
+    relative order.
+
+    :param string1,...:  A comma-separated list of strings.
+
+    This matcher first checks whether the evaluated object is a string. If so,
+    it checks whether it contains a given list of strings, in relative order to
+    each other. The searches are performed starting from the beginning of the
+    evaluated string.
+
+    Example::
+
+        string_contains_in_order("bc", "fg", "jkl")
+
+    will match "abcdefghijklm".
+
+    """
     return StringContainsInOrder(*substrings)

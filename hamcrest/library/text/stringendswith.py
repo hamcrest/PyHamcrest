@@ -7,7 +7,6 @@ __license__ = "BSD, see License.txt"
 
 
 class StringEndsWith(SubstringMatcher):
-    """Matches if the item is a string that ends with a given substring."""
 
     def __init__(self, substring):
         super(StringEndsWith, self).__init__(substring)
@@ -21,6 +20,20 @@ class StringEndsWith(SubstringMatcher):
         return 'ending with'
 
 
-def ends_with(substring):
-    """Is the value a string ending with a given substring?"""
-    return StringEndsWith(substring)
+def ends_with(string):
+    """Matches if object is a string ending with a given string.
+
+    :param string: The string to search for.
+
+    This matcher first checks whether the evaluated object is a string. If so,
+    it checks if ``string`` matches the ending characters of the evaluated
+    object.
+
+    Example::
+
+        ends_with("bar")
+
+    will match "foobar".
+
+    """
+    return StringEndsWith(string)
