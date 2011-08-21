@@ -42,8 +42,9 @@ def is_(x):
 
     .. note::
 
-        Despite its similar name, this matcher has nothing to do with Python's
-        ``is`` operator.
+        PyHamcrest's ``is_`` matcher is unrelated to Python's ``is`` operator.
+        The matcher for object identity is
+        :py:func:`~hamcrest.core.core.issame.same_instance`.
 
     If the ``x`` argument is a matcher, its behavior is retained, but the test
     may be more expressive. Example::

@@ -70,53 +70,70 @@ This is equivalent to the ``assert_`` method of unittest.TestCase, but because
 it's a standalone function, it offers greater flexibility in test writing.
 
 
-A tour of common matchers
-=========================
+Predefined matchers
+===================
 
 PyHamcrest comes with a library of useful matchers:
 
-* Core
-
-  * ``anything`` - always matches, useful if you don't care what the object
-    under test is
-  * ``described_as`` - decorator to add custom failure description
-  * ``is_`` - decorator to improve readability - see `Syntactic sugar`, below
-
-* Logical
-
-  * ``all_of`` - matches if all matchers match, short circuits (like Python
-    ``and``)
-  * ``any_of`` - matches if any matchers match, short circuits (like Python
-    ``or``)
-  * ``is_not`` - matches if the wrapped matcher doesn't match and vice versa
-
 * Object
 
-  * ``equal_to`` - tests object equality using ``==``
-  * ``has_length`` - tests whether ``len(item)`` satisfies a given matcher
-  * ``has_string`` - tests whether ``str(item)`` satisfies another matcher
-  * ``instance_of`` - tests type
-  * ``none``, ``not_none`` - tests for ``None``
-  * ``same_instance`` - tests object identity
-
-* Collection
-
-  * ``has_entry``, ``has_entries``, ``has_key``, ``has_value`` - tests that a dictionary
-    contains an entry, key or value
-  * ``has_item``, ``contains``, ``contains_inanyorder``, ``only_contains`` - tests that a sequence contains elements
+  * ``equal_to`` - match equal object
+  * ``has_length`` - match ``len()``
+  * ``has_string`` - match ``str()``
+  * ``instance_of`` - match object type
+  * ``none``, ``not_none`` - match ``None``, or not ``None``
+  * ``same_instance`` - match same object
 
 * Number
 
-  * ``close_to`` - tests that numeric values are close to a given value
+  * ``close_to`` - match number close to a given value
   * ``greater_than``, ``greater_than_or_equal_to``, ``less_than``,
-    ``less_than_or_equal_to`` - tests ordering
+    ``less_than_or_equal_to`` - match numeric ordering
 
 * Text
 
-  * ``equal_to_ignoring_case`` - tests string equality ignoring case
-  * ``equal_to_ignoring_whitespace`` - test strings equality ignoring
-    differences in runs of whitespace
-  * ``contains_string``, ``ends_with``, ``starts_with``, ``string_contains_in_order`` - tests string matching
+  * ``contains_string`` - match part of a string
+  * ``ends_with`` - match the end of a string
+  * ``equal_to_ignoring_case`` - match the complete string but ignore case
+  * ``equal_to_ignoring_whitespace`` - match the complete string but ignore
+  extra whitespace
+  * ``starts_with`` - match the beginning of a string
+  * ``string_contains_in_order`` - match parts of a string, in relative order
+
+* Logical
+
+  * ``all_of`` - ``and`` together all matchers
+  * ``any_of`` - ``or`` together all matchers
+  * ``anything`` - match anything, useful in composite matchers when you don't
+  care about a particular value
+  * ``is_not`` - negate the matcher
+
+* Sequence
+
+  * ``contains`` - exactly match the entire sequence
+  * ``contains_inanyorder`` - match the entire sequence, but in any order
+  * ``has_item`` - match if given item appears in the sequence
+  * ``has_items`` - match if all given items appear in the sequence, in any
+  order
+  * ``is_in`` - match if item appears in the given sequence
+  * ``only_contains`` - match if sequence's items appear in given list
+
+* Dictionary
+
+  * ``has_entries`` - match dictionary with list of key-value pairs
+  * ``has_entry`` - match dictionary containing a key-value pair
+  * ``has_key`` - match dictionary with a key
+  * ``has_value`` - match dictionary with a value
+
+* Decorator
+
+  * ``described_as`` - give the matcher a custom failure description
+  * ``is_`` - decorator to improve readability - see `Syntactic sugar` below
+
+The arguments for many of these matchers accept not just a matching value, but
+another matcher, so matchers can be composed for greater flexibility. For
+example, ``only_contains(less_than(5))`` will match any sequence where every
+item is less than 5.
 
 
 Syntactic sugar

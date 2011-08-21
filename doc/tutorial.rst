@@ -64,76 +64,94 @@ This is equivalent to the :py:meth:`~unittest.TestCase.assert_` method of
 offers greater flexibility in test writing.
 
 
-A tour of common matchers
--------------------------
+Predefined matchers
+-------------------
 
 PyHamcrest comes with a library of useful matchers:
 
-* Core
-
-  * :py:func:`~hamcrest.core.core.isanything.anything` - always matches, useful
-    if you don't care what the object under test is
-  * :py:func:`~hamcrest.core.core.described_as.described_as` - decorator to
-    add custom failure description
-  * :py:func:`~hamcrest.core.core.is_.is_` - decorator to improve readability -
-    see :ref:`sugar`, below
-
-* Logical
-
-  * :py:func:`~hamcrest.core.core.allof.all_of` - matches if all matchers
-    match, short circuits (like Python ``and``)
-  * :py:func:`~hamcrest.core.core.anyof.any_of` - matches if any matchers
-    match, short circuits (like Python ``or``)
-  * :py:func:`~hamcrest.core.core.isnot.is_not` - matches if the wrapped
-    matcher doesn't match and vice versa
-
 * Object
 
-  * :py:func:`~hamcrest.core.core.isequal.equal_to` - tests object equality
-    using ``==``
-  * :py:func:`~hamcrest.library.object.haslength.has_length` - tests whether
-    ``len(item)`` satisfies a given matcher
-  * :py:func:`~hamcrest.library.object.hasstring.has_string` - tests whether
-    ``str(item)`` satisfies another matcher
-  * :py:func:`~hamcrest.core.core.isinstanceof.instance_of` - tests type
+  * :py:func:`~hamcrest.core.core.isequal.equal_to` - match equal object
+  * :py:func:`~hamcrest.library.object.haslength.has_length` - match
+    ``len(item)``
+  * :py:func:`~hamcrest.library.object.hasstring.has_string` - match
+    ``str(item)``
+  * :py:func:`~hamcrest.core.core.isinstanceof.instance_of` - match object type
   * :py:func:`~hamcrest.core.core.isnone.none`,
-    :py:func:`~hamcrest.core.core.isnone.not_none` - tests for ``None``
-  * :py:func:`~hamcrest.core.core.issame.same_instance` - tests object identity
-
-* Collection
-
-  * :py:func:`~hamcrest.library.collection.isdict_containing.has_entry`,
-    :py:func:`~hamcrest.library.collection.isdict_containingentries.has_entries`,
-    :py:func:`~hamcrest.library.collection.isdict_containingkey.has_key`,
-    :py:func:`~hamcrest.library.collection.isdict_containingvalue.has_value` -
-    tests that a dictionary contains an entry, key or value
-  * :py:func:`~hamcrest.library.collection.issequence_containing.has_item`,
-    :py:func:`~hamcrest.library.collection.issequence_containinginorder.contains`,
-    :py:func:`~hamcrest.library.collection.issequence_containinginanyorder.contains_inanyorder`,
-    :py:func:`~hamcrest.library.collection.issequence_onlycontaining.only_contains` -
-    tests that a sequence contains elements
+    :py:func:`~hamcrest.core.core.isnone.not_none` - match ``None``, or not
+    ``None``
+  * :py:func:`~hamcrest.core.core.issame.same_instance` - match same object
 
 * Number
 
-  * :py:func:`~hamcrest.library.number.iscloseto.close_to` - tests that numeric
-    values are close to a given value
+  * :py:func:`~hamcrest.library.number.iscloseto.close_to` - match number close
+    to a given value
   * :py:func:`~hamcrest.library.number.ordering_comparison.greater_than`,
     :py:func:`~hamcrest.library.number.ordering_comparison.greater_than_or_equal_to`,
     :py:func:`~hamcrest.library.number.ordering_comparison.less_than`,
     :py:func:`~hamcrest.library.number.ordering_comparison.less_than_or_equal_to`
-    - tests ordering
+    - match numeric ordering
 
 * Text
 
+  * :py:func:`~hamcrest.library.text.stringcontains.contains_string` - match
+    part of a string
+  * :py:func:`~hamcrest.library.text.stringendswith.ends_with` - match the end
+    of a string
   * :py:func:`~hamcrest.library.text.isequal_ignoring_case.equal_to_ignoring_case`
-    - tests string equality ignoring case
+    - match the complete string but ignore case
   * :py:func:`~hamcrest.library.text.isequal_ignoring_whitespace.equal_to_ignoring_whitespace`
-    - test strings equality ignoring differences in runs of whitespace
-  * :py:func:`~hamcrest.library.text.stringcontains.contains_string`,
-    :py:func:`~hamcrest.library.text.stringendswith.ends_with`,
-    :py:func:`~hamcrest.library.text.stringstartswith.starts_with`,
-    :py:func:`~hamcrest.library.text.stringcontainsinorder.string_contains_in_order`
-    - tests string matching
+    - match the complete string but ignore extra whitespace
+  * :py:func:`~hamcrest.library.text.stringstartswith.starts_with` - match the
+    beginning of a string
+  * :py:func:`~hamcrest.library.text.stringcontainsinorder.string_contains_in_order`
+    - match parts of a string, in relative order
+
+* Logical
+
+  * :py:func:`~hamcrest.core.core.allof.all_of` - ``and`` together all matchers
+  * :py:func:`~hamcrest.core.core.anyof.any_of` - ``or`` together all matchers
+  * :py:func:`~hamcrest.core.core.isanything.anything` - match anything, useful
+    in composite matchers when you don't care about a particular value
+  * :py:func:`~hamcrest.core.core.isnot.is_not` - negate the matcher
+
+* Sequence
+
+  * :py:func:`~hamcrest.library.collection.issequence_containinginorder.contains`
+    - exactly match the entire sequence
+  * :py:func:`~hamcrest.library.collection.issequence_containinginanyorder.contains_inanyorder`
+    - match the entire sequence, but in any order
+  * :py:func:`~hamcrest.library.collection.issequence_containing.has_item` -
+    match if given item appears in the sequence
+  * :py:func:`~hamcrest.library.collection.issequence_containing.has_items` -
+    match if all given items appear in the list, in any order
+  * :py:func:`~hamcrest.library.collection.isin.is_in` - match if item appears
+    in the given sequence
+  * :py:func:`~hamcrest.library.collection.issequence_onlycontaining.only_contains`
+    - match if sequence's items appear in given list
+
+* Dictionary
+
+  * :py:func:`~hamcrest.library.collection.isdict_containingentries.has_entries`
+    - match dictionary with list of key-value pairs
+  * :py:func:`~hamcrest.library.collection.isdict_containing.has_entry` - match
+    dictionary containing a key-value pair
+  * :py:func:`~hamcrest.library.collection.isdict_containingkey.has_key` -
+    match dictionary with a key
+  * :py:func:`~hamcrest.library.collection.isdict_containingvalue.has_value` -
+    match dictionary with a value
+
+* Decorator
+
+  * :py:func:`~hamcrest.core.core.described_as.described_as` - give the matcher
+    a custom failure description
+  * :py:func:`~hamcrest.core.core.is_.is_` - decorator to improve readability -
+    see :ref:`sugar`, below
+
+The arguments for many of these matchers accept not just a matching value, but
+another matcher, so matchers can be composed for greater flexibility. For
+example, ``only_contains(less_than(5))`` will match any sequence where every
+item is less than 5.
 
 
 .. _sugar:
@@ -160,6 +178,6 @@ also equivalent::
     assert_that(theBiscuit, is_(instance_of(Biscuit)))
     assert_that(theBiscuit, is_(Biscuit))
 
-*Note that PyHamcrest's ``is_`` matcher is unrelated to Python's ``is``
+(Note that PyHamcrest's ``is_`` matcher is unrelated to Python's ``is``
 operator. The matcher for object identity is
-:py:func:`~hamcrest.core.core.issame.same_instance`.*
+:py:func:`~hamcrest.core.core.issame.same_instance`.)

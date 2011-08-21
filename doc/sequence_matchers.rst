@@ -1,7 +1,7 @@
-Collection Matchers
--------------------
+Sequence Matchers
+-----------------
 
-Matchers of collections.
+Matchers of sequences.
 
 
 contains
@@ -18,34 +18,12 @@ contains_inanyorder
     :exclude-members: contains_inanyorder
 .. autofunction:: contains_inanyorder(match1, [match2[, ...]])
 
-has_entries
-^^^^^^^^^^^
-
-.. automodule:: hamcrest.library.collection.isdict_containingentries
-    :exclude-members: has_entries
-.. autofunction:: has_entries(matcher_dict)
-
-has_entry
-^^^^^^^^^
-
-.. automodule:: hamcrest.library.collection.isdict_containing
-
 has_item, has_items
 ^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.collection.issequence_containing
     :exclude-members: has_items
 .. autofunction:: has_items(match1, [match2[, ...]])
-
-has_key
-^^^^^^^
-
-.. automodule:: hamcrest.library.collection.isdict_containingkey
-
-has_value
-^^^^^^^^^
-
-.. automodule:: hamcrest.library.collection.isdict_containingvalue
 
 is_in
 ^^^^^
