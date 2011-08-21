@@ -26,7 +26,8 @@ My first PyHamcrest test
 
 We'll start by writing a very simple PyUnit test, but instead of using PyUnit's
 :py:meth:`~unittest.TestCase.assertEqual` method, we'll use PyHamcrest's
-:py:func:`~hamcrest.core.matcher_assert.assert_that` construct and the standard set of matchers::
+:py:func:`~hamcrest.core.matcher_assert.assert_that` construct and the standard
+set of matchers::
 
     from hamcrest import *
     import unittest

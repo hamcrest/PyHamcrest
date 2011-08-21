@@ -6,6 +6,8 @@ from isdict_containingkey import has_key
 from isdict_containingvalue import has_value
 from isin import is_in
 from issequence_containing import has_item, has_items
+from issequence_containinginanyorder import contains_inanyorder
+from issequence_containinginorder import contains
 from issequence_onlycontaining import only_contains
 
 __author__ = "Jon Reid"

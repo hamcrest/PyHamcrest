@@ -2,6 +2,7 @@
 
 from hamcrest.core import *
 from collection import *
+from integration import *
 from number import *
 from object import *
 from text import *
@@ -18,13 +19,17 @@ __all__ = [
     'is_in',
     'has_item',
     'has_items',
+    'contains_inanyorder',
+    'contains',
     'only_contains',
+    'match_equality',
     'close_to',
     'greater_than',
     'greater_than_or_equal_to',
     'less_than',
     'less_than_or_equal_to',
     'has_length',
+    'has_property',
     'has_string',
     'equal_to_ignoring_case',
     'equal_to_ignoring_whitespace',
