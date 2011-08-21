@@ -36,11 +36,20 @@ class IsDictContainingEntriesTest(MatcherTest):
     def testMatchesUsingSingleDictionaryArgument(self):
         target = {'a': 1, 'b': 2, 'c': 3}
         self.assert_matches('has a & b',
-                        has_entries(dict(a=equal_to(1), b=equal_to(2))), target)
+                        has_entries({'a':equal_to(1), 'b':equal_to(2)}), target)
         self.assert_matches('has c & a',
-                        has_entries(dict(c=equal_to(3), a=equal_to(1))), target)
+                        has_entries({'c':equal_to(3), 'a':equal_to(1)}), target)
         self.assert_does_not_match('no d:3',
-                        has_entries(dict(b=equal_to(3), d=equal_to(3))), target)
+                        has_entries({'b':equal_to(2), 'd':equal_to(3)}), target)
+
+    def testMatcheSingleDictionaryArgumentWithImplicitEqualTo(self):
+        target = {'a': 1, 'b': 2, 'c': 3}
+        self.assert_matches('has a & b',
+                        has_entries({'a':1, 'b':2}), target)
+        self.assert_matches('has c & a',
+                        has_entries({'c':3, 'a':1}), target)
+        self.assert_does_not_match('no d:3',
+                        has_entries({'b':2, 'd': 3}), target)
 
     def testMatchesUsingKwargs(self):
         target = {'a': 1, 'b': 2, 'c': 3}
@@ -49,7 +58,16 @@ class IsDictContainingEntriesTest(MatcherTest):
         self.assert_matches('has c & a',
                         has_entries(c=equal_to(3), a=equal_to(1)), target)
         self.assert_does_not_match('no d:3',
-                        has_entries(b=equal_to(3), d=equal_to(3)), target)
+                        has_entries(b=equal_to(2), d=equal_to(3)), target)
+
+    def testMatchesKwargsWithImplicitEqualTo(self):
+        target = {'a': 1, 'b': 2, 'c': 3}
+        self.assert_matches('has a & b',
+                        has_entries(a=1, b=2), target)
+        self.assert_matches('has c & a',
+                        has_entries(c=3, a=1), target)
+        self.assert_does_not_match('no d:3',
+                        has_entries(b=2, d=3), target)
 
     def testMatchesDictionaryContainingSingleKeyWithMatchingValue(self):
         target = {'a': 1, 'b': 2}

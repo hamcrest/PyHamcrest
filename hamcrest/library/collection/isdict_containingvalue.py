@@ -8,7 +8,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsDictContainingValue(BaseMatcher):
-    """Matches dictionaries containing a value satisfying a given matcher."""
 
     def __init__(self, value_matcher):
         self.value_matcher = value_matcher
@@ -26,11 +25,24 @@ class IsDictContainingValue(BaseMatcher):
 
 
 def has_value(value):
-    """Matches dictionaries containing a value satisfying a given matcher.
+    """Matches if dictionary contains an entry whose value satisfies a given
+    matcher.
 
-    :param value: A matcher - or a value for
-        :py:func:`~hamcrest.core.core.isequal.equal_to` matching - for the
-        value.
+    :param value_match: The matcher to satisfy for the value, or an expected
+        value for :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+
+    This matcher iterates the evaluated dictionary, searching for any key-value
+    entry whose value satisfies the given matcher. If a matching entry is
+    found, ``has_value`` is satisfied.
+
+    Any argument that is not a matcher is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
+
+    Examples::
+
+        has_value(equal_to('bar'))
+        has_value('bar')
 
     """
     return IsDictContainingValue(wrap_matcher(value))

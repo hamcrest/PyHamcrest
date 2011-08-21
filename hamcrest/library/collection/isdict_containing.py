@@ -8,10 +8,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsDictContaining(BaseMatcher):
-    """Matches dictionaries containing a key-value pair satisfying a given pair
-    of matchers.
-
-    """
 
     def __init__(self, key_matcher, value_matcher):
         self.key_matcher = key_matcher
@@ -32,15 +28,27 @@ class IsDictContaining(BaseMatcher):
                     .append_text(']')
 
 
-def has_entry(key, value):
-    """Matches dictionaries containing a key-value pair satisfying a given pair
+def has_entry(key_match, value_match):
+    """Matches if dictionary contains key-value entry satisfying a given pair
     of matchers.
 
-    :param key: A matcher - or a value for
-        :py:func:`~hamcrest.core.core.isequal.equal_to` matching - for the key.
-    :param value: A matcher - or a value for
-        :py:func:`~hamcrest.core.core.isequal.equal_to` matching - for the
-        value.
+    :param key_match: The matcher to satisfy for the key, or an expected value
+        for :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+    :param value_match: The matcher to satisfy for the value, or an expected
+        value for :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+
+    This matcher iterates the evaluated dictionary, searching for any key-value
+    entry that satisfies ``key_match`` and ``value_match``. If a matching entry
+    is found, ``has_entry`` is satisfied.
+
+    Any argument that is not a matcher is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
+
+    Examples::
+
+        has_entry(equal_to('foo'), equal_to(1))
+        has_entry('foo', 1)
 
     """
-    return IsDictContaining(wrap_matcher(key), wrap_matcher(value))
+    return IsDictContaining(wrap_matcher(key_match), wrap_matcher(value_match))

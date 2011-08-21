@@ -8,7 +8,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsDictContainingKey(BaseMatcher):
-    """Matches dictionaries containing a key satisfying a given matcher."""
 
     def __init__(self, key_matcher):
         self.key_matcher = key_matcher
@@ -25,11 +24,25 @@ class IsDictContainingKey(BaseMatcher):
                     .append_description_of(self.key_matcher)
 
 
-def has_key(key):
-    """Matches dictionaries containing a key satisfying a given matcher.
+def has_key(key_match):
+    """Matches if dictionary contains an entry whose key satisfies a given
+    matcher.
 
-    :param key: A matcher - or a value for
-        :py:func:`~hamcrest.core.core.isequal.equal_to` matching - for the key.
+    :param key_match: The matcher to satisfy for the key, or an expected value
+        for :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+
+    This matcher iterates the evaluated dictionary, searching for any key-value
+    entry whose key satisfies the given matcher. If a matching entry is found,
+    ``has_key`` is satisfied.
+
+    Any argument that is not a matcher is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
+
+    Examples::
+
+        has_key(equal_to('foo'))
+        has_key('foo')
 
     """
-    return IsDictContainingKey(wrap_matcher(key))
+    return IsDictContainingKey(wrap_matcher(key_match))

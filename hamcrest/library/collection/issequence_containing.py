@@ -9,7 +9,6 @@ from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class IsSequenceContaining(BaseMatcher):
-    """Matches a sequence if any element satisfies a given matcher."""
 
     def __init__(self, element_matcher):
         self.element_matcher = element_matcher
@@ -26,22 +25,39 @@ class IsSequenceContaining(BaseMatcher):
                     .append_description_of(self.element_matcher)
 
 
-def has_item(item):
-    """Matches a sequence if any element satifies a given matcher.
+def has_item(match):
+    """Matches if any element of sequence satisfies a given matcher.
 
-    :param item: A matcher, or a value for
+    :param match: The matcher to satisfy, or an expected value for
         :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
 
+    This matcher iterates the evaluated sequence, searching for any element
+    that satisfies a given matcher. If a matching element is found,
+    ``has_item`` is satisfied.
+
+    If the ``match`` argument is not a matcher, it is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
+
     """
-    return IsSequenceContaining(wrap_matcher(item))
+    return IsSequenceContaining(wrap_matcher(match))
 
 
 def has_items(*items):
-    """Matches a sequence if all matchers are satisfied by any of the
-    sequence's elements.
+    """Matches if all of the given matchers are satisfied by any elements of
+    the sequence.
+
+    :param match1,...: A comma-separated list of matchers.
+
+    This matcher iterates the given matchers, searching for any elements in the
+    evaluated sequence that satisfy them. If each matcher is satisfied, then
+    ``has_items`` is satisfied.
+
+    Any argument that is not a matcher is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
 
     """
-
     matchers = []
     for item in items:
         matchers.append(has_item(item))

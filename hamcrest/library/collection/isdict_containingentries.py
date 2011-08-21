@@ -8,10 +8,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsDictContainingEntries(BaseMatcher):
-    """Matches dictionaries containing key-value pairs satisfying given lists
-    of keys and value matchers.
-
-    """
 
     def __init__(self, value_matchers):
         self.value_matchers = value_matchers
@@ -73,20 +69,49 @@ class IsDictContainingEntries(BaseMatcher):
 
 
 def has_entries(*keys_valuematchers, **kv_args):
-    """Matches dictionaries containing key-value pairs satisfying a given list
-    of alternating keys and value matchers.
+    """Matches if dictionary contains entries satisfying a dictionary of keys
+    and value matchers.
 
-    :param keys_valuematchers: Alternating pairs of keys and value matchers (or
-        straight values for :py:func:`~hamcrest.core.core.isequal.equal_to`
-        matching.
+    :param matcher_dict: A dictionary mapping keys to associated value matchers,
+        or to expected values for
+        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
 
-        If only one parameter is passed here, it must be a mapping
-        object. In that case, matching will be done against its
-        keys/values.
+    Note that the keys must be actual keys, not matchers. Any value argument
+    that is not a matcher is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
 
-    :param kv_args: These name value pairs will be matched by the
-        matcher as well. Any values provided here will supercede those
-        provided in the positional argument list.
+    Examples::
+
+        has_entries({'foo':equal_to(1), 'bar':equal_to(2)})
+        has_entries({'foo':1, 'bar':2})
+
+    ``has_entries`` also accepts a list of keyword arguments:
+
+    .. function:: has_entries(keyword1=value_matcher1[, keyword2=value_matcher2[, ...]])
+
+    :param keyword1: A keyword to look up.
+    :param valueMatcher1: The matcher to satisfy for the value, or an expected
+        value for :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+
+    Examples::
+
+        has_entries(foo=equal_to(1), bar=equal_to(2))
+        has_entries(foo=1, bar=2)
+
+    Finally, ``has_entries`` also accepts a list of alternating keys and their
+    value matchers:
+
+    .. function:: has_entries(key1, value_matcher1[, ...])
+
+    :param key1: A key (not a matcher) to look up.
+    :param valueMatcher1: The matcher to satisfy for the value, or an expected
+        value for :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+
+    Examples::
+
+        has_entries('foo', equal_to(1), 'bar', equal_to(2))
+        has_entries('foo', 1, 'bar', 2)
 
     """
     if len(keys_valuematchers) == 1:

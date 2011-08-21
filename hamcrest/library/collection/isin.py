@@ -6,7 +6,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsIn(BaseMatcher):
-    """Is the value present in the given sequence?"""
 
     def __init__(self, sequence):
         self.sequence = sequence
@@ -20,5 +19,12 @@ class IsIn(BaseMatcher):
 
 
 def is_in(sequence):
-    """Is the value present in the given sequence?"""
+    """Matches if evaluated object is present in a given sequence.
+
+    :param sequence: The sequence to search.
+
+    This matcher invokes the ``in`` membership operator to determine if the
+    evaluated object is a member of the sequence.
+
+    """
     return IsIn(sequence)

@@ -35,8 +35,9 @@ def has_length(match):
         :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
 
     This matcher invokes the :py:func:`len` function on the evaluated object to
-    get its length, passing the result to a given matcher for evaluation. If
-    the ``match`` argument is not a matcher, it is implicitly wrapped in an
+    get its length, passing the result to a given matcher for evaluation.
+
+    If the ``match`` argument is not a matcher, it is implicitly wrapped in an
     :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
     :equality.
 

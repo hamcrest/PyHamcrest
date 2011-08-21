@@ -9,12 +9,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsSequenceOnlyContaining(BaseMatcher):
-    """Matches sequences that only contain elements satisfying a given
-    matcher.
-
-    This matcher will never match an empty sequence.
-
-    """
 
     def __init__(self, matcher):
         self.matcher = matcher
@@ -37,13 +31,22 @@ class IsSequenceOnlyContaining(BaseMatcher):
 
 
 def only_contains(*items):
-    """Matches sequences that only contain elements satisfying any of a list
-    of items.
+    """Matches if each element of sequence satisfies any of the given matchers.
 
-    For example, ``[3,1,2]`` would satisfy ``only_contains(less_than(4))``.
+    :param match1,...: A comma-separated list of matchers.
 
-    If an item is not a matcher, it is equivalent to ``equal_to(item)``, so the
-    list in the example above would also satisfy ``only_contains(1,2,3)``.
+    This matcher iterates the evaluated sequence, confirming whether each
+    element satisfies any of the given matchers.
+
+    Example::
+
+        only_contains(less_than(4))
+
+    will match ``[3,1,2]``.
+
+    Any argument that is not a matcher is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
 
     """
     matchers = []

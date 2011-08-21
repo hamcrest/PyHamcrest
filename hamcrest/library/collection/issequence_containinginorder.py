@@ -44,10 +44,6 @@ class MatchingInOrder(object):
 
 
 class IsSequenceContainingInOrder(BaseMatcher):
-    """Matches a sequence if its elements, in order, satisfy a list of
-    matchers.
-
-    """
 
     def __init__(self, matchers):
         self.matchers = matchers
@@ -73,13 +69,18 @@ class IsSequenceContainingInOrder(BaseMatcher):
 
 
 def contains(*items):
-    """Matches a sequence if its elements, in order, satisfy a list of matchers.
+    """Matches if sequence's elements satisfy a given list of matchers, in order.
 
-    :param items: Each item is a matcher, or a value for
-        :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
+    :param match1,...: A comma-separated list of matchers.
+
+    This matcher iterates the evaluated sequence and a given list of matchers,
+    seeing if each element satisfies its corresponding matcher.
+
+    Any argument that is not a matcher is implicitly wrapped in an
+    :py:func:`~hamcrest.core.core.isequal.equal_to` matcher to check for
+    equality.
 
     """
-
     matchers = []
     for item in items:
         matchers.append(wrap_matcher(item))
