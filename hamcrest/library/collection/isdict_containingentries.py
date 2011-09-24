@@ -70,7 +70,7 @@ class IsDictContainingEntries(BaseMatcher):
 
 def has_entries(*keys_valuematchers, **kv_args):
     """Matches if dictionary contains entries satisfying a dictionary of keys
-    and value matchers.
+    and corresponding value matchers.
 
     :param matcher_dict: A dictionary mapping keys to associated value matchers,
         or to expected values for

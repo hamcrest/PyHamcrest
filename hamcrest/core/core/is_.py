@@ -47,7 +47,7 @@ def is_(x):
         :py:func:`~hamcrest.core.core.issame.same_instance`.
 
     If the ``x`` argument is a matcher, its behavior is retained, but the test
-    may be more expressive. Example::
+    may be more expressive. For example::
 
         assert_that(value, less_than(5))
         assert_that(value, is_(less_than(5)))
@@ -56,6 +56,7 @@ def is_(x):
     :py:func:`~hamcrest.core.core.isinstanceof.instance_of` matcher. This makes
     the following statements equivalent::
 
+        assert_that(cheese, instance_of(Cheddar))
         assert_that(cheese, is_(instance_of(Cheddar)))
         assert_that(cheese, is_(Cheddar))
 
@@ -63,6 +64,7 @@ def is_(x):
     :py:func:`~hamcrest.core.core.isequal.equal_to` matcher. This makes the
     following statements equivalent::
 
+        assert_that(cheese, equal_to(smelly))
         assert_that(cheese, is_(equal_to(smelly)))
         assert_that(cheese, is_(smelly))
 
