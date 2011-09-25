@@ -54,8 +54,8 @@ class IsObjectWithProperty(BaseMatcher):
 
 
 def has_property(name, match=None):
-    """Matches if object has a property with a given name that satisfies a
-    given matcher.
+    """Matches if object has a property with a given name whose value satisfies
+    a given matcher.
 
     :param name: The name of the property.
     :param match: Optional matcher to satisfy.
