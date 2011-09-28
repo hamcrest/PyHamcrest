@@ -1,12 +1,15 @@
+import sys
 if __name__ == "__main__":
-    import sys
     sys.path.insert(0, '..')
 
 from hamcrest.core.string_description import *
 
 from hamcrest.core.selfdescribing import SelfDescribing
 import re
-import unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -41,9 +44,15 @@ class StringDescriptionTest(unittest.TestCase):
         expected = re.compile("<object object at 0x[0-9a-fA-F]+>")
         self.assertTrue(expected.match(str(self.description)))
 
-    def testDescribeUnicodeString(self):
+    @unittest.skipIf(sys.version_info >= (3,), "Describe unicode strings doesn't malform in Python 3")
+    def testDescribeUnicodeStringAsBytes(self):
         self.description.append_description_of(u'\u05d0')
         self.assertEqual("u'\\u05d0'", str(self.description))
+
+    @unittest.skipUnless(sys.version_info >= (3,), "Describe unicode strings only malforms in Python 2")
+    def testDescribeUnicodeStringAsUnicode(self):
+        self.description.append_description_of(u'\u05d0')
+        self.assertEqual(u"'\u05d0'", str(self.description))
 
 if __name__ == "__main__":
     unittest.main()
