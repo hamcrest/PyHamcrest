@@ -75,6 +75,8 @@ PyHamcrest comes with a library of useful matchers:
   * :py:func:`~hamcrest.core.core.isequal.equal_to` - match equal object
   * :py:func:`~hamcrest.library.object.haslength.has_length` - match
     ``len(item)``
+  * :py:func:`~hamcrest.library.object.hasproperty.has_property` - match value
+    of property with given name
   * :py:func:`~hamcrest.library.object.hasstring.has_string` - match
     ``str(item)``
   * :py:func:`~hamcrest.core.core.isinstanceof.instance_of` - match object type

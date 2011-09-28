@@ -86,6 +86,7 @@ PyHamcrest comes with a library of useful matchers:
 
   * ``equal_to`` - match equal object
   * ``has_length`` - match ``len()``
+  * ``has_property`` - match value of property with given name
   * ``has_string`` - match ``str()``
   * ``instance_of`` - match object type
   * ``none``, ``not_none`` - match ``None``, or not ``None``
