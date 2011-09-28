@@ -3,8 +3,14 @@ Latest package: http://pypi.python.org/pypi/PyHamcrest
 Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
-=== NEXT VERSION IN PROGRESS
+See also:
+Objective-C version for Cocoa and iOS: https://github.com/jonreid/OCHamcrest
+Quality Coding - Tools, tips and techniques for building quality in to your iOS programs: http://jonreid.blogs.com/qualitycoding/
 
+
+=== Version 1.6 ==
+
+27 Sep 2011
 (All changes by Chris Rose unless otherwise noted.)
 
 * Packaging:
