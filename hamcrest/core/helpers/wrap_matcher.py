@@ -5,6 +5,7 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+import types
 
 def wrap_matcher(x):
     """Wraps argument in a matcher, if necessary.
@@ -17,3 +18,12 @@ def wrap_matcher(x):
         return x
     else:
         return equal_to(x)
+
+def is_matchable_type(expected_type):
+    if isinstance(expected_type, type):
+        return True
+
+    if type(expected_type) == types.ClassType:
+        return True
+
+    return False

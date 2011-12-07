@@ -3,8 +3,9 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher, Matcher
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher, is_matchable_type
 from isequal import equal_to
+from isinstanceof import instance_of
 
 
 class IsNot(BaseMatcher):
@@ -17,6 +18,13 @@ class IsNot(BaseMatcher):
 
     def describe_to(self, description):
         description.append_text('not ').append_description_of(self.matcher)
+
+
+def wrap_value_or_type(x):
+    if is_matchable_type(x):
+        return instance_of(x)
+    else:
+        return wrap_matcher(x)
 
 
 def is_not(match):
@@ -35,4 +43,4 @@ def is_not(match):
         assert_that(cheese, is_not(smelly))
 
     """
-    return IsNot(wrap_matcher(match))
+    return IsNot(wrap_value_or_type(match))
