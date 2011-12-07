@@ -3,8 +3,8 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
-import isinstanceof
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher, is_matchable_type
+from isinstanceof import instance_of
 
 
 class Is(BaseMatcher):
@@ -23,8 +23,8 @@ class Is(BaseMatcher):
 
 
 def wrap_value_or_type(x):
-    if isinstanceof._valid_type(x):
-        return isinstanceof.instance_of(x)
+    if is_matchable_type(x):
+        return instance_of(x)
     else:
         return wrap_matcher(x)
 

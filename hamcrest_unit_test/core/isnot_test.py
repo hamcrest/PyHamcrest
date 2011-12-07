@@ -24,6 +24,10 @@ class IsNotTest(MatcherTest):
         self.assert_matches('invert mismatch', is_not('A'), 'B');
         self.assert_does_not_match('invert match', is_not('A'), 'A');
 
+    def testProvidesConvenientShortcutForNotInstanceOf(self):
+        self.assert_matches('invert mismatch', is_not(str), 1);
+        self.assert_does_not_match('invert match', is_not(str), 'A');
+
     def testHasAReadableDescription(self):
         self.assert_description("not 'A'", is_not('A'));
 
