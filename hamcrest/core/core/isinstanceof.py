@@ -9,21 +9,12 @@ import types
 class IsInstanceOf(BaseMatcher):
 
     def __init__(self, expected_type):
-        if not self._valid_type(expected_type):
+        if not _valid_type(expected_type):
             raise TypeError('IsInstanceOf requires type')
         self.expected_type = expected_type
 
     def _matches(self, item):
         return isinstance(item, self.expected_type)
-
-    def _valid_type(self, expected_type):
-        if isinstance(expected_type, type):
-            return True
-
-        if type(expected_type) == types.ClassType:
-            return True
-
-        return False
 
     def describe_to(self, description):
         description.append_text('an instance of ')              \
@@ -44,3 +35,12 @@ def instance_of(atype):
 
     """
     return IsInstanceOf(atype)
+
+def _valid_type(expected_type):
+    if isinstance(expected_type, type):
+        return True
+
+    if type(expected_type) == types.ClassType:
+        return True
+
+    return False
