@@ -3,9 +3,13 @@ Latest package: http://pypi.python.org/pypi/PyHamcrest
 Latest sources: https://github.com/jonreid/PyHamcrest
 Hamcrest information: http://code.google.com/p/hamcrest
 
-See also:
-Objective-C version for Cocoa and iOS: https://github.com/jonreid/OCHamcrest
-Quality Coding - Tools, tips and techniques for building quality in to your iOS programs: http://jonreid.blogs.com/qualitycoding/
+See also: Objective-C version for Cocoa and iOS:  https://github.com/jonreid/OCHamcrest
+
+
+=== NEXT VERSION IN PROGRESS
+
+* Improvements:
+ - Can now do matching against old-style classes.
 
 
 === Version 1.6 ==

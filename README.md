@@ -3,12 +3,8 @@
 * [Latest sources](https://github.com/jonreid/PyHamcrest)
 * [Hamcrest information](http://code.google.com/p/hamcrest)
 
-See also:
-
-* [OCHamcrest](https://github.com/jonreid/OCHamcrest) - Objective-C version for
+See also: [OCHamcrest](https://github.com/jonreid/OCHamcrest) - Objective-C version for
 Cocoa and iOS.
-* [Quality Coding](http://jonreid.blogs.com/qualitycoding/) - Tools, tips and
-techniques for _building quality in_ to your iOS programs.
 
 
 Introduction
