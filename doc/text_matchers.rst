@@ -9,6 +9,13 @@ contains_string
 
 .. automodule:: hamcrest.library.text.stringcontains
 
+
+matches_regexp
+^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.library.text.stringmatches
+
+
 ends_with
 ^^^^^^^^^
 
