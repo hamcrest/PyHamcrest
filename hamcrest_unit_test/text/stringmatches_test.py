@@ -1,6 +1,7 @@
-import sys
 if __name__ == "__main__":
+    import sys
     sys.path.insert(0, '..')
+    sys.path.insert(0, '../..')
 
 from hamcrest.library.text.stringmatches import *
 from hamcrest_unit_test.matcher_test import MatcherTest
@@ -58,3 +59,7 @@ class StringMatchesTest(MatcherTest):
 
     def testCompiledDescribeMismatch(self):
         self.assert_describe_mismatch("was 'bad'", compiled_matcher, 'bad')
+
+
+if __name__ == '__main__':
+    unittest.main()
