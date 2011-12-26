@@ -2,8 +2,6 @@ if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
-import sys
-print '\n'.join(sys.path)
 
 from hamcrest.library.object.hasproperty import *
 

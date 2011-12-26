@@ -1,6 +1,5 @@
-import re
-
 from hamcrest.core.base_matcher import BaseMatcher
+import re
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

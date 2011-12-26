@@ -1,9 +1,9 @@
+from hamcrest.library.text.substringmatcher import SubstringMatcher
+from hamcrest.core.helpers.hasmethod import hasmethod
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-from hamcrest.library.text.substringmatcher import SubstringMatcher
-from hamcrest.core.helpers.hasmethod import hasmethod
 
 
 class StringContains(SubstringMatcher):

@@ -1,9 +1,9 @@
+from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class HasString(BaseMatcher):
