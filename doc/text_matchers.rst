@@ -10,12 +10,6 @@ contains_string
 .. automodule:: hamcrest.library.text.stringcontains
 
 
-matches_regexp
-^^^^^^^^^^^^^^
-
-.. automodule:: hamcrest.library.text.stringmatches
-
-
 ends_with
 ^^^^^^^^^
 
@@ -30,6 +24,11 @@ equal_to_ignoring_whitespace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.text.isequal_ignoring_whitespace
+
+matches_regexp
+^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.library.text.stringmatches
 
 starts_with
 ^^^^^^^^^^^

@@ -97,11 +97,11 @@ PyHamcrest comes with a library of useful matchers:
 * Text
 
   * ``contains_string`` - match part of a string
-  * ``matches_regexp`` - match a regular expression in a string
   * ``ends_with`` - match the end of a string
   * ``equal_to_ignoring_case`` - match the complete string but ignore case
   * ``equal_to_ignoring_whitespace`` - match the complete string but ignore
   extra whitespace
+  * ``matches_regexp`` - match a regular expression in a string
   * ``starts_with`` - match the beginning of a string
   * ``string_contains_in_order`` - match parts of a string, in relative order
 
