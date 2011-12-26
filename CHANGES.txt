@@ -8,6 +8,11 @@ See also: Objective-C version for Cocoa and iOS:  https://github.com/jonreid/OCH
 
 === NEXT VERSION IN PROGRESS
 
+(All changes by Chris Rose unless otherwise noted.)
+
+* New matchers:
+ - matches_regexp matches a regular expression in a string.
+
 * Improvements:
  - Can now do matching against old-style classes.
 
