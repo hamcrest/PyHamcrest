@@ -14,15 +14,40 @@ class IsSequenceContaining(BaseMatcher):
         self.element_matcher = element_matcher
 
     def _matches(self, sequence):
-        if hasmethod(sequence, '__iter__'):
+        try:
             for item in sequence:
                 if self.element_matcher.matches(item):
                     return True
-        return False
+        except TypeError: # not a sequence
+            return False
 
     def describe_to(self, description):
         description.append_text('a sequence containing ')           \
                     .append_description_of(self.element_matcher)
+
+
+# It'd be great to make use of all_of, but we can't be sure we won't
+# be seeing a one-time sequence here (like a generator); see issue #20
+# Instead, we wrap it inside a class that will convert the sequence into
+# a concrete list and then hand it off to the all_of matcher.
+class IsSequenceContainingEvery(BaseMatcher):
+
+    def __init__(self, *element_matchers):
+        delegates = [has_item(e) for e in element_matchers]
+        self.matcher = all_of(*delegates)
+
+    def _matches(self, sequence):
+        try:
+            return self.matcher.matches(list(sequence))
+        except TypeError:
+            return False
+
+    def describe_mismatch(self, item, mismatch_description):
+        self.matcher.describe_mismatch(item, mismatch_description)
+
+    def describe_to(self, description):
+        self.matcher.describe_to(description)
+
 
 
 def has_item(match):
@@ -60,5 +85,5 @@ def has_items(*items):
     """
     matchers = []
     for item in items:
-        matchers.append(has_item(item))
-    return apply(all_of, matchers)
+        matchers.append(wrap_matcher(item))
+    return IsSequenceContainingEvery(*matchers)
