@@ -49,16 +49,17 @@ class IsSequenceContainingInOrder(BaseMatcher):
         self.matchers = matchers
 
     def matches(self, sequence, mismatch_description=None):
-        if not hasmethod(sequence, '__iter__'):
+        try:
+            matchsequence = MatchingInOrder(self.matchers, mismatch_description)
+            for item in sequence:
+                if not matchsequence.matches(item):
+                    return False
+            return matchsequence.isfinished()
+        except TypeError:
             if mismatch_description:
                 super(IsSequenceContainingInOrder, self)                \
                     .describe_mismatch(sequence, mismatch_description)
             return False
-        matchsequence = MatchingInOrder(self.matchers, mismatch_description)
-        for item in sequence:
-            if not matchsequence.matches(item):
-                return False
-        return matchsequence.isfinished()
 
     def describe_mismatch(self, item, mismatch_description):
         self.matches(item, mismatch_description)
