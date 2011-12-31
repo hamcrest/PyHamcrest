@@ -14,16 +14,16 @@ class IsSequenceOnlyContaining(BaseMatcher):
         self.matcher = matcher
 
     def _matches(self, sequence):
-        if not hasmethod(sequence, '__len__')   \
-        or not hasmethod(sequence, '__iter__'):
-            return False
-
-        if len(sequence) == 0:
-            return False
-        for item in sequence:
-            if not self.matcher.matches(item):
+        try:
+            sequence = list(sequence)
+            if len(sequence) == 0:
                 return False
-        return True
+            for item in sequence:
+                if not self.matcher.matches(item):
+                    return False
+            return True
+        except TypeError:
+            return False
 
     def describe_to(self, description):
         description.append_text('a sequence containing items matching ')    \
