@@ -77,6 +77,8 @@ PyHamcrest comes with a library of useful matchers:
     ``len(item)``
   * :py:func:`~hamcrest.library.object.hasproperty.has_property` - match value
     of property with given name
+  * :py:func:`~hamcrest.library.object.hasproperty.has_properties` - match an
+     object that has all of the given properties.
   * :py:func:`~hamcrest.library.object.hasstring.has_string` - match
     ``str(item)``
   * :py:func:`~hamcrest.core.core.isinstanceof.instance_of` - match object type
