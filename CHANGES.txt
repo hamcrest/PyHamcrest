@@ -15,7 +15,8 @@ See also: Objective-C version for Cocoa and iOS:  https://github.com/jonreid/OCH
 
 * Improvements:
  - Can now do matching against old-style classes.
-
+ - Sequence matchers handle generators, as well as actual sequences and
+   pseudo-sequences.
 
 === Version 1.6 ==
 

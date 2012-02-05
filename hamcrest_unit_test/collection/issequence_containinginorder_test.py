@@ -8,6 +8,7 @@ from hamcrest.library.collection.issequence_containinginorder import *
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
 from quasisequence import QuasiSequence
+from sequencemixin import SequenceForm, GeneratorForm
 import unittest
 
 __author__ = "Jon Reid"
@@ -15,42 +16,42 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-class IsSequenceContainingInOrderTest(MatcherTest):
+class IsSequenceContainingInOrderTestBase(object):
 
     def testMatchingSingleItemSequence(self):
-        self.assert_matches("Single item sequence", contains(equal_to(1)), [1])
+        self.assert_matches("Single item sequence", contains(equal_to(1)), self._sequence(1))
 
     def testMatchingMultipleItemSequence(self):
         self.assert_matches("Multiple item sequence",
                             contains(equal_to(1), equal_to(2), equal_to(3)),
-                            [1,2,3])
+                            self._sequence(1,2,3))
 
     def testProvidesConvenientShortcutForMatchingWithEqualTo(self):
         self.assert_matches("Values automatically wrapped with equal_to",
                             contains(1, 2, 3),
-                            [1,2,3])
+                            self._sequence(1,2,3))
 
     def testDoesNotMatchWithMoreElementsThanExpected(self):
         self.assert_mismatch_description("Not matched: <4>",
-                            contains(1,2,3), [1,2,3,4])
+                            contains(1,2,3), self._sequence(1,2,3,4))
 
     def testDoesNotMatchWithFewerElementsThanExpected(self):
         self.assert_mismatch_description("No item matched: <3>",
-                            contains(1,2,3), [1,2])
+                            contains(1,2,3), self._sequence(1,2))
 
     def testDoesNotMatchIfSingleItemMismatches(self):
-        self.assert_mismatch_description("item 0: was <3>", contains(4), [3])
+        self.assert_mismatch_description("item 0: was <3>", contains(4), self._sequence(3))
 
     def testDoesNotMatchIfOneOfMultipleItemsMismatch(self):
         self.assert_mismatch_description("item 2: was <4>",
-                            contains(1,2,3), [1,2,4])
+                            contains(1,2,3), self._sequence(1,2,4))
 
     def testDoesNotMatchEmptySequence(self):
         self.assert_mismatch_description("No item matched: <4>",
-                            contains(4), [])
+                            contains(4), self._sequence())
 
     def testEmptySequenceMatchesEmptySequence(self):
-        self.assert_matches("Empty sequence", contains(), [])
+        self.assert_matches("Empty sequence", contains(), self._sequence())
 
     def testMatchesAnyConformingSequence(self):
         self.assert_matches('quasi-sequence', contains(1,2), QuasiSequence())
@@ -60,10 +61,17 @@ class IsSequenceContainingInOrderTest(MatcherTest):
         self.assert_description("a sequence containing [<1>, <2>]", contains(1,2))
 
     def testDescribeMismatch(self):
-        self.assert_describe_mismatch('item 1: was <3>', contains(1,2), [1,3])
+        self.assert_describe_mismatch('item 1: was <3>', contains(1,2), self._sequence(1,3))
 
     def testDescribeMismatchOfNonSequence(self):
         self.assert_describe_mismatch("was <3>", contains(1,2), 3)
+
+
+class IsConcreteSequenceContainingInOrderTest(MatcherTest, IsSequenceContainingInOrderTestBase, SequenceForm):
+    pass
+
+class IsGeneratorSequenceContainingInOrderTest(MatcherTest, IsSequenceContainingInOrderTestBase, GeneratorForm):
+    pass
 
 if __name__ == '__main__':
     unittest.main()
