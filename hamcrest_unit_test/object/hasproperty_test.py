@@ -16,10 +16,12 @@ __license__ = "BSD, see License.txt"
 class OnePropertyOldStyle:
 
     field = 'value'
+    field2 = 'value2'
 
 class OnePropertyNewStyle(object):
 
     field = 'value'
+    field2 = 'value2'
 
     def __repr__(self):
         return 'OnePropertyNewStyle'
@@ -30,73 +32,73 @@ class OnePropertyNewStyle(object):
 class OverridingOldStyle:
 
     def __getattr__(self, name):
-        if name != 'field':
-            raise AttributeError(name)
-        return 'value'
+        if name == 'field':
+            return 'value'
+        if name == 'field2':
+            return 'value2'
+
+        raise AttributeError(name)
 
 class OverridingNewStyleGetAttr(object):
 
     def __getattr__(self, name):
-        if name != 'field':
-            raise AttributeError(name)
-        return 'value'
+        if name == 'field':
+            return 'value'
+        if name == 'field2':
+            return 'value2'
+
+        raise AttributeError(name)
 
 class OverridingNewStyleGetAttribute(object):
 
-    def __getattr__(self, name):
-        if name != 'field':
-            raise AttributeError(name)
-        return 'value'
+    def __getattribute__(self, name):
+        if name == 'field':
+            return 'value'
+        if name == 'field2':
+            return 'value2'
 
-class HasPropertyTest(MatcherTest):
+        raise AttributeError(name)
+
+
+class ObjectPropertyMatcher(object):
+
+    match_sets = (
+        ("old-style: %s", OnePropertyOldStyle),
+        ('new-style: %s', OnePropertyNewStyle),
+        ('old-style, overriding: %s', OverridingOldStyle),
+        ('new-style, using getattr: %s', OverridingNewStyleGetAttr),
+        ('new-style, using getattribute: %s', OverridingNewStyleGetAttribute),
+        )
+
+    def assert_matches_for_all_types(self, description, matcher):
+        for description_fmt, target_class in self.match_sets:
+            self.assert_matches(description_fmt % description,
+                                matcher,
+                                target_class())
+
+    def assert_does_not_match_for_all_types(self, description, matcher):
+        for description_fmt, target_class in self.match_sets:
+            self.assert_does_not_match(description_fmt % description,
+                                       matcher,
+                                       target_class())
+
+class HasPropertyTest(MatcherTest, ObjectPropertyMatcher):
 
     def testHasPropertyWithoutValueMatcher(self):
-        self.assert_matches('old-style direct',
-                            has_property('field'), OnePropertyOldStyle())
-        self.assert_matches('old-style direct',
-                            has_property('field'), OnePropertyNewStyle())
-        self.assert_matches('old-style direct',
-                            has_property('field'), OverridingOldStyle())
-        self.assert_matches('old-style direct',
-                            has_property('field'), OverridingNewStyleGetAttr())
-        self.assert_matches('old-style direct',
-                            has_property('field'), OverridingNewStyleGetAttribute())
+        self.assert_matches_for_all_types('has property with name',
+                                          has_property('field'))
 
     def testHasPropertyWithoutValueMatcherNegative(self):
-        self.assert_does_not_match('old-style direct',
-                            has_property('not_there'), OnePropertyOldStyle())
-        self.assert_does_not_match('old-style direct',
-                            has_property('not_there'), OnePropertyNewStyle())
-        self.assert_does_not_match('old-style direct',
-                            has_property('not_there'), OverridingOldStyle())
-        self.assert_does_not_match('old-style direct',
-                            has_property('not_there'), OverridingNewStyleGetAttr())
-        self.assert_does_not_match('old-style direct',
-                            has_property('not_there'), OverridingNewStyleGetAttribute())
+        self.assert_does_not_match_for_all_types('has property with name',
+                                                 has_property('not_there'))
 
     def testHasPropertyWithValueMatcher(self):
-        self.assert_matches('old-style direct',
-                            has_property('field', 'value'), OnePropertyOldStyle())
-        self.assert_matches('old-style direct',
-                            has_property('field', 'value'), OnePropertyNewStyle())
-        self.assert_matches('old-style direct',
-                            has_property('field', 'value'), OverridingOldStyle())
-        self.assert_matches('old-style direct',
-                            has_property('field', 'value'), OverridingNewStyleGetAttr())
-        self.assert_matches('old-style direct',
-                            has_property('field', 'value'), OverridingNewStyleGetAttribute())
+        self.assert_matches_for_all_types('has property with name and value',
+                                          has_property('field', 'value'))
 
     def testHasPropertyWithValueMatcherNegative(self):
-        self.assert_does_not_match('old-style direct',
-                            has_property('field', 'not the value'), OnePropertyOldStyle())
-        self.assert_does_not_match('old-style direct',
-                            has_property('field', 'not the value'), OnePropertyNewStyle())
-        self.assert_does_not_match('old-style direct',
-                            has_property('field', 'not the value'), OverridingOldStyle())
-        self.assert_does_not_match('old-style direct',
-                            has_property('field', 'not the value'), OverridingNewStyleGetAttr())
-        self.assert_does_not_match('old-style direct',
-                            has_property('field', 'not the value'), OverridingNewStyleGetAttribute())
+        self.assert_does_not_match_for_all_types('has property with name',
+                                                 has_property('field', 'not the value'))
 
     def testDescription(self):
         self.assert_description("an object with a property 'field' matching ANYTHING",
@@ -120,6 +122,20 @@ class HasPropertyTest(MatcherTest):
     def testNoMismatchDescriptionOnMatch(self):
         self.assert_no_mismatch_description(has_property('field', 'value'), OnePropertyNewStyle())
 
+
+class HasPropertiesTest(MatcherTest, ObjectPropertyMatcher):
+
+    def testMatcherCreationRequiresEvenNumberOfPositionalArguments(self):
+        self.assertRaises(ValueError, has_properties, 'a', 'b', 'c')
+
+    def testMatchesUsingSingleDictionaryArgument(self):
+        # import pdb; pdb.set_trace()
+        self.assert_matches_for_all_types('matches using a single-argument dictionary',
+                                          has_properties({'field':'value', 'field2': 'value2'}))
+
+    def testMatchesUsingKeywordArguments(self):
+        self.assert_matches_for_all_types('matches using a kwarg dict',
+                                          has_properties(field='value', field2='value2'))
 
 if __name__ == '__main__':
     unittest.main()

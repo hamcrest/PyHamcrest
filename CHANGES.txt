@@ -12,6 +12,7 @@ See also: Objective-C version for Cocoa and iOS:  https://github.com/jonreid/OCH
 
 * New matchers:
  - matches_regexp matches a regular expression in a string.
+ - has_properties matches an object with more than one property.
 
 * Improvements:
  - Can now do matching against old-style classes.
