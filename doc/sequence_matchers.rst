@@ -40,7 +40,7 @@ only_contains
 empty
 ^^^^^
 
-.. automodule:: hamcrest.libraryr.collection.has_length
+.. automodule:: hamcrest.library.collection.has_length
     :exclude-members: has_length, empty
 .. autofunction:: empty()
 .. autofunction:: has_length(len)
