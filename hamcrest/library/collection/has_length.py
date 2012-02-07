@@ -57,7 +57,7 @@ def empty():
     This matcher matches any collection-like object that responds to the
     __len__ method, and has a length of 0.
     """
-    return Empty()
+    return IsEmpty()
 
 def has_length(len_):
     """
