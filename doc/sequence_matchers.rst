@@ -36,3 +36,10 @@ only_contains
 .. automodule:: hamcrest.library.collection.issequence_onlycontaining
     :exclude-members: only_contains
 .. autofunction:: only_contains(match1, [match2[, ...]])
+
+empty
+^^^^^
+
+.. automodule:: hamcrest.libraryr.collection.is_empty
+    :exclude-members: empty
+.. autofunction:: empty()
