@@ -40,6 +40,6 @@ only_contains
 empty
 ^^^^^
 
-.. automodule:: hamcrest.libraryr.collection.is_empty
+.. automodule:: hamcrest.library.collection.is_empty
     :exclude-members: empty
 .. autofunction:: empty()
