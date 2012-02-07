@@ -5,6 +5,7 @@ from isdict_containingentries import has_entries
 from isdict_containingkey import has_key
 from isdict_containingvalue import has_value
 from isin import is_in
+from has_length import empty, has_length
 from issequence_containing import has_item, has_items
 from issequence_containinginanyorder import contains_inanyorder
 from issequence_containinginorder import contains
