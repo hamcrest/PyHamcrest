@@ -37,8 +37,8 @@ only_contains
     :exclude-members: only_contains
 .. autofunction:: only_contains(match1, [match2[, ...]])
 
-empty
-^^^^^
+has_length
+^^^^^^^^^^
 
 .. automodule:: hamcrest.library.collection.has_length
     :exclude-members: has_length, empty
