@@ -134,10 +134,6 @@ PyHamcrest comes with a library of useful matchers:
     in the given sequence
   * :py:func:`~hamcrest.library.collection.issequence_onlycontaining.only_contains`
     - match if sequence's items appear in given list
-  * :py:func:`~hamcrest.library.collection.has_length.empty`
-    - match if the sequence is empty
-  * :py:func:`~hamcrest.library.collection.has_length.has_length`
-    - match if the sequence has a specified length
 
 * Dictionary
 
