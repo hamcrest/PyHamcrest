@@ -1,10 +1,6 @@
 * [Full documentation](http://readthedocs.org/docs/pyhamcrest/en/V1.6/)
 * [Latest package](http://pypi.python.org/pypi/PyHamcrest)
 * [Latest sources](https://github.com/hamcrest/PyHamcrest)
-* [Hamcrest information](http://code.google.com/p/hamcrest)
-
-See also: [OCHamcrest](https://github.com/jonreid/OCHamcrest) - Objective-C version for
-Cocoa and iOS.
 
 
 Introduction
