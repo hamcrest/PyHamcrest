@@ -7,7 +7,16 @@ __license__ = "BSD, see License.txt"
 
 
 def isnumeric(value):
-    return isinstance(value, (int, long, float))
+    """Confirm that 'value' can be treated numerically; duck-test accordingly
+    """
+    try:
+        _ = (fabs(value) + 0 - 0) * 1
+        return True
+    except ArithmeticError:
+        return True
+    except:
+        return False
+    return False
 
 
 class IsCloseTo(BaseMatcher):
