@@ -1,7 +1,7 @@
 """Matchers that inspect objects and classes."""
 
 from haslength import has_length
-from hasproperty import has_property
+from hasproperty import has_property, has_properties
 from hasstring import has_string
 
 __author__ = "Jon Reid"
