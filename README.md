@@ -1,6 +1,4 @@
-* [Full documentation](http://readthedocs.org/docs/pyhamcrest/en/V1.6/)
-* [Latest package](http://pypi.python.org/pypi/PyHamcrest)
-* [Latest sources](https://github.com/hamcrest/PyHamcrest)
+![ochamcrest](http://hamcrest.org/images/logo.jpg)
 
 
 Introduction
@@ -236,3 +234,12 @@ Even though the ``on_a_saturday`` function creates a new matcher each time it
 is called, you should not assume this is the only usage pattern for your
 matcher. Therefore you should make sure your matcher is stateless, so a single
 instance can be reused between matches.
+
+
+More resources
+==============
+
+* [Documentation](http://readthedocs.org/docs/pyhamcrest/en/V1.6/)
+* [Package](http://pypi.python.org/pypi/PyHamcrest)
+* [Sources](https://github.com/hamcrest/PyHamcrest)
+* [Hamcrest](http://hamcrest.org)
