@@ -15,6 +15,8 @@ matrix:
     exclude:
       - python: pypy
         env: NUMPY="true"
+      - python: 3.2
+        env: NUMPY="true"
 
 install:
     - if [[ $TRAVIS_PYTHON_VERSION == '2.5' ]]; then pip install --use-mirrors unittest2; fi
