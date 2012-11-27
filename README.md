@@ -1,5 +1,5 @@
-![ochamcrest](http://hamcrest.org/images/logo.jpg)
-
+![PyHamcrest](http://hamcrest.org/images/logo.jpg)
+![Build Status](https://travis-ci.org/hamcrest/PyHamcrest.png)
 
 Introduction
 ============
