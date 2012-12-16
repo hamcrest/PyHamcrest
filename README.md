@@ -35,17 +35,19 @@ We'll start by writing a very simple PyUnit test, but instead of using PyUnit's
 ``assertEqual`` method, we'll use PyHamcrest's ``assert_that`` construct and
 the standard set of matchers::
 
-    from hamcrest import *
-    import unittest
+```python
+from hamcrest import *
+import unittest
 
-    class BiscuitTest(unittest.TestCase):
-        def testEquals(self):
-            theBiscuit = Biscuit('Ginger')
-            myBiscuit = Biscuit('Ginger')
-            assert_that(theBiscuit, equal_to(myBiscuit))
+class BiscuitTest(unittest.TestCase):
+    def testEquals(self):
+        theBiscuit = Biscuit('Ginger')
+        myBiscuit = Biscuit('Ginger')
+        assert_that(theBiscuit, equal_to(myBiscuit))
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()
+```
 
 The ``assert_that`` function is a stylized sentence for making a test
 assertion. In this example, the subject of the assertion is the object
@@ -57,12 +59,16 @@ since the ``Biscuit`` class defines an ``__eq__`` method.
 If you have more than one assertion in your test you can include an identifier
 for the tested value in the assertion::
 
-    assert_that(theBiscuit.getChocolateChipCount(), equal_to(10), 'chocolate chips')
-    assert_that(theBiscuit.getHazelnutCount(), equal_to(3), 'hazelnuts')
+```python
+assert_that(theBiscuit.getChocolateChipCount(), equal_to(10), 'chocolate chips')
+assert_that(theBiscuit.getHazelnutCount(), equal_to(3), 'hazelnuts')
+```
 
 As a convenience, assert_that can also be used to verify a boolean condition::
 
-    assert_that(theBiscuit.isCooked(), 'cooked')
+```python
+assert_that(theBiscuit.isCooked(), 'cooked')
+```
 
 This is equivalent to the ``assert_`` method of unittest.TestCase, but because
 it's a standalone function, it offers greater flexibility in test writing.
@@ -145,17 +151,21 @@ PyHamcrest strives to make your tests as readable as possible. For example, the
 ``is_`` matcher is a wrapper that doesn't add any extra behavior to the
 underlying matcher. The following assertions are all equivalent::
 
-    assert_that(theBiscuit, equal_to(myBiscuit))
-    assert_that(theBiscuit, is_(equal_to(myBiscuit)))
-    assert_that(theBiscuit, is_(myBiscuit))
+```python
+assert_that(theBiscuit, equal_to(myBiscuit))
+assert_that(theBiscuit, is_(equal_to(myBiscuit)))
+assert_that(theBiscuit, is_(myBiscuit))
+```
 
 The last form is allowed since ``is_(value)`` wraps most non-matcher arguments
 with ``equal_to``. But if the argument is a type, it is wrapped with
 ``instance_of``, so the following are also equivalent::
 
-    assert_that(theBiscuit, instance_of(Biscuit))
-    assert_that(theBiscuit, is_(instance_of(Biscuit)))
-    assert_that(theBiscuit, is_(Biscuit))
+```python
+assert_that(theBiscuit, instance_of(Biscuit))
+assert_that(theBiscuit, is_(instance_of(Biscuit)))
+assert_that(theBiscuit, is_(Biscuit))
+```
 
 *Note that PyHamcrest's ``is_`` matcher is unrelated to Python's ``is``
 operator. The matcher for object identity is ``same_instance``.*
@@ -174,33 +184,37 @@ eliminate code duplication and make your tests more readable!
 Let's write our own matcher for testing if a calendar date falls on a Saturday.
 This is the test we want to write::
 
-    def testDateIsOnASaturday(self):
-        d = datetime.date(2008, 04, 26)
-        assert_that(d, is_(on_a_saturday()))
+```python
+def testDateIsOnASaturday(self):
+    d = datetime.date(2008, 04, 26)
+    assert_that(d, is_(on_a_saturday()))
+```
 
 And here's the implementation::
 
-    from hamcrest.core.base_matcher import BaseMatcher
-    from hamcrest.core.helpers.hasmethod import hasmethod
+```python
+from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.helpers.hasmethod import hasmethod
 
-    class IsGivenDayOfWeek(BaseMatcher):
+class IsGivenDayOfWeek(BaseMatcher):
 
-        def __init__(self, day):
-            self.day = day  # Monday is 0, Sunday is 6
+    def __init__(self, day):
+        self.day = day  # Monday is 0, Sunday is 6
 
-        def _matches(self, item):
-            if not hasmethod(item, 'weekday'):
-                return False
-            return item.weekday() == self.day
+    def _matches(self, item):
+        if not hasmethod(item, 'weekday'):
+            return False
+        return item.weekday() == self.day
 
-        def describe_to(self, description):
-            day_as_string = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                             'Friday', 'Saturday', 'Sunday']
-            description.append_text('calendar date falling on ')    \
-                       .append_text(day_as_string[self.day])
+    def describe_to(self, description):
+        day_as_string = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
+                         'Friday', 'Saturday', 'Sunday']
+        description.append_text('calendar date falling on ')    \
+                   .append_text(day_as_string[self.day])
 
-    def on_a_saturday():
-        return IsGivenDayOfWeek(5)
+def on_a_saturday():
+    return IsGivenDayOfWeek(5)
+```
 
 For our Matcher implementation we implement the ``_matches`` method - which
 calls the ``weekday`` method after confirming that the argument (which may not
@@ -208,7 +222,9 @@ be a date) has such a method - and the ``describe_to`` method - which is used
 to produce a failure message when a test fails. Here's an example of how the
 failure message looks::
 
-    assert_that(datetime.date(2008, 04, 06), is_(on_a_saturday()))
+```python
+assert_that(datetime.date(2008, 04, 06), is_(on_a_saturday()))
+```
 
 fails with the message::
 
@@ -219,17 +235,19 @@ fails with the message::
 Let's say this matcher is saved in a module named ``isgivendayofweek``. We
 could use it in our test by importing the factory function ``on_a_saturday``::
 
-    from hamcrest import *
-    import unittest
-    from isgivendayofweek import on_a_saturday
+```python
+from hamcrest import *
+import unittest
+from isgivendayofweek import on_a_saturday
 
-    class DateTest(unittest.TestCase):
-        def testDateIsOnASaturday(self):
-            d = datetime.date(2008, 04, 26)
-            assert_that(d, is_(on_a_saturday()))
+class DateTest(unittest.TestCase):
+    def testDateIsOnASaturday(self):
+        d = datetime.date(2008, 04, 26)
+        assert_that(d, is_(on_a_saturday()))
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()
+```
 
 Even though the ``on_a_saturday`` function creates a new matcher each time it
 is called, you should not assume this is the only usage pattern for your
