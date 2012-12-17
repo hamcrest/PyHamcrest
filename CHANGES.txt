@@ -11,6 +11,7 @@
  - Can now do matching against old-style classes.
  - Sequence matchers handle generators, as well as actual sequences and
    pseudo-sequences.
+ - README enhancements by ming13
 
 
 === Version 1.6 ==
