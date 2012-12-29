@@ -1,5 +1,8 @@
 === NEXT VERSION IN PROGRESS
 
+=== Version 1.7 ==
+
+29 Dec 2012
 (All changes by Chris Rose unless otherwise noted.)
 
 * New matchers:

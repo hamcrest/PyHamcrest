@@ -1,7 +1,7 @@
 from core import *
 from library import *
 
-__version__ = "1.6"
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
+__version__ = "1.7"
+__author__ = "Chris Rose"
+__copyright__ = "Copyright 2012 hamcrest.org"
 __license__ = "BSD, see License.txt"

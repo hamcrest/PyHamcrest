@@ -258,7 +258,7 @@ instance can be reused between matches.
 More resources
 ==============
 
-* [Documentation](http://readthedocs.org/docs/pyhamcrest/en/V1.6/)
+* [Documentation](http://readthedocs.org/docs/pyhamcrest/en/V1.7/)
 * [Package](http://pypi.python.org/pypi/PyHamcrest)
 * [Sources](https://github.com/hamcrest/PyHamcrest)
 * [Hamcrest](http://hamcrest.org)
