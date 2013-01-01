@@ -30,6 +30,7 @@ __all__ = [
     'less_than_or_equal_to',
     'has_length',
     'has_property',
+    'has_properties',
     'has_string',
     'equal_to_ignoring_case',
     'equal_to_ignoring_whitespace',
