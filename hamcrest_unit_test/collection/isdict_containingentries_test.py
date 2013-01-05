@@ -5,9 +5,15 @@ if __name__ == '__main__':
 
 from hamcrest.library.collection.isdict_containingentries import *
 
+import platform
+
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
-import unittest
+try:
+    from unittest import skipIf
+    import unittest
+except ImportError:
+    import unittest2 as unittest
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -91,6 +97,7 @@ class IsDictContainingEntriesTest(MatcherTest):
         self.assert_matches('has c & a', has_entries('c', 3, 'a', 1), target)
         self.assert_does_not_match('no d:4', has_entries('b', 3, 'd', 4), target)
 
+    @unittest.skipIf('java' in platform.system().lower(), "Hash randomization makes this unpredictably fail")
     def testHasReadableDescription(self):
         self.assert_description("a dictionary containing {'a': <1>, 'b': <2>}",
                                 has_entries('a', 1, 'b', 2))
@@ -101,10 +108,6 @@ class IsDictContainingEntriesTest(MatcherTest):
     def testMismatchDescriptionOfNonDictionaryShowsActualArgument(self):
         self.assert_mismatch_description("'bad' is not a mapping object", has_entries('a', 1), 'bad')
 
-    def testMismatchDescriptionOfDictionaryWithoutKey(self):
-        self.assert_mismatch_description("no 'b' key in <{'a': 1, 'c': 3}>",
-                                has_entries('a', 1, 'b', 2), {'a': 1, 'c': 3})
-
     def testMismatchDescriptionOfDictionaryWithNonMatchingValue(self):
         self.assert_mismatch_description("value for 'a' was <2>",
                                 has_entries('a', 1), {'a': 2})
@@ -112,6 +115,7 @@ class IsDictContainingEntriesTest(MatcherTest):
     def testDescribeMismatchOfNonDictionaryShowsActualArgument(self):
         self.assert_describe_mismatch("'bad' is not a mapping object", has_entries('a', 1), 'bad')
 
+    @unittest.skipIf('java' in platform.system().lower(), "Hash randomization makes this unpredictably fail")
     def testDescribeMismatchOfDictionaryWithoutKey(self):
         self.assert_describe_mismatch("no 'b' key in <{'a': 1, 'c': 3}>",
                                 has_entries('a', 1, 'b', 2), {'a': 1, 'c': 3})
