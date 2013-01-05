@@ -2,6 +2,10 @@
 
 === Version 1.7 ==
 
+5 Jan 2010 (Verison 1.7.1)
+* Bug fixes:
+ - included a fix by jaimegildesagredo for issue #28 (has_properties was not importable)
+
 29 Dec 2012
 (All changes by Chris Rose unless otherwise noted.)
 
