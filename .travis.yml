@@ -28,6 +28,12 @@ matrix:
     allow_failures:
       - python: jython2.5
         env: NUMPY="false"
+      - python: 2.5
+        env: NUMPY="true"
+      - python: 2.6
+        env: NUMPY="true"
+      - python: 2.7
+        env: NUMPY="true"
 
 before_install:
   - export PYTHON_EXE=python
