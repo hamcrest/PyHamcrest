@@ -46,7 +46,7 @@ class AssertRaisesTest(unittest.TestCase):
         self.fail('should have failed')
 
     def testAssertionErrorShouldDescribeExpectedAndActualExceptionTypes(self):
-        expectedMessage = "\nExpected: IOError raised\n     but: KeyError raised\n"
+        expectedMessage = "\nExpected: IOError raised\n     but: KeyError raised []\n"
 
         def throwsKeyError():
             raise KeyError()
@@ -57,6 +57,20 @@ class AssertRaisesTest(unittest.TestCase):
             self.assertEqual(expectedMessage, str(e))
             return
         self.fail('should have failed')
+
+    def testAssertionErrorShouldShowContentsOfActualException(self):
+        expectedMessage = "\nExpected: IOError raised\n     but: KeyError raised ['Index out of range']\n"
+
+        def throwsKeyError():
+            raise KeyError("Index out of range")
+
+        try:
+            assert_raises(IOError, throwsKeyError)
+        except AssertionError, e:
+            self.assertEqual(expectedMessage, str(e))
+            return
+        self.fail('should have failed')
+
 
     def testAssertionErrorShouldDescribeExpectedException(self):
         expectedMessage = "\nExpected: IOError raised\n     but: No exception raised\n"

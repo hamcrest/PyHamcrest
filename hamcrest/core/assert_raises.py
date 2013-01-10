@@ -5,7 +5,7 @@ __unittest = True
 
 WRONG_EXCEPTION_TEXT = """
 Expected: %s raised
-     but: %s raised
+     but: %s raised [%s]
 """
 
 NO_EXCEPTION_TEXT = """
@@ -36,7 +36,7 @@ def assert_raises(exception, function, *args, **kwargs):
         function(*args, **kwargs)
     except Exception, e:
         if type(e) != exception:
-            description = WRONG_EXCEPTION_TEXT % (exception.__name__, type(e).__name__)
+            description = WRONG_EXCEPTION_TEXT % (exception.__name__, type(e).__name__, str(e))
             raise AssertionError(description)
     else:
         description = NO_EXCEPTION_TEXT % exception.__name__
