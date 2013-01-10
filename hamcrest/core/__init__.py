@@ -1,4 +1,5 @@
 from assert_that import assert_that
+from assert_raises import assert_raises
 from core import *
 
 __author__ = "Jon Reid"
