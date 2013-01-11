@@ -20,9 +20,9 @@ class AssertRaisesTest(unittest.TestCase):
 
         def throwsIoError():
             self.function_called = True
-            raise IOError()
+            raise ValueError()
 
-        assert_raises(IOError, throwsIoError)
+        assert_raises(ValueError, throwsIoError)
         self.assertEqual(self.function_called, True)
 
     def testShouldRaiseAssertionErrorIfNoExceptionWasRaised(self):
@@ -30,14 +30,14 @@ class AssertRaisesTest(unittest.TestCase):
             pass
 
         try:
-            assert_raises(IOError, doesNotThrow)
+            assert_raises(ValueError, doesNotThrow)
         except AssertionError:
             return
         self.fail('should have failed')
 
     def testShouldRaiseAssertionErrorIfWrongExceptionTypeWasRaised(self):
         def throwsIoError():
-            raise IOError()
+            raise ValueError()
 
         try:
             assert_raises(KeyError, throwsIoError)
@@ -46,26 +46,26 @@ class AssertRaisesTest(unittest.TestCase):
         self.fail('should have failed')
 
     def testAssertionErrorShouldDescribeExpectedAndActualExceptionTypes(self):
-        expectedMessage = "\nExpected: IOError raised\n     but: KeyError raised []\n"
+        expectedMessage = "\nExpected: ValueError raised\n     but: KeyError raised []\n"
 
         def throwsKeyError():
             raise KeyError()
 
         try:
-            assert_raises(IOError, throwsKeyError)
+            assert_raises(ValueError, throwsKeyError)
         except AssertionError, e:
             self.assertEqual(expectedMessage, str(e))
             return
         self.fail('should have failed')
 
     def testAssertionErrorShouldShowContentsOfActualException(self):
-        expectedMessage = "\nExpected: IOError raised\n     but: KeyError raised ['Index out of range']\n"
+        expectedMessage = "\nExpected: ValueError raised\n     but: KeyError raised ['Index out of range']\n"
 
         def throwsKeyError():
             raise KeyError("Index out of range")
 
         try:
-            assert_raises(IOError, throwsKeyError)
+            assert_raises(ValueError, throwsKeyError)
         except AssertionError, e:
             self.assertEqual(expectedMessage, str(e))
             return
@@ -73,13 +73,13 @@ class AssertRaisesTest(unittest.TestCase):
 
 
     def testAssertionErrorShouldDescribeExpectedException(self):
-        expectedMessage = "\nExpected: IOError raised\n     but: No exception raised\n"
+        expectedMessage = "\nExpected: ValueError raised\n     but: No exception raised\n"
 
         def doesNotThrow():
             pass
 
         try:
-            assert_raises(IOError, doesNotThrow)
+            assert_raises(ValueError, doesNotThrow)
         except AssertionError, e:
             self.assertEqual(expectedMessage, str(e))
             return
