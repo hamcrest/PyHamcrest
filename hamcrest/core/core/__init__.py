@@ -10,6 +10,7 @@ from isinstanceof import instance_of
 from isnone import none, not_none
 from isnot import is_not
 from issame import same_instance
+from raises import calling, raises
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

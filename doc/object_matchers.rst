@@ -45,3 +45,9 @@ same_instance
 ^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.core.core.issame
+
+calling, raises
+^^^^^^^^^^^^^^^
+
+.. automodule:: hamcrest.core.core.raises
+

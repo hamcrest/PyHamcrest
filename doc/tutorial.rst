@@ -86,6 +86,9 @@ PyHamcrest comes with a library of useful matchers:
     :py:func:`~hamcrest.core.core.isnone.not_none` - match ``None``, or not
     ``None``
   * :py:func:`~hamcrest.core.core.issame.same_instance` - match same object
+  * :py:func:`~hamcrest.core.core.raises.calling`,
+    :py:func:`~hamcrest.core.core.raises.raises` - wrap a method call and assert 
+    that it raises an exception
 
 * Number
 
