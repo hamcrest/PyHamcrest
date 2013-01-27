@@ -1,4 +1,5 @@
 import re
+import sys
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
@@ -19,8 +20,8 @@ class Raises(BaseMatcher):
 
         try:
             function()
-        except Exception as err:
-            self.actual = err
+        except Exception:
+            self.actual = sys.exc_info()[1]
 
             if isinstance(self.actual, self.expected):
                 if self.pattern is not None:
