@@ -8,6 +8,10 @@ __copyright__ = "Copyright 2013 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
+def _is_callable(function):
+    return any("__call__" in klass.__dict__ for klass in type(function).__mro__)
+
+
 class Raises(BaseMatcher):
     def __init__(self, expected, pattern=None):
         self.pattern = pattern
@@ -15,7 +19,7 @@ class Raises(BaseMatcher):
         self.actual = None
 
     def _matches(self, function):
-        if not callable(function):
+        if not _is_callable(function):
             return False
 
         try:
@@ -30,10 +34,10 @@ class Raises(BaseMatcher):
         return False
 
     def describe_to(self, description):
-        description.append_text('Expected %s' % self.expected)
+        description.append_text('Expected a callable raising %s' % self.expected)
 
     def describe_mismatch(self, item, description):
-        if not callable(item):
+        if not _is_callable(item):
             description.append_text('%s is not callable' % item)
             return
 
@@ -59,22 +63,22 @@ def raises(exception, pattern=None):
 
     Examples::
 
-        assert_that(calling(int).with_('q'), raises(TypeError))
+        assert_that(calling(int).with_args('q'), raises(TypeError))
         assert_that(calling(parse, broken_input), raises(ValueError))
     """
     return Raises(exception, pattern)
 
 
-class DelayedCall(object):
-    def __init__(self, func, *args, **kwargs):
+class DeferredCallable(object):
+    def __init__(self, func):
         self.func = func
-        self.args = args
-        self.kwargs = kwargs
+        self.args = tuple()
+        self.kwargs = {}
 
     def __call__(self):
         self.func(*self.args, **self.kwargs)
 
-    def with_(self, *args, **kwargs):
+    def with_args(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
         return self
@@ -85,12 +89,10 @@ def calling(func, *args, **kwargs):
     :py:func:`~hamcrest.core.core.raises.raises` matcher can catch any thrown exception.
 
     :param func: The function or method to be called
-    :param \*args: The positional arguments to pass to the function or method
-    :param \*\*kwargs: The keyword arguments to pass to the function or method
 
-    The arguments can either be provided directly along with the function or you can call
-    the `with_` function on the returned object as a for of syntactic sugar::
+    The arguments can be provided with a call to the `with_args` function on the returned
+    object::
 
-           calling(my_method).with_(arguments, and_='keywords')
+           calling(my_method).with_args(arguments, and_='keywords')
     """
-    return DelayedCall(func, *args, **kwargs)
+    return DeferredCallable(func, *args, **kwargs)
