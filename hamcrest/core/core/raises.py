@@ -9,6 +9,8 @@ __license__ = "BSD, see License.txt"
 
 
 def _is_callable(function):
+    if function is None:
+        return False
     return any("__call__" in klass.__dict__ for klass in type(function).__mro__)
 
 
