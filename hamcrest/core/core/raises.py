@@ -1,3 +1,4 @@
+from weakref import ref
 import re
 import sys
 from hamcrest.core.base_matcher import BaseMatcher
@@ -19,11 +20,16 @@ class Raises(BaseMatcher):
         self.pattern = pattern
         self.expected = expected
         self.actual = None
+        self.function = None
 
     def _matches(self, function):
         if not _is_callable(function):
             return False
 
+        self.function = ref(function)
+        return self._call_function(function)
+
+    def _call_function(self, function):
         try:
             function()
         except Exception:
@@ -42,6 +48,12 @@ class Raises(BaseMatcher):
         if not _is_callable(item):
             description.append_text('%s is not callable' % item)
             return
+
+        function = None if self.function is None else self.function()
+        if function is None or function is not item:
+            self.function = ref(item)
+            if not self._call_function(item):
+                return
 
         if self.actual is None:
             description.append_text('No exception raised.')
@@ -86,7 +98,7 @@ class DeferredCallable(object):
         return self
 
 
-def calling(func, *args, **kwargs):
+def calling(func):
     """Wrapper for function call that delays the actual execution so that
     :py:func:`~hamcrest.core.core.raises.raises` matcher can catch any thrown exception.
 
@@ -97,4 +109,4 @@ def calling(func, *args, **kwargs):
 
            calling(my_method).with_args(arguments, and_='keywords')
     """
-    return DeferredCallable(func, *args, **kwargs)
+    return DeferredCallable(func)

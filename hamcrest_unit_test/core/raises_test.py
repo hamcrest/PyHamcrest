@@ -57,6 +57,11 @@ class RaisesTest(MatcherTest):
                             raises(AssertionError, "([\d, ]+)"),
                             calling(raise_exception).with_args(3,1,4))
 
+    def testDescribeMismatchWillCallItemIfNotTheOriginalMatch(self):
+        function = Callable()
+        matcher = raises(AssertionError)
+        matcher.describe_mismatch(function, object())
+        self.assertTrue(function.called)
 
 class CallingTest(unittest.TestCase):
     def testCallingDoesNotImmediatelyExecuteFunction(self):
