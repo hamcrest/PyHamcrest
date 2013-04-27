@@ -37,4 +37,5 @@ __all__ = [
     'contains_string',
     'ends_with',
     'starts_with',
+    'string_contains_in_order',
 ]
