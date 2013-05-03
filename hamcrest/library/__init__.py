@@ -23,6 +23,7 @@ __all__ = [
     'contains',
     'only_contains',
     'match_equality',
+    'matches_regexp',
     'close_to',
     'greater_than',
     'greater_than_or_equal_to',
