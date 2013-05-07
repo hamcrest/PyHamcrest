@@ -6,6 +6,7 @@ from stringcontains import contains_string
 from stringendswith import ends_with
 from stringstartswith import starts_with
 from stringmatches import matches_regexp
+from stringcontainsinorder import string_contains_in_order
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
