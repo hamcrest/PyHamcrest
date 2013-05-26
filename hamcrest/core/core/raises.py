@@ -3,16 +3,11 @@ import re
 import sys
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+from hamcrest.core.compat import is_callable
 
 __author__ = "Per Fagrell"
 __copyright__ = "Copyright 2013 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-
-def _is_callable(function):
-    if function is None:
-        return False
-    return any("__call__" in klass.__dict__ for klass in type(function).__mro__)
 
 
 class Raises(BaseMatcher):
@@ -23,13 +18,14 @@ class Raises(BaseMatcher):
         self.function = None
 
     def _matches(self, function):
-        if not _is_callable(function):
+        if not is_callable(function):
             return False
 
         self.function = ref(function)
         return self._call_function(function)
 
     def _call_function(self, function):
+        self.actual = None
         try:
             function()
         except Exception:
@@ -45,7 +41,7 @@ class Raises(BaseMatcher):
         description.append_text('Expected a callable raising %s' % self.expected)
 
     def describe_mismatch(self, item, description):
-        if not _is_callable(item):
+        if not is_callable(item):
             description.append_text('%s is not callable' % item)
             return
 
