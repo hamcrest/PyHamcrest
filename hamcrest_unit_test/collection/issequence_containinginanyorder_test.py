@@ -72,6 +72,12 @@ class IsSequenceContainingInAnyOrderBase(object):
     def testDescribeMismatchOfNonSequence(self):
         self.assert_describe_mismatch("was <3>", contains_inanyorder(1,2), 3)
 
+    def testDescribeMismatchAfterMatch(self):
+        matcher = contains_inanyorder(1, 2, 3)
+        matcher.matches(self._sequence(3, 1))
+        self.assert_describe_mismatch('no item matches: <2> in [<3>, <1>]',
+                                      matcher, self._sequence(3, 1))
+
 
 class IsConcreteSequenceContainingInAnyOrderTest(MatcherTest, IsSequenceContainingInAnyOrderBase, SequenceForm):
     pass
