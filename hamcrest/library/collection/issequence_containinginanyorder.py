@@ -9,7 +9,7 @@ __license__ = "BSD, see License.txt"
 
 class MatchInAnyOrder(object):
     def __init__(self, matchers, mismatch_description):
-        self.matchers = matchers
+        self.matchers = matchers[:]
         self.mismatch_description = mismatch_description
 
     def matches(self, item):
@@ -34,12 +34,11 @@ class MatchInAnyOrder(object):
         return True
 
     def ismatched(self, item):
-        index = 0
-        for matcher in self.matchers:
+        for index, matcher in enumerate(self.matchers):
             if matcher.matches(item):
                 del self.matchers[index]
                 return True
-            index += 1
+
         if self.mismatch_description:
             self.mismatch_description.append_text('not matched: ')  \
                                      .append_description_of(item)
