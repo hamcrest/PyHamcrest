@@ -1,9 +1,6 @@
 PyHamcrest
 ==========
 
-.. image:: http://hamcrest.org/images/logo.jpg
-        :alt: PyHamcrest
-
 .. image:: https://pypip.in/v/PyHamcrest/badge.png
         :alt: Release Status
         :target: https://crate.io/packages/PyHamcrest
