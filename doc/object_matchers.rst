@@ -19,15 +19,8 @@ has_string
 
 .. automodule:: hamcrest.library.object.hasstring
 
-has_properties
-^^^^^^^^^^^^^^
-
-.. automodule:: hamcrest.library.object.hasproperty
-    :exclude-members: has_properties
-.. autofunction:: has_properties(matcher_dict)
-
-has_property
-^^^^^^^^^^^^
+has_properties/has_property
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.object.hasproperty
 
@@ -50,4 +43,3 @@ calling, raises
 ^^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.core.core.raises
-
