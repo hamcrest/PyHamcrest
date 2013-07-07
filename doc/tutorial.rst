@@ -67,16 +67,24 @@ offers greater flexibility in test writing.
 
 Asserting Exceptions
 --------------------
-There's a utility function and matcher available to help you test that your
-code has the expected behavior in situations where it should raise an exception.
-The :py:func:`~hamcrest.core.core.raises.calling` function wraps a callable, 
-and then allows you to set arguments to be used in a call to the wrapped callable.  This, 
-together with the :py:func:`~hamcrest.core.core.raises.raises` matcher lets you
-assert that calling a method with certain arguments causes an exception to be thrown. It is also possible to provide a regular expression pattern to the :py:func:`~hamcrest.core.core.raises.raises` matcher allowing you assure that the right issue was found::
+
+There's a utility function and matcher available to help you test that
+your code has the expected behavior in situations where it should raise
+an exception.  The :py:func:`~hamcrest.core.core.raises.calling`
+function wraps a callable, and then allows you to set arguments to be
+used in a call to the wrapped callable.  This, together with the
+:py:func:`~hamcrest.core.core.raises.raises` matcher lets you assert
+that calling a method with certain arguments causes an exception to be
+thrown. It is also possible to provide a regular expression pattern to
+the :py:func:`~hamcrest.core.core.raises.raises` matcher allowing you
+assure that the right issue was found::
 
     assert_that(calling(parse, bad_data), raises(ValueError))
+
     assert_that(calling(translate).with_(curse_words), raises(LanguageError, "\w+very naughty"))
+
     assert_that(broken_function, raises(Exception))
+
     # This will fail and complain that 23 is not callable
     # assert_that(23, raises(IOError))
 
@@ -104,7 +112,7 @@ PyHamcrest comes with a library of useful matchers:
     ``None``
   * :py:func:`~hamcrest.core.core.issame.same_instance` - match same object
   * :py:func:`~hamcrest.core.core.raises.calling`,
-    :py:func:`~hamcrest.core.core.raises.raises` - wrap a method call and assert 
+    :py:func:`~hamcrest.core.core.raises.raises` - wrap a method call and assert
     that it raises an exception
 
 * Number
