@@ -44,7 +44,7 @@ params = dict(
     packages = find_packages(),
     test_suite = 'hamcrest_unit_test.alltests',
     provides = ['hamcrest'],
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     install_requires=['distribute'],
     classifiers = [
         'Development Status :: 5 - Production/Stable',
