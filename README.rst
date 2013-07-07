@@ -137,6 +137,8 @@ PyHamcrest comes with a library of useful matchers:
 
 * Decorator
 
+  * ``calling`` - wrap a callable in a deffered object, for subsequent matching on calling behaviour
+  * ``raises`` - Ensure that a deferred callable raises as expected
   * ``described_as`` - give the matcher a custom failure description
   * ``is_`` - decorator to improve readability - see `Syntactic sugar` below
 
@@ -260,7 +262,12 @@ instance can be reused between matches.
 More resources
 ==============
 
-* [Documentation](http://readthedocs.org/docs/pyhamcrest/en/V1.7/)
-* [Package](http://pypi.python.org/pypi/PyHamcrest)
-* [Sources](https://github.com/hamcrest/PyHamcrest)
-* [Hamcrest](http://hamcrest.org)
+* Documentation_
+* Package_
+* Sources_
+* Hamcrest_
+
+.. _Documentation: http://readthedocs.org/docs/pyhamcrest/en/V1.7.1/
+.. _Package: http://pypi.python.org/pypi/PyHamcrest
+.. _Sources: https://github.com/hamcrest/PyHamcrest
+.. _Hamcrest: http://hamcrest.org
