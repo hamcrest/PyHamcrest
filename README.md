@@ -1,6 +1,6 @@
 ![PyHamcrest](http://hamcrest.org/images/logo.jpg)
 
-[![Release Status](https://pypip.in/v/virtualenv/badge.png)](https://pypi.python.org/pypi/virtualenv)
+[![Release Status](https://pypip.in/P/PyHamcrest/badge.png)](https://crate.io/packages/PyHamcrest)
 [![Build Status](https://travis-ci.org/hamcrest/PyHamcrest.png?branch=master)](https://travis-ci.org/hamcrest/PyHamcrest)
 
 Introduction
