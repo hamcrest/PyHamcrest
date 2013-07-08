@@ -48,7 +48,7 @@ def equal_to_ignoring_whitespace(string):
 
     Example::
 
-        equal_to_ignoring_case("hello world")
+        equal_to_ignoring_whitespace("hello world")
 
     will match ``"hello   world"``.
 
