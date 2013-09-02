@@ -2,7 +2,18 @@
 
 === Version 1.7 ==
 
-5 Jan 2010 (Verison 1.7.1)
+2 Sep 2013 (Version 1.7.2)
+* Supported versions
+ - As of this version, support for Python 3.1 has been dropped due to no available CI platform.
+ - Added support for Python 3.3
+
+* Bug fixes:
+ - string_contains_in_order is now used in the test as it would be in an application, and is properly exported. (Romilly Cocking)
+ - Fix mismatch description of containing_inanyorder (David Keijser)
+ - added import of stringmatches to text/__init__.py (Eric Scheidemantle)
+ - added matches_regexp to __all__ list to library/__init__.py (Eric Scheidemantle)
+
+5 Jan 2010 (Version 1.7.1)
 * Bug fixes:
  - included a fix by jaimegildesagredo for issue #28 (has_properties was not importable)
 
