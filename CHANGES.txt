@@ -1,4 +1,13 @@
-=== NEXT VERSION IN PROGRESS
+=== Version 1.8 ==
+
+* Supported versions
+ - Support for Python 2.5 and Jython 2.5 has been dropped. They may still work, but no promises.
+
+* Bug Fixes
+
+* New Features
+ - Support for numpy numeric values in iscloseto (Alexander Beedie)
+ - A matcher targeting exceptions and call results (Per Fagrell)
 
 === Version 1.7 ==
 
