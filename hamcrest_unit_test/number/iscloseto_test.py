@@ -6,7 +6,10 @@ if __name__ == '__main__':
 from hamcrest.library.number.iscloseto import *
 
 from hamcrest_unit_test.matcher_test import MatcherTest
-import unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
