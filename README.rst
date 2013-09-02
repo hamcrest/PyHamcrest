@@ -4,6 +4,9 @@ PyHamcrest
 .. image:: https://pypip.in/v/PyHamcrest/badge.png
         :alt: Release Status
         :target: https://crate.io/packages/PyHamcrest
+.. image:: https://pypip.in/d/PyHamcrest/badge.png
+        :alt: Downloads
+        :target: https://crate.io/packages/PyHamcrest
 .. image:: https://travis-ci.org/hamcrest/PyHamcrest.png?branch=master
         :alt: Build Status
         :target: https://travis-ci.org/hamcrest/PyHamcrest
