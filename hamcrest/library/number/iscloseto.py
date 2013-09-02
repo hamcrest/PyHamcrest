@@ -9,6 +9,9 @@ __license__ = "BSD, see License.txt"
 def isnumeric(value):
     """Confirm that 'value' can be treated numerically; duck-test accordingly
     """
+    if isinstance(value, (int, float, complex, long)):
+        return True
+
     try:
         _ = (fabs(value) + 0 - 0) * 1
         return True
