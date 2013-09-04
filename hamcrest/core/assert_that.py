@@ -4,8 +4,10 @@ from string_description import StringDescription
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
+# unittest integration; hide these frames from tracebacks
 __unittest = True
-
+# py.test integration; hide these frames from tracebacks
+__tracebackhide__ = True
 
 def assert_that(arg1, arg2=None, arg3=''):
     """Asserts that actual value satisfies matcher. (Can also assert plain
