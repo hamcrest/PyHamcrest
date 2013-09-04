@@ -7,7 +7,6 @@ python:
     - 3.2
     - 3.3
     - pypy
-    - jython2.5
 
 env:
   matrix:
