@@ -1,65 +1,78 @@
+from __future__ import with_statement
+import sys
+
 if __name__ == '__main__':
-    import sys
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-from hamcrest.library.text.stringcontains import *
-from hamcrest_unit_test.matcher_test import MatcherTest
+from hamcrest.library.text.stringcontains import contains_string
+from hamcrest_unit_test.matcher_test import *
 import unittest
+import pytest
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-EXCERPT = 'EXCERPT'
-matcher = contains_string(EXCERPT)
+@pytest.fixture(scope="module",
+                params=("EXCERPT", u"EXCERPT"))
+def matcher(request):
+    return contains_string(request.param)
 
-class StringContainsTest(MatcherTest):
+TEST_MATCHING_STRINGS = (
+    ("EXCERPTEND",),
+    ("STARTEXCERPTEND",),
+    ("STARTEXCERPT",),
+    ("EXCERPTEXCERPT",),
+    ("EXCERPT",),
+)
+if sys.version_info < (3,):
+    TEST_MATCHING_STRINGS += (
+        (u"EXCERPTEND",),
+        (u"STARTEXCERPTEND",),
+        (u"STARTEXCERPT",),
+        (u"EXCERPTEXCERPT",),
+        (u"EXCERPT",),
+    )
 
-    def testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring(self):
-        self.assert_matches('excerpt at beginning', matcher, EXCERPT + 'END')
-        self.assert_matches('excerpt at end', matcher, 'START' + EXCERPT)
-        self.assert_matches('excerpt in middle',
-                            matcher, 'START' + EXCERPT + 'END')
-        self.assert_matches('excerpt repeated', matcher, EXCERPT + EXCERPT)
+TEST_MISMATCHING_STRINGS = (
+    ("whatever",),
+    ("EXCERP",),
+    (object(),),
+)
 
-        self.assert_does_not_match('excerpt not in string',matcher, 'whatever')
-        self.assert_does_not_match('only part of excerpt',matcher, EXCERPT[1:])
 
-    def testEvaluatesToTrueIfArgumentIsEqualToSubstring(self):
-        self.assert_matches('excerpt is entire string', matcher, EXCERPT)
+@pytest.mark.parametrize(['text'], TEST_MATCHING_STRINGS)
+def test_evaluates_true_if_argument_contains_substring(text, matcher):
+    assert_matches(matcher, text, "assert that %s matches %s" % (text, matcher))
 
-    def testMatcherCreationRequiresString(self):
-        self.assertRaises(TypeError, contains_string, 3)
 
-    def testFailsIfMatchingAgainstNonString(self):
-        self.assert_does_not_match('non-string', matcher, object())
+@pytest.mark.parametrize(['text'], TEST_MISMATCHING_STRINGS)
+def test_evaluates_false_with_mismatch(text, matcher):
+    assert_does_not_match(matcher, text, "%s was not in string %s" % (matcher, text))
 
-    def testCanApplyUnicodeStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-unicode',
-                            contains_string(u'bar'), u'foo bar baz')
 
-    def testCanApplyPlainStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-ascii',
-                            contains_string(u'bar'), 'foo bar baz')
+def testMatcherCreationRequiresString():
+    with pytest.raises(TypeError):
+        contains_string(3)
 
-    def testCanApplyUnicodeStringToPlainMatcher(self):
-        self.assert_matches('ascii-unicode',
-                            contains_string('bar'), u'foo bar baz')
 
-    def testHasAReadableDescription(self):
-        self.assert_description("a string containing 'EXCERPT'", matcher)
+def test_description(matcher):
+    assert_description("a string containing 'EXCERPT'", matcher)
 
-    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
-        self.assert_no_mismatch_description(matcher, EXCERPT)
 
-    def testMismatchDescription(self):
-        self.assert_mismatch_description("was 'bad'", matcher, 'bad')
+def test_successful_match_does_not_have_mismatch_description(matcher):
+    assert_no_mismatch_description(matcher, "EXCERPT")
 
-    def testDescribeMismatch(self):
-        self.assert_describe_mismatch("was 'bad'", matcher, 'bad')
 
+@pytest.mark.parametrize(['text'], TEST_MISMATCHING_STRINGS)
+def test_mismatch_description(matcher, text):
+    if isinstance(text, basestring):
+        check_str = "'%s'" % text
+    else:
+        check_str = "%s" % text
+    assert_mismatch_description("was %s" % check_str, matcher, text)
 
 
 if __name__ == '__main__':
