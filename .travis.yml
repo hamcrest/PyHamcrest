@@ -36,6 +36,7 @@ install:
     - if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then pip install --use-mirrors unittest2; fi
     - if [[ $TRAVIS_PYTHON_VERSION == "jython2.5" ]]; then pip install nose unittest2; fi
     - if [[ $NUMPY == "true" ]]; then pip install numpy; fi
+    - pip install --use-mirrors 'pytest>=2.3.5'
     - "/usr/bin/yes | $PYTHON_EXE setup.py install 2>&1 | tail -n 2"
     # - pip install . --use-mirrors
 
@@ -48,4 +49,4 @@ script:
     # the python2 code from the current directory instead of the installed
     # 2to3 version.
     - $PYTHON_EXE setup.py build --build-lib=build/lib
-    - nosetests -v -w build/lib hamcrest_unit_test
+    - cd build/lib; py.test -v hamcrest_unit_test
