@@ -15,8 +15,13 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
+if sys.version_info < (3,):
+    matcher_args = ("EXCERPT", u"EXCERPT")
+else:
+    matcher_args = ("EXCERPT",)
+
 @pytest.fixture(scope="module",
-                params=("EXCERPT", u"EXCERPT"))
+                params=matcher_args)
 def matcher(request):
     return contains_string(request.param)
 
