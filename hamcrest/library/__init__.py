@@ -17,6 +17,7 @@ __all__ = [
     'has_key',
     'has_value',
     'is_in',
+    'empty',
     'has_item',
     'has_items',
     'contains_inanyorder',

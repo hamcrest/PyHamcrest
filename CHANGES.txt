@@ -4,6 +4,7 @@
  - Support for Python 2.5 and Jython 2.5 has been dropped. They may still work, but no promises.
 
 * Bug Fixes
+ - [#39] is_empty was missing from the global namespace
 
 * New Features
  - Support for numpy numeric values in iscloseto (Alexander Beedie)
