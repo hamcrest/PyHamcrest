@@ -17,7 +17,7 @@ def read(fname):
 
 # On Python 3, we can't "from hamcrest import __version__" (get ImportError),
 # so we extract the variable assignment and execute it ourselves.
-fh = open(local('hamcrest/__init__.py'))
+fh = open(local('src/hamcrest/__init__.py'))
 try:
     for line in fh:
         if re.match('__version__.*', line):
@@ -41,7 +41,8 @@ params = dict(
     keywords='hamcrest matchers pyunit unit test testing unittest unittesting',
     url='https://github.com/hamcrest/PyHamcrest',
     download_url='http://pypi.python.org/packages/source/P/PyHamcrest/PyHamcrest-%s.tar.gz' % __version__,
-    packages=find_packages(),
+    packages=find_packages('src'),
+    package_dir = {'': 'src'},
     provides=['hamcrest'],
     long_description=read('README.rst'),
     install_requires=['setuptools'],
