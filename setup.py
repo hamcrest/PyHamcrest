@@ -31,22 +31,22 @@ if sys.version_info >= (3,):
     extra_attributes['use_2to3'] = True
 
 params = dict(
-    name = 'PyHamcrest',
-    version = __version__,
-    author = 'Jon Reid',
-    author_email = 'jon.reid@mac.com',
-    description = 'Hamcrest framework for matcher objects',
-    license = 'New BSD',
+    name='PyHamcrest',
+    version=__version__,  #flake8:noqa
+    author='Chris Rose',
+    author_email='offline@offby1.net',
+    description='Hamcrest framework for matcher objects',
+    license='New BSD',
     platforms=['All'],
-    keywords = 'hamcrest matchers pyunit unit test testing unittest unittesting',
-    url = 'http://code.google.com/p/hamcrest/',
-    download_url = 'http://pypi.python.org/packages/source/P/PyHamcrest/PyHamcrest-%s.tar.gz' % __version__,
-    packages = find_packages(),
-    test_suite = 'hamcrest_unit_test.alltests',
-    provides = ['hamcrest'],
+    keywords='hamcrest matchers pyunit unit test testing unittest unittesting',
+    url='https://github.com/hamcrest/PyHamcrest',
+    download_url='http://pypi.python.org/packages/source/P/PyHamcrest/PyHamcrest-%s.tar.gz' % __version__,
+    packages=find_packages(),
+    test_suite='hamcrest_unit_test.alltests',
+    provides=['hamcrest'],
     long_description=read('README.rst'),
     install_requires=['distribute'],
-    classifiers = [
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
