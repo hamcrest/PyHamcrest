@@ -45,7 +45,7 @@ params = dict(
     test_suite='hamcrest_unit_test.alltests',
     provides=['hamcrest'],
     long_description=read('README.rst'),
-    install_requires=['distribute'],
+    install_requires=['setuptools'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
