@@ -1,13 +1,9 @@
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
+from __future__ import absolute_import
 
 from hamcrest.library.collection.is_empty import *
 
 from hamcrest_unit_test.matcher_test import MatcherTest
-from sequencemixin import GeneratorForm, SequenceForm
-import unittest
+from .sequencemixin import GeneratorForm, SequenceForm
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2012 hamcrest.org"

@@ -1,10 +1,10 @@
-if __name__ == "__main__":
-    import sys
-    sys.path.insert(0, '..')
-
+from __future__ import with_statement
 from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isequal import equal_to
-import unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -22,12 +22,10 @@ class AssertThatTest(unittest.TestCase):
 
         expectedMessage = "\nExpected: 'EXPECTED'\n     but: was 'ACTUAL'\n"
 
-        try:
+        with self.assertRaises(AssertionError) as e:
             assert_that(actual, equal_to(expected))
-        except AssertionError, e:
-            self.assertEqual(expectedMessage, str(e))
-            return
-        self.fail('should have failed')
+
+        self.assertEqual(expectedMessage, str(e.exception))
 
     def testAssertionErrorShouldIncludeOptionalReason(self):
         expected = 'EXPECTED'
@@ -35,34 +33,25 @@ class AssertThatTest(unittest.TestCase):
 
         expectedMessage = "REASON\nExpected: 'EXPECTED'\n     but: was 'ACTUAL'\n"
 
-        try:
+        with self.assertRaises(AssertionError) as e:
             assert_that(actual, equal_to(expected), 'REASON')
-        except AssertionError, e:
-            self.assertEqual(expectedMessage, str(e))
-            return
-        self.fail('should have failed')
+
+        self.assertEqual(expectedMessage, str(e.exception))
 
     def testCanTestBoolDirectly(self):
         assert_that(True, 'should accept True')
 
-        try:
+        with self.assertRaises(AssertionError) as e:
             assert_that(False, 'FAILURE REASON')
-        except AssertionError, e:
-            self.assertEqual('FAILURE REASON', str(e))
-            return
-
-        self.fail('should have failed')
+        self.assertEqual('FAILURE REASON', str(e.exception))
 
     def testCanTestBoolDirectlyWithoutReason(self):
         assert_that(True)
 
-        try:
+        with self.assertRaises(AssertionError) as e:
             assert_that(False)
-        except AssertionError, e:
-            self.assertEqual('Assertion failed', str(e))
-            return
-
-        self.fail('should have failed')
+            
+        self.assertEqual('Assertion failed', str(e.exception))
 
 
 if __name__ == "__main__":

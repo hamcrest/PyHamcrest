@@ -1,13 +1,10 @@
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
+from __future__ import absolute_import
 
 from hamcrest.core.core.described_as import *
 
 from hamcrest.core.core.isanything import anything
 from hamcrest_unit_test.matcher_test import MatcherTest
-from nevermatch import NeverMatch
+from .nevermatch import NeverMatch
 import unittest
 
 __author__ = "Jon Reid"

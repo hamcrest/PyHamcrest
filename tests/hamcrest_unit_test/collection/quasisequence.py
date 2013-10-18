@@ -2,8 +2,10 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+import six
 
-class QuasiSequence:
+
+class QuasiSequence(object):
     def __iter__(self):
         return QuasiSequenceIterator()
 
@@ -11,14 +13,14 @@ class QuasiSequence:
         return 2
 
 
-class QuasiSequenceIterator:
+class QuasiSequenceIterator(six.Iterator):
     def __init__(self):
         self.index = 1
 
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         if self.index >= 3:
             raise StopIteration
         result = self.index

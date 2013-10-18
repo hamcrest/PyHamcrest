@@ -1,7 +1,4 @@
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
+import six
 
 from hamcrest.library.text.stringstartswith import *
 
@@ -43,15 +40,15 @@ class StringStartsWithTest(MatcherTest):
 
     def testCanApplyUnicodeStringToUnicodeMatcher(self):
         self.assert_matches('unicode-unicode',
-                            starts_with(u'foo'), u'foo bar baz')
+                            starts_with(six.u('foo')), six.u('foo bar baz'))
 
     def testCanApplyPlainStringToUnicodeMatcher(self):
         self.assert_matches('unicode-ascii',
-                            starts_with(u'foo'), 'foo bar baz')
+                            starts_with(six.u('foo')), 'foo bar baz')
 
     def testCanApplyUnicodeStringToPlainMatcher(self):
         self.assert_matches('ascii-unicode',
-                            starts_with(u'foo'), u'foo bar baz')
+                            starts_with(six.u('foo')), six.u('foo bar baz'))
 
     def testHasAReadableDescription(self):
         self.assert_description("a string starting with 'EXCERPT'", matcher)

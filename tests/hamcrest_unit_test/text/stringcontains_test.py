@@ -1,10 +1,5 @@
 from __future__ import with_statement
-import sys
-
-if __name__ == '__main__':
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
-
+import six
 from hamcrest.library.text.stringcontains import contains_string
 from hamcrest_unit_test.matcher_test import *
 import unittest
@@ -15,11 +10,12 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-if sys.version_info < (3,):
-    matcher_args = ("EXCERPT", u"EXCERPT")
+if six.PY2:
+    matcher_args = ("EXCERPT", six.u("EXCERPT"))
 else:
     matcher_args = ("EXCERPT",)
 
+    
 @pytest.fixture(scope="module",
                 params=matcher_args)
 def matcher(request):
@@ -32,13 +28,13 @@ TEST_MATCHING_STRINGS = (
     ("EXCERPTEXCERPT",),
     ("EXCERPT",),
 )
-if sys.version_info < (3,):
+if six.PY2:
     TEST_MATCHING_STRINGS += (
-        (u"EXCERPTEND",),
-        (u"STARTEXCERPTEND",),
-        (u"STARTEXCERPT",),
-        (u"EXCERPTEXCERPT",),
-        (u"EXCERPT",),
+        (six.u("EXCERPTEND"),),
+        (six.u("STARTEXCERPTEND"),),
+        (six.u("STARTEXCERPT"),),
+        (six.u("EXCERPTEXCERPT"),),
+        (six.u("EXCERPT"),),
     )
 
 TEST_MISMATCHING_STRINGS = (
@@ -73,7 +69,7 @@ def test_successful_match_does_not_have_mismatch_description(matcher):
 
 @pytest.mark.parametrize(['text'], TEST_MISMATCHING_STRINGS)
 def test_mismatch_description(matcher, text):
-    if isinstance(text, basestring):
+    if isinstance(text, six.string_types):
         check_str = "'%s'" % text
     else:
         check_str = "%s" % text

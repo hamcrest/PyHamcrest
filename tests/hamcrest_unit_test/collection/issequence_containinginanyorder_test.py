@@ -1,14 +1,11 @@
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
+from __future__ import absolute_import
 
 from hamcrest.library.collection.issequence_containinginanyorder import *
 
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
-from quasisequence import QuasiSequence
-from sequencemixin import SequenceForm, GeneratorForm
+from .quasisequence import QuasiSequence
+from .sequencemixin import SequenceForm, GeneratorForm
 import unittest
 
 __author__ = "Jon Reid"

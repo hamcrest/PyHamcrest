@@ -1,15 +1,12 @@
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
+from __future__ import absolute_import
 
 from hamcrest.library.collection.issequence_onlycontaining import *
 
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.library.number.ordering_comparison import less_than
 from hamcrest_unit_test.matcher_test import MatcherTest
-from quasisequence import QuasiSequence
-from sequencemixin import SequenceForm, GeneratorForm
+from .quasisequence import QuasiSequence
+from .sequencemixin import SequenceForm, GeneratorForm
 import unittest
 
 __author__ = "Jon Reid"
@@ -44,8 +41,10 @@ class IsSequenceOnlyContainingTestBase(object):
         self.assert_does_not_match('empty', only_contains('foo'), self._sequence())
 
     def testMatchesAnyConformingSequence(self):
-        class ObjectWithLenOnly:
-            def __len__(self): return 20
+        class ObjectWithLenOnly(object):
+            def __len__(self):
+                return 20
+            
         self.assert_matches('quasi-sequence',
                             only_contains(less_than(3)), QuasiSequence())
         self.assert_does_not_match('non-sequence', only_contains(1), object())

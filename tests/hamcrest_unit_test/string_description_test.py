@@ -1,7 +1,4 @@
-import sys
-if __name__ == "__main__":
-    sys.path.insert(0, '..')
-
+import six
 from hamcrest.core.string_description import *
 
 from hamcrest.core.selfdescribing import SelfDescribing
@@ -44,15 +41,15 @@ class StringDescriptionTest(unittest.TestCase):
         expected = re.compile("<object object at 0x[0-9a-fA-F]+>")
         self.assertTrue(expected.match(str(self.description)))
 
-    @unittest.skipIf(sys.version_info >= (3,), "Describe unicode strings doesn't malform in Python 3")
+    @unittest.skip("Describe unicode strings doesn't malform in Python 3. Six makes this go away anyway :/")
     def testDescribeUnicodeStringAsBytes(self):
-        self.description.append_description_of(u'\u05d0')
-        self.assertEqual("u'\\u05d0'", str(self.description))
+        self.description.append_description_of(six.u('\u05d0'))
+        self.assertEqual(six.u('\\u05d0'), str(self.description))
 
-    @unittest.skipUnless(sys.version_info >= (3,), "Describe unicode strings only malforms in Python 2")
+    @unittest.skipUnless(six.PY3, "Describe unicode strings only malforms in Python 2")
     def testDescribeUnicodeStringAsUnicode(self):
-        self.description.append_description_of(u'\u05d0')
-        self.assertEqual(u"'\u05d0'", str(self.description))
+        self.description.append_description_of(six.u('\u05d0'))
+        self.assertEqual(six.u("'\u05d0'"), str(self.description))
 
 if __name__ == "__main__":
     unittest.main()

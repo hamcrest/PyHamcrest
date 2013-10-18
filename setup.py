@@ -42,7 +42,6 @@ params = dict(
     url='https://github.com/hamcrest/PyHamcrest',
     download_url='http://pypi.python.org/packages/source/P/PyHamcrest/PyHamcrest-%s.tar.gz' % __version__,
     packages=find_packages(),
-    test_suite='hamcrest_unit_test.alltests',
     provides=['hamcrest'],
     long_description=read('README.rst'),
     install_requires=['setuptools'],

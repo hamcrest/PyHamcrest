@@ -1,13 +1,11 @@
-import sys
-if __name__ == '__main__':
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
+from __future__ import absolute_import
 
 from hamcrest.core.core.is_ import *
 
+import six
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
-from nevermatch import NeverMatch
+from .nevermatch import NeverMatch
 
 try:
     import unittest2 as unittest
@@ -18,7 +16,7 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-if sys.version_info < (3,):
+if six.PY2:
     class OldClass:
         pass
 
@@ -44,7 +42,7 @@ class IsTest(MatcherTest):
         self.assert_matches('should match', is_(str), 'A');
         self.assert_does_not_match('should not match', is_(int), 'A');
 
-    @unittest.skipIf(sys.version_info >= (3,), "Old-style classes are not relevant under Python3+")
+    @unittest.skipUnless(six.PY2, "Old-style classes are not relevant under Python3+")
     def testProvidesConvenientShortcutForIsInstanceOfOldStyleClass(self):
         self.assert_matches('should match', is_(OldClass), OldClass())
 

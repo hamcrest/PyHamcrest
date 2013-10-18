@@ -2,8 +2,10 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+import six
 
-class QuasiDictionary:
+
+class QuasiDictionary(object):
     def items(self):
         return QuasiDictionaryItemIterator()
 
@@ -14,14 +16,14 @@ class QuasiDictionary:
         return QuasiDictionaryValueIterator()
 
 
-class BaseQuasiDictionaryIterator:
+class BaseQuasiDictionaryIterator(six.Iterator):
     def __init__(self):
         self.index = 1
 
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         if self.index >= 3:
             raise StopIteration
         result = self.indexToResult()

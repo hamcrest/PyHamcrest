@@ -1,13 +1,10 @@
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
+from __future__ import absolute_import
 
 from hamcrest.library.collection.isdict_containingvalue import *
 
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
-from quasidict import QuasiDictionary
+from .quasidict import QuasiDictionary
 import unittest
 
 __author__ = "Jon Reid"
