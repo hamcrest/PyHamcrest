@@ -98,6 +98,7 @@ PyHamcrest comes with a library of useful matchers:
   * ``instance_of`` - match object type
   * ``none``, ``not_none`` - match ``None``, or not ``None``
   * ``same_instance`` - match same object
+  * ``calling, raises`` - wrap a method call and assert that it raises an exception
 
 * Number
 
@@ -130,6 +131,7 @@ PyHamcrest comes with a library of useful matchers:
   * ``has_items`` - match if all given items appear in the sequence, in any order
   * ``is_in`` - match if item appears in the given sequence
   * ``only_contains`` - match if sequence's items appear in given list
+  * ``empty`` - match if the sequence is empty
 
 * Dictionary
 
