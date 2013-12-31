@@ -10,6 +10,10 @@ PyHamcrest
 .. image:: https://travis-ci.org/hamcrest/PyHamcrest.png?branch=master
         :alt: Build Status
         :target: https://travis-ci.org/hamcrest/PyHamcrest
+.. image:: https://coveralls.io/repos/hamcrest/PyHamcrest/badge.png?branch=master
+        :alt: Coverage
+        :target: https://coveralls.io/r/hamcrest/PyHamcrest?branch=master
+
 
 Introduction
 ============

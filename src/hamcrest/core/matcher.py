@@ -1,4 +1,5 @@
-from selfdescribing import SelfDescribing
+from __future__ import absolute_import
+from .selfdescribing import SelfDescribing
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

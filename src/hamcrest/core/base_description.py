@@ -1,13 +1,14 @@
-from description import Description
-from selfdescribingvalue import SelfDescribingValue
-from helpers.hasmethod import hasmethod
-
-import warnings
-
+from __future__ import absolute_import
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+import warnings
+import six
+
+from hamcrest.core.description import Description
+from hamcrest.core.selfdescribingvalue import SelfDescribingValue
+from hamcrest.core.helpers.hasmethod import hasmethod
 
 class BaseDescription(Description):
     """Base class for all :py:class:`~hamcrest.core.description.Description`
@@ -22,10 +23,12 @@ class BaseDescription(Description):
     def append_description_of(self, value):
         if hasmethod(value, 'describe_to'):
             value.describe_to(self)
-        elif isinstance(value, str):
-            self.append_string_in_python_syntax(value)
-        elif isinstance(value, unicode):
+        elif six.PY3 and isinstance(value, six.text_type):
             self.append(repr(value))
+        elif isinstance(value, six.binary_type):
+            self.append_string_in_python_syntax(value)
+        elif isinstance(value, six.text_type):
+            self.append_string_in_python_syntax(value)
         else:
             description = str(value)
             if description[:1] == '<' and description[-1:] == '>':
