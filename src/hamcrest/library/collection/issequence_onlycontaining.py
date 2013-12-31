@@ -52,4 +52,4 @@ def only_contains(*items):
     matchers = []
     for item in items:
         matchers.append(wrap_matcher(item))
-    return IsSequenceOnlyContaining(apply(any_of, matchers))
+    return IsSequenceOnlyContaining(any_of(*matchers))

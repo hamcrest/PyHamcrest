@@ -1,9 +1,10 @@
+from __future__ import absolute_import
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-from matcher import Matcher
-from string_description import tostring
+from hamcrest.core.matcher import Matcher
+from hamcrest.core.string_description import tostring
 
 
 class BaseMatcher(Matcher):

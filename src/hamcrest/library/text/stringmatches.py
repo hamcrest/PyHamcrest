@@ -1,11 +1,13 @@
-from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.hasmethod import hasmethod
-import re
-
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+import re
+
+import six
+
+from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.helpers.hasmethod import hasmethod
 
 class StringMatchesPattern(BaseMatcher):
 
@@ -32,7 +34,7 @@ def matches_regexp(pattern):
     evaluated object.
 
     """
-    if isinstance(pattern, basestring):
+    if isinstance(pattern, six.string_types):
         pattern = re.compile(pattern)
 
     return StringMatchesPattern(pattern)

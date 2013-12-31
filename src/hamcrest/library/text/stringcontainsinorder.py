@@ -1,16 +1,17 @@
-from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.hasmethod import hasmethod
-
 __author__ = "Romilly Cocking"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.helpers.hasmethod import hasmethod
+
+import six
 
 class StringContainsInOrder(BaseMatcher):
 
     def __init__(self, *substrings):
         for substring in substrings:
-            if not isinstance(substring, basestring):
+            if not isinstance(substring, six.string_types):
                 raise TypeError(self.__class__.__name__
                                 + ' requires string arguments')
         self.substrings = substrings

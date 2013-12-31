@@ -1,4 +1,5 @@
-from base_description import BaseDescription
+from __future__ import absolute_import
+from .base_description import BaseDescription
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

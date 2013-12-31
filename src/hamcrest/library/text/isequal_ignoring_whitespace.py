@@ -1,9 +1,10 @@
-from hamcrest.core.base_matcher import BaseMatcher
-
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+from hamcrest.core.base_matcher import BaseMatcher
+
+import six
 
 def stripspace(string):
     result = ''
@@ -22,13 +23,13 @@ def stripspace(string):
 class IsEqualIgnoringWhiteSpace(BaseMatcher):
 
     def __init__(self, string):
-        if not isinstance(string, basestring):
+        if not isinstance(string, six.string_types):
             raise TypeError('IsEqualIgnoringWhiteSpace requires string')
         self.original_string = string
         self.stripped_string = stripspace(string)
 
     def _matches(self, item):
-        if not isinstance(item, basestring):
+        if not isinstance(item, six.string_types):
             return False
         return self.stripped_string == stripspace(item)
 

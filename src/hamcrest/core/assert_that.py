@@ -1,5 +1,6 @@
-from matcher import Matcher
-from string_description import StringDescription
+from __future__ import absolute_import
+from hamcrest.core.matcher import Matcher
+from hamcrest.core.string_description import StringDescription
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
