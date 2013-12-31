@@ -23,22 +23,19 @@ before_install:
   - export EASY_SETUP_URL='http://peak.telecommunity.com/dist/ez_setup.py'
 
 install:
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.5' ]]; then pip install --use-mirrors unittest2; fi
   - if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then pip install --use-mirrors unittest2; fi
   - if [[ $NUMPY == "true" ]]; then pip install numpy; fi
   - pip install --use-mirrors coveralls
-  - pip install --use-mirrors 'pytest>=2.3.5' 'six' 'pytest-cov>=1.6'
-  - "/usr/bin/yes | $PYTHON_EXE setup.py install 2>&1 | tail -n 2"
+  - pip install --use-mirrors 'pytest>=2.3.5' 'pytest-cov>=1.6'
+  - pip install --use-mirrors -r requirements.txt
 
 before_script:
-  - if [[ $TRAVIS_PYTHON_VERSION == "jython2.5" ]]; then jython -c "print ''"; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "3.3" ]]; then export PYTHONHASHSEED=4; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "3.4" ]]; then export PYTHONHASHSEED=8; fi
 
 script:
-  - $PYTHON_EXE setup.py 
+  - $PYTHON_EXE setup.py develop
   - py.test -v --cov hamcrest
 
 after_success:
-  - find . -name .coverage
-  - coveralls debug
+  - coveralls
