@@ -1,0 +1,2 @@
+six>=1.4
+setuptools>=1.1
