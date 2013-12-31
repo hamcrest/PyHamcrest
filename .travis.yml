@@ -36,8 +36,9 @@ before_script:
   - if [[ $TRAVIS_PYTHON_VERSION == "3.4" ]]; then export PYTHONHASHSEED=8; fi
 
 script:
-  - $PYTHON_EXE setup.py build 
+  - $PYTHON_EXE setup.py 
   - py.test -v --cov hamcrest
 
 after_success:
-  - coveralls
+  - find . -name .coverage
+  - coveralls debug

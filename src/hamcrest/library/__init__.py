@@ -1,11 +1,12 @@
+from __future__ import absolute_import
 """Library of Matcher implementations."""
 
 from hamcrest.core import *
-from collection import *
-from integration import *
-from number import *
-from object import *
-from text import *
+from hamcrest.library.collection import *
+from hamcrest.library.integration import *
+from hamcrest.library.number import *
+from hamcrest.library.object import *
+from hamcrest.library.text import *
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

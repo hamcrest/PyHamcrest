@@ -27,8 +27,8 @@ finally:
         fh.close()
 
 extra_attributes = {}
-if sys.version_info >= (3,):
-    extra_attributes['use_2to3'] = True
+# if sys.version_info >= (3,):
+#     extra_attributes['use_2to3'] = True
 
 params = dict(
     name='PyHamcrest',
@@ -45,7 +45,7 @@ params = dict(
     package_dir = {'': 'src'},
     provides=['hamcrest'],
     long_description=read('README.rst'),
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'six'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
