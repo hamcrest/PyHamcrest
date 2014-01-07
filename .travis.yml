@@ -1,40 +1,25 @@
 language: python
 
-python:
-  - 2.6
-  - 2.7
-  - 3.2
-  - 3.3
-  - pypy
+python: 2.7
 
 env:
-  matrix:
-    - NUMPY="true"
-    - NUMPY="false"
-
-matrix:
-  exclude:
-    - python: pypy
-      env: NUMPY="true"
+  - TOX_ENV=py26
+  - TOX_ENV=py27
+  - TOX_ENV=py27-numpy
+  - TOX_ENV=py32
+  - TOX_ENV=py33
+  - TOX_ENV=py33-numpy
+  - TOX_ENV=pypy
 
 before_install:
   - export PYTHON_EXE=python
   - export EASY_SETUP_URL='http://peak.telecommunity.com/dist/ez_setup.py'
 
 install:
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then pip install --use-mirrors unittest2; fi
-  - if [[ $NUMPY == "true" ]]; then pip install numpy; fi
   - pip install --use-mirrors coveralls
-  - pip install --use-mirrors 'pytest>=2.3.5' 'pytest-cov>=1.6'
-  - pip install --use-mirrors -r requirements.txt
+  - pip install --use-mirrors 'tox>=1.4.3'
 
-before_script:
-  - if [[ $TRAVIS_PYTHON_VERSION == "3.3" ]]; then export PYTHONHASHSEED=4; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == "3.4" ]]; then export PYTHONHASHSEED=8; fi
-
-script:
-  - $PYTHON_EXE setup.py develop
-  - py.test -v --cov hamcrest
+script: tox -e $TOX_ENV
 
 after_success:
   - coveralls
