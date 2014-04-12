@@ -17,7 +17,7 @@ before_install:
   - export EASY_SETUP_URL='http://peak.telecommunity.com/dist/ez_setup.py'
 
 install:
-  - pip install --use-mirrors tox
+  - pip install --use-mirrors tox coveralls
 
 script:
   - tox -e $TOX_ENV
