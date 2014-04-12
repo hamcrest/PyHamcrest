@@ -12,6 +12,7 @@
 # serve to show the default.
 
 import sys, os
+import six
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -45,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'PyHamcrest'
-copyright = u'2011, hamcrest.org'
+project = six.u('PyHamcrest')
+copyright = six.u('2011, hamcrest.org')
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -183,8 +184,8 @@ htmlhelp_basename = 'PyHamcrestdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'PyHamcrest.tex', u'PyHamcrest Documentation',
-   u'hamcrest.org', 'manual'),
+  ('index', 'PyHamcrest.tex', six.u('PyHamcrest Documentation'),
+   six.u('hamcrest.org'), 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -224,6 +225,6 @@ def setup(app):
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'pyhamcrest', u'PyHamcrest Documentation',
-     [u'hamcrest.org'], 1)
+    ('index', 'pyhamcrest', six.u('PyHamcrest Documentation'),
+     [six.u('hamcrest.org')], 1)
 ]
