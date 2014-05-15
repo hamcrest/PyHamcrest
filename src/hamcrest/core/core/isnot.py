@@ -43,5 +43,12 @@ def is_not(match):
         assert_that(cheese, is_not(equal_to(smelly)))
         assert_that(cheese, is_not(smelly))
 
+    For better readability a ``not_`` alias is provided:
+
+        assert_that(alist, not_(has_item(item)))
+
     """
     return IsNot(wrap_value_or_type(match))
+
+# alias for better readability of negations
+not_ = is_not
