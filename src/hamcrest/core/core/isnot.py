@@ -45,3 +45,13 @@ def is_not(match):
 
     """
     return IsNot(wrap_value_or_type(match))
+
+def not_(match):
+    """Alias of :py:func:`is_not` for better readability of negations.
+
+    Examples::
+
+        assert_that(alist, not_(has_item(item)))
+
+    """
+    return is_not(match)

@@ -9,8 +9,7 @@ from hamcrest.core.core.isanything import anything
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.core.core.isinstanceof import instance_of
 from hamcrest.core.core.isnone import none, not_none
-from hamcrest.core.core.isnot import is_not
-not_ = is_not
+from hamcrest.core.core.isnot import is_not, not_
 from hamcrest.core.core.issame import same_instance
 from hamcrest.core.core.raises import calling, raises
 
