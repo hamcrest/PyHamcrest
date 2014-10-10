@@ -1,3 +1,8 @@
+=== Version 1.8.1 ===
+
+* Added not_ alias for is_not [Matteo Bertini]
+* Added doc directory to the sdist [Alex Brandt]
+
 === Version 1.8 ==
 
 * Supported versions
