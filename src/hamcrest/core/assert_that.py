@@ -54,7 +54,7 @@ def _assert_match(actual, matcher, reason):
                    .append_text('\n     but: ')
         matcher.describe_mismatch(actual, description)
         description.append_text('\n')
-        raise AssertionError(str(description))
+        raise AssertionError(description)
 
 
 def _assert_bool(assertion, reason=None):
