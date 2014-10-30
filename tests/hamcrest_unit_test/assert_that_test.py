@@ -1,3 +1,4 @@
+# encoding: utf-8
 from __future__ import with_statement
 from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isequal import equal_to
@@ -37,6 +38,13 @@ class AssertThatTest(unittest.TestCase):
             assert_that(actual, equal_to(expected), 'REASON')
 
         self.assertEqual(expectedMessage, str(e.exception))
+
+    def testAssertionUnicodeEncodesProperly(self):
+        expected = 'EXPECTED'
+        actual = u'ЧТО-ТО_ДРУГОЕ'
+
+        with self.assertRaises(AssertionError):
+            assert_that(actual, equal_to(expected), 'REASON')
 
     def testCanTestBoolDirectly(self):
         assert_that(True, 'should accept True')
