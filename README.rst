@@ -276,7 +276,7 @@ More resources
 * Sources_
 * Hamcrest_
 
-.. _Documentation: http://readthedocs.org/docs/pyhamcrest/en/latest/
+.. _Documentation: http://readthedocs.org/docs/pyhamcrest/en/V1.8.1/
 .. _Package: http://pypi.python.org/pypi/PyHamcrest
 .. _Sources: https://github.com/hamcrest/PyHamcrest
 .. _Hamcrest: http://hamcrest.org
