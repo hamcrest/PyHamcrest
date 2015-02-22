@@ -115,10 +115,10 @@ class IsDictContainingEntriesTest(MatcherTest):
     def testDescribeMismatchOfNonDictionaryShowsActualArgument(self):
         self.assert_describe_mismatch("'bad' is not a mapping object", has_entries('a', 1), 'bad')
 
-    @unittest.skipIf('java' in platform.system().lower(), "Hash randomization makes this unpredictably fail")
     def testDescribeMismatchOfDictionaryWithoutKey(self):
-        self.assert_describe_mismatch("no 'b' key in <{'a': 1, 'c': 3}>",
-                                has_entries('a', 1, 'b', 2), {'a': 1, 'c': 3})
+        d = {'a': 1, 'c': 3}
+        self.assert_describe_mismatch("no 'b' key in <%s>" % (d, ),
+                                      has_entries('a', 1, 'b', 2), d)
 
     def testDescribeMismatchOfDictionaryWithNonMatchingValue(self):
         self.assert_describe_mismatch("value for 'a' was <2>",
