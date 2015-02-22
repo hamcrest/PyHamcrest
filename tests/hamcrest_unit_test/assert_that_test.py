@@ -1,3 +1,4 @@
+# encoding: utf-8
 from __future__ import with_statement
 from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isequal import equal_to
@@ -5,6 +6,15 @@ try:
     import unittest2 as unittest
 except ImportError:
     import unittest
+
+import sys
+if sys.version < '3':
+    import codecs
+    def u(x):
+        return codecs.unicode_escape_decode(x)[0]
+else:
+    def u(x):
+        return x
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -37,6 +47,13 @@ class AssertThatTest(unittest.TestCase):
             assert_that(actual, equal_to(expected), 'REASON')
 
         self.assertEqual(expectedMessage, str(e.exception))
+
+    def testAssertionUnicodeEncodesProperly(self):
+        expected = 'EXPECTED'
+        actual = u('\xdcnic\N{Latin Small Letter O with diaeresis}de')
+
+        with self.assertRaises(AssertionError):
+            assert_that(actual, equal_to(expected), 'REASON')
 
     def testCanTestBoolDirectly(self):
         assert_that(True, 'should accept True')
