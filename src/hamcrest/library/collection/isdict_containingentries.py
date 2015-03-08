@@ -10,7 +10,7 @@ __license__ = "BSD, see License.txt"
 class IsDictContainingEntries(BaseMatcher):
 
     def __init__(self, value_matchers):
-        self.value_matchers = value_matchers
+        self.value_matchers = sorted(value_matchers.items())
 
     def _not_a_dictionary(self, dictionary, mismatch_description):
         if mismatch_description:
@@ -19,7 +19,7 @@ class IsDictContainingEntries(BaseMatcher):
         return False
 
     def matches(self, dictionary, mismatch_description=None):
-        for key in self.value_matchers:
+        for key, value_matcher in self.value_matchers:
 
             try:
                 if not key in dictionary:
@@ -32,7 +32,6 @@ class IsDictContainingEntries(BaseMatcher):
             except TypeError:
                 return self._not_a_dictionary(dictionary, mismatch_description)
 
-            value_matcher = self.value_matchers[key]
             try:
                 actual_value = dictionary[key]
             except TypeError:
@@ -51,19 +50,19 @@ class IsDictContainingEntries(BaseMatcher):
     def describe_mismatch(self, item, mismatch_description):
         self.matches(item, mismatch_description)
 
-    def describe_keyvalue(self, index, description):
+    def describe_keyvalue(self, index, value, description):
         """Describes key-value pair at given index."""
         description.append_description_of(index)                        \
                    .append_text(': ')                                   \
-                   .append_description_of(self.value_matchers[index])
+                   .append_description_of(value)
 
     def describe_to(self, description):
         description.append_text('a dictionary containing {')
         first = True
-        for key in self.value_matchers:
+        for key, value in self.value_matchers:
             if not first:
                 description.append_text(', ')
-            self.describe_keyvalue(key, description)
+            self.describe_keyvalue(key, value, description)
             first = False
         description.append_text('}')
 
