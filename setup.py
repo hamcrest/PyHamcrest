@@ -2,6 +2,11 @@ import sys
 import os
 import re
 
+# need to kill off link if we're in docker builds
+if os.environ.get('PYTHON_BUILD_DOCKER', None) == 'true':
+    del os.link
+
+
 try:
     from setuptools import setup, find_packages
 except ImportError:
