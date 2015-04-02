@@ -1,18 +1,52 @@
 PyHamcrest
 ==========
 
-.. image:: https://pypip.in/v/PyHamcrest/badge.png
-        :alt: Release Status
-        :target: https://crate.io/packages/PyHamcrest
-.. image:: https://pypip.in/d/PyHamcrest/badge.png
-        :alt: Downloads
-        :target: https://crate.io/packages/PyHamcrest
-.. image:: https://travis-ci.org/hamcrest/PyHamcrest.png?branch=master
-        :alt: Build Status
-        :target: https://travis-ci.org/hamcrest/PyHamcrest
-.. image:: https://coveralls.io/repos/hamcrest/PyHamcrest/badge.png?branch=master
-        :alt: Coverage
-        :target: https://coveralls.io/r/hamcrest/PyHamcrest?branch=master
+| |docs| |travis| |coveralls| |landscape| |scrutinizer|
+| |version| |downloads| |wheel| |supported-versions| |supported-implementations|
+
+.. |docs| image:: https://readthedocs.org/projects/PyHamcrest/badge/?style=flat
+    :target: https://readthedocs.org/projects/PyHamcrest
+    :alt: Documentation Status
+
+.. |travis| image:: http://img.shields.io/travis/hamcrest/PyHamcrest/master.png?style=flat
+    :alt: Travis-CI Build Status
+    :target: https://travis-ci.org/hamcrest/PyHamcrest
+
+.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/hamcrest/PyHamcrest?branch=master
+    :alt: AppVeyor Build Status
+    :target: https://ci.appveyor.com/project/hamcrest/PyHamcrest
+
+.. |coveralls| image:: http://img.shields.io/coveralls/hamcrest/PyHamcrest/master.png?style=flat
+    :alt: Coverage Status
+    :target: https://coveralls.io/r/hamcrest/PyHamcrest
+
+.. |landscape| image:: https://landscape.io/github/hamcrest/PyHamcrest/master/landscape.svg?style=flat
+    :target: https://landscape.io/github/hamcrest/PyHamcrest/master
+    :alt: Code Quality Status
+
+.. |version| image:: http://img.shields.io/pypi/v/PyHamcrest.png?style=flat
+    :alt: PyPI Package latest release
+    :target: https://pypi.python.org/pypi/PyHamcrest
+
+.. |downloads| image:: http://img.shields.io/pypi/dm/PyHamcrest.png?style=flat
+    :alt: PyPI Package monthly downloads
+    :target: https://pypi.python.org/pypi/PyHamcrest
+
+.. |wheel| image:: https://pypip.in/wheel/PyHamcrest/badge.png?style=flat
+    :alt: PyPI Wheel
+    :target: https://pypi.python.org/pypi/PyHamcrest
+
+.. |supported-versions| image:: https://pypip.in/py_versions/PyHamcrest/badge.png?style=flat
+    :alt: Supported versions
+    :target: https://pypi.python.org/pypi/PyHamcrest
+
+.. |supported-implementations| image:: https://pypip.in/implementation/PyHamcrest/badge.png?style=flat
+    :alt: Supported imlementations
+    :target: https://pypi.python.org/pypi/PyHamcrest
+
+.. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/hamcrest/PyHamcrest/master.png?style=flat
+    :alt: Scrtinizer Status
+    :target: https://scrutinizer-ci.com/g/hamcrest/PyHamcrest/
 
 
 Introduction
