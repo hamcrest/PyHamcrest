@@ -4,8 +4,8 @@ PyHamcrest
 | |docs| |travis| |coveralls| |landscape| |scrutinizer|
 | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 
-.. |docs| image:: https://readthedocs.org/projects/PyHamcrest/badge/?style=flat
-    :target: https://readthedocs.org/projects/PyHamcrest
+.. |docs| image:: https://readthedocs.org/projects/pyhamcrest/badge/?style=flat
+    :target: https://pyhamcrest.readthedocs.org/
     :alt: Documentation Status
 
 .. |travis| image:: http://img.shields.io/travis/hamcrest/PyHamcrest/master.png?style=flat
