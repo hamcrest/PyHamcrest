@@ -25,7 +25,7 @@ class BaseDescription(Description):
             value.describe_to(self)
         elif six.PY3 and isinstance(value, six.text_type):
             self.append(repr(value))
-        elif isinstance(value, six.binary_type):
+        elif six.PY2 and isinstance(value, six.binary_type):
             self.append_string_in_python_syntax(value)
         elif isinstance(value, six.text_type):
             self.append_string_in_python_syntax(value)
