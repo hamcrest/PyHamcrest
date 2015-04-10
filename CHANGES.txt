@@ -1,6 +1,6 @@
 === Version 1.8.3 ===
 
-* Fix #53 - bad handling when reporting mismatches for byte arrays in Python 3
+* Fix #52 - bad handling when reporting mismatches for byte arrays in Python 3
 
 === Version 1.8.2 ===
 
