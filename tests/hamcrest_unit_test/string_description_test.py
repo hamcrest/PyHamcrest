@@ -3,6 +3,7 @@ from hamcrest.core.string_description import *
 
 from hamcrest.core.selfdescribing import SelfDescribing
 import re
+import pytest
 try:
     import unittest2 as unittest
 except ImportError:
@@ -50,6 +51,15 @@ class StringDescriptionTest(unittest.TestCase):
     def testDescribeUnicodeStringAsUnicode(self):
         self.description.append_description_of(six.u('\u05d0'))
         self.assertEqual(six.u("'\u05d0'"), str(self.description))
+
+
+# below is a set of things that should append without error to string
+# descriptions
+@pytest.mark.parametrize('valid_input', ('native', six.b('bytes'), six.u('unicode')))
+def test_description_append_valid_input(valid_input):
+    desc = StringDescription()
+    desc.append(valid_input)
+    str(desc)
 
 if __name__ == "__main__":
     unittest.main()
