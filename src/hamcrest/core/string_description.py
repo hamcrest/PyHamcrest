@@ -1,4 +1,8 @@
 from __future__ import absolute_import
+
+import codecs
+import six
+
 from .base_description import BaseDescription
 
 __author__ = "Jon Reid"
@@ -31,4 +35,4 @@ class StringDescription(BaseDescription):
         return self.out
 
     def append(self, string):
-        self.out += string
+        self.out += six.text_type(string)
