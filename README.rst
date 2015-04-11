@@ -1,7 +1,7 @@
 PyHamcrest
 ==========
 
-| |docs| |travis| |coveralls| |landscape| |scrutinizer|
+| |docs| |travis| |coveralls| |landscape| |scrutinizer| |codeclimate|
 | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 
 .. |docs| image:: https://readthedocs.org/projects/pyhamcrest/badge/?style=flat
@@ -23,6 +23,10 @@ PyHamcrest
 .. |landscape| image:: https://landscape.io/github/hamcrest/PyHamcrest/master/landscape.svg?style=flat
     :target: https://landscape.io/github/hamcrest/PyHamcrest/master
     :alt: Code Quality Status
+
+.. |codeclimate| image:: https://codeclimate.com/github/hamcrest/PyHamcrest/badges/gpa.svg
+   :target: https://codeclimate.com/github/hamcrest/PyHamcrest
+   :alt: Code Climate
 
 .. |version| image:: http://img.shields.io/pypi/v/PyHamcrest.png?style=flat
     :alt: PyPI Package latest release
