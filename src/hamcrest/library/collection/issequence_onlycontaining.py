@@ -29,6 +29,21 @@ class IsSequenceOnlyContaining(BaseMatcher):
         description.append_text('a sequence containing items matching ')    \
                     .append_description_of(self.matcher)
 
+    def describe_mismatch(self, item, mismatch_description):
+        super(IsSequenceOnlyContaining, self).describe_mismatch(
+            item, mismatch_description)
+        try:
+            sequence = list(item)
+            for seq_item in sequence:
+                if not self.matcher.matches(seq_item):
+                    mismatch_description.append(
+                        ', first sequence item not matching ')
+                    self.matcher.describe_mismatch(
+                        seq_item, mismatch_description)
+                    return
+        except TypeError:
+            pass
+
 
 def only_contains(*items):
     """Matches if each element of sequence satisfies any of the given matchers.

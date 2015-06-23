@@ -4,6 +4,7 @@ from hamcrest.library.collection.issequence_onlycontaining import *
 
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.library.number.ordering_comparison import less_than
+from hamcrest.library.object.haslength import has_length
 from hamcrest_unit_test.matcher_test import MatcherTest
 from .quasisequence import QuasiSequence
 from .sequencemixin import SequenceForm, GeneratorForm
@@ -56,7 +57,30 @@ class IsSequenceOnlyContainingTestBase(object):
                                 only_contains(1,2))
 
     def testDescribeMismatch(self):
-        self.assert_describe_mismatch("was 'bad'", only_contains(1,2), 'bad')
+        self.assert_describe_mismatch(
+            "was 'bad', first sequence item not matching was 'b'", 
+            only_contains(1,2), 'bad')
+
+    def testDescribeMismatchDisplayUsedMatchersDescriptionForFirstFailingItem(self):
+        has_length_matcher = has_length(1)
+        has_length_description = 'an object with length of <1>'
+        has_length_mismatch_text = "was 'sdf' with length of <3>"
+
+        self.assert_description(has_length_description, has_length_matcher)
+        self.assert_describe_mismatch(
+            has_length_mismatch_text, has_length_matcher, 'sdf')
+
+        sequence = self._sequence('a', 'sdf')
+        prefix = postfix = ''
+        if repr(sequence)[0] != '<':
+            prefix = '<'
+            postfix = '>'
+        expected_only_contains_failure_text = \
+            "was {prefix}{sequence!r}{postfix}, " \
+            "first sequence item not matching {has_length_mismatch_text}".format(**locals())
+        self.assert_describe_mismatch(
+            expected_only_contains_failure_text,
+            only_contains(has_length_matcher), sequence)
 
     def testDescribeMismatchOfNonSequence(self):
         self.assert_describe_mismatch("was <3>", only_contains(1,2), 3)
