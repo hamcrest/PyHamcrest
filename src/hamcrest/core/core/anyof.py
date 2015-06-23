@@ -20,6 +20,12 @@ class AnyOf(BaseMatcher):
     def describe_to(self, description):
         description.append_list('(', ' or ', ')', self.matchers)
 
+    def describe_mismatch(self, item, mismatch_description):
+        for matcher in self.matchers:
+            if not matcher.matches(item):
+                matcher.describe_mismatch(item, mismatch_description)
+                return
+
 
 def any_of(*items):
     """Matches if any of the given matchers evaluate to ``True``.

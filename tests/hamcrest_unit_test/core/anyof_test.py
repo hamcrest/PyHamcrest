@@ -6,6 +6,7 @@ if __name__ == '__main__':
 from hamcrest.core.core.anyof import *
 
 from hamcrest.core.core.isequal import equal_to
+from hamcrest.library.object.haslength import has_length
 from hamcrest_unit_test.matcher_test import MatcherTest
 import unittest
 
@@ -72,6 +73,10 @@ class AnyOfTest(MatcherTest):
 
     def testMismatchDescriptionDescribesFirstFailingMatch(self):
         self.assert_mismatch_description(
+                                "was 'ugly' with length of <4>",
+                                any_of(has_length(1), equal_to('good')),
+                                'ugly')
+        self.assert_mismatch_description(
                                 "was 'ugly'",
                                 any_of(equal_to('bad'), equal_to('good')),
                                 'ugly')
@@ -81,6 +86,10 @@ class AnyOfTest(MatcherTest):
                                 "was 'ugly'",
                                 any_of(equal_to('bad'), equal_to('good')),
                                 'ugly')
+        self.assert_describe_mismatch(
+                                "was 'sdf' with length of <3>",
+                                any_of(has_length(1)),
+                                'sdf')
 
 
 if __name__ == '__main__':
