@@ -46,6 +46,7 @@ do_all_vers do_test || exit 1
 do_all_vers do_release || exit 1
 
 echo "All releases uploaded; uploading source release as well"
-$HERE/.tox/py27/bin/python $HERE/setup.py sdist upload
+tox -e wheel
+
 
 exit $rc
