@@ -3,63 +3,88 @@ from __future__ import absolute_import
 from hamcrest.core.core.is_ import *
 
 import six
+import pytest
+
 from hamcrest.core.core.isequal import equal_to
-from hamcrest_unit_test.matcher_test import MatcherTest
+from hamcrest_unit_test.matcher_test import *
 from .nevermatch import NeverMatch
 
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
+__author__ = "Chris Rose"
+__copyright__ = "Copyright 2015 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-if six.PY2:
-    class OldClass:
-        pass
+class OldClass:
+    pass
 
-class IsTest(MatcherTest):
+@pytest.mark.parametrize('arg, identity', (
+    (True, True),
+    (False, False),
+))
+def test_delegates_matching_to_nested_matcher(arg, identity):
+    assert_matches(is_(equal_to(identity)), arg, "should match")
 
-    def testDelegatesMatchingToNestedMatcher(self):
-        self.assert_matches('should match', is_(equal_to(True)), True)
-        self.assert_matches('should match', is_(equal_to(False)), False)
-        self.assert_does_not_match('should not match', is_(equal_to(True)), False)
-        self.assert_does_not_match('should not match', is_(equal_to(False)), True)
 
-    def testDescriptionShouldPassThrough(self):
-        self.assert_description('<True>', is_(equal_to(True)))
+@pytest.mark.parametrize('arg, identity', (
+    (True, False),
+    (False, True),
+))
+def test_delegates_mismatching_to_nested_matcher(arg, identity):
+    assert_does_not_match(is_(equal_to(identity)), arg, "should match")
 
-    def testProvidesConvenientShortcutForIsEqualTo(self):
-        self.assert_matches('should match', is_('A'), 'A');
-        self.assert_matches('should match', is_('B'), 'B');
-        self.assert_does_not_match('should not match', is_('A'), 'B');
-        self.assert_does_not_match('should not match', is_('B'), 'A');
-        self.assert_description("'A'", is_('A'));
 
-    def testProvidesConvenientShortcutForIsInstanceOf(self):
-        self.assert_matches('should match', is_(str), 'A');
-        self.assert_does_not_match('should not match', is_(int), 'A');
+def test_description_should_pass_through_matcher():
+    assert_description('<True>', is_(equal_to(True)))
 
-    @unittest.skipUnless(six.PY2, "Old-style classes are not relevant under Python3+")
-    def testProvidesConvenientShortcutForIsInstanceOfOldStyleClass(self):
-        self.assert_matches('should match', is_(OldClass), OldClass())
 
-    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
-        self.assert_no_mismatch_description(is_('A'), 'A')
+equal_matches = pytest.mark.parametrize('arg, identity, desc', (
+    ('A', 'A', "'A'"),
+    (5 + 3, 8, "<8>"),
+    pytest.mark.issue56((tuple(), (), "<()>")),
+))
 
-    def testDelegatesMismatchDescriptionToNestedMatcher(self):
-        self.assert_mismatch_description(
-                                NeverMatch.mismatch_description,
-                                is_(NeverMatch()),
-                                'hi')
+equal_mismatches = pytest.mark.parametrize('arg, identity, desc', (
+    ('B', 'A', "'A'"),
+    (5 + 4, 8, "<8>"),
+))
 
-    def testDelegatesDescribeMismatchToNestedMatcher(self):
-        self.assert_describe_mismatch(
-                                NeverMatch.mismatch_description,
-                                is_(NeverMatch()),
-                                'hi')
+@equal_matches
+def test_provides_convenient_shortcut_for_is_equal_to(arg, identity, desc):
+    assert_matches(is_(identity), arg, 'should match')
+
+
+@equal_mismatches
+def test_provides_convenient_shortcut_for_is_equal_to_false(arg, identity, desc):
+    assert_does_not_match(is_(identity), arg, 'should not match')
+
+
+@equal_matches
+def test_description_uses_equal_to(arg, identity, desc):
+    assert_description(desc, is_(identity))
+
+
+@pytest.mark.parametrize('arg, identity', (
+    ('A', str),
+    (1, int),
+    only_py2((OldClass(), OldClass)),
+))
+def test_provides_instanceof_shortcut(arg, identity):
+    assert_matches(is_(identity), arg, "should match")
+
+
+def test_successful_match_does_not_generate_mismatch_description():
+    assert_no_mismatch_description(is_('A'), 'A')
+
+def test_delegates_mismatch_description_to_nested_matcher():
+    assert_mismatch_description(
+                            NeverMatch.mismatch_description,
+                            is_(NeverMatch()),
+                            'hi')
+
+def test_delegates_describe_mismatch_to_nested_matcher():
+    assert_describe_mismatch(
+                            NeverMatch.mismatch_description,
+                            is_(NeverMatch()),
+                            'hi')
 
 
 if __name__ == '__main__':

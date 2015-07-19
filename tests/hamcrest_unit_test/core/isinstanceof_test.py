@@ -1,4 +1,5 @@
 import sys
+import pytest
 
 if __name__ == '__main__':
     sys.path.insert(0, '..')
@@ -6,80 +7,60 @@ if __name__ == '__main__':
 
 from hamcrest.core.core.isinstanceof import *
 
-from hamcrest_unit_test.matcher_test import MatcherTest
+from hamcrest_unit_test.matcher_test import *
 
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
-__author__ = "Jon Reid"
-__copyright__ = "Copyright 2011 hamcrest.org"
+__author__ = "Chris Rose"
+__copyright__ = "Copyright 2015 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+class Parent:
+    pass
 
-class IsInstanceOfTest(MatcherTest):
-
-    def testEvaluatesToTrueIfArgumentIsInstanceOfASpecificClass(self):
-        self.assert_matches('same class', instance_of(int), 1)
-
-        self.assert_matches('same class', instance_of((int, str)), 1)
-        self.assert_matches('same class', instance_of((str, int)), 'foobar')
-
-        self.assert_does_not_match('different class', instance_of(int), 'hi')
-        self.assert_does_not_match('None', instance_of(int), None)
-
-    def testMatcherCreationRequiresType(self):
-        self.assertRaises(TypeError, instance_of, 'not a type')
-
-    def testHasAReadableDescription(self):
-        self.assert_description('an instance of int', instance_of(int));
-
-    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
-        self.assert_no_mismatch_description(instance_of(int), 3)
-
-    def testMismatchDescriptionShowsActualArgument(self):
-        self.assert_mismatch_description("was 'bad'", instance_of(int), 'bad')
-
-    def testDescribeMismatch(self):
-        self.assert_describe_mismatch("was 'bad'", instance_of(int), 'bad')
+class Child(Parent):
+    pass
 
 
-if sys.version_info < (3,):
-    class Parent():
-        pass
+@pytest.mark.parametrize('arg, matcher', (
+    (1, instance_of(int)),
+    (1, instance_of((str, int))),
+    ('foo', instance_of((str, int))),
+    (1, instance_of((int, str))),
+    ('foo', instance_of((int, str))),
+    only_py2((Parent(), instance_of(Parent))),
+))
+def test_matching_evaluation(arg, matcher):
+    assert_matches(matcher, arg, 'same class')
 
-    class Child(Parent):
-        pass
 
-class OldStyleIsInstanceTest(MatcherTest):
+@pytest.mark.parametrize('arg, matcher', (
+    ('hi', instance_of(int)),
+    (None, instance_of(int)),
+    only_py2(('not a parent', instance_of(Parent))),
+    only_py2((None, instance_of(Parent))),
+))
+def test_mismatching_evaluation(arg, matcher):
+    assert_does_not_match(matcher, arg, 'mismatched')
 
-    @unittest.skipIf(sys.version_info >= (3,), "Old-style classes are not relevant under Python3+")
-    def testMatchesOldStyleClass(self):
-        self.assert_matches('same class', instance_of(Parent), Parent())
+@pytest.mark.parametrize('obj', (
+    pytest.mark.issue56(()),
+    'str',
+))
+def test_matcher_creation_requires_type(obj):
+    with pytest.raises(TypeError):
+        instance_of(obj)
 
-        self.assert_does_not_match('different class', instance_of(Parent), 'not a Parent')
-        self.assert_does_not_match('None', instance_of(Parent), None)
+@pytest.mark.parametrize('desc, type', (
+    ('an instance of int', int),
+    ('an instance of Parent', Parent)
+))
+def test_has_a_readable_description(desc, type):
+    assert_description(desc, instance_of(type));
 
-    @unittest.skipIf(sys.version_info >= (3,), "Old-style classes are not relevant under Python3+")
-    def testMatchesOldStyleSubclass(self):
-        self.assert_matches('same class', instance_of(Parent), Child())
+def test_successful_match_does_not_generate_mismatch_description():
+    assert_no_mismatch_description(instance_of(int), 3)
 
-    @unittest.skipIf(sys.version_info >= (3,), "Old-style classes are not relevant under Python3+")
-    def testHasAReadableDescription(self):
-        self.assert_description('an instance of Parent', instance_of(Parent));
+def test_mismatch_description_shows_actual_argument():
+    assert_mismatch_description("was 'bad'", instance_of(int), 'bad')
 
-    @unittest.skipIf(sys.version_info >= (3,), "Old-style classes are not relevant under Python3+")
-    def testSuccessfulMatchDoesNotGenerateMismatchDescription(self):
-        self.assert_no_mismatch_description(instance_of(Parent), Parent())
-
-    @unittest.skipIf(sys.version_info >= (3,), "Old-style classes are not relevant under Python3+")
-    def testMismatchDescriptionShowsActualArgument(self):
-        self.assert_mismatch_description("was 'bad'", instance_of(Parent), 'bad')
-
-    @unittest.skipIf(sys.version_info >= (3,), "Old-style classes are not relevant under Python3+")
-    def testDescribeMismatch(self):
-        self.assert_describe_mismatch("was 'bad'", instance_of(Parent), 'bad')
-
-if __name__ == '__main__':
-    unittest.main()
+def test_describe_mismatch():
+    assert_describe_mismatch("was 'bad'", instance_of(int), 'bad')
