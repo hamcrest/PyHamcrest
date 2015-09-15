@@ -81,7 +81,7 @@ assure that the right issue was found::
 
     assert_that(calling(parse, bad_data), raises(ValueError))
 
-    assert_that(calling(translate).with_(curse_words), raises(LanguageError, "\w+very naughty"))
+    assert_that(calling(translate).with_args(curse_words), raises(LanguageError, "\w+very naughty"))
 
     assert_that(broken_function, raises(Exception))
 
