@@ -14,6 +14,8 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
+from setuptools.command.test import test as TestCommand
+
 def local(fname):
     return os.path.join(os.path.dirname(__file__), fname)
 
@@ -30,6 +32,26 @@ try:
 finally:
     if fh:
         fh.close()
+
+
+class PyTest(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = ["tests"]
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+        errno = pytest.main(self.test_args)
+        sys.exit(errno)
+
+
+test_dependencies = ['hypothesis>=1.11', 'pytest>=2.8', 'mock', 'pytest-cov']
+try:
+    from unittest import skipIf
+except ImportError:
+    test_dependencies.append('unittest2')
+
 
 extra_attributes = {}
 # if sys.version_info >= (3,):
@@ -51,6 +73,8 @@ params = dict(
     provides=['hamcrest'],
     long_description=read('README.rst'),
     install_requires=['setuptools', 'six'],
+    tests_require=test_dependencies,
+    cmdclass={'test': PyTest},
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
