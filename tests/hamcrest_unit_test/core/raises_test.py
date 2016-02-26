@@ -5,7 +5,6 @@ if __name__ == '__main__':
 
 from hamcrest.core.core.raises import *
 
-from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
 import unittest
 
@@ -90,6 +89,10 @@ class CallingTest(unittest.TestCase):
 
         self.assertEqual(method.args, (3, 1, 4))
         self.assertEqual(method.kwargs, {"keyword1": "arg1"})
+
+    def testCallingReturnsFunctionResult(self):
+        returned = calling(sum).with_args((3, 1, 4))()
+        self.assertEqual(returned, 8)
 
 
 class Callable(object):
