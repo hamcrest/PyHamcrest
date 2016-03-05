@@ -1,3 +1,19 @@
+=== Version 1.9.0 ==
+
+Drop formal support for 2.x < 2.7
+Drop formal support for 3.x < 3.4
+
+Fix #62 - Return result of a deferred call
+
+=== Version 1.8.5 ===
+
+Fix #56 - incorrect handling of () in is_ matcher
+Fix #60 - correct calling API call with args
+
+=== Version 1.8.4 ==
+
+* Fix #54 - Make instance_of work with tuple like isinstance and unittest's assertIsInstance
+
 === Version 1.8.3 ===
 
 * Fix #52 - bad handling when reporting mismatches for byte arrays in Python 3
