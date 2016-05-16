@@ -7,6 +7,7 @@ from hamcrest.library.integration import *
 from hamcrest.library.number import *
 from hamcrest.library.object import *
 from hamcrest.library.text import *
+from hamcrest.library.bool import *
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -41,4 +42,6 @@ __all__ = [
     'ends_with',
     'starts_with',
     'string_contains_in_order',
+    'is_true',
+    'is_false'
 ]
