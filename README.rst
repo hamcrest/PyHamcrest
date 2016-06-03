@@ -148,6 +148,11 @@ PyHamcrest comes with a library of useful matchers:
   * ``greater_than``, ``greater_than_or_equal_to``, ``less_than``,
     ``less_than_or_equal_to`` - match numeric ordering
 
+* Boolean
+
+  * ``is_true`` - verify the value is True
+  * ``is_false`` - verify the value is False
+
 * Text
 
   * ``contains_string`` - match part of a string
