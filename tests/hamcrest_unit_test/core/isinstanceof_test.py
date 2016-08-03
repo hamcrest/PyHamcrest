@@ -23,6 +23,9 @@ class IsInstanceOfTest(MatcherTest):
     def testEvaluatesToTrueIfArgumentIsInstanceOfASpecificClass(self):
         self.assert_matches('same class', instance_of(int), 1)
 
+        self.assert_matches('same class', instance_of((int, str)), 1)
+        self.assert_matches('same class', instance_of((str, int)), 'foobar')
+
         self.assert_does_not_match('different class', instance_of(int), 'hi')
         self.assert_does_not_match('None', instance_of(int), None)
 
