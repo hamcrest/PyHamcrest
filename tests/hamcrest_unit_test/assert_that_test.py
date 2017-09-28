@@ -67,8 +67,16 @@ class AssertThatTest(unittest.TestCase):
 
         with self.assertRaises(AssertionError) as e:
             assert_that(False)
-            
+
         self.assertEqual('Assertion failed', str(e.exception))
+
+    def testRaisesTypeErrorForMatcherAsArg1(self):
+        assert_that(True)
+
+        with self.assertRaises(TypeError) as e:
+            assert_that(equal_to(1))
+
+        self.assertTrue(str(e.exception).startswith('arg1 should be boolean'))
 
 
 if __name__ == "__main__":

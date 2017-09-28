@@ -42,6 +42,8 @@ def assert_that(arg1, arg2=None, arg3=''):
     if isinstance(arg2, Matcher):
         _assert_match(actual=arg1, matcher=arg2, reason=arg3)
     else:
+        if isinstance(arg1, Matcher):
+            raise TypeError("arg1 should be boolean, but was {}".format(type(arg1)))
         _assert_bool(assertion=arg1, reason=arg2)
 
 
