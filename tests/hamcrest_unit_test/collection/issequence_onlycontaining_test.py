@@ -37,8 +37,8 @@ class IsSequenceOnlyContainingTestBase(object):
         self.assert_does_not_match('3 is not less than 3',
                                    only_contains(less_than(3)), self._sequence(1, 2, 3))
 
-    def testDoesNotMatchEmptyList(self):
-        self.assert_does_not_match('empty', only_contains('foo'), self._sequence())
+    def testMatchesEmptyList(self):
+        self.assert_matches('empty', only_contains('foo'), self._sequence())
 
     def testMatchesAnyConformingSequence(self):
         class ObjectWithLenOnly(object):

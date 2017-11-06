@@ -16,8 +16,6 @@ class IsSequenceOnlyContaining(BaseMatcher):
     def _matches(self, sequence):
         try:
             sequence = list(sequence)
-            if len(sequence) == 0:
-                return False
             for item in sequence:
                 if not self.matcher.matches(item):
                     return False
