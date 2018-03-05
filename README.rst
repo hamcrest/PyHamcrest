@@ -32,15 +32,15 @@ PyHamcrest
     :alt: PyPI Package monthly downloads
     :target: https://pypi.python.org/pypi/PyHamcrest
 
-.. |wheel| image:: https://pypip.in/wheel/PyHamcrest/badge.png?style=flat
+.. |wheel| image:: https://img.shields.io/pypi/wheel/PyHamcrest.svg?style=flat
     :alt: PyPI Wheel
     :target: https://pypi.python.org/pypi/PyHamcrest
 
-.. |supported-versions| image:: https://pypip.in/py_versions/PyHamcrest/badge.png?style=flat
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/PyHamcrest.svg?style=flat
     :alt: Supported versions
     :target: https://pypi.python.org/pypi/PyHamcrest
 
-.. |supported-implementations| image:: https://pypip.in/implementation/PyHamcrest/badge.png?style=flat
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/PyHamcrest.svg?style=flat
     :alt: Supported imlementations
     :target: https://pypi.python.org/pypi/PyHamcrest
 
