@@ -6,18 +6,17 @@ python:
 env:
   - TOX_ENV=py33
   - TOX_ENV=py33-numpy
-  - TOX_ENV=py32
   - TOX_ENV=py27
   - TOX_ENV=py27-numpy
-  - TOX_ENV=py26
   - TOX_ENV=pypy
   - TOX_ENV=docs-py3
-
-before_install:
-  - export EASY_SETUP_URL='http://peak.telecommunity.com/dist/ez_setup.py'
+  - TOX_ENV=py34
+  - TOX_ENV=py34-numpy
+  - TOX_ENV=py35
+  - TOX_ENV=py36
 
 install:
-  - pip install --use-mirrors tox coveralls
+  - pip install tox coveralls
 
 script:
   - tox -e $TOX_ENV
