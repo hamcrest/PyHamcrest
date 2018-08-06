@@ -234,7 +234,7 @@ This is the test we want to write:
 .. code:: python
 
  def testDateIsOnASaturday(self):
-     d = datetime.date(2008, 04, 26)
+     d = datetime.date(2008, 4, 26)
      assert_that(d, is_(on_a_saturday()))
 
 And here's the implementation:
@@ -271,7 +271,7 @@ failure message looks:
 
 .. code:: python
 
- assert_that(datetime.date(2008, 04, 06), is_(on_a_saturday()))
+ assert_that(datetime.date(2008, 4, 6), is_(on_a_saturday()))
 
 fails with the message::
 
@@ -290,7 +290,7 @@ could use it in our test by importing the factory function ``on_a_saturday``:
 
  class DateTest(unittest.TestCase):
      def testDateIsOnASaturday(self):
-         d = datetime.date(2008, 04, 26)
+         d = datetime.date(2008, 4, 26)
          assert_that(d, is_(on_a_saturday()))
 
  if __name__ == '__main__':
