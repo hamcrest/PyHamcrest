@@ -31,7 +31,7 @@ from hamcrest import __version__
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 
-autodoc_default_flags = ['members', 'show-inheritance']
+autodoc_default_options = {'members': None, 'show-inheritance': None}
 intersphinx_mapping = {'python': ('http://docs.python.org/2.6', None)}
 
 # Add any paths that contain templates here, relative to this directory.

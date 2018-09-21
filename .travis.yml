@@ -1,23 +1,26 @@
 language: python
 
 python:
-  - 2.7
+  - 3.6
 
 env:
-  - TOX_ENV=py33
-  - TOX_ENV=py33-numpy
-  - TOX_ENV=py32
-  - TOX_ENV=py27
-  - TOX_ENV=py27-numpy
   - TOX_ENV=py26
-  - TOX_ENV=pypy
+  - TOX_ENV=py27
+  - TOX_ENV=pypy2.7
+  - TOX_ENV=py27-numpy
+  - TOX_ENV=py32
+  - TOX_ENV=py33
+  - TOX_ENV=py34
+  - TOX_ENV=py36
+  - TOX_ENV=py36-numpy
+  - TOX_ENV=pypy3.6
   - TOX_ENV=docs-py3
 
 before_install:
   - export EASY_SETUP_URL='http://peak.telecommunity.com/dist/ez_setup.py'
 
 install:
-  - pip install --use-mirrors tox coveralls
+  - pip install tox coveralls
 
 script:
   - tox -e $TOX_ENV
