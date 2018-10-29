@@ -5,6 +5,7 @@ from mock import sentinel, patch
 
 from hamcrest.core.base_description import BaseDescription
 from hamcrest.core.selfdescribing import SelfDescribing
+from hamcrest.core.helpers.ismock import MOCKTYPES
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2015 hamcrest.org"
@@ -54,3 +55,10 @@ def test_append_description_types(desc, described, appended):
 def test_string_in_python_syntax(desc, char, rep):
     desc.append_string_in_python_syntax(char)
     assert ''.join(desc.appended) == "'{0}'".format(rep)
+
+
+@pytest.mark.parametrize("mock", MOCKTYPES)
+def test_describe_mock(desc, mock):
+    m = mock()
+    desc.append_description_of(m)
+    assert ''.join(desc.appended) == str(m)
