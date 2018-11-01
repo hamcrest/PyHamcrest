@@ -7,6 +7,7 @@ from hamcrest.core.core.raises import *
 
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
+import six
 import unittest
 
 __author__ = "Per Fagrell"
@@ -32,6 +33,16 @@ class RaisesTest(MatcherTest):
         self.assert_does_not_match('Not callable',
                                    raises(TypeError),
                                    23)
+
+    def testDoesNotMatchIfTheWrongExceptionTypeIsRaised(self):
+        self.assert_does_not_match('Wrong exception',
+                            raises(IOError),
+                            calling(raise_exception))
+        expected_message = "<class 'AssertionError'> was raised instead" \
+            if six.PY3 else "<type 'exceptions.AssertionError'> was raised instead"
+        self.assert_mismatch_description(expected_message,
+                                         raises(TypeError),
+                                         calling(raise_exception))
 
     def testMatchesIfFunctionRaisesASubclassOfTheExpectedException(self):
         self.assert_matches('Subclassed Exception',
