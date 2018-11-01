@@ -4,3 +4,6 @@ PyHamcrest.egg-info/
 build/
 dist/
 .tox
+.coverage
+.idea/
+*~
