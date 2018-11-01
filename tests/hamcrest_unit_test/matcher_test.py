@@ -1,3 +1,6 @@
+import warnings
+
+from hamcrest import assert_that, has_item, has_properties, has_string, anything
 from hamcrest.core.string_description import StringDescription
 
 try:
@@ -35,6 +38,9 @@ class MatcherTest(unittest.TestCase):
 
     def assert_describe_mismatch(self, expected, matcher, arg):
         assert_describe_mismatch(expected, matcher, arg)
+
+    def assert_deprecated(self, message, matcher):
+        assert_deprecated(message, matcher)
 
 
 def assert_matches(matcher, arg, message):
@@ -75,3 +81,16 @@ def assert_describe_mismatch(expected, matcher, arg):
     description = StringDescription()
     matcher.describe_mismatch(arg, description)
     assert expected == str(description)
+
+
+def assert_deprecated(message, matcher):
+    with warnings.catch_warnings(record=True) as w:
+        warnings.simplefilter("always")
+
+        matcher(anything()).matches("", StringDescription())
+
+        assert_that(w,
+                    has_item(
+                        has_properties(
+                            category=DeprecationWarning,
+                            message=has_string(message))))

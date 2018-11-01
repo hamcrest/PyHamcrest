@@ -4,12 +4,12 @@ Sequence Matchers
 Matchers of sequences.
 
 
-contains
-^^^^^^^^
+contains_exactly
+^^^^^^^^^^^^^^^^
 
 .. automodule:: hamcrest.library.collection.issequence_containinginorder
-    :exclude-members: contains
-.. autofunction:: contains(match1, [match2[, ...]])
+    :exclude-members: contains, contains_exactly
+.. autofunction:: contains_exactly(match1, [match2[, ...]])
 
 contains_inanyorder
 ^^^^^^^^^^^^^^^^^^^
