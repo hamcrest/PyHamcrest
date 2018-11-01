@@ -38,8 +38,8 @@ class RaisesTest(MatcherTest):
         self.assert_does_not_match('Wrong exception',
                             raises(IOError),
                             calling(raise_exception))
-        expected_message = "<class 'AssertionError'> was raised instead" \
-            if six.PY3 else "<type 'exceptions.AssertionError'> was raised instead"
+        expected_message = "AssertionError('(){}',) of type <%s> was raised instead" % \
+                           ("class 'AssertionError'" if six.PY3 else "type 'exceptions.AssertionError'")
         self.assert_mismatch_description(expected_message,
                                          raises(TypeError),
                                          calling(raise_exception))
