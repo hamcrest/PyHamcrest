@@ -23,6 +23,10 @@ def raise_exception(*args, **kwargs):
     raise AssertionError(str(args) + str(kwargs))
 
 
+def raise_baseException(*args, **kwargs):
+    raise SystemExit(str(args) + str(kwargs))
+
+
 class RaisesTest(MatcherTest):
     def testMatchesIfFunctionRaisesTheExactExceptionExpected(self):
         self.assert_matches('Right exception',
@@ -48,6 +52,11 @@ class RaisesTest(MatcherTest):
         self.assert_matches('Subclassed Exception',
                             raises(Exception),
                             calling(raise_exception))
+
+    def testMatchesIfFunctionRaisesASubclassOfTheExpectedBaseException(self):
+        self.assert_matches('Subclassed BasedException',
+                            raises(BaseException),
+                            calling(raise_baseException))
 
     def testDoesNotMatchIfFunctionDoesNotRaiseException(self):
         self.assert_does_not_match('No exception',

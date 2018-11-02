@@ -28,7 +28,7 @@ class Raises(BaseMatcher):
         self.actual = None
         try:
             function()
-        except Exception:
+        except BaseException:
             self.actual = sys.exc_info()[1]
 
             if isinstance(self.actual, self.expected):
