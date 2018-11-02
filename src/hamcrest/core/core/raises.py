@@ -57,7 +57,7 @@ class Raises(BaseMatcher):
             description.append_text('Correct assertion type raised, but the expected pattern ("%s") not found.' % self.pattern)
             description.append_text('\n          message was: "%s"' % str(self.actual))
         else:
-            description.append_text('%s was raised instead' % type(self.actual))
+            description.append_text('%r of type %s was raised instead' % (self.actual, type(self.actual)))
 
 
 def raises(exception, pattern=None):
