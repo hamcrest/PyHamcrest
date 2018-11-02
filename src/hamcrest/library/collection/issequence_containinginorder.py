@@ -92,6 +92,5 @@ def contains_exactly(*items):
 
 def contains(*items):
     """Deprecated - use contains_exactly(*items)"""
-    # import pdb; pdb.set_trace()
     warnings.warn("deprecated - use contains_exactly(*items)", DeprecationWarning)
     return contains_exactly(*items)
