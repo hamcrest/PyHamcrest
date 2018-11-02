@@ -35,10 +35,10 @@ def test_append_text_delegates(desc):
 
 @pytest.mark.parametrize('described, appended', (
     (Described(), 'described'),
-    pytest.mark.skipif(six.PY3, reason="py2 only")((six.u('unicode-py2'), "'unicode-py2'")),
-    pytest.mark.skipif(six.PY3, reason="py2 only")((six.b('bytes-py2'), "'bytes-py2'")),
-    pytest.mark.skipif(six.PY2, reason="py3 only")((six.u('unicode-py3'), "'unicode-py3'")),
-    pytest.mark.skipif(six.PY2, reason="py3 only")((six.b('bytes-py3'), "<b'bytes-py3'>")),
+    pytest.param(six.u('unicode-py2'), "'unicode-py2'", marks=pytest.mark.skipif(six.PY3, reason="py2 only")),
+    pytest.param(six.b('bytes-py2'), "'bytes-py2'", marks=pytest.mark.skipif(six.PY3, reason="py2 only")),
+    pytest.param(six.u('unicode-py3'), "'unicode-py3'", marks=pytest.mark.skipif(six.PY2, reason="py3 only")),
+    pytest.param(six.b('bytes-py3'), "<b'bytes-py3'>", marks=pytest.mark.skipif(six.PY2, reason="py3 only")),
     (six.u("\U0001F4A9"), six.u("'{0}'").format(six.u("\U0001F4A9"))),
 ))
 def test_append_description_types(desc, described, appended):
