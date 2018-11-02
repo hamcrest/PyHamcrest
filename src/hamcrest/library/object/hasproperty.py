@@ -38,13 +38,15 @@ class IsObjectWithProperty(BaseMatcher):
             return
 
         if not hasattr(item, self.property_name):
-            mismatch_description.append_value(item) \
-                                                    .append_text(' did not have the ') \
-                                                    .append_value(self.property_name) \
-                                                    .append_text(' property')
+            mismatch_description.append_description_of(item) \
+                                .append_text(' did not have the ') \
+                                .append_description_of(self.property_name) \
+                                .append_text(' property')
             return
 
-        mismatch_description.append_text('property ').append_value(self.property_name).append_text(' ')
+        mismatch_description.append_text('property ') \
+                            .append_description_of(self.property_name) \
+                            .append_text(' ')
         value = getattr(item, self.property_name)
         self.value_matcher.describe_mismatch(value, mismatch_description)
 
