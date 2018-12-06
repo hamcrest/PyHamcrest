@@ -41,7 +41,7 @@ PyHamcrest
     :target: https://pypi.python.org/pypi/PyHamcrest
 
 .. |supported-implementations| image:: https://pypip.in/implementation/PyHamcrest/badge.png?style=flat
-    :alt: Supported imlementations
+    :alt: Supported implementations
     :target: https://pypi.python.org/pypi/PyHamcrest
 
 .. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/hamcrest/PyHamcrest/master.png?style=flat
@@ -180,7 +180,7 @@ PyHamcrest comes with a library of useful matchers:
 
 * Decorator
 
-  * ``calling`` - wrap a callable in a deffered object, for subsequent matching on calling behaviour
+  * ``calling`` - wrap a callable in a deferred object, for subsequent matching on calling behaviour
   * ``raises`` - Ensure that a deferred callable raises as expected
   * ``described_as`` - give the matcher a custom failure description
   * ``is_`` - decorator to improve readability - see `Syntactic sugar` below
