@@ -159,7 +159,7 @@ PyHamcrest comes with a library of useful matchers:
   * ``all_of`` - ``and`` together all matchers
   * ``any_of`` - ``or`` together all matchers
   * ``anything`` - match anything, useful in composite matchers when you don't care about a particular value
-  * ``is_not`` - negate the matcher
+  * ``is_not``, ``not_`` - negate the matcher
 
 * Sequence
 
