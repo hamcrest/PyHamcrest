@@ -1,5 +1,6 @@
 # encoding: utf-8
 from __future__ import with_statement
+import warnings
 from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isequal import equal_to
 try:
@@ -67,8 +68,18 @@ class AssertThatTest(unittest.TestCase):
 
         with self.assertRaises(AssertionError) as e:
             assert_that(False)
-            
+
         self.assertEqual('Assertion failed', str(e.exception))
+
+    def testWarnsForMatcherAsArg1(self):
+        assert_that(True)
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            assert_that(equal_to(1))
+
+            self.assertEqual(len(w), 1)
+            self.assertTrue("arg1 should be boolean" in str(w[-1].message))
 
 
 if __name__ == "__main__":
