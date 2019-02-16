@@ -8,15 +8,17 @@ __license__ = "BSD, see License.txt"
 
 class AllOf(BaseMatcher):
 
-    def __init__(self, *matchers):
+    def __init__(self, *matchers, describe_matcher_in_mismatch=True):
         self.matchers = matchers
+        self.describe_matcher_in_mismatch = describe_matcher_in_mismatch
 
     def matches(self, item, mismatch_description=None):
         for matcher in self.matchers:
             if not matcher.matches(item):
                 if mismatch_description:
-                    mismatch_description.append_description_of(matcher) \
-                                        .append_text(' ')
+                    if self.describe_matcher_in_mismatch:
+                        mismatch_description.append_description_of(matcher) \
+                                            .append_text(' ')
                     matcher.describe_mismatch(item, mismatch_description)
                 return False
         return True
