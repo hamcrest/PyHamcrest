@@ -8,9 +8,9 @@ __license__ = "BSD, see License.txt"
 
 class AllOf(BaseMatcher):
 
-    def __init__(self, *matchers, describe_matcher_in_mismatch=True):
+    def __init__(self, *matchers, **kwargs):
         self.matchers = matchers
-        self.describe_matcher_in_mismatch = describe_matcher_in_mismatch
+        self.describe_matcher_in_mismatch = kwargs.pop('describe_matcher_in_mismatch', True)  # No keyword-only args in 2.7 :-(
 
     def matches(self, item, mismatch_description=None):
         for matcher in self.matchers:
