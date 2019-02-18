@@ -1,3 +1,5 @@
+import pytest
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, '..')
@@ -5,9 +7,7 @@ if __name__ == '__main__':
 
 from hamcrest.core.core.raises import *
 
-from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
-import six
 import unittest
 
 __author__ = "Per Fagrell"
@@ -38,12 +38,32 @@ class RaisesTest(MatcherTest):
                                    raises(TypeError),
                                    23)
 
-    def testDoesNotMatchIfTheWrongExceptionTypeIsRaised(self):
+    @pytest.mark.skipif(sys.version_info >= (3, 0), reason="Message differs between Python versions")
+    def testDoesNotMatchIfTheWrongExceptionTypeIsRaisedPy2(self):
         self.assert_does_not_match('Wrong exception',
                             raises(IOError),
                             calling(raise_exception))
-        expected_message = "AssertionError('(){}',) of type <%s> was raised instead" % \
-                           ("class 'AssertionError'" if six.PY3 else "type 'exceptions.AssertionError'")
+        expected_message = "AssertionError('(){}',) of type <type 'exceptions.AssertionError'> was raised instead"
+        self.assert_mismatch_description(expected_message,
+                                         raises(TypeError),
+                                         calling(raise_exception))
+
+    @pytest.mark.skipif(not (3, 0) <= sys.version_info < (3, 7), reason="Message differs between Python versions")
+    def testDoesNotMatchIfTheWrongExceptionTypeIsRaisedPy3(self):
+        self.assert_does_not_match('Wrong exception',
+                            raises(IOError),
+                            calling(raise_exception))
+        expected_message = "AssertionError('(){}',) of type <class 'AssertionError'> was raised instead"
+        self.assert_mismatch_description(expected_message,
+                                         raises(TypeError),
+                                         calling(raise_exception))
+
+    @pytest.mark.skipif(sys.version_info < (3, 7), reason="Message differs between Python versions")
+    def testDoesNotMatchIfTheWrongExceptionTypeIsRaisedPy37(self):
+        self.assert_does_not_match('Wrong exception',
+                            raises(IOError),
+                            calling(raise_exception))
+        expected_message = "AssertionError('(){}') of type <class 'AssertionError'> was raised instead"
         self.assert_mismatch_description(expected_message,
                                          raises(TypeError),
                                          calling(raise_exception))

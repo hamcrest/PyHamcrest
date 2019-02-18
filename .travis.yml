@@ -1,26 +1,68 @@
 language: python
 
-python:
-  - 3.6
-
-env:
-  - TOX_ENV=py26
-  - TOX_ENV=py27
-  - TOX_ENV=pypy2.7
-  - TOX_ENV=py27-numpy
-  - TOX_ENV=py32
-  - TOX_ENV=py33
-  - TOX_ENV=py34
-  - TOX_ENV=py36
-  - TOX_ENV=py36-numpy
-  - TOX_ENV=pypy3.6
-  - TOX_ENV=docs-py3
+matrix:
+  include:
+    - python: 2.7
+      env:
+        - TOX_ENV=py26
+    - python: 2.7
+      env:
+        - TOX_ENV=py27
+    - python: 2.7
+      env:
+        - TOX_ENV=pypy2.7
+    - python: 2.7
+      env:
+        - TOX_ENV=py27-numpy
+    - python: 3.6
+      env:
+        - TOX_ENV=py32
+    - python: 3.6
+      env:
+        - TOX_ENV=py33
+    - python: 3.6
+      env:
+        - TOX_ENV=py34
+    - python: 3.5
+      env:
+        - TOX_ENV=py35
+    - python: 3.6
+      env:
+        - TOX_ENV=py36
+    - python: 3.6
+      env:
+        - TOX_ENV=pypy3.6
+    - python: 3.6
+      env:
+        - TOX_ENV=py36-numpy
+    - python: 3.7
+      dist: xenial
+      sudo: yes
+      env:
+        - TOX_ENV=py37
+    - os: osx
+      language: generic
+      python: 3.6
+      env:
+        - TOX_ENV=py36
+    - os: windows
+      language: sh
+      python: 3.7
+      before_install:
+        - choco install python3
+        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+        - python -m pip install --upgrade pip wheel
+      env:
+        - TOX_ENV=py37
+    - python: 3.6
+      env:
+        - TOX_ENV=docs-py3
 
 before_install:
   - export EASY_SETUP_URL='http://peak.telecommunity.com/dist/ez_setup.py'
 
 install:
-  - pip install tox coveralls
+  - pip install --upgrade tox coveralls
 
 script:
   - tox -e $TOX_ENV
