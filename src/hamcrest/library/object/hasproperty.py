@@ -1,8 +1,8 @@
-from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core import anything
+from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.allof import AllOf
-from hamcrest.core.string_description import StringDescription
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher as wrap_shortcut
+from hamcrest.core.string_description import StringDescription
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -153,4 +153,5 @@ def has_properties(*keys_valuematchers, **kv_args):
 
     return AllOf(*[has_property(property_name, property_value_matcher)
                    for property_name, property_value_matcher in base_dict.items()],
+                 describe_all_mismatches=True,
                  describe_matcher_in_mismatch=False)
