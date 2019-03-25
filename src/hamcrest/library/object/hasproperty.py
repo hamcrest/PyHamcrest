@@ -152,6 +152,6 @@ def has_properties(*keys_valuematchers, **kv_args):
         base_dict[key] = wrap_shortcut(value)
 
     return AllOf(*[has_property(property_name, property_value_matcher)
-                   for property_name, property_value_matcher in base_dict.items()],
+                   for property_name, property_value_matcher in sorted(base_dict.items())],
                  describe_all_mismatches=True,
                  describe_matcher_in_mismatch=False)
