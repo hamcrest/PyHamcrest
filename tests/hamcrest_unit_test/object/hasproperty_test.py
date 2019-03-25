@@ -3,10 +3,11 @@ if __name__ == '__main__':
     sys.path.insert(0, '..')
     sys.path.insert(0, '../..')
 
-from hamcrest.library.object.hasproperty import *
-
-from hamcrest_unit_test.matcher_test import MatcherTest
 import unittest
+
+from hamcrest import greater_than
+from hamcrest.library.object.hasproperty import *
+from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -141,6 +142,12 @@ class HasPropertiesTest(MatcherTest, ObjectPropertyMatcher):
         self.assert_describe_mismatch("property 'field' was 'value' and property 'field3' was 'value3'",
                                       has_properties(field='different', field2='value2', field3='alsodifferent'),
                                       ThreePropertiesNewStyle())
+
+    def testDescription(self):
+        self.assert_description("an object with a property 'a' matching <1>", has_properties(a=1))
+        self.assert_description("an object with properties 'a' matching <1> "
+                                "and 'b' matching a value greater than <2>",
+                                has_properties(a=1, b=greater_than(2)))
 
 
 if __name__ == '__main__':
