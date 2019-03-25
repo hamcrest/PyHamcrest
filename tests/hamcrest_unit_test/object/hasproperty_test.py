@@ -17,13 +17,14 @@ class OnePropertyOldStyle:
     field = 'value'
     field2 = 'value2'
 
-class OnePropertyNewStyle(object):
+class ThreePropertiesNewStyle(object):
 
     field = 'value'
     field2 = 'value2'
+    field3 = 'value3'
 
     def __repr__(self):
-        return 'OnePropertyNewStyle'
+        return 'ThreePropertiesNewStyle'
 
     def __str__(self):
         return repr(self)
@@ -63,7 +64,7 @@ class ObjectPropertyMatcher(object):
 
     match_sets = (
         ("old-style: %s", OnePropertyOldStyle),
-        ('new-style: %s', OnePropertyNewStyle),
+        ('new-style: %s', ThreePropertiesNewStyle),
         ('old-style, overriding: %s', OverridingOldStyle),
         ('new-style, using getattr: %s', OverridingNewStyleGetAttr),
         ('new-style, using getattribute: %s', OverridingNewStyleGetAttribute),
@@ -106,20 +107,20 @@ class HasPropertyTest(MatcherTest, ObjectPropertyMatcher):
                                 has_property('field', 'value'))
 
     def testDescribeMissingProperty(self):
-        self.assert_mismatch_description("<OnePropertyNewStyle> did not have the 'not_there' property",
-                                         has_property('not_there'), OnePropertyNewStyle())
+        self.assert_mismatch_description("<ThreePropertiesNewStyle> did not have the 'not_there' property",
+                                         has_property('not_there'), ThreePropertiesNewStyle())
 
     def testDescribePropertyValueMismatch(self):
         self.assert_mismatch_description("property 'field' was 'value'",
-                                         has_property('field', 'another_value'), OnePropertyNewStyle())
+                                         has_property('field', 'another_value'), ThreePropertiesNewStyle())
 
     def testMismatchDescription(self):
-        self.assert_describe_mismatch("<OnePropertyNewStyle> did not have the 'not_there' property",
+        self.assert_describe_mismatch("<ThreePropertiesNewStyle> did not have the 'not_there' property",
                                       has_property('not_there'),
-                                      OnePropertyNewStyle())
+                                      ThreePropertiesNewStyle())
 
     def testNoMismatchDescriptionOnMatch(self):
-        self.assert_no_mismatch_description(has_property('field', 'value'), OnePropertyNewStyle())
+        self.assert_no_mismatch_description(has_property('field', 'value'), ThreePropertiesNewStyle())
 
 
 class HasPropertiesTest(MatcherTest, ObjectPropertyMatcher):
@@ -137,9 +138,9 @@ class HasPropertiesTest(MatcherTest, ObjectPropertyMatcher):
                                           has_properties(field='value', field2='value2'))
 
     def testMismatchDescription(self):
-        self.assert_describe_mismatch("property 'field' was 'value'",
-                                      has_properties(field='different'),
-                                      OnePropertyNewStyle())
+        self.assert_describe_mismatch("property 'field' was 'value' and property 'field3' was 'value3'",
+                                      has_properties(field='different', field2='value2', field3='alsodifferent'),
+                                      ThreePropertiesNewStyle())
 
 
 if __name__ == '__main__':

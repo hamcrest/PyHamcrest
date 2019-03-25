@@ -11,17 +11,23 @@ class AllOf(BaseMatcher):
     def __init__(self, *matchers, **kwargs):
         self.matchers = matchers
         self.describe_matcher_in_mismatch = kwargs.pop('describe_matcher_in_mismatch', True)  # No keyword-only args in 2.7 :-(
+        self.describe_all_mismatches = kwargs.pop('describe_all_mismatches', False)
 
     def matches(self, item, mismatch_description=None):
-        for matcher in self.matchers:
+        found_mismatch = False
+        for i, matcher in enumerate(self.matchers):
             if not matcher.matches(item):
                 if mismatch_description:
                     if self.describe_matcher_in_mismatch:
                         mismatch_description.append_description_of(matcher) \
                                             .append_text(' ')
                     matcher.describe_mismatch(item, mismatch_description)
-                return False
-        return True
+                found_mismatch = True
+                if not self.describe_all_mismatches:
+                    break
+                elif i < len(self.matchers) - 1:
+                    mismatch_description.append_text(' and ')
+        return not found_mismatch
 
     def describe_mismatch(self, item, mismatch_description):
         self.matches(item, mismatch_description)
