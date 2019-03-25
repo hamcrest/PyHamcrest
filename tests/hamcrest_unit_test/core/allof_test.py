@@ -77,6 +77,12 @@ class AllOfTest(MatcherTest):
                                 all_of(equal_to('bad'), equal_to('good')),
                                 'bad')
 
+    def testMismatchDescriptionOptionallyDescribesMultipleFailingMatches(self):
+        self.assert_mismatch_description(
+            "'bad' was 'indifferent' and 'good' was 'indifferent'",
+            AllOf(equal_to('bad'), equal_to('indifferent'), equal_to('good'), describe_all_mismatches=True),
+            'indifferent')
+
 
 if __name__ == '__main__':
     unittest.main()
