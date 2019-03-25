@@ -5,7 +5,6 @@ if __name__ == '__main__':
 
 from hamcrest.library.object.hasproperty import *
 
-from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
 import unittest
 
@@ -136,6 +135,12 @@ class HasPropertiesTest(MatcherTest, ObjectPropertyMatcher):
     def testMatchesUsingKeywordArguments(self):
         self.assert_matches_for_all_types('matches using a kwarg dict',
                                           has_properties(field='value', field2='value2'))
+
+    def testMismatchDescription(self):
+        self.assert_describe_mismatch("property 'field' was 'value'",
+                                      has_properties(field='different'),
+                                      OnePropertyNewStyle())
+
 
 if __name__ == '__main__':
     unittest.main()
