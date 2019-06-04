@@ -35,4 +35,10 @@ class StringDescription(BaseDescription):
         return self.out
 
     def append(self, string):
-        self.out += six.text_type(string)
+        if six.PY3:
+            self.out += str(string)
+        else:
+            if isinstance(string, unicode):
+                self.out += string
+            else:
+                self.out += unicode(string, errors="ignore")

@@ -61,5 +61,10 @@ def test_description_append_valid_input(valid_input):
     desc.append(valid_input)
     str(desc)
 
+
+def test_description_append_invalid_input():
+    desc = StringDescription()
+    desc.append(chr(239))
+
 if __name__ == "__main__":
     unittest.main()
