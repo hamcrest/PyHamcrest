@@ -6,6 +6,7 @@ import re
 if os.environ.get('PYTHON_BUILD_DOCKER', None) == 'true':
     del os.link
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 try:
     from setuptools import setup, find_packages
@@ -14,15 +15,12 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
-def local(fname):
-    return os.path.join(os.path.dirname(__file__), fname)
-
 def read(fname):
-    return open(local(fname)).read()
+    return open(fname).read()
 
 # On Python 3, we can't "from hamcrest import __version__" (get ImportError),
 # so we extract the variable assignment and execute it ourselves.
-fh = open(local('src/hamcrest/__init__.py'))
+fh = open('src/hamcrest/__init__.py')
 try:
     for line in fh:
         if re.match('__version__.*', line):
