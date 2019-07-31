@@ -1,4 +1,5 @@
 language: python
+dist: xenial
 
 matrix:
   include:
@@ -21,6 +22,7 @@ matrix:
       env:
         - TOX_ENV=py33
     - python: 3.6
+      dist: trusty
       env:
         - TOX_ENV=py34
     - python: 3.5
@@ -36,7 +38,6 @@ matrix:
       env:
         - TOX_ENV=py36-numpy
     - python: 3.7
-      dist: xenial
       sudo: yes
       env:
         - TOX_ENV=py37
