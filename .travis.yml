@@ -41,6 +41,10 @@ matrix:
       sudo: yes
       env:
         - TOX_ENV=py37
+    - python: 3.8-dev
+      sudo: yes
+      env:
+        - TOX_ENV=py38
     - os: osx
       language: generic
       python: 3.6
