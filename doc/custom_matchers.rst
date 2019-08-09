@@ -74,3 +74,30 @@ Even though the ``on_a_saturday`` function creates a new matcher each time it
 is called, you should not assume this is the only usage pattern for your
 matcher. Therefore you should make sure your matcher is stateless, so a single
 instance can be reused between matches.
+
+If you need your matcher to provide more details in case of a mismatch, you
+can override the :py:meth:`~hamcrest.core.base_matcher.BaseMatcher.describe_mismatch`
+method. For example, if we added this
+:py:meth:`~hamcrest.core.base_matcher.BaseMatcher.describe_mismatch` implementation
+to our ``IsGivenDayOfWeek`` matcher::
+
+    def describe_mismatch(self, item, mismatch_description):
+        day_as_string = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
+                         'Friday', 'Saturday', 'Sunday']
+        mismatch_description.append_text('got ') \
+                            .append_description_of(item) \
+                            .append_text(' which is a ') \
+                            .append_text(day_as_string[item.weekday()])
+
+Our matcher would now give the message::
+
+    AssertionError:
+    Expected: is calendar date falling on Saturday
+         got: <2008-04-06> which is a Sunday
+
+
+Occasionally, you might also need your matcher to explain why it matched successfully.
+For example, if your matcher is wrapped by a :py:meth:`~hamcrest.core.core.isnot.is_not`
+matcher, the ``is_not`` matcher can only explain its mismatches by understanding why your
+matcher succeeded. In this case, your matcher can implement
+:py:meth:`~hamcrest.core.base_matcher.BaseMatcher.describe_match`.
