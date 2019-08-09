@@ -1,8 +1,9 @@
 import unittest
 
 import pytest
+from hamcrest import not_
 from hamcrest.core.core.raises import *
-from hamcrest_unit_test.matcher_test import MatcherTest
+from hamcrest_unit_test.matcher_test import MatcherTest, assert_mismatch_description
 
 if __name__ == "__main__":
     import sys
@@ -91,6 +92,36 @@ class RaisesTest(MatcherTest):
         matcher = raises(AssertionError)
         matcher.describe_mismatch(function, object())
         self.assertTrue(function.called)
+
+
+@pytest.mark.parametrize(
+    "expected_message",
+    [
+        pytest.param(
+            "but AssertionError('(){}',) of type <type 'exceptions.AssertionError'> was raised.",
+            marks=pytest.mark.skipif(
+                sys.version_info >= (3, 0), reason="Message differs between Python versions"
+            ),
+        ),
+        pytest.param(
+            "but AssertionError('(){}',) of type <class 'AssertionError'> was raised.",
+            marks=pytest.mark.skipif(
+                not (3, 0) <= sys.version_info < (3, 7),
+                reason="Message differs between Python versions",
+            ),
+        ),
+        pytest.param(
+            "but AssertionError('(){}') of type <class 'AssertionError'> was raised.",
+            marks=pytest.mark.skipif(
+                sys.version_info < (3, 7), reason="Message differs between Python versions"
+            ),
+        ),
+    ],
+)
+def test_gives_correct_message_when_wrapped_with_is_not(expected_message):
+    assert_mismatch_description(
+        expected_message, not_(raises(AssertionError)), calling(raise_exception)
+    )
 
 
 class CallingTest(unittest.TestCase):

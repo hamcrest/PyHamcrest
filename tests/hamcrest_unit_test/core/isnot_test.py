@@ -35,10 +35,10 @@ class IsNotTest(MatcherTest):
         self.assert_no_mismatch_description(is_not("A"), "B")
 
     def testMismatchDescriptionShowsActualArgument(self):
-        self.assert_mismatch_description("was 'A'", is_not("A"), "A")
+        self.assert_mismatch_description("but was 'A'", is_not("A"), "A")
 
     def testDescribeMismatch(self):
-        self.assert_describe_mismatch("was 'A'", is_not("A"), "A")
+        self.assert_describe_mismatch("but was 'A'", is_not("A"), "A")
 
 
 if __name__ == "__main__":
