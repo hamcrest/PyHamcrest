@@ -147,6 +147,8 @@ PyHamcrest comes with a library of useful matchers:
   * :py:func:`~hamcrest.core.core.isanything.anything` - match anything, useful
     in composite matchers when you don't care about a particular value
   * :py:func:`~hamcrest.core.core.isnot.is_not` - negate the matcher
+  * :py:func:`~hamcrest.core.core.isnot.not_` - alias of
+    :py:func:`~hamcrest.core.core.isnot.is_not` for better readability of negations.
 
 * Sequence
 
