@@ -49,3 +49,19 @@ class Matcher(SelfDescribing):
 
         """
         raise NotImplementedError("describe_mismatch")
+
+    def describe_match(self, item, match_description):
+        """Generates a description of why the matcher has accepted the item.
+
+        The description may be part of a larger description of why a matching
+        failed, so it should be concise.
+
+        This method assumes that ``matches(item)`` is ``True``, but will not
+        check this.
+
+        :param item: The item that the
+            :py:class:`~hamcrest.core.matcher.Matcher` has accepted.
+        :param match_description: The description to be built or appended to.
+
+        """
+        raise NotImplementedError("describe_match")
