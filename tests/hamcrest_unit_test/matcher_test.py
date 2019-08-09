@@ -70,6 +70,15 @@ def assert_mismatch_description(expected, matcher, arg):
     assert expected == str(description)
 
 
+def assert_match_description(expected, matcher, item):
+    result = matcher.matches(item, StringDescription())
+    assert result, "Precondition: Matcher should match item"
+
+    description = StringDescription()
+    matcher.describe_match(item, description)
+    assert expected == str(description)
+
+
 def assert_describe_mismatch(expected, matcher, arg):
     description = StringDescription()
     matcher.describe_mismatch(arg, description)

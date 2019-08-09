@@ -6,21 +6,36 @@ if __name__ == "__main__":
 import unittest
 
 from hamcrest.core.base_matcher import *
+from hamcrest_unit_test.matcher_test import *
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-class TestingBaseMatcher(BaseMatcher):
+class FailingBaseMatcher(BaseMatcher):
     def describe_to(self, description):
         description.append_text("SOME DESCRIPTION")
+
+    def _matches(self, item):
+        return False
+
+
+class PassingBaseMatcher(BaseMatcher):
+    def _matches(self, item):
+        return True
 
 
 class BaseMatcherTest(unittest.TestCase):
     def testStrFunctionShouldDescribeMatcher(self):
-        matcher = TestingBaseMatcher()
+        matcher = FailingBaseMatcher()
         self.assertEqual("SOME DESCRIPTION", str(matcher))
+
+    def testMismatchDescriptionShouldDescribeItem(self):
+        assert_mismatch_description("was <99>", FailingBaseMatcher(), 99)
+
+    def testMatchDescriptionShouldDescribeItem(self):
+        assert_match_description("was <99>", PassingBaseMatcher(), 99)
 
 
 if __name__ == "__main__":

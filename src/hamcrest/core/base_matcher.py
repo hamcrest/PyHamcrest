@@ -31,3 +31,6 @@ class BaseMatcher(Matcher):
 
     def describe_mismatch(self, item, mismatch_description):
         mismatch_description.append_text("was ").append_description_of(item)
+
+    def describe_match(self, item, match_description):
+        match_description.append_text("was ").append_description_of(item)
