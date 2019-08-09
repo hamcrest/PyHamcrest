@@ -18,6 +18,10 @@ class IsNot(BaseMatcher):
     def describe_to(self, description):
         description.append_text("not ").append_description_of(self.matcher)
 
+    def describe_mismatch(self, item, mismatch_description):
+        mismatch_description.append_text("but ")
+        self.matcher.describe_match(item, mismatch_description)
+
 
 def wrap_value_or_type(x):
     if is_matchable_type(x):

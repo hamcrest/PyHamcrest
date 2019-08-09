@@ -48,10 +48,10 @@ class NotNoneTest(MatcherTest):
         self.assert_no_mismatch_description(not_none(), "hi")
 
     def testMismatchDescriptionShowsActualArgument(self):
-        self.assert_mismatch_description("was <None>", not_none(), None)
+        self.assert_mismatch_description("but was <None>", not_none(), None)
 
     def testDescribeMismatch(self):
-        self.assert_describe_mismatch("was <None>", not_none(), None)
+        self.assert_describe_mismatch("but was <None>", not_none(), None)
 
 
 if __name__ == "__main__":
