@@ -5,14 +5,9 @@ from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isequal import equal_to
 import unittest
 
-import sys
-if sys.version < '3':
-    import codecs
-    def u(x):
-        return codecs.unicode_escape_decode(x)[0]
-else:
-    def u(x):
-        return x
+
+def u(x):
+    return x
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
