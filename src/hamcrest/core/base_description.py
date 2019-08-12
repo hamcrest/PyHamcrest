@@ -4,7 +4,6 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 import warnings
-import six
 
 from hamcrest.core.description import Description
 from hamcrest.core.selfdescribingvalue import SelfDescribingValue
@@ -24,12 +23,8 @@ class BaseDescription(Description):
     def append_description_of(self, value):
         if not ismock(value) and hasmethod(value, 'describe_to'):
             value.describe_to(self)
-        elif six.PY3 and isinstance(value, six.text_type):
+        elif isinstance(value, str):
             self.append(repr(value))
-        elif six.PY2 and isinstance(value, six.binary_type):
-            self.append_string_in_python_syntax(value)
-        elif isinstance(value, six.text_type):
-            self.append_string_in_python_syntax(value)
         else:
             description = str(value)
             if description[:1] == '<' and description[-1:] == '>':

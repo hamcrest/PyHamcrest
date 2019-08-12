@@ -7,10 +7,7 @@ from hamcrest.library.text.stringmatches import *
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 import re
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+import unittest
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"

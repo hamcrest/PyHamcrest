@@ -1,4 +1,3 @@
-import six
 from hamcrest.library.text.isequal_ignoring_case import equal_to_ignoring_case
 
 from hamcrest_unit_test.matcher_test import MatcherTest
@@ -29,18 +28,6 @@ class IsEqualIgnoringCaseTest(MatcherTest):
 
     def testFailsIfMatchingAgainstNonString(self):
         self.assert_does_not_match('non-string', matcher, object())
-
-    def testCanApplyUnicodeStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-unicode',
-                            equal_to_ignoring_case(six.u('heLLo')), six.u('HelLo'))
-
-    def testCanApplyPlainStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-ascii',
-                            equal_to_ignoring_case(six.u('heLLo')), 'HelLo')
-
-    def testCanApplyUnicodeStringToPlainMatcher(self):
-        self.assert_matches('ascii-unicode',
-                            equal_to_ignoring_case('heLLo'), six.u('HelLo'))
 
     def testHasAReadableDescription(self):
         self.assert_description("'heLLo' ignoring case", matcher)

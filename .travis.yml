@@ -3,28 +3,6 @@ dist: xenial
 
 matrix:
   include:
-    - python: 2.7
-      env:
-        - TOX_ENV=py26
-    - python: 2.7
-      env:
-        - TOX_ENV=py27
-    - python: 2.7
-      env:
-        - TOX_ENV=pypy2.7
-    - python: 2.7
-      env:
-        - TOX_ENV=py27-numpy
-    - python: 3.6
-      env:
-        - TOX_ENV=py32
-    - python: 3.6
-      env:
-        - TOX_ENV=py33
-    - python: 3.6
-      dist: trusty
-      env:
-        - TOX_ENV=py34
     - python: 3.5
       env:
         - TOX_ENV=py35

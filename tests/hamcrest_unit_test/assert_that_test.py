@@ -3,10 +3,7 @@ from __future__ import with_statement
 import warnings
 from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core.isequal import equal_to
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+import unittest
 
 import sys
 if sys.version < '3':

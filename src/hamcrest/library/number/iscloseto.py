@@ -1,4 +1,3 @@
-import six
 from hamcrest.core.base_matcher import BaseMatcher
 from math import fabs
 
@@ -10,7 +9,7 @@ __license__ = "BSD, see License.txt"
 def isnumeric(value):
     """Confirm that 'value' can be treated numerically; duck-test accordingly
     """
-    if isinstance(value, (float, complex) + six.integer_types):
+    if isinstance(value, (float, complex, int)):
         return True
 
     try:
