@@ -40,6 +40,9 @@ matrix:
     - python: 3.6
       env:
         - TOX_ENV=docs-py3
+    - python: 3.7
+      env:
+        - TOX_ENV=check-format
 
 before_install:
   - export EASY_SETUP_URL='http://peak.telecommunity.com/dist/ez_setup.py'
