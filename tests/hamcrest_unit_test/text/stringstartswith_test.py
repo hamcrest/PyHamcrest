@@ -1,9 +1,5 @@
-import six
-
 from hamcrest.library.text.stringstartswith import *
 
-from hamcrest.core.assert_that import assert_that
-from hamcrest.core.core.isnot import is_not
 from hamcrest_unit_test.matcher_test import MatcherTest
 import unittest
 
@@ -37,18 +33,6 @@ class StringStartsWithTest(MatcherTest):
 
     def testFailsIfMatchingAgainstNonString(self):
         self.assert_does_not_match('non-string', matcher, object())
-
-    def testCanApplyUnicodeStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-unicode',
-                            starts_with(six.u('foo')), six.u('foo bar baz'))
-
-    def testCanApplyPlainStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-ascii',
-                            starts_with(six.u('foo')), 'foo bar baz')
-
-    def testCanApplyUnicodeStringToPlainMatcher(self):
-        self.assert_matches('ascii-unicode',
-                            starts_with(six.u('foo')), six.u('foo bar baz'))
 
     def testHasAReadableDescription(self):
         self.assert_description("a string starting with 'EXCERPT'", matcher)

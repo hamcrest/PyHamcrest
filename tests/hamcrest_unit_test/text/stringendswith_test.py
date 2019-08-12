@@ -1,5 +1,3 @@
-import six
-
 from hamcrest.library.text.stringendswith import *
 
 from hamcrest_unit_test.matcher_test import MatcherTest
@@ -36,18 +34,6 @@ class StringEndsWithTest(MatcherTest):
 
     def testFailsIfMatchingAgainstNonString(self):
         self.assert_does_not_match('non-string', matcher, object())
-
-    def testCanApplyUnicodeStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-unicode',
-                            ends_with(six.u('baz')), six.u('foo bar baz'))
-
-    def testCanApplyPlainStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-ascii',
-                            ends_with(six.u('baz')), 'foo bar baz')
-
-    def testCanApplyUnicodeStringToPlainMatcher(self):
-        self.assert_matches('ascii-unicode',
-                            ends_with(six.u('baz')), six.u('foo bar baz'))
 
     def testHasAReadableDescription(self):
         self.assert_description("a string ending with 'EXCERPT'", matcher)

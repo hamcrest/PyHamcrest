@@ -2,8 +2,6 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-import six
-
 
 class QuasiDictionary(object):
     def items(self):
@@ -16,7 +14,7 @@ class QuasiDictionary(object):
         return QuasiDictionaryValueIterator()
 
 
-class BaseQuasiDictionaryIterator(six.Iterator):
+class BaseQuasiDictionaryIterator():
     def __init__(self):
         self.index = 1
 

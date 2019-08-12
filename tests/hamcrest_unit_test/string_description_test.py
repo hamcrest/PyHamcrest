@@ -1,13 +1,9 @@
-import six
 from hamcrest.core.string_description import *
 
 from hamcrest.core.selfdescribing import SelfDescribing
 import re
 import pytest
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+import unittest
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -42,20 +38,14 @@ class StringDescriptionTest(unittest.TestCase):
         expected = re.compile("<object object at 0x[0-9a-fA-F]+>")
         self.assertTrue(expected.match(str(self.description)))
 
-    @unittest.skip("Describe unicode strings doesn't malform in Python 3. Six makes this go away anyway :/")
-    def testDescribeUnicodeStringAsBytes(self):
-        self.description.append_description_of(six.u('\u05d0'))
-        self.assertEqual(six.u('\\u05d0'), str(self.description))
-
-    @unittest.skipUnless(six.PY3, "Describe unicode strings only malforms in Python 2")
     def testDescribeUnicodeStringAsUnicode(self):
-        self.description.append_description_of(six.u('\u05d0'))
-        self.assertEqual(six.u("'\u05d0'"), str(self.description))
+        self.description.append_description_of('\u05d0')
+        self.assertEqual("'\u05d0'", str(self.description))
 
 
 # below is a set of things that should append without error to string
 # descriptions
-@pytest.mark.parametrize('valid_input', ('native', six.b('bytes'), six.u('unicode')))
+@pytest.mark.parametrize('valid_input', (b'bytes', 'unicode'))
 def test_description_append_valid_input(valid_input):
     desc = StringDescription()
     desc.append(valid_input)

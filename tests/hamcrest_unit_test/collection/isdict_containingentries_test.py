@@ -5,15 +5,9 @@ if __name__ == '__main__':
 
 from hamcrest.library.collection.isdict_containingentries import *
 
-import platform
-
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
-try:
-    from unittest import skipIf
-    import unittest
-except ImportError:
-    import unittest2 as unittest
+import unittest
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

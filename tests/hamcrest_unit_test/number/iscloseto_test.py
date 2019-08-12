@@ -1,11 +1,7 @@
-import six
 from hamcrest.library.number.iscloseto import *
 
 from hamcrest_unit_test.matcher_test import MatcherTest
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+import unittest
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -25,8 +21,7 @@ class IsCloseToTest(MatcherTest):
         self.assert_does_not_match('too large', matcher, 1.6)
 
     def testMatcherCreationAcceptsOtherNumericTypes(self):
-        for t in six.integer_types:
-            close_to(t(5), t(1))
+        close_to(int(5), int(1))
 
     def testMatcherCreationRequiresNumbers(self):
         self.assertRaises(TypeError, close_to, 'a', 0.5)

@@ -3,12 +3,7 @@ import warnings
 from hamcrest import assert_that, has_item, has_properties, has_string, anything
 from hamcrest.core.string_description import StringDescription
 
-try:
-    from unittest import skipIf
-    import unittest
-except ImportError:
-    import unittest2 as unittest
-
+import unittest
 import logging
 
 log = logging.getLogger(__name__)

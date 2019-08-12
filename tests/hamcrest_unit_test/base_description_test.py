@@ -1,7 +1,6 @@
 # coding: utf-8
-import six
 import pytest
-from mock import sentinel, patch
+from mock import sentinel
 
 from hamcrest.core.base_description import BaseDescription
 from hamcrest.core.selfdescribing import SelfDescribing
@@ -35,11 +34,9 @@ def test_append_text_delegates(desc):
 
 @pytest.mark.parametrize('described, appended', (
     (Described(), 'described'),
-    pytest.param(six.u('unicode-py2'), "'unicode-py2'", marks=pytest.mark.skipif(six.PY3, reason="py2 only")),
-    pytest.param(six.b('bytes-py2'), "'bytes-py2'", marks=pytest.mark.skipif(six.PY3, reason="py2 only")),
-    pytest.param(six.u('unicode-py3'), "'unicode-py3'", marks=pytest.mark.skipif(six.PY2, reason="py3 only")),
-    pytest.param(six.b('bytes-py3'), "<b'bytes-py3'>", marks=pytest.mark.skipif(six.PY2, reason="py3 only")),
-    (six.u("\U0001F4A9"), six.u("'{0}'").format(six.u("\U0001F4A9"))),
+    ('unicode-py3', "'unicode-py3'"),
+    (b'bytes-py3', "<b'bytes-py3'>"),
+    ("\U0001F4A9", "'{0}'".format("\U0001F4A9")),
 ))
 def test_append_description_types(desc, described, appended):
     desc.append_description_of(described)

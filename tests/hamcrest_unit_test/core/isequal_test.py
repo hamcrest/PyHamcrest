@@ -7,8 +7,6 @@ from hamcrest.core.core.isequal import *
 
 from hamcrest_unit_test.matcher_test import MatcherTest
 import unittest
-import pytest
-import six
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -55,18 +53,13 @@ class IsEqualTest(MatcherTest):
         self.assert_describe_mismatch("was 'bad'", equal_to('good'), 'bad')
 
     def testEqualToWithEqualBytes(self):
-        self.assert_matches("equal for b", equal_to(six.b('a')), six.b('a'))
+        self.assert_matches("equal for b", equal_to('a'), 'a')
 
     def testNotEqualToWithEqualBytes(self):
-        self.assert_does_not_match("equal for b", equal_to(six.b('a')), six.b('b'))
+        self.assert_does_not_match("equal for b", equal_to('a'), 'b')
 
-    @pytest.mark.skipif(six.PY2, reason="Py3 formatting")
-    def testByteInequalityDescriptionPy3(self):
-        self.assert_mismatch_description("was <{0!r}>".format(six.b('b')), equal_to(six.b('a')), six.b('b'))
-
-    @pytest.mark.skipif(six.PY3, reason="Py2 formatting")
-    def testByteInequalityDescriptionPy2(self):
-        self.assert_mismatch_description("was {0!r}".format(six.b('b')), equal_to(six.b('a')), six.b('b'))
+    def testByteInequalityDescription(self):
+        self.assert_mismatch_description("was <{0!r}>".format(b'b'), equal_to(b'a'), b'b')
 
 
 if __name__ == '__main__':

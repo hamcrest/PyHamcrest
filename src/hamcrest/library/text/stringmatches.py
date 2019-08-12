@@ -4,8 +4,6 @@ __license__ = "BSD, see License.txt"
 
 import re
 
-import six
-
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.hasmethod import hasmethod
 
@@ -34,7 +32,7 @@ def matches_regexp(pattern):
     evaluated object.
 
     """
-    if isinstance(pattern, six.string_types):
+    if isinstance(pattern, str):
         pattern = re.compile(pattern)
 
     return StringMatchesPattern(pattern)

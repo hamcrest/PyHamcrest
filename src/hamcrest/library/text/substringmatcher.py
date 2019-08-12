@@ -4,12 +4,10 @@ __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher
 
-import six
-
 class SubstringMatcher(BaseMatcher):
 
     def __init__(self, substring):
-        if not isinstance(substring, six.string_types):
+        if not isinstance(substring, str):
             raise TypeError(self.__class__.__name__ + ' requires string')
         self.substring = substring
 

@@ -1,5 +1,3 @@
-import six
-
 from hamcrest.core.base_matcher import Matcher
 from hamcrest.core.core.isequal import equal_to
 
@@ -23,9 +21,6 @@ def wrap_matcher(x):
 
 def is_matchable_type(expected_type):
     if isinstance(expected_type, type):
-        return True
-
-    if isinstance(expected_type, six.class_types):
         return True
 
     return False

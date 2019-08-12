@@ -1,8 +1,5 @@
 from __future__ import absolute_import
 
-import codecs
-import six
-
 from .base_description import BaseDescription
 
 __author__ = "Jon Reid"
@@ -35,10 +32,4 @@ class StringDescription(BaseDescription):
         return self.out
 
     def append(self, string):
-        if six.PY3:
-            self.out += str(string)
-        else:
-            if isinstance(string, unicode):
-                self.out += string
-            else:
-                self.out += unicode(string, errors="ignore")
+        self.out += str(string)

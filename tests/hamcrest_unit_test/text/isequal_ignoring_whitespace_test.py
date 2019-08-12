@@ -1,4 +1,3 @@
-import six
 from hamcrest.library.text.isequal_ignoring_whitespace import *
 
 from hamcrest_unit_test.matcher_test import MatcherTest
@@ -36,21 +35,6 @@ class IsEqualIgnoringWhiteSpaceTest(MatcherTest):
 
     def testFailsIfMatchingAgainstNonString(self):
         self.assert_does_not_match('non-string', matcher, object())
-
-    def testCanApplyUnicodeStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-unicode',
-                            equal_to_ignoring_whitespace(six.u('foo\nbar')),
-                            six.u('foo bar'))
-
-    def testCanApplyPlainStringToUnicodeMatcher(self):
-        self.assert_matches('unicode-ascii',
-                            equal_to_ignoring_whitespace(six.u('foo\nbar')),
-                            'foo bar')
-
-    def testCanApplyUnicodeStringToPlainMatcher(self):
-        self.assert_matches('ascii-unicode',
-                            equal_to_ignoring_whitespace('foo\n bar'),
-                            six.u('foo bar'))
 
     def testDescribesItselfAsIgnoringWhiteSpace(self):
         self.assert_description("'foo\\nbar' ignoring whitespace",

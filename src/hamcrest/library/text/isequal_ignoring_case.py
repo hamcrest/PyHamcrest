@@ -4,18 +4,17 @@ __license__ = "BSD, see License.txt"
 
 from hamcrest.core.base_matcher import BaseMatcher
 
-import six
 
 class IsEqualIgnoringCase(BaseMatcher):
 
     def __init__(self, string):
-        if not isinstance(string, six.string_types):
+        if not isinstance(string, str):
             raise TypeError('IsEqualIgnoringCase requires string')
         self.original_string = string
         self.lowered_string = string.lower()
 
     def _matches(self, item):
-        if not isinstance(item, six.string_types):
+        if not isinstance(item, str):
             return False
         return self.lowered_string == item.lower()
 
