@@ -25,10 +25,6 @@ finally:
     if fh:
         fh.close()
 
-extra_attributes = {}
-# if sys.version_info >= (3,):
-#     extra_attributes['use_2to3'] = True
-
 params = dict(
     name="PyHamcrest",
     version=__version__,  # flake8:noqa
@@ -64,8 +60,7 @@ params = dict(
         "Topic :: Software Development :: Quality Assurance",
         "Topic :: Software Development :: Testing",
     ],
-    **extra_attributes,
 )
 
-all_params = dict(params.items(), **extra_attributes)
+all_params = dict(params.items())
 setup(**all_params)
