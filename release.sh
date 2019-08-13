@@ -23,7 +23,7 @@ function do_test() {
 }
 
 function do_all_vers() {
-    for python_version in py26 py27 py32 py33 py34; do
+    for python_version in py35 py36 py37; do
         $1 $python_version || failed="$failed $python_version"
     done
     $1 pypy pypy || failed="$failed pypy"
@@ -46,6 +46,6 @@ do_all_vers do_test || exit 1
 do_all_vers do_release || exit 1
 
 echo "All releases uploaded; uploading source release as well"
-$HERE/.tox/py27/bin/python $HERE/setup.py sdist upload
+$HERE/.tox/py37/bin/python $HERE/setup.py sdist upload
 
 exit $rc
