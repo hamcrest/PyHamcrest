@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 """Matchers that perform text comparisons."""
 
 from .isequal_ignoring_case import equal_to_ignoring_case

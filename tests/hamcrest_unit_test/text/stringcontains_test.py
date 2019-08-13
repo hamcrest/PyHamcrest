@@ -1,4 +1,3 @@
-from __future__ import with_statement
 from hamcrest.library.text.stringcontains import contains_string
 from hamcrest_unit_test.matcher_test import *
 import unittest

@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 """Matchers that inspect objects and classes."""
 
 from .haslength import has_length

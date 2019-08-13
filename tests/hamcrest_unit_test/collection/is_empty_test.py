@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from hamcrest.library.collection.is_empty import *
 
 from hamcrest_unit_test.matcher_test import MatcherTest

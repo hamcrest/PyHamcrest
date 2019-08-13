@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from hamcrest.library.collection.issequence_containinginorder import *
 
 from hamcrest.core.core.isequal import equal_to

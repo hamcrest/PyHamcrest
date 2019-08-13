@@ -1,5 +1,4 @@
 """Matchers of collections."""
-from __future__ import absolute_import
 from .isdict_containing import has_entry
 from .isdict_containingentries import has_entries
 from .isdict_containingkey import has_key

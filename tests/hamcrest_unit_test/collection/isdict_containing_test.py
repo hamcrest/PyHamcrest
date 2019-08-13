@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from hamcrest.library.collection.isdict_containing import *
 
 from hamcrest.core.core.isequal import equal_to

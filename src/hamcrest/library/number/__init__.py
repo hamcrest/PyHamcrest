@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 """Matchers that perform numeric comparisons."""
 
 from .iscloseto import close_to
