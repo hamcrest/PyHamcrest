@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 """Utilities for integrating Hamcrest with other libraries."""
 
 from .match_equality import match_equality

@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from .base_description import BaseDescription
 
 __author__ = "Jon Reid"
