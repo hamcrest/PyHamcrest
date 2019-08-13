@@ -8,24 +8,21 @@ __license__ = "BSD, see License.txt"
 
 
 class HasLength(BaseMatcher):
-
     def __init__(self, len_matcher):
         self.len_matcher = len_matcher
 
     def _matches(self, item):
-        if not hasmethod(item, '__len__'):
+        if not hasmethod(item, "__len__"):
             return False
         return self.len_matcher.matches(len(item))
 
     def describe_mismatch(self, item, mismatch_description):
         super(HasLength, self).describe_mismatch(item, mismatch_description)
-        if hasmethod(item, '__len__'):
-            mismatch_description.append_text(' with length of ')    \
-                                .append_description_of(len(item))
+        if hasmethod(item, "__len__"):
+            mismatch_description.append_text(" with length of ").append_description_of(len(item))
 
     def describe_to(self, description):
-        description.append_text('an object with length of ')    \
-                    .append_description_of(self.len_matcher)
+        description.append_text("an object with length of ").append_description_of(self.len_matcher)
 
 
 def has_length(match):

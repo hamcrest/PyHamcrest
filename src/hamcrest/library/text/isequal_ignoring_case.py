@@ -6,10 +6,9 @@ from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsEqualIgnoringCase(BaseMatcher):
-
     def __init__(self, string):
         if not isinstance(string, str):
-            raise TypeError('IsEqualIgnoringCase requires string')
+            raise TypeError("IsEqualIgnoringCase requires string")
         self.original_string = string
         self.lowered_string = string.lower()
 
@@ -19,8 +18,7 @@ class IsEqualIgnoringCase(BaseMatcher):
         return self.lowered_string == item.lower()
 
     def describe_to(self, description):
-        description.append_description_of(self.original_string)    \
-                   .append_text(' ignoring case')
+        description.append_description_of(self.original_string).append_text(" ignoring case")
 
 
 def equal_to_ignoring_case(string):

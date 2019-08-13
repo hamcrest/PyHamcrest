@@ -1,14 +1,15 @@
-import pytest
-
-if __name__ == '__main__':
-    import sys
-    sys.path.insert(0, '..')
-    sys.path.insert(0, '../..')
-
-from hamcrest.core.core.raises import *
-
-from hamcrest_unit_test.matcher_test import MatcherTest
 import unittest
+
+import pytest
+from hamcrest.core.core.raises import *
+from hamcrest_unit_test.matcher_test import MatcherTest
+
+if __name__ == "__main__":
+    import sys
+
+    sys.path.insert(0, "..")
+    sys.path.insert(0, "../..")
+
 
 __author__ = "Per Fagrell"
 __copyright__ = "Copyright 2013 hamcrest.org"
@@ -29,69 +30,68 @@ def raise_baseException(*args, **kwargs):
 
 class RaisesTest(MatcherTest):
     def testMatchesIfFunctionRaisesTheExactExceptionExpected(self):
-        self.assert_matches('Right exception',
-                            raises(AssertionError),
-                            calling(raise_exception))
+        self.assert_matches("Right exception", raises(AssertionError), calling(raise_exception))
 
     def testDoesNotMatchTypeErrorIfActualIsNotCallable(self):
-        self.assert_does_not_match('Not callable',
-                                   raises(TypeError),
-                                   23)
+        self.assert_does_not_match("Not callable", raises(TypeError), 23)
 
-    @pytest.mark.skipif(not (3, 0) <= sys.version_info < (3, 7), reason="Message differs between Python versions")
+    @pytest.mark.skipif(
+        not (3, 0) <= sys.version_info < (3, 7), reason="Message differs between Python versions"
+    )
     def testDoesNotMatchIfTheWrongExceptionTypeIsRaisedPy3(self):
-        self.assert_does_not_match('Wrong exception',
-                            raises(IOError),
-                            calling(raise_exception))
-        expected_message = "AssertionError('(){}',) of type <class 'AssertionError'> was raised instead"
-        self.assert_mismatch_description(expected_message,
-                                         raises(TypeError),
-                                         calling(raise_exception))
+        self.assert_does_not_match("Wrong exception", raises(IOError), calling(raise_exception))
+        expected_message = (
+            "AssertionError('(){}',) of type <class 'AssertionError'> was raised instead"
+        )
+        self.assert_mismatch_description(
+            expected_message, raises(TypeError), calling(raise_exception)
+        )
 
     @pytest.mark.skipif(sys.version_info < (3, 7), reason="Message differs between Python versions")
     def testDoesNotMatchIfTheWrongExceptionTypeIsRaisedPy37(self):
-        self.assert_does_not_match('Wrong exception',
-                            raises(IOError),
-                            calling(raise_exception))
-        expected_message = "AssertionError('(){}') of type <class 'AssertionError'> was raised instead"
-        self.assert_mismatch_description(expected_message,
-                                         raises(TypeError),
-                                         calling(raise_exception))
+        self.assert_does_not_match("Wrong exception", raises(IOError), calling(raise_exception))
+        expected_message = (
+            "AssertionError('(){}') of type <class 'AssertionError'> was raised instead"
+        )
+        self.assert_mismatch_description(
+            expected_message, raises(TypeError), calling(raise_exception)
+        )
 
     def testMatchesIfFunctionRaisesASubclassOfTheExpectedException(self):
-        self.assert_matches('Subclassed Exception',
-                            raises(Exception),
-                            calling(raise_exception))
+        self.assert_matches("Subclassed Exception", raises(Exception), calling(raise_exception))
 
     def testMatchesIfFunctionRaisesASubclassOfTheExpectedBaseException(self):
-        self.assert_matches('Subclassed BasedException',
-                            raises(BaseException),
-                            calling(raise_baseException))
+        self.assert_matches(
+            "Subclassed BasedException", raises(BaseException), calling(raise_baseException)
+        )
 
     def testDoesNotMatchIfFunctionDoesNotRaiseException(self):
-        self.assert_does_not_match('No exception',
-                            raises(ValueError),
-                            calling(no_exception))
+        self.assert_does_not_match("No exception", raises(ValueError), calling(no_exception))
 
     def testDoesNotMatchExceptionIfRegularExpressionDoesNotMatch(self):
-        self.assert_does_not_match('Bad regex',
-                                   raises(AssertionError, "Phrase not found"),
-                                   calling(raise_exception))
+        self.assert_does_not_match(
+            "Bad regex", raises(AssertionError, "Phrase not found"), calling(raise_exception)
+        )
 
     def testMatchesRegularExpressionToStringifiedException(self):
-        self.assert_matches('Regex',
-                            raises(AssertionError, "(3, 1, 4)"),
-                            calling(raise_exception).with_args(3,1,4))
+        self.assert_matches(
+            "Regex",
+            raises(AssertionError, "(3, 1, 4)"),
+            calling(raise_exception).with_args(3, 1, 4),
+        )
 
-        self.assert_matches('Regex',
-                            raises(AssertionError, "([\d, ]+)"),
-                            calling(raise_exception).with_args(3,1,4))
+        self.assert_matches(
+            "Regex",
+            raises(AssertionError, "([\d, ]+)"),
+            calling(raise_exception).with_args(3, 1, 4),
+        )
 
     def testDescribeMismatchWillCallItemIfNotTheOriginalMatch(self):
         function = Callable()
         matcher = raises(AssertionError)
         matcher.describe_mismatch(function, object())
         self.assertTrue(function.called)
+
 
 class CallingTest(unittest.TestCase):
     def testCallingDoesNotImmediatelyExecuteFunction(self):

@@ -8,24 +8,21 @@ __license__ = "BSD, see License.txt"
 
 
 class IsDictContaining(BaseMatcher):
-
     def __init__(self, key_matcher, value_matcher):
         self.key_matcher = key_matcher
         self.value_matcher = value_matcher
 
     def _matches(self, dictionary):
-        if hasmethod(dictionary, 'items'):
+        if hasmethod(dictionary, "items"):
             for key, value in dictionary.items():
                 if self.key_matcher.matches(key) and self.value_matcher.matches(value):
                     return True
         return False
 
     def describe_to(self, description):
-        description.append_text('a dictionary containing [')        \
-                    .append_description_of(self.key_matcher)        \
-                    .append_text(': ')                              \
-                    .append_description_of(self.value_matcher)      \
-                    .append_text(']')
+        description.append_text("a dictionary containing [").append_description_of(
+            self.key_matcher
+        ).append_text(": ").append_description_of(self.value_matcher).append_text("]")
 
 
 def has_entry(key_match, value_match):

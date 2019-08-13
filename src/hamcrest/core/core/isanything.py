@@ -6,11 +6,10 @@ __license__ = "BSD, see License.txt"
 
 
 class IsAnything(BaseMatcher):
-
     def __init__(self, description):
         self.description = description
         if not description:
-            self.description = 'ANYTHING'
+            self.description = "ANYTHING"
 
     def _matches(self, item):
         return True

@@ -19,17 +19,15 @@ class MatchInAnyOrder(object):
         if not self.matchers:
             return True
         if self.mismatch_description:
-            self.mismatch_description.append_text('no item matches: ')      \
-                                .append_list('', ', ', '', self.matchers)   \
-                                .append_text(' in ')                        \
-                                .append_list('[', ', ', ']', sequence)
+            self.mismatch_description.append_text("no item matches: ").append_list(
+                "", ", ", "", self.matchers
+            ).append_text(" in ").append_list("[", ", ", "]", sequence)
         return False
 
     def isnotsurplus(self, item):
         if not self.matchers:
             if self.mismatch_description:
-                self.mismatch_description.append_text('not matched: ')  \
-                                         .append_description_of(item)
+                self.mismatch_description.append_text("not matched: ").append_description_of(item)
             return False
         return True
 
@@ -40,13 +38,11 @@ class MatchInAnyOrder(object):
                 return True
 
         if self.mismatch_description:
-            self.mismatch_description.append_text('not matched: ')  \
-                                     .append_description_of(item)
+            self.mismatch_description.append_text("not matched: ").append_description_of(item)
         return False
 
 
 class IsSequenceContainingInAnyOrder(BaseMatcher):
-
     def __init__(self, matchers):
         self.matchers = matchers
 
@@ -60,17 +56,18 @@ class IsSequenceContainingInAnyOrder(BaseMatcher):
             return matchsequence.isfinished(sequence)
         except TypeError:
             if mismatch_description:
-                super(IsSequenceContainingInAnyOrder, self)             \
-                    .describe_mismatch(sequence, mismatch_description)
+                super(IsSequenceContainingInAnyOrder, self).describe_mismatch(
+                    sequence, mismatch_description
+                )
             return False
 
     def describe_mismatch(self, item, mismatch_description):
         self.matches(item, mismatch_description)
 
     def describe_to(self, description):
-        description.append_text('a sequence over ')             \
-                   .append_list('[', ', ', ']', self.matchers)  \
-                   .append_text(' in any order')
+        description.append_text("a sequence over ").append_list(
+            "[", ", ", "]", self.matchers
+        ).append_text(" in any order")
 
 
 def contains_inanyorder(*items):

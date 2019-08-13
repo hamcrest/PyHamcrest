@@ -7,7 +7,6 @@ __license__ = "BSD, see License.txt"
 
 
 class AnyOf(BaseMatcher):
-
     def __init__(self, *matchers):
         self.matchers = matchers
 
@@ -18,7 +17,7 @@ class AnyOf(BaseMatcher):
         return False
 
     def describe_to(self, description):
-        description.append_list('(', ' or ', ')', self.matchers)
+        description.append_list("(", " or ", ")", self.matchers)
 
 
 def any_of(*items):

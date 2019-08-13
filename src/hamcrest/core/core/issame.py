@@ -6,7 +6,6 @@ from hamcrest.core.base_matcher import BaseMatcher
 
 
 class IsSame(BaseMatcher):
-
     def __init__(self, object):
         self.object = object
 
@@ -14,16 +13,14 @@ class IsSame(BaseMatcher):
         return item is self.object
 
     def describe_to(self, description):
-        description.append_text('same instance as ')            \
-                   .append_text(hex(id(self.object)))           \
-                   .append_text(' ')                            \
-                   .append_description_of(self.object)
+        description.append_text("same instance as ").append_text(hex(id(self.object))).append_text(
+            " "
+        ).append_description_of(self.object)
 
     def describe_mismatch(self, item, mismatch_description):
-        mismatch_description.append_text('was ')
+        mismatch_description.append_text("was ")
         if item is not None:
-            mismatch_description.append_text(hex(id(item)))         \
-                                .append_text(' ')
+            mismatch_description.append_text(hex(id(item))).append_text(" ")
         mismatch_description.append_description_of(item)
 
 

@@ -7,16 +7,14 @@ from hamcrest.core.helpers.hasmethod import hasmethod
 
 
 class StringContainsInOrder(BaseMatcher):
-
     def __init__(self, *substrings):
         for substring in substrings:
             if not isinstance(substring, str):
-                raise TypeError(self.__class__.__name__
-                                + ' requires string arguments')
+                raise TypeError(self.__class__.__name__ + " requires string arguments")
         self.substrings = substrings
 
     def _matches(self, item):
-        if not hasmethod(item, 'find'):
+        if not hasmethod(item, "find"):
             return False
         from_index = 0
         for substring in self.substrings:
@@ -26,8 +24,7 @@ class StringContainsInOrder(BaseMatcher):
         return True
 
     def describe_to(self, description):
-        description.append_list('a string containing ', ', ', ' in order',
-                                self.substrings)
+        description.append_list("a string containing ", ", ", " in order", self.substrings)
 
 
 def string_contains_in_order(*substrings):

@@ -1,5 +1,5 @@
-from hamcrest.library.text.substringmatcher import SubstringMatcher
 from hamcrest.core.helpers.hasmethod import hasmethod
+from hamcrest.library.text.substringmatcher import SubstringMatcher
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -7,17 +7,16 @@ __license__ = "BSD, see License.txt"
 
 
 class StringEndsWith(SubstringMatcher):
-
     def __init__(self, substring):
         super(StringEndsWith, self).__init__(substring)
 
     def _matches(self, item):
-        if not hasmethod(item, 'endswith'):
+        if not hasmethod(item, "endswith"):
             return False
         return item.endswith(self.substring)
 
     def relationship(self):
-        return 'ending with'
+        return "ending with"
 
 
 def ends_with(string):

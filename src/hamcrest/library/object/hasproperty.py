@@ -11,7 +11,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsObjectWithProperty(BaseMatcher):
-
     def __init__(self, property_name, value_matcher):
         self.property_name = property_name
         self.value_matcher = value_matcher
@@ -27,26 +26,24 @@ class IsObjectWithProperty(BaseMatcher):
         return self.value_matcher.matches(value)
 
     def describe_to(self, description):
-        description.append_text("an object with a property '") \
-                                        .append_text(self.property_name) \
-                                        .append_text("' matching ") \
-                                        .append_description_of(self.value_matcher)
+        description.append_text("an object with a property '").append_text(
+            self.property_name
+        ).append_text("' matching ").append_description_of(self.value_matcher)
 
     def describe_mismatch(self, item, mismatch_description):
         if item is None:
-            mismatch_description.append_text('was None')
+            mismatch_description.append_text("was None")
             return
 
         if not hasattr(item, self.property_name):
-            mismatch_description.append_description_of(item) \
-                                .append_text(' did not have the ') \
-                                .append_description_of(self.property_name) \
-                                .append_text(' property')
+            mismatch_description.append_description_of(item).append_text(
+                " did not have the "
+            ).append_description_of(self.property_name).append_text(" property")
             return
 
-        mismatch_description.append_text('property ') \
-                            .append_description_of(self.property_name) \
-                            .append_text(' ')
+        mismatch_description.append_text("property ").append_description_of(
+            self.property_name
+        ).append_text(" ")
         value = getattr(item, self.property_name)
         self.value_matcher.describe_mismatch(value, mismatch_description)
 
@@ -141,31 +138,41 @@ def has_properties(*keys_valuematchers, **kv_args):
             for key in base_dict:
                 base_dict[key] = wrap_shortcut(base_dict[key])
         except AttributeError:
-            raise ValueError('single-argument calls to has_properties must pass a dict as the argument')
+            raise ValueError(
+                "single-argument calls to has_properties must pass a dict as the argument"
+            )
     else:
         if len(keys_valuematchers) % 2:
-            raise ValueError('has_properties requires key-value pairs')
+            raise ValueError("has_properties requires key-value pairs")
         base_dict = {}
         for index in range(int(len(keys_valuematchers) / 2)):
-            base_dict[keys_valuematchers[2 * index]] = wrap_shortcut(keys_valuematchers[2 * index + 1])
+            base_dict[keys_valuematchers[2 * index]] = wrap_shortcut(
+                keys_valuematchers[2 * index + 1]
+            )
 
     for key, value in kv_args.items():
         base_dict[key] = wrap_shortcut(value)
 
     if len(base_dict) > 1:
-        description = StringDescription().append_text('an object with properties ')
+        description = StringDescription().append_text("an object with properties ")
         for i, (property_name, property_value_matcher) in enumerate(sorted(base_dict.items())):
-            description.append_value(property_name).append_text(' matching ').append_description_of(
-                property_value_matcher)
+            description.append_value(property_name).append_text(" matching ").append_description_of(
+                property_value_matcher
+            )
             if i < len(base_dict) - 1:
-                description.append_text(' and ')
+                description.append_text(" and ")
 
-        return described_as(str(description),
-                            AllOf(*[has_property(property_name, property_value_matcher)
-                                    for property_name, property_value_matcher
-                                    in sorted(base_dict.items())],
-                                  describe_all_mismatches=True,
-                                  describe_matcher_in_mismatch=False))
+        return described_as(
+            str(description),
+            AllOf(
+                *[
+                    has_property(property_name, property_value_matcher)
+                    for property_name, property_value_matcher in sorted(base_dict.items())
+                ],
+                describe_all_mismatches=True,
+                describe_matcher_in_mismatch=False,
+            ),
+        )
     else:
         property_name, property_value_matcher = base_dict.popitem()
         return has_property(property_name, property_value_matcher)

@@ -15,4 +15,4 @@ class SelfDescribing(object):
         :param description: The description to be built or appended to.
 
         """
-        raise NotImplementedError('describe_to')
+        raise NotImplementedError("describe_to")

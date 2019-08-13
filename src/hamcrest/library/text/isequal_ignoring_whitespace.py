@@ -6,12 +6,12 @@ from hamcrest.core.base_matcher import BaseMatcher
 
 
 def stripspace(string):
-    result = ''
+    result = ""
     last_was_space = True
     for character in string:
         if character.isspace():
             if not last_was_space:
-                result += ' '
+                result += " "
             last_was_space = True
         else:
             result += character
@@ -20,10 +20,9 @@ def stripspace(string):
 
 
 class IsEqualIgnoringWhiteSpace(BaseMatcher):
-
     def __init__(self, string):
         if not isinstance(string, str):
-            raise TypeError('IsEqualIgnoringWhiteSpace requires string')
+            raise TypeError("IsEqualIgnoringWhiteSpace requires string")
         self.original_string = string
         self.stripped_string = stripspace(string)
 
@@ -33,8 +32,7 @@ class IsEqualIgnoringWhiteSpace(BaseMatcher):
         return self.stripped_string == stripspace(item)
 
     def describe_to(self, description):
-        description.append_description_of(self.original_string)    \
-                   .append_text(' ignoring whitespace')
+        description.append_description_of(self.original_string).append_text(" ignoring whitespace")
 
 
 def equal_to_ignoring_whitespace(string):
