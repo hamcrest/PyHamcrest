@@ -1,3 +1,5 @@
+from collections.abc import Iterator
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
@@ -11,7 +13,7 @@ class QuasiSequence(object):
         return 2
 
 
-class QuasiSequenceIterator():
+class QuasiSequenceIterator(Iterator):
     def __init__(self):
         self.index = 1
 
