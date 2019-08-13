@@ -5,9 +5,10 @@ __license__ = "BSD, see License.txt"
 import warnings
 
 from hamcrest.core.description import Description
-from hamcrest.core.selfdescribingvalue import SelfDescribingValue
 from hamcrest.core.helpers.hasmethod import hasmethod
 from hamcrest.core.helpers.ismock import ismock
+from hamcrest.core.selfdescribingvalue import SelfDescribingValue
+
 
 class BaseDescription(Description):
     """Base class for all :py:class:`~hamcrest.core.description.Description`
@@ -20,36 +21,33 @@ class BaseDescription(Description):
         return self
 
     def append_description_of(self, value):
-        if not ismock(value) and hasmethod(value, 'describe_to'):
+        if not ismock(value) and hasmethod(value, "describe_to"):
             value.describe_to(self)
         elif isinstance(value, str):
             self.append(repr(value))
         else:
             description = str(value)
-            if description[:1] == '<' and description[-1:] == '>':
+            if description[:1] == "<" and description[-1:] == ">":
                 self.append(description)
             else:
-                self.append('<')
+                self.append("<")
                 self.append(description)
-                self.append('>')
+                self.append(">")
         return self
 
     def append_value(self, value):
-        warnings.warn('Call append_description_of instead of append_value',
-                      DeprecationWarning)
+        warnings.warn("Call append_description_of instead of append_value", DeprecationWarning)
         if isinstance(value, str):
             self.append_string_in_python_syntax(value)
         else:
-            self.append('<')
+            self.append("<")
             self.append(str(value))
-            self.append('>')
+            self.append(">")
         return self
 
     def append_value_list(self, start, separator, end, list):
-        warnings.warn('Call append_list instead of append_value_list',
-                      DeprecationWarning)
-        return self.append_list(start, separator, end,
-                                map(SelfDescribingValue, list))
+        warnings.warn("Call append_list instead of append_value_list", DeprecationWarning)
+        return self.append_list(start, separator, end, map(SelfDescribingValue, list))
 
     def append_list(self, start, separator, end, list):
         separate = False
@@ -65,7 +63,7 @@ class BaseDescription(Description):
 
     def append(self, string):
         """Append the string to the description."""
-        raise NotImplementedError('append')
+        raise NotImplementedError("append")
 
     def append_string_in_python_syntax(self, string):
         self.append("'")
@@ -76,12 +74,12 @@ class BaseDescription(Description):
 
 def character_in_python_syntax(ch):
     if ch == "'":
-        return "\'"
-    elif ch == '\n':
-        return '\\n'
-    elif ch == '\r':
-        return '\\r'
-    elif ch == '\t':
-        return '\\t'
+        return "'"
+    elif ch == "\n":
+        return "\\n"
+    elif ch == "\r":
+        return "\\r"
+    elif ch == "\t":
+        return "\\t"
     else:
         return ch

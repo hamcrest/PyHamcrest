@@ -6,7 +6,6 @@ __license__ = "BSD, see License.txt"
 
 
 class IsIn(BaseMatcher):
-
     def __init__(self, sequence):
         self.sequence = sequence
 
@@ -14,8 +13,7 @@ class IsIn(BaseMatcher):
         return item in self.sequence
 
     def describe_to(self, description):
-        description.append_text('one of ')      \
-                   .append_list('(', ', ', ')', self.sequence)
+        description.append_text("one of ").append_list("(", ", ", ")", self.sequence)
 
 
 def is_in(sequence):

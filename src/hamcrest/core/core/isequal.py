@@ -7,7 +7,6 @@ from hamcrest.core.matcher import Matcher
 
 
 class IsEqual(BaseMatcher):
-
     def __init__(self, equals):
         self.object = equals
 
@@ -17,10 +16,10 @@ class IsEqual(BaseMatcher):
     def describe_to(self, description):
         nested_matcher = isinstance(self.object, Matcher)
         if nested_matcher:
-            description.append_text('<')
+            description.append_text("<")
         description.append_description_of(self.object)
         if nested_matcher:
-            description.append_text('>')
+            description.append_text(">")
 
 
 def equal_to(obj):

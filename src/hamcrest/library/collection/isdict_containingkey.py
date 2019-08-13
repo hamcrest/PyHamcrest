@@ -8,20 +8,20 @@ __license__ = "BSD, see License.txt"
 
 
 class IsDictContainingKey(BaseMatcher):
-
     def __init__(self, key_matcher):
         self.key_matcher = key_matcher
 
     def _matches(self, dictionary):
-        if hasmethod(dictionary, 'keys'):
+        if hasmethod(dictionary, "keys"):
             for key in dictionary.keys():
                 if self.key_matcher.matches(key):
                     return True
         return False
 
     def describe_to(self, description):
-        description.append_text('a dictionary containing key ')     \
-                    .append_description_of(self.key_matcher)
+        description.append_text("a dictionary containing key ").append_description_of(
+            self.key_matcher
+        )
 
 
 def has_key(key_match):

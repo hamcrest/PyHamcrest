@@ -1,12 +1,11 @@
 import warnings
 
+from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
-
-from hamcrest.core.base_matcher import BaseMatcher
-from hamcrest.core.helpers.hasmethod import hasmethod
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 
 
 class MatchingInOrder(object):
@@ -21,8 +20,9 @@ class MatchingInOrder(object):
     def isfinished(self):
         if self.next_match_index < len(self.matchers):
             if self.mismatch_description:
-                self.mismatch_description.append_text('No item matched: ') \
-                                 .append_description_of(self.matchers[self.next_match_index])
+                self.mismatch_description.append_text("No item matched: ").append_description_of(
+                    self.matchers[self.next_match_index]
+                )
             return False
         return True
 
@@ -30,7 +30,7 @@ class MatchingInOrder(object):
         matcher = self.matchers[self.next_match_index]
         if not matcher.matches(item):
             if self.mismatch_description:
-                self.mismatch_description.append_text('item ' + str(self.next_match_index) + ': ')
+                self.mismatch_description.append_text("item " + str(self.next_match_index) + ": ")
                 matcher.describe_mismatch(item, self.mismatch_description)
             return False
         self.next_match_index += 1
@@ -39,14 +39,12 @@ class MatchingInOrder(object):
     def isnotsurplus(self, item):
         if len(self.matchers) <= self.next_match_index:
             if self.mismatch_description:
-                self.mismatch_description.append_text('Not matched: ')  \
-                                         .append_description_of(item)
+                self.mismatch_description.append_text("Not matched: ").append_description_of(item)
             return False
         return True
 
 
 class IsSequenceContainingInOrder(BaseMatcher):
-
     def __init__(self, matchers):
         self.matchers = matchers
 
@@ -59,16 +57,16 @@ class IsSequenceContainingInOrder(BaseMatcher):
             return matchsequence.isfinished()
         except TypeError:
             if mismatch_description:
-                super(IsSequenceContainingInOrder, self)                \
-                    .describe_mismatch(sequence, mismatch_description)
+                super(IsSequenceContainingInOrder, self).describe_mismatch(
+                    sequence, mismatch_description
+                )
             return False
 
     def describe_mismatch(self, item, mismatch_description):
         self.matches(item, mismatch_description)
 
     def describe_to(self, description):
-        description.append_text('a sequence containing ')   \
-                   .append_list('[', ', ', ']', self.matchers)
+        description.append_text("a sequence containing ").append_list("[", ", ", "]", self.matchers)
 
 
 def contains_exactly(*items):

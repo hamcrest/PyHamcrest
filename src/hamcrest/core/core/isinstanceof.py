@@ -1,3 +1,5 @@
+import types
+
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.helpers.wrap_matcher import is_matchable_type
 
@@ -5,21 +7,18 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-import types
 
 class IsInstanceOf(BaseMatcher):
-
     def __init__(self, expected_type):
         if not is_matchable_type(expected_type):
-            raise TypeError('IsInstanceOf requires type')
+            raise TypeError("IsInstanceOf requires type")
         self.expected_type = expected_type
 
     def _matches(self, item):
         return isinstance(item, self.expected_type)
 
     def describe_to(self, description):
-        description.append_text('an instance of ')              \
-                    .append_text(self.expected_type.__name__)
+        description.append_text("an instance of ").append_text(self.expected_type.__name__)
 
 
 def instance_of(atype):

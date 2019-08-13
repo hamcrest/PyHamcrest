@@ -7,7 +7,6 @@ __license__ = "BSD, see License.txt"
 
 
 class HasString(BaseMatcher):
-
     def __init__(self, str_matcher):
         self.str_matcher = str_matcher
 
@@ -15,8 +14,7 @@ class HasString(BaseMatcher):
         return self.str_matcher.matches(str(item))
 
     def describe_to(self, description):
-        description.append_text('an object with str ')          \
-                    .append_description_of(self.str_matcher)
+        description.append_text("an object with str ").append_description_of(self.str_matcher)
 
 
 def has_string(match):

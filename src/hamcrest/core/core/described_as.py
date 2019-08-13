@@ -1,16 +1,16 @@
-from hamcrest.core.base_matcher import BaseMatcher
 import re
+
+from hamcrest.core.base_matcher import BaseMatcher
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-ARG_PATTERN = re.compile('%([0-9]+)')
+ARG_PATTERN = re.compile("%([0-9]+)")
 
 
 class DescribedAs(BaseMatcher):
-
     def __init__(self, description_template, matcher, *values):
         self.template = description_template
         self.matcher = matcher
@@ -25,7 +25,7 @@ class DescribedAs(BaseMatcher):
     def describe_to(self, description):
         text_start = 0
         for match in re.finditer(ARG_PATTERN, self.template):
-            description.append_text(self.template[text_start:match.start()])
+            description.append_text(self.template[text_start : match.start()])
             arg_index = int(match.group()[1:])
             description.append_description_of(self.values[arg_index])
             text_start = match.end()

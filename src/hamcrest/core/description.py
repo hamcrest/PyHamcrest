@@ -17,7 +17,7 @@ class Description(object):
         :returns: ``self``, for chaining
 
         """
-        raise NotImplementedError('append_text')
+        raise NotImplementedError("append_text")
 
     def append_description_of(self, value):
         """Appends description of given value to this description.
@@ -29,7 +29,7 @@ class Description(object):
         :returns: ``self``, for chaining
 
         """
-        raise NotImplementedError('append_description_of')
+        raise NotImplementedError("append_description_of")
 
     def append_value(self, value):
         """Appends an arbitary value to the description.
@@ -41,7 +41,7 @@ class Description(object):
         :returns: ``self``, for chaining
 
         """
-        raise NotImplementedError('append_value')
+        raise NotImplementedError("append_value")
 
     def append_list(self, start, separator, end, list):
         """Appends a list of objects to the description.
@@ -55,4 +55,4 @@ class Description(object):
         :returns: ``self``, for chaining
 
         """
-        raise NotImplementedError('append_list')
+        raise NotImplementedError("append_list")

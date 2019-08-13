@@ -23,7 +23,7 @@ class StringDescription(BaseDescription):
     """
 
     def __init__(self):
-        self.out = ''
+        self.out = ""
 
     def __str__(self):
         """Returns the description."""

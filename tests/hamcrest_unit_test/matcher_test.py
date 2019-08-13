@@ -1,10 +1,9 @@
+import logging
+import unittest
 import warnings
 
-from hamcrest import assert_that, has_item, has_properties, has_string, anything
+from hamcrest import anything, assert_that, has_item, has_properties, has_string
 from hamcrest.core.string_description import StringDescription
-
-import unittest
-import logging
 
 log = logging.getLogger(__name__)
 
@@ -15,7 +14,6 @@ __tracebackhide__ = True
 
 
 class MatcherTest(unittest.TestCase):
-
     def assert_matches(self, message, matcher, arg):
         assert_matches(matcher, arg, message)
 
@@ -61,14 +59,14 @@ def assert_description(expected, matcher):
 def assert_no_mismatch_description(matcher, arg):
     description = StringDescription()
     result = matcher.matches(arg, description)
-    assert result, 'Precondition: Matcher should match item'
-    assert '' == str(description), 'Expected no mismatch description'
+    assert result, "Precondition: Matcher should match item"
+    assert "" == str(description), "Expected no mismatch description"
 
 
 def assert_mismatch_description(expected, matcher, arg):
     description = StringDescription()
     result = matcher.matches(arg, description)
-    assert not result, 'Precondition: Matcher should not match item'
+    assert not result, "Precondition: Matcher should not match item"
     assert expected == str(description)
 
 
@@ -84,8 +82,6 @@ def assert_deprecated(message, matcher):
 
         matcher(anything()).matches("", StringDescription())
 
-        assert_that(w,
-                    has_item(
-                        has_properties(
-                            category=DeprecationWarning,
-                            message=has_string(message))))
+        assert_that(
+            w, has_item(has_properties(category=DeprecationWarning, message=has_string(message)))
+        )
