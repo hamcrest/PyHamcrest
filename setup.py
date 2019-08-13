@@ -8,12 +8,8 @@ if os.environ.get('PYTHON_BUILD_DOCKER', None) == 'true':
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-try:
-    from setuptools import setup, find_packages
-except ImportError:
-    from distribute_setup import use_setuptools
-    use_setuptools()
-    from setuptools import setup, find_packages
+from setuptools import setup, find_packages
+
 
 def read(fname):
     return open(fname).read()
