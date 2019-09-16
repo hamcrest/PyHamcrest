@@ -1,12 +1,15 @@
+from typing import Optional
+
+from hamcrest.core.description import Description
+from hamcrest.core.matcher import Matcher, T
+from hamcrest.core.string_description import tostring
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-from hamcrest.core.matcher import Matcher
-from hamcrest.core.string_description import tostring
 
-
-class BaseMatcher(Matcher):
+class BaseMatcher(Matcher[T]):
     """Base class for all :py:class:`~hamcrest.core.matcher.Matcher`
     implementations.
 
@@ -17,19 +20,19 @@ class BaseMatcher(Matcher):
 
     """
 
-    def __str__(self):
+    def __str__(self) -> str:
         return tostring(self)
 
-    def _matches(self, item):
+    def _matches(self, item: T) -> bool:
         raise NotImplementedError("_matches")
 
-    def matches(self, item, mismatch_description=None):
+    def matches(self, item: T, mismatch_description: Optional[Description] = None) -> bool:
         match_result = self._matches(item)
         if not match_result and mismatch_description:
             self.describe_mismatch(item, mismatch_description)
         return match_result
 
-    def describe_mismatch(self, item, mismatch_description):
+    def describe_mismatch(self, item: T, mismatch_description: Description) -> None:
         mismatch_description.append_text("was ").append_description_of(item)
 
     def describe_match(self, item, match_description):

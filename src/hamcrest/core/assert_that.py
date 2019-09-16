@@ -1,4 +1,5 @@
 import warnings
+from typing import Optional, TypeVar, cast
 
 from hamcrest.core.matcher import Matcher
 from hamcrest.core.string_description import StringDescription
@@ -11,8 +12,10 @@ __unittest = True
 # py.test integration; hide these frames from tracebacks
 __tracebackhide__ = True
 
+T = TypeVar("T")
 
-def assert_that(arg1, arg2=None, arg3=""):
+
+def assert_that(actual: T, matcher: Optional[Matcher[T]] = None, reason: str = "") -> None:
     """Asserts that actual value satisfies matcher. (Can also assert plain
     boolean condition.)
 
@@ -41,15 +44,15 @@ def assert_that(arg1, arg2=None, arg3=""):
     writing by being a standalone function.
 
     """
-    if isinstance(arg2, Matcher):
-        _assert_match(actual=arg1, matcher=arg2, reason=arg3)
+    if isinstance(matcher, Matcher):
+        _assert_match(actual=actual, matcher=matcher, reason=reason)
     else:
-        if isinstance(arg1, Matcher):
-            warnings.warn("arg1 should be boolean, but was {}".format(type(arg1)))
-        _assert_bool(assertion=arg1, reason=arg2)
+        if isinstance(actual, Matcher):
+            warnings.warn("arg1 should be boolean, but was {}".format(type(actual)))
+        _assert_bool(assertion=cast(bool, actual), reason=cast(str, matcher))
 
 
-def _assert_match(actual, matcher, reason):
+def _assert_match(actual: T, matcher: Matcher[T], reason: str) -> None:
     if not matcher.matches(actual):
         description = StringDescription()
         description.append_text(reason).append_text("\nExpected: ").append_description_of(
@@ -60,7 +63,7 @@ def _assert_match(actual, matcher, reason):
         raise AssertionError(description)
 
 
-def _assert_bool(assertion, reason=None):
+def _assert_bool(assertion: bool, reason: Optional[str] = None) -> None:
     if not assertion:
         if not reason:
             reason = "Assertion failed"
