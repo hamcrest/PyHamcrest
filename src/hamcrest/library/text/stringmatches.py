@@ -1,26 +1,29 @@
+import re
+from typing import Pattern, Union
+
+from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.description import Description
+from hamcrest.core.matcher import Matcher
+
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-import re
 
-from hamcrest.core.base_matcher import BaseMatcher
-
-
-class StringMatchesPattern(BaseMatcher):
-    def __init__(self, pattern):
+class StringMatchesPattern(BaseMatcher[str]):
+    def __init__(self, pattern) -> None:
         self.pattern = pattern
 
-    def describe_to(self, description):
+    def describe_to(self, description: Description) -> None:
         description.append_text("a string matching '").append_text(
             self.pattern.pattern
         ).append_text("'")
 
-    def _matches(self, item):
+    def _matches(self, item: str) -> bool:
         return self.pattern.search(item) is not None
 
 
-def matches_regexp(pattern):
+def matches_regexp(pattern: Union[str, Pattern[str]]) -> Matcher[str]:
     """Matches if object is a string containing a match for a given regular
     expression.
 

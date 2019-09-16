@@ -1,31 +1,41 @@
+from typing import Mapping, TypeVar, Union
+
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.description import Description
 from hamcrest.core.helpers.hasmethod import hasmethod
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+from hamcrest.core.matcher import Matcher
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-class IsDictContaining(BaseMatcher):
-    def __init__(self, key_matcher, value_matcher):
+K = TypeVar("K")  # TODO - covariant?
+V = TypeVar("V")
+
+
+class IsDictContaining(BaseMatcher[Mapping[K, V]]):
+    def __init__(self, key_matcher: Matcher[K], value_matcher: Matcher[V]) -> None:
         self.key_matcher = key_matcher
         self.value_matcher = value_matcher
 
-    def _matches(self, dictionary):
+    def _matches(self, dictionary: Mapping[K, V]) -> bool:
         if hasmethod(dictionary, "items"):
             for key, value in dictionary.items():
                 if self.key_matcher.matches(key) and self.value_matcher.matches(value):
                     return True
         return False
 
-    def describe_to(self, description):
+    def describe_to(self, description: Description) -> None:
         description.append_text("a dictionary containing [").append_description_of(
             self.key_matcher
         ).append_text(": ").append_description_of(self.value_matcher).append_text("]")
 
 
-def has_entry(key_match, value_match):
+def has_entry(
+    key_match: Union[K, Matcher[K]], value_match: Union[V, Matcher[V]]
+) -> Matcher[Mapping[K, V]]:
     """Matches if dictionary contains key-value entry satisfying a given pair
     of matchers.
 

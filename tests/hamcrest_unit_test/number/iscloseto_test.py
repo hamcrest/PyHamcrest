@@ -47,6 +47,11 @@ class IsCloseToTest(MatcherTest):
     def testDescribeMismatchShowsActualArgumentIfNotNumeric(self):
         self.assert_describe_mismatch("was 'bad'", close_to(1.0, 0.5), "bad")
 
+    def testMatcherSupportsDecimal(self):
+        matcher = close_to(Decimal("1.0"), Decimal("0.5"))
+
+        self.assert_matches("equal", matcher, Decimal("1.4"))
+
 
 try:
     import numpy as np
