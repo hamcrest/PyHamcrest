@@ -1,21 +1,27 @@
+from typing import Any, Mapping, TypeVar, Union, overload
+
 from hamcrest import described_as
 from hamcrest.core import anything
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.allof import AllOf
+from hamcrest.core.description import Description
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher as wrap_shortcut
+from hamcrest.core.matcher import Matcher
 from hamcrest.core.string_description import StringDescription
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+V = TypeVar("V")
 
-class IsObjectWithProperty(BaseMatcher):
-    def __init__(self, property_name, value_matcher):
+
+class IsObjectWithProperty(BaseMatcher[object]):
+    def __init__(self, property_name: str, value_matcher: Matcher[V]) -> None:
         self.property_name = property_name
         self.value_matcher = value_matcher
 
-    def _matches(self, o):
+    def _matches(self, o: object) -> bool:
         if o is None:
             return False
 
@@ -25,12 +31,12 @@ class IsObjectWithProperty(BaseMatcher):
         value = getattr(o, self.property_name)
         return self.value_matcher.matches(value)
 
-    def describe_to(self, description):
+    def describe_to(self, description: Description) -> None:
         description.append_text("an object with a property '").append_text(
             self.property_name
         ).append_text("' matching ").append_description_of(self.value_matcher)
 
-    def describe_mismatch(self, item, mismatch_description):
+    def describe_mismatch(self, item: object, mismatch_description: Description) -> None:
         if item is None:
             mismatch_description.append_text("was None")
             return
@@ -53,7 +59,7 @@ class IsObjectWithProperty(BaseMatcher):
         return str(d)
 
 
-def has_property(name, match=None):
+def has_property(name: str, match: Union[None, Matcher[V], V] = None) -> Matcher[object]:
     """Matches if object has a property with a given name whose value satisfies
     a given matcher.
 
@@ -84,6 +90,24 @@ def has_property(name, match=None):
         match = anything()
 
     return IsObjectWithProperty(name, wrap_shortcut(match))
+
+
+# Keyword argument form
+@overload
+def has_properties(**keys_valuematchers: Union[Matcher[V], V]) -> Matcher[object]:
+    ...
+
+
+# Name to matcher dict form
+@overload
+def has_properties(keys_valuematchers: Mapping[str, Union[Matcher[V], V]]) -> Matcher[object]:
+    ...
+
+
+# Alternating name/matcher form
+@overload
+def has_properties(*keys_valuematchers: Any) -> Matcher[object]:
+    ...
 
 
 def has_properties(*keys_valuematchers, **kv_args):
