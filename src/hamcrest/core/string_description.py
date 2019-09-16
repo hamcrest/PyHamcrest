@@ -1,3 +1,5 @@
+from hamcrest.core.selfdescribing import SelfDescribing
+
 from .base_description import BaseDescription
 
 __author__ = "Jon Reid"
@@ -5,7 +7,7 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-def tostring(selfdescribing):
+def tostring(selfdescribing: SelfDescribing) -> str:
     """Returns the description of a
     :py:class:`~hamcrest.core.selfdescribing.SelfDescribing` object as a
     string.
@@ -22,12 +24,12 @@ class StringDescription(BaseDescription):
 
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.out = ""
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns the description."""
         return self.out
 
-    def append(self, string):
+    def append(self, string: str) -> None:
         self.out += str(string)
