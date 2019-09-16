@@ -1,45 +1,48 @@
 import re
 import sys
+from typing import Any, Callable, Mapping, Optional, Tuple, cast
 from weakref import ref
 
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.description import Description
+from hamcrest.core.matcher import Matcher
 
 __author__ = "Per Fagrell"
 __copyright__ = "Copyright 2013 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-class Raises(BaseMatcher):
-    def __init__(self, expected, pattern=None):
+class Raises(BaseMatcher[Callable[..., Any]]):
+    def __init__(self, expected: Exception, pattern: Optional[str] = None) -> None:
         self.pattern = pattern
         self.expected = expected
-        self.actual = None
-        self.function = None
+        self.actual = None  # type: Optional[BaseException]
+        self.function = None  # type: Optional[Callable[..., Any]]
 
-    def _matches(self, function):
+    def _matches(self, function: Callable[..., Any]) -> bool:
         if not callable(function):
             return False
 
-        self.function = ref(function)
+        self.function = cast(Callable[..., Any], ref(function))
         return self._call_function(function)
 
-    def _call_function(self, function):
+    def _call_function(self, function: Callable[..., Any]) -> bool:
         self.actual = None
         try:
             function()
         except BaseException:
             self.actual = sys.exc_info()[1]
 
-            if isinstance(self.actual, self.expected):
+            if isinstance(self.actual, cast(type, self.expected)):
                 if self.pattern is not None:
                     return re.search(self.pattern, str(self.actual)) is not None
                 return True
         return False
 
-    def describe_to(self, description):
+    def describe_to(self, description: Description) -> None:
         description.append_text("Expected a callable raising %s" % self.expected)
 
-    def describe_mismatch(self, item, description):
+    def describe_mismatch(self, item, description: Description) -> None:
         if not callable(item):
             description.append_text("%s is not callable" % item)
             return
@@ -52,7 +55,7 @@ class Raises(BaseMatcher):
 
         if self.actual is None:
             description.append_text("No exception raised.")
-        elif isinstance(self.actual, self.expected) and self.pattern is not None:
+        elif isinstance(self.actual, cast(type, self.expected)) and self.pattern is not None:
             description.append_text(
                 'Correct assertion type raised, but the expected pattern ("%s") not found.'
                 % self.pattern
@@ -70,7 +73,7 @@ class Raises(BaseMatcher):
         )
 
 
-def raises(exception, pattern=None):
+def raises(exception: Exception, pattern=None) -> Matcher[Callable[..., Any]]:
     """Matches if the called function raised the expected exception.
 
     :param exception:  The class of the expected exception
@@ -90,10 +93,10 @@ def raises(exception, pattern=None):
 
 
 class DeferredCallable(object):
-    def __init__(self, func):
+    def __init__(self, func: Callable[..., Any]):
         self.func = func
-        self.args = tuple()
-        self.kwargs = {}
+        self.args = tuple()  # type: Tuple[Any, ...]
+        self.kwargs = {}  # type: Mapping[str, Any]
 
     def __call__(self):
         self.func(*self.args, **self.kwargs)
@@ -104,7 +107,7 @@ class DeferredCallable(object):
         return self
 
 
-def calling(func):
+def calling(func: Callable[..., Any]) -> DeferredCallable:
     """Wrapper for function call that delays the actual execution so that
     :py:func:`~hamcrest.core.core.raises.raises` matcher can catch any thrown exception.
 
