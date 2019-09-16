@@ -1,9 +1,11 @@
+from typing import Any, Iterable, Sequence
+
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-class Description(object):
+class Description:
     """A description of a :py:class:`~hamcrest.core.matcher.Matcher`.
 
     A :py:class:`~hamcrest.core.matcher.Matcher` will describe itself to a
@@ -11,7 +13,7 @@ class Description(object):
 
     """
 
-    def append_text(self, text):
+    def append_text(self, text: str) -> "Description":
         """Appends some plain text to the description.
 
         :returns: ``self``, for chaining
@@ -19,7 +21,7 @@ class Description(object):
         """
         raise NotImplementedError("append_text")
 
-    def append_description_of(self, value):
+    def append_description_of(self, value: Any) -> "Description":
         """Appends description of given value to this description.
 
         If the value implements
@@ -31,7 +33,9 @@ class Description(object):
         """
         raise NotImplementedError("append_description_of")
 
-    def append_list(self, start, separator, end, list):
+    def append_list(
+        self, start: str, separator: str, end: str, list: Iterable[Any]
+    ) -> "Description":
         """Appends a list of objects to the description.
 
         :param start: String that will begin the list description.
