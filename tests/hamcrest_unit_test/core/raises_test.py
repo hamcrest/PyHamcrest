@@ -1,13 +1,12 @@
+import sys
 import unittest
 
 import pytest
 from hamcrest import not_
-from hamcrest.core.core.raises import *
+from hamcrest.core.core.raises import calling, raises
 from hamcrest_unit_test.matcher_test import MatcherTest, assert_mismatch_description
 
 if __name__ == "__main__":
-    import sys
-
     sys.path.insert(0, "..")
     sys.path.insert(0, "../..")
 
