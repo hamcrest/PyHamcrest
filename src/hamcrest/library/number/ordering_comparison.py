@@ -1,14 +1,21 @@
 import operator
+from typing import Any, Callable
 
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.matcher import Matcher
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-class OrderingComparison(BaseMatcher):
-    def __init__(self, value, comparison_function, comparison_description):
+class OrderingComparison(BaseMatcher[Any]):
+    def __init__(
+        self,
+        value: Any,
+        comparison_function: Callable[[Any, Any], bool],
+        comparison_description: str,
+    ) -> None:
         self.value = value
         self.comparison_function = comparison_function
         self.comparison_description = comparison_description
@@ -22,7 +29,7 @@ class OrderingComparison(BaseMatcher):
         ).append_description_of(self.value)
 
 
-def greater_than(value):
+def greater_than(value: Any) -> Matcher[Any]:
     """Matches if object is greater than a given value.
 
     :param value: The value to compare against.
@@ -31,7 +38,7 @@ def greater_than(value):
     return OrderingComparison(value, operator.gt, "greater than")
 
 
-def greater_than_or_equal_to(value):
+def greater_than_or_equal_to(value: Any) -> Matcher[Any]:
     """Matches if object is greater than or equal to a given value.
 
     :param value: The value to compare against.
@@ -40,7 +47,7 @@ def greater_than_or_equal_to(value):
     return OrderingComparison(value, operator.ge, "greater than or equal to")
 
 
-def less_than(value):
+def less_than(value: Any) -> Matcher[Any]:
     """Matches if object is less than a given value.
 
     :param value: The value to compare against.
@@ -49,7 +56,7 @@ def less_than(value):
     return OrderingComparison(value, operator.lt, "less than")
 
 
-def less_than_or_equal_to(value):
+def less_than_or_equal_to(value: Any) -> Matcher[Any]:
     """Matches if object is less than or equal to a given value.
 
     :param value: The value to compare against.

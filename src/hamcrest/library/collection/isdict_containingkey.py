@@ -1,30 +1,36 @@
+from typing import Any, Mapping, TypeVar, Union
+
 from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest.core.description import Description
 from hamcrest.core.helpers.hasmethod import hasmethod
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
+from hamcrest.core.matcher import Matcher
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
+K = TypeVar("K")
 
-class IsDictContainingKey(BaseMatcher):
-    def __init__(self, key_matcher):
+
+class IsDictContainingKey(BaseMatcher[Mapping[K, Any]]):
+    def __init__(self, key_matcher: Matcher[K]) -> None:
         self.key_matcher = key_matcher
 
-    def _matches(self, dictionary):
+    def _matches(self, dictionary: Mapping[K, Any]) -> bool:
         if hasmethod(dictionary, "keys"):
             for key in dictionary.keys():
                 if self.key_matcher.matches(key):
                     return True
         return False
 
-    def describe_to(self, description):
+    def describe_to(self, description: Description) -> None:
         description.append_text("a dictionary containing key ").append_description_of(
             self.key_matcher
         )
 
 
-def has_key(key_match):
+def has_key(key_match: Union[K, Matcher[K]]) -> Matcher[Mapping[K, Any]]:
     """Matches if dictionary contains an entry whose key satisfies a given
     matcher.
 
