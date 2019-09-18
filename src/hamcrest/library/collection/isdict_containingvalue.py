@@ -17,9 +17,9 @@ class IsDictContainingValue(BaseMatcher[Mapping[Any, V]]):
     def __init__(self, value_matcher: Matcher[V]) -> None:
         self.value_matcher = value_matcher
 
-    def _matches(self, dictionary: Mapping[Any, V]) -> bool:
-        if hasmethod(dictionary, "values"):
-            for value in dictionary.values():
+    def _matches(self, item: Mapping[Any, V]) -> bool:
+        if hasmethod(item, "values"):
+            for value in item.values():
                 if self.value_matcher.matches(value):
                     return True
         return False

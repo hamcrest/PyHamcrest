@@ -1,12 +1,14 @@
-from typing import Optional
+from typing import Optional, TypeVar
 
 from hamcrest.core.description import Description
-from hamcrest.core.matcher import Matcher, T
+from hamcrest.core.matcher import Matcher
 from hamcrest.core.string_description import tostring
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
+
+T = TypeVar("T")
 
 
 class BaseMatcher(Matcher[T]):

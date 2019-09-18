@@ -1,4 +1,4 @@
-from typing import Mapping, TypeVar, Union
+from typing import Hashable, Mapping, TypeVar, Union
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -11,7 +11,7 @@ __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
 
-K = TypeVar("K")  # TODO - covariant?
+K = TypeVar("K", bound=Hashable)  # TODO - covariant?
 V = TypeVar("V")
 
 
@@ -20,9 +20,9 @@ class IsDictContaining(BaseMatcher[Mapping[K, V]]):
         self.key_matcher = key_matcher
         self.value_matcher = value_matcher
 
-    def _matches(self, dictionary: Mapping[K, V]) -> bool:
-        if hasmethod(dictionary, "items"):
-            for key, value in dictionary.items():
+    def _matches(self, item: Mapping[K, V]) -> bool:
+        if hasmethod(item, "items"):
+            for key, value in item.items():
                 if self.key_matcher.matches(key) and self.value_matcher.matches(value):
                     return True
         return False
