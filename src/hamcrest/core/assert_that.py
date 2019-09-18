@@ -1,5 +1,5 @@
 import warnings
-from typing import Optional, TypeVar, cast
+from typing import Optional, TypeVar, cast, overload
 
 from hamcrest.core.matcher import Matcher
 from hamcrest.core.string_description import StringDescription
@@ -15,7 +15,17 @@ __tracebackhide__ = True
 T = TypeVar("T")
 
 
-def assert_that(actual: T, matcher: Optional[Matcher[T]] = None, reason: str = "") -> None:
+@overload
+def assert_that(actual: T, matcher: Matcher[T], reason: str = "") -> None:
+    ...
+
+
+@overload
+def assert_that(assertion: bool, reason: str = "") -> None:
+    ...
+
+
+def assert_that(actual, matcher=None, reason=""):
     """Asserts that actual value satisfies matcher. (Can also assert plain
     boolean condition.)
 

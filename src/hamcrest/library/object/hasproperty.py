@@ -21,14 +21,14 @@ class IsObjectWithProperty(BaseMatcher[object]):
         self.property_name = property_name
         self.value_matcher = value_matcher
 
-    def _matches(self, o: object) -> bool:
-        if o is None:
+    def _matches(self, item: object) -> bool:
+        if item is None:
             return False
 
-        if not hasattr(o, self.property_name):
+        if not hasattr(item, self.property_name):
             return False
 
-        value = getattr(o, self.property_name)
+        value = getattr(item, self.property_name)
         return self.value_matcher.matches(value)
 
     def describe_to(self, description: Description) -> None:

@@ -56,18 +56,18 @@ class IsSequenceContainingInOrder(BaseMatcher[Sequence[T]]):
         self.matchers = matchers
 
     def matches(
-        self, sequence: Sequence[T], mismatch_description: Optional[Description] = None
+        self, item: Sequence[T], mismatch_description: Optional[Description] = None
     ) -> bool:
         try:
             matchsequence = MatchingInOrder(self.matchers, mismatch_description)
-            for item in sequence:
-                if not matchsequence.matches(item):
+            for element in item:
+                if not matchsequence.matches(element):
                     return False
             return matchsequence.isfinished()
         except TypeError:
             if mismatch_description:
                 super(IsSequenceContainingInOrder, self).describe_mismatch(
-                    sequence, mismatch_description
+                    item, mismatch_description
                 )
             return False
 

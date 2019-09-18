@@ -17,10 +17,10 @@ class IsSequenceContaining(BaseMatcher[Sequence[T]]):
     def __init__(self, element_matcher: Matcher[T]) -> None:
         self.element_matcher = element_matcher
 
-    def _matches(self, sequence: Sequence[T]) -> bool:
+    def _matches(self, item: Sequence[T]) -> bool:
         try:
-            for item in sequence:
-                if self.element_matcher.matches(item):
+            for element in item:
+                if self.element_matcher.matches(element):
                     return True
         except TypeError:  # not a sequence
             pass
@@ -41,9 +41,9 @@ class IsSequenceContainingEvery(BaseMatcher[Sequence[T]]):
         delegates = [cast(Matcher[Sequence[T]], has_item(e)) for e in element_matchers]
         self.matcher = all_of(*delegates)  # type: Matcher[Sequence[T]]
 
-    def _matches(self, sequence: Sequence[T]) -> bool:
+    def _matches(self, item: Sequence[T]) -> bool:
         try:
-            return self.matcher.matches(list(sequence))
+            return self.matcher.matches(list(item))
         except TypeError:
             return False
 

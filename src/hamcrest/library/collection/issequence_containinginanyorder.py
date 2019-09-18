@@ -22,13 +22,13 @@ class MatchInAnyOrder(object):
     def matches(self, item: T) -> bool:
         return self.isnotsurplus(item) and self.ismatched(item)
 
-    def isfinished(self, sequence: Sequence[T]) -> bool:
+    def isfinished(self, item: Sequence[T]) -> bool:
         if not self.matchers:
             return True
         if self.mismatch_description:
             self.mismatch_description.append_text("no item matches: ").append_list(
                 "", ", ", "", self.matchers
-            ).append_text(" in ").append_list("[", ", ", "]", sequence)
+            ).append_text(" in ").append_list("[", ", ", "]", item)
         return False
 
     def isnotsurplus(self, item: T) -> bool:
@@ -54,19 +54,19 @@ class IsSequenceContainingInAnyOrder(BaseMatcher[Sequence[T]]):
         self.matchers = matchers
 
     def matches(
-        self, sequence: Sequence[T], mismatch_description: Optional[Description] = None
+        self, item: Sequence[T], mismatch_description: Optional[Description] = None
     ) -> bool:
         try:
-            sequence = list(sequence)
+            sequence = list(item)
             matchsequence = MatchInAnyOrder(self.matchers, mismatch_description)
-            for item in sequence:
-                if not matchsequence.matches(item):
+            for element in sequence:
+                if not matchsequence.matches(element):
                     return False
             return matchsequence.isfinished(sequence)
         except TypeError:
             if mismatch_description:
                 super(IsSequenceContainingInAnyOrder, self).describe_mismatch(
-                    sequence, mismatch_description
+                    item, mismatch_description
                 )
             return False
 
