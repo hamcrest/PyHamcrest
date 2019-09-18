@@ -1,0 +1,5 @@
+- case: equal_to_ignoring_case
+  main: |
+    from hamcrest.library.text.isequal_ignoring_case import equal_to_ignoring_case
+
+    reveal_type(equal_to_ignoring_case(""))  # N: Revealed type is 'builtins.str*'

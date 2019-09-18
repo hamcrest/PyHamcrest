@@ -1,4 +1,4 @@
-from typing import Any, Mapping, Optional, TypeVar, Union, overload
+from typing import Any, Hashable, Mapping, Optional, TypeVar, Union, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -9,7 +9,7 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-K = TypeVar("K")
+K = TypeVar("K", bound=Hashable)
 V = TypeVar("V")
 
 
@@ -18,33 +18,31 @@ class IsDictContainingEntries(BaseMatcher[Mapping[K, V]]):
         self.value_matchers = sorted(value_matchers.items())
 
     def _not_a_dictionary(
-        self, dictionary: Mapping[K, V], mismatch_description: Optional[Description]
+        self, item: Mapping[K, V], mismatch_description: Optional[Description]
     ) -> bool:
         if mismatch_description:
-            mismatch_description.append_description_of(dictionary).append_text(
-                " is not a mapping object"
-            )
+            mismatch_description.append_description_of(item).append_text(" is not a mapping object")
         return False
 
     def matches(
-        self, dictionary: Mapping[K, V], mismatch_description: Optional[Description] = None
+        self, item: Mapping[K, V], mismatch_description: Optional[Description] = None
     ) -> bool:
         for key, value_matcher in self.value_matchers:
 
             try:
-                if not key in dictionary:
+                if not key in item:
                     if mismatch_description:
                         mismatch_description.append_text("no ").append_description_of(
                             key
-                        ).append_text(" key in ").append_description_of(dictionary)
+                        ).append_text(" key in ").append_description_of(item)
                     return False
             except TypeError:
-                return self._not_a_dictionary(dictionary, mismatch_description)
+                return self._not_a_dictionary(item, mismatch_description)
 
             try:
-                actual_value = dictionary[key]
+                actual_value = item[key]
             except TypeError:
-                return self._not_a_dictionary(dictionary, mismatch_description)
+                return self._not_a_dictionary(item, mismatch_description)
 
             if not value_matcher.matches(actual_value):
                 if mismatch_description:

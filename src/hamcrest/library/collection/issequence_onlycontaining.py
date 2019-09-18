@@ -17,13 +17,13 @@ class IsSequenceOnlyContaining(BaseMatcher[Sequence[T]]):
     def __init__(self, matcher: Matcher[T]) -> None:
         self.matcher = matcher
 
-    def _matches(self, sequence: Sequence[T]) -> bool:
+    def _matches(self, item: Sequence[T]) -> bool:
         try:
-            sequence = list(sequence)
+            sequence = list(item)
             if len(sequence) == 0:
                 return False
-            for item in sequence:
-                if not self.matcher.matches(item):
+            for element in sequence:
+                if not self.matcher.matches(element):
                     return False
             return True
         except TypeError:
