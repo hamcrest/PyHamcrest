@@ -19,7 +19,7 @@ matrix:
       sudo: yes
       env:
         - TOX_ENV=py37
-    - python: 3.8-dev
+    - python: 3.8
       sudo: yes
       env:
         - TOX_ENV=py38
@@ -32,7 +32,7 @@ matrix:
       language: sh
       python: 3.7
       before_install:
-        - choco install python3
+        - choco install python --version=3.7.5
         - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
         - python -m pip install --upgrade pip wheel
       env:
