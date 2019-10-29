@@ -37,5 +37,5 @@ class BaseMatcher(Matcher[T]):
     def describe_mismatch(self, item: T, mismatch_description: Description) -> None:
         mismatch_description.append_text("was ").append_description_of(item)
 
-    def describe_match(self, item, match_description):
+    def describe_match(self, item: T, match_description: Description) -> None:
         match_description.append_text("was ").append_description_of(item)

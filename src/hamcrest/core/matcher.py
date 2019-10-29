@@ -57,7 +57,7 @@ class Matcher(Generic[T], SelfDescribing):
         """
         raise NotImplementedError("describe_mismatch")
 
-    def describe_match(self, item, match_description):
+    def describe_match(self, item: T, match_description: Description) -> None:
         """Generates a description of why the matcher has accepted the item.
 
         The description may be part of a larger description of why a matching
