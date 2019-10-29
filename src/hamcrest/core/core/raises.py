@@ -66,7 +66,7 @@ class Raises(BaseMatcher[Callable[..., Any]]):
                 "%r of type %s was raised instead" % (self.actual, type(self.actual))
             )
 
-    def describe_match(self, item, match_description):
+    def describe_match(self, item, match_description: Description) -> None:
         self._call_function(item)
         match_description.append_text(
             "%r of type %s was raised." % (self.actual, type(self.actual))

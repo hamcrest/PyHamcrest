@@ -24,7 +24,7 @@ class IsNot(BaseMatcher[T]):
     def describe_to(self, description: Description) -> None:
         description.append_text("not ").append_description_of(self.matcher)
 
-    def describe_mismatch(self, item, mismatch_description):
+    def describe_mismatch(self, item: T, mismatch_description: Description) -> None:
         mismatch_description.append_text("but ")
         self.matcher.describe_match(item, mismatch_description)
 
