@@ -156,9 +156,9 @@ def has_properties(*keys_valuematchers, **kv_args):
     if len(base_dict) > 1:
         description = StringDescription().append_text("an object with properties ")
         for i, (property_name, property_value_matcher) in enumerate(sorted(base_dict.items())):
-            description.append_value(property_name).append_text(" matching ").append_description_of(
-                property_value_matcher
-            )
+            description.append_description_of(property_name).append_text(
+                " matching "
+            ).append_description_of(property_value_matcher)
             if i < len(base_dict) - 1:
                 description.append_text(" and ")
 

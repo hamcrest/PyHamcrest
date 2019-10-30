@@ -31,18 +31,6 @@ class Description(object):
         """
         raise NotImplementedError("append_description_of")
 
-    def append_value(self, value):
-        """Appends an arbitary value to the description.
-
-        **Deprecated:** Call
-        :py:meth:`~hamcrest.core.description.Description.append_description_of`
-        instead.
-
-        :returns: ``self``, for chaining
-
-        """
-        raise NotImplementedError("append_value")
-
     def append_list(self, start, separator, end, list):
         """Appends a list of objects to the description.
 
