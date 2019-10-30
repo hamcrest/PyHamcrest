@@ -2,12 +2,9 @@ __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-import warnings
-
 from hamcrest.core.description import Description
 from hamcrest.core.helpers.hasmethod import hasmethod
 from hamcrest.core.helpers.ismock import ismock
-from hamcrest.core.selfdescribingvalue import SelfDescribingValue
 
 
 class BaseDescription(Description):
@@ -34,20 +31,6 @@ class BaseDescription(Description):
                 self.append(description)
                 self.append(">")
         return self
-
-    def append_value(self, value):
-        warnings.warn("Call append_description_of instead of append_value", DeprecationWarning)
-        if isinstance(value, str):
-            self.append_string_in_python_syntax(value)
-        else:
-            self.append("<")
-            self.append(str(value))
-            self.append(">")
-        return self
-
-    def append_value_list(self, start, separator, end, list):
-        warnings.warn("Call append_list instead of append_value_list", DeprecationWarning)
-        return self.append_list(start, separator, end, map(SelfDescribingValue, list))
 
     def append_list(self, start, separator, end, list):
         separate = False
