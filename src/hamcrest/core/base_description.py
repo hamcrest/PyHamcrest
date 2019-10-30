@@ -36,22 +36,6 @@ class BaseDescription(Description):
                 self.append(">")
         return self
 
-    def append_value(self, value: Any) -> Description:
-        warnings.warn("Call append_description_of instead of append_value", DeprecationWarning)
-        if isinstance(value, str):
-            self.append_string_in_python_syntax(value)
-        else:
-            self.append("<")
-            self.append(str(value))
-            self.append(">")
-        return self
-
-    def append_value_list(
-        self, start: str, separator: str, end: str, list: Iterable[Any]
-    ) -> Description:
-        warnings.warn("Call append_list instead of append_value_list", DeprecationWarning)
-        return self.append_list(start, separator, end, map(SelfDescribingValue, list))
-
     def append_list(self, start: str, separator: str, end: str, list: Iterable[Any]) -> Description:
         separate = False
 
