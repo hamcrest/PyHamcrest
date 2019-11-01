@@ -1,9 +1,10 @@
 # coding: utf-8
+from unittest.mock import sentinel
+
 import pytest
 from hamcrest.core.base_description import BaseDescription
 from hamcrest.core.helpers.ismock import MOCKTYPES
 from hamcrest.core.selfdescribing import SelfDescribing
-from mock import sentinel
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2015 hamcrest.org"
