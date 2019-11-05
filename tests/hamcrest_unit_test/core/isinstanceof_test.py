@@ -41,13 +41,6 @@ def test_matching_evaluation(arg, matcher):
 def test_mismatching_evaluation(arg, matcher):
     assert_does_not_match(matcher, arg, 'mismatched')
 
-@pytest.mark.parametrize('obj', (
-    pytest.mark.issue56(()),
-    'str',
-))
-def test_matcher_creation_requires_type(obj):
-    with pytest.raises(TypeError):
-        instance_of(obj)
 
 @pytest.mark.parametrize('desc, type', (
     ('an instance of int', int),

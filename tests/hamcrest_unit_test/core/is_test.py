@@ -39,7 +39,7 @@ def test_description_should_pass_through_matcher():
 equal_matches = pytest.mark.parametrize('arg, identity, desc', (
     ('A', 'A', "'A'"),
     (5 + 3, 8, "<8>"),
-    pytest.mark.issue56((tuple(), (), "<()>")),
+    pytest.param(tuple(), (), "<()>", marks=pytest.mark.issue56),
 ))
 
 equal_mismatches = pytest.mark.parametrize('arg, identity, desc', (
