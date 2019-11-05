@@ -77,9 +77,3 @@ def assert_describe_mismatch(expected, matcher, arg):
     description = StringDescription()
     matcher.describe_mismatch(arg, description)
     assert expected == str(description)
-
-
-only_py3 = pytest.mark.skipif(sys.version_info < (3, ),
-                              reason="Only relevant in Python 3")
-only_py2 = pytest.mark.skipif(sys.version_info >= (3, ),
-                              reason="Only relevant in Python 2")

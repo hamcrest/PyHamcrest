@@ -65,7 +65,6 @@ def test_description_uses_equal_to(arg, identity, desc):
 @pytest.mark.parametrize('arg, identity', (
     ('A', str),
     (1, int),
-    only_py2((OldClass(), OldClass)),
 ))
 def test_provides_instanceof_shortcut(arg, identity):
     assert_matches(is_(identity), arg, "should match")

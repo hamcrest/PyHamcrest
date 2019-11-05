@@ -26,7 +26,6 @@ class Child(Parent):
     ('foo', instance_of((str, int))),
     (1, instance_of((int, str))),
     ('foo', instance_of((int, str))),
-    only_py2((Parent(), instance_of(Parent))),
 ))
 def test_matching_evaluation(arg, matcher):
     assert_matches(matcher, arg, 'same class')
@@ -35,8 +34,6 @@ def test_matching_evaluation(arg, matcher):
 @pytest.mark.parametrize('arg, matcher', (
     ('hi', instance_of(int)),
     (None, instance_of(int)),
-    only_py2(('not a parent', instance_of(Parent))),
-    only_py2((None, instance_of(Parent))),
 ))
 def test_mismatching_evaluation(arg, matcher):
     assert_does_not_match(matcher, arg, 'mismatched')
