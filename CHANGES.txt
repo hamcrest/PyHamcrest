@@ -1,3 +1,11 @@
+=== Version 1.10.1 ==
+
+Add support up to Python 3.8
+
+Fix #66 - deprecate contains() in favour of contains_exactly().
+Fix #72 - make has_properties mismatch description less verbose by adding option to AllOf not to include matcher description in its mismatch messages.
+Fix #82 - include exception details in mismatch description.
+
 === Version 1.9.0 ==
 
 Drop formal support for 2.x < 2.7
