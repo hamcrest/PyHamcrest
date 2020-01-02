@@ -25,9 +25,9 @@ matrix:
         - TOX_ENV=py38
     - os: osx
       language: generic
-      python: 3.6
+      python: 3.7
       env:
-        - TOX_ENV=py36
+        - TOX_ENV=py37
     - os: windows
       language: sh
       python: 3.7
