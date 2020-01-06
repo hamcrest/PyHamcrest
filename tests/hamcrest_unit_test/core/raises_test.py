@@ -2,7 +2,7 @@ import sys
 import unittest
 
 import pytest
-from hamcrest import not_
+from hamcrest import has_properties, not_
 from hamcrest.core.core.raises import calling, raises
 from hamcrest_unit_test.matcher_test import MatcherTest, assert_mismatch_description
 
@@ -26,6 +26,13 @@ def raise_exception(*args, **kwargs):
 
 def raise_baseException(*args, **kwargs):
     raise SystemExit(str(args) + str(kwargs))
+
+
+def raise_exception_with_properties(**kwargs):
+    err = AssertionError("boom")
+    for k, v in kwargs.items():
+        setattr(err, k, v)
+    raise err
 
 
 class RaisesTest(MatcherTest):
@@ -89,6 +96,37 @@ class RaisesTest(MatcherTest):
             "Regex",
             raises(AssertionError, "([\d, ]+)"),
             calling(raise_exception).with_args(3, 1, 4),
+        )
+
+    def testMachesIfRaisedExceptionMatchesAdditionalMatchers(self):
+        self.assert_matches(
+            "Properties",
+            raises(AssertionError, matching=has_properties(prip="prop")),
+            calling(raise_exception_with_properties).with_args(prip="prop"),
+        )
+
+    def testDoesNotMatchIfAdditionalMatchersDoesNotMatch(self):
+        self.assert_does_not_match(
+            "Bad properties",
+            raises(AssertionError, matching=has_properties(prop="prip")),
+            calling(raise_exception_with_properties).with_args(prip="prop"),
+        )
+        self.assert_mismatch_description(
+            '''Correct assertion type raised, but an object with a property 'prop' matching 'prip' not found. Exception message was: "boom"''',
+            raises(AssertionError, matching=has_properties(prop="prip")),
+            calling(raise_exception_with_properties).with_args(prip="prop"),
+        )
+
+    def testDoesNotMatchIfNeitherPatternOrMatcherMatch(self):
+        self.assert_does_not_match(
+            "Bad pattern and properties",
+            raises(AssertionError, pattern="asdf", matching=has_properties(prop="prip")),
+            calling(raise_exception_with_properties).with_args(prip="prop"),
+        )
+        self.assert_mismatch_description(
+            '''Correct assertion type raised, but the expected pattern ("asdf") and an object with a property 'prop' matching 'prip' not found. Exception message was: "boom"''',
+            raises(AssertionError, pattern="asdf", matching=has_properties(prop="prip")),
+            calling(raise_exception_with_properties).with_args(prip="prop"),
         )
 
     def testDescribeMismatchWillCallItemIfNotTheOriginalMatch(self):
