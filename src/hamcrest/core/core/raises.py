@@ -55,12 +55,13 @@ class Raises(BaseMatcher[Callable[..., Any]]):
 
         if self.actual is None:
             description.append_text("No exception raised.")
-        elif isinstance(self.actual, cast(type, self.expected)) and self.pattern is not None:
-            description.append_text(
-                'Correct assertion type raised, but the expected pattern ("%s") not found.'
-                % self.pattern
-            )
-            description.append_text('\n          message was: "%s"' % str(self.actual))
+        elif isinstance(self.actual, cast(type, self.expected)):
+            if self.pattern is not None:
+                description.append_text(
+                    'Correct assertion type raised, but the expected pattern ("%s") not found. '
+                    % self.pattern
+                )
+                description.append_text('Exception message was: "%s"' % str(self.actual))
         else:
             description.append_text(
                 "%r of type %s was raised instead" % (self.actual, type(self.actual))

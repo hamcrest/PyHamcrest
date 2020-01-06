@@ -72,6 +72,11 @@ class RaisesTest(MatcherTest):
         self.assert_does_not_match(
             "Bad regex", raises(AssertionError, "Phrase not found"), calling(raise_exception)
         )
+        self.assert_mismatch_description(
+            '''Correct assertion type raised, but the expected pattern ("Phrase not found") not found. Exception message was: "(){}"''',
+            raises(AssertionError, "Phrase not found"),
+            calling(raise_exception),
+        )
 
     def testMatchesRegularExpressionToStringifiedException(self):
         self.assert_matches(
