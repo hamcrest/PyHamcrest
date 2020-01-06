@@ -13,8 +13,11 @@ __license__ = "BSD, see License.txt"
 
 
 class Raises(BaseMatcher[Callable[..., Any]]):
-    def __init__(self, expected: Exception, pattern: Optional[str] = None) -> None:
+    def __init__(
+        self, expected: Exception, pattern: Optional[str] = None, matching: Optional[Matcher] = None
+    ) -> None:
         self.pattern = pattern
+        self.matcher = matching
         self.expected = expected
         self.actual = None  # type: Optional[BaseException]
         self.function = None  # type: Optional[Callable[..., Any]]
@@ -35,7 +38,11 @@ class Raises(BaseMatcher[Callable[..., Any]]):
 
             if isinstance(self.actual, cast(type, self.expected)):
                 if self.pattern is not None:
-                    return re.search(self.pattern, str(self.actual)) is not None
+                    if re.search(self.pattern, str(self.actual)) is None:
+                        return False
+                if self.matcher is not None:
+                    if not self.matcher.matches(self.actual):
+                        return False
                 return True
         return False
 
@@ -56,12 +63,16 @@ class Raises(BaseMatcher[Callable[..., Any]]):
         if self.actual is None:
             description.append_text("No exception raised.")
         elif isinstance(self.actual, cast(type, self.expected)):
-            if self.pattern is not None:
-                description.append_text(
-                    'Correct assertion type raised, but the expected pattern ("%s") not found. '
-                    % self.pattern
-                )
-                description.append_text('Exception message was: "%s"' % str(self.actual))
+            if self.pattern is not None or self.matcher is not None:
+                description.append_text("Correct assertion type raised, but ")
+                if self.pattern is not None:
+                    description.append_text('the expected pattern ("%s") ' % self.pattern)
+                if self.pattern is not None and self.matcher is not None:
+                    description.append_text("and ")
+                if self.matcher is not None:
+                    description.append_description_of(self.matcher)
+                    description.append_text(" ")
+                description.append_text('not found. Exception message was: "%s"' % str(self.actual))
         else:
             description.append_text(
                 "%r of type %s was raised instead" % (self.actual, type(self.actual))
@@ -74,11 +85,12 @@ class Raises(BaseMatcher[Callable[..., Any]]):
         )
 
 
-def raises(exception: Exception, pattern=None) -> Matcher[Callable[..., Any]]:
+def raises(exception: Exception, pattern=None, matching=None) -> Matcher[Callable[..., Any]]:
     """Matches if the called function raised the expected exception.
 
     :param exception:  The class of the expected exception
     :param pattern:    Optional regular expression to match exception message.
+    :param matching:   Optional Hamcrest matchers to apply to the exception.
 
     Expects the actual to be wrapped by using :py:func:`~hamcrest.core.core.raises.calling`,
     or a callable taking no arguments.
@@ -89,8 +101,12 @@ def raises(exception: Exception, pattern=None) -> Matcher[Callable[..., Any]]:
 
         assert_that(calling(int).with_args('q'), raises(TypeError))
         assert_that(calling(parse, broken_input), raises(ValueError))
+        assert_that(
+            calling(valid_user, bad_json),
+            raises(HTTPError, matching=has_properties(status_code=500)
+        )
     """
-    return Raises(exception, pattern)
+    return Raises(exception, pattern, matching)
 
 
 class DeferredCallable(object):
