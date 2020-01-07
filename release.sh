@@ -23,7 +23,7 @@ function do_test() {
 }
 
 function do_all_vers() {
-    for python_version in py35 py36 py37; do
+    for python_version in py35 py36 py37 py38; do
         $1 $python_version || failed="$failed $python_version"
     done
     $1 pypy pypy || failed="$failed pypy"
