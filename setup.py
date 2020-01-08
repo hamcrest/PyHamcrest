@@ -41,6 +41,7 @@ params = dict(
     package_dir={"": "src"},
     provides=["hamcrest"],
     long_description=read("README.rst"),
+    python_requires='>=3.5',
     install_requires=[],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
