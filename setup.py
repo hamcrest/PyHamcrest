@@ -33,6 +33,7 @@ params = dict(
     description="Hamcrest framework for matcher objects",
     license="New BSD",
     platforms=["All"],
+    python_requires=">=3.5",
     keywords="hamcrest matchers pyunit unit test testing unittest unittesting",
     url="https://github.com/hamcrest/PyHamcrest",
     download_url="http://pypi.python.org/packages/source/P/PyHamcrest/PyHamcrest-%s.tar.gz"
