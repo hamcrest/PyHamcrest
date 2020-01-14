@@ -5,26 +5,7 @@ matrix:
   include:
     - python: 2.7
       env:
-        - TOX_ENV=py26
-    - python: 2.7
-      env:
         - TOX_ENV=py27
-    - python: 2.7
-      env:
-        - TOX_ENV=pypy2.7
-    - python: 2.7
-      env:
-        - TOX_ENV=py27-numpy
-    - python: 3.6
-      env:
-        - TOX_ENV=py32
-    - python: 3.6
-      env:
-        - TOX_ENV=py33
-    - python: 3.6
-      dist: trusty
-      env:
-        - TOX_ENV=py34
     - python: 3.5
       env:
         - TOX_ENV=py35
@@ -41,20 +22,20 @@ matrix:
       sudo: yes
       env:
         - TOX_ENV=py37
-    - python: 3.8-dev
+    - python: 3.8
       sudo: yes
       env:
         - TOX_ENV=py38
     - os: osx
       language: generic
-      python: 3.6
+      python: 3.7
       env:
-        - TOX_ENV=py36
+        - TOX_ENV=py37
     - os: windows
       language: sh
       python: 3.7
       before_install:
-        - choco install python3
+        - choco install python --version=3.7.5
         - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
         - python -m pip install --upgrade pip wheel
       env:
@@ -67,7 +48,9 @@ before_install:
   - export EASY_SETUP_URL='http://peak.telecommunity.com/dist/ez_setup.py'
 
 install:
-  - pip install --upgrade tox coveralls
+  - pip install --upgrade pip tox coveralls
+  - python --version
+  - pip --version
 
 script:
   - tox -e $TOX_ENV
