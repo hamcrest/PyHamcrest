@@ -39,6 +39,7 @@ params = dict(
     % __version__,
     packages=find_packages("src"),
     package_dir={"": "src"},
+    package_data={"hamcrest": ["py.typed"]},
     provides=["hamcrest"],
     long_description=read("README.rst"),
     python_requires=">=3.5",
