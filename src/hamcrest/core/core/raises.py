@@ -1,6 +1,6 @@
 import re
 import sys
-from typing import Any, Callable, Mapping, Optional, Tuple, cast
+from typing import Any, Callable, Mapping, Optional, Tuple, Type, cast
 from weakref import ref
 
 from hamcrest.core.base_matcher import BaseMatcher
@@ -14,7 +14,10 @@ __license__ = "BSD, see License.txt"
 
 class Raises(BaseMatcher[Callable[..., Any]]):
     def __init__(
-        self, expected: Exception, pattern: Optional[str] = None, matching: Optional[Matcher] = None
+        self,
+        expected: Type[Exception],
+        pattern: Optional[str] = None,
+        matching: Optional[Matcher] = None,
     ) -> None:
         self.pattern = pattern
         self.matcher = matching
@@ -85,7 +88,7 @@ class Raises(BaseMatcher[Callable[..., Any]]):
         )
 
 
-def raises(exception: Exception, pattern=None, matching=None) -> Matcher[Callable[..., Any]]:
+def raises(exception: Type[Exception], pattern=None, matching=None) -> Matcher[Callable[..., Any]]:
     """Matches if the called function raised the expected exception.
 
     :param exception:  The class of the expected exception
