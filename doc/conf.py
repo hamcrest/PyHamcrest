@@ -48,7 +48,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = six.u('PyHamcrest')
-copyright = six.u('2011, hamcrest.org')
+copyright = six.u('2020, hamcrest.org')
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
