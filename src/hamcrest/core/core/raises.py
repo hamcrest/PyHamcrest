@@ -39,7 +39,7 @@ class Raises(BaseMatcher[Callable[..., Any]]):
         except BaseException:
             self.actual = sys.exc_info()[1]
 
-            if isinstance(self.actual, cast(type, self.expected)):
+            if isinstance(self.actual, self.expected):
                 if self.pattern is not None:
                     if re.search(self.pattern, str(self.actual)) is None:
                         return False
@@ -65,7 +65,7 @@ class Raises(BaseMatcher[Callable[..., Any]]):
 
         if self.actual is None:
             description.append_text("No exception raised.")
-        elif isinstance(self.actual, cast(type, self.expected)):
+        elif isinstance(self.actual, self.expected):
             if self.pattern is not None or self.matcher is not None:
                 description.append_text("Correct assertion type raised, but ")
                 if self.pattern is not None:
