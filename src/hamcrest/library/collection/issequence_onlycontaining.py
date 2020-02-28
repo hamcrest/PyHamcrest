@@ -35,7 +35,7 @@ class IsSequenceOnlyContaining(BaseMatcher[Sequence[T]]):
         )
 
 
-def only_contains(*items: Union[T, Matcher[T]]) -> Matcher[Sequence[T]]:
+def only_contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     """Matches if each element of sequence satisfies any of the given matchers.
 
     :param match1,...: A comma-separated list of matchers.

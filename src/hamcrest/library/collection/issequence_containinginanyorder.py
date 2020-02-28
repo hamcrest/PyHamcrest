@@ -79,7 +79,7 @@ class IsSequenceContainingInAnyOrder(BaseMatcher[Sequence[T]]):
         ).append_text(" in any order")
 
 
-def contains_inanyorder(*items: Union[T, Matcher[T]]) -> Matcher[Sequence[T]]:
+def contains_inanyorder(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     """Matches if sequences's elements, in any order, satisfy a given list of
     matchers.
 

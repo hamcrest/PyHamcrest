@@ -26,7 +26,7 @@ class AnyOf(BaseMatcher[T]):
         description.append_list("(", " or ", ")", self.matchers)
 
 
-def any_of(*items: Union[T, Matcher[T]]) -> Matcher[T]:
+def any_of(*items: Union[Matcher[T], T]) -> Matcher[T]:
     """Matches if any of the given matchers evaluate to ``True``.
 
     :param matcher1,...:  A comma-separated list of matchers.

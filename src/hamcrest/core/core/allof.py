@@ -42,7 +42,7 @@ class AllOf(BaseMatcher[T]):
         description.append_list("(", " and ", ")", self.matchers)
 
 
-def all_of(*items: Union[T, Matcher[T]]) -> Matcher[T]:
+def all_of(*items: Union[Matcher[T], T]) -> Matcher[T]:
     """Matches if all of the given matchers evaluate to ``True``.
 
     :param matcher1,...:  A comma-separated list of matchers.
