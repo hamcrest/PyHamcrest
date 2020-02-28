@@ -54,7 +54,7 @@ class IsSequenceContainingEvery(BaseMatcher[Sequence[T]]):
         self.matcher.describe_to(description)
 
 
-def has_item(match: Union[T, Matcher[T]]) -> Matcher[Sequence[T]]:
+def has_item(match: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     """Matches if any element of sequence satisfies a given matcher.
 
     :param match: The matcher to satisfy, or an expected value for
@@ -72,7 +72,7 @@ def has_item(match: Union[T, Matcher[T]]) -> Matcher[Sequence[T]]:
     return IsSequenceContaining(wrap_matcher(match))
 
 
-def has_items(*items: Union[T, Matcher[T]]) -> Matcher[Sequence[T]]:
+def has_items(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     """Matches if all of the given matchers are satisfied by any elements of
     the sequence.
 
