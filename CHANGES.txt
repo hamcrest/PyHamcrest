@@ -1,4 +1,8 @@
-=== Version 2.0.1 ==
+=== Version 2.0.2 ===
+
+Various type hint bug fixes.
+
+=== Version 2.0.1 ===
 
 * Make hamcrest package PEP 561 compatible, i.e. supply type hints for external use.
 
