@@ -12,7 +12,6 @@
 # serve to show the default.
 
 import sys, os
-import six
 import sphinx_rtd_theme
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -32,7 +31,7 @@ from hamcrest import __version__
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 
 autodoc_default_options = {'members': None, 'show-inheritance': None}
-intersphinx_mapping = {'python': ('http://docs.python.org/2.6', None)}
+intersphinx_mapping = {'python': ('http://docs.python.org/3', None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -47,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = six.u('PyHamcrest')
-copyright = six.u('2020, hamcrest.org')
+project = 'PyHamcrest'
+copyright = '2020, hamcrest.org'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -186,8 +185,8 @@ htmlhelp_basename = 'PyHamcrestdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'PyHamcrest.tex', six.u('PyHamcrest Documentation'),
-   six.u('hamcrest.org'), 'manual'),
+  ('index', 'PyHamcrest.tex', 'PyHamcrest Documentation',
+   'hamcrest.org'), 'manual',
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -227,6 +226,6 @@ def setup(app):
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'pyhamcrest', six.u('PyHamcrest Documentation'),
-     [six.u('hamcrest.org')], 1)
+    ('index', 'pyhamcrest', 'PyHamcrest Documentation',
+     ['hamcrest.org'], 1)
 ]
