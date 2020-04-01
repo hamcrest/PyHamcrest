@@ -21,16 +21,16 @@ class MethodsOldStyle:
         return "value1"
     
     def method2(self, arg1):
-        return f"value{arg1}"
+        return "value{}".format(arg1)
     
     def method3(self, kwarg1=None):
-        return f"value{kwarg1}"
+        return "value{}".format(kwarg1)
 
     def method4(self, arg1, kwarg1=None):
-        return f"value{arg1}{kwarg1}"
+        return "value{}{}".format(arg1, kwarg1)
 
     def method5(self, arg1, arg2, kwarg1=None, kwarg2=None):
-        return f"value{arg1}{arg2}{kwarg1}{kwarg2}"
+        return "value{}{}{}{}".format(arg1, arg2, kwarg1, kwarg2)
 
 
 class MethodsNewStyle(object):
@@ -39,16 +39,16 @@ class MethodsNewStyle(object):
         return "value1"
     
     def method2(self, arg1):
-        return f"value{arg1}"
+        return "value{}".format(arg1)
     
     def method3(self, kwarg1=None):
-        return f"value{kwarg1}"
+        return "value{}".format(kwarg1)
 
     def method4(self, arg1, kwarg1=None):
-        return f"value{arg1}{kwarg1}"
+        return "value{}{}".format(arg1, kwarg1)
 
     def method5(self, arg1, arg2, kwarg1=None, kwarg2=None):
-        return f"value{arg1}{arg2}{kwarg1}{kwarg2}"
+        return "value{}{}{}{}".format(arg1, arg2, kwarg1, kwarg2)
 
     def __repr__(self):
         return "MethodsNewStyle"
@@ -62,13 +62,13 @@ class OverridingOldStyle:
         if name == "method1":
             return lambda: "value1"
         if name == "method2":
-            return lambda arg1: f"value{arg1}"
+            return lambda arg1: "value{}".format(arg1)
         if name == "method3":
-            return lambda kwarg1=None: f"value{kwarg1}"
+            return lambda kwarg1=None: "value{}".format(kwarg1)
         if name == "method4":
-            return lambda arg1, kwarg1=None: f"value{arg1}{kwarg1}"
+            return lambda arg1, kwarg1=None: "value{}{}".format(arg1, kwarg1)
         if name == "method5":
-            return lambda arg1, arg2, kwarg1=None, kwarg2=None: f"value{arg1}{arg2}{kwarg1}{kwarg2}"
+            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(arg1, arg2, kwarg1, kwarg2)
 
         raise AttributeError(name)
 
@@ -78,13 +78,13 @@ class OverridingNewStyleGetAttr(object):
         if name == "method1":
             return lambda: "value1"
         if name == "method2":
-            return lambda arg1: f"value{arg1}"
+            return lambda arg1: "value{}".format(arg1)
         if name == "method3":
-            return lambda kwarg1=None: f"value{kwarg1}"
+            return lambda kwarg1=None: "value{}".format(kwarg1)
         if name == "method4":
-            return lambda arg1, kwarg1=None: f"value{arg1}{kwarg1}"
+            return lambda arg1, kwarg1=None: "value{}{}".format(arg1, kwarg1)
         if name == "method5":
-            return lambda arg1, arg2, kwarg1=None, kwarg2=None: f"value{arg1}{arg2}{kwarg1}{kwarg2}"
+            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(arg1, arg2, kwarg1, kwarg2)
 
         raise AttributeError(name)
 
@@ -94,13 +94,13 @@ class OverridingNewStyleGetAttribute(object):
         if name == "method1":
             return lambda: "value1"
         if name == "method2":
-            return lambda arg1: f"value{arg1}"
+            return lambda arg1: "value{}".format(arg1)
         if name == "method3":
-            return lambda kwarg1=None: f"value{kwarg1}"
+            return lambda kwarg1=None: "value{}".format(, kwarg1)
         if name == "method4":
-            return lambda arg1, kwarg1=None: f"value{arg1}{kwarg1}"
+            return lambda arg1, kwarg1=None: "value{}{}".format(arg1, kwarg1)
         if name == "method5":
-            return lambda arg1, arg2, kwarg1=None, kwarg2=None: f"value{arg1}{arg2}{kwarg1}{kwarg2}"
+            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(arg1, arg2, kwarg1, kwarg2)
 
         raise AttributeError(name)
 
