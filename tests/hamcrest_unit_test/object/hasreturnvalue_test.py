@@ -96,7 +96,7 @@ class OverridingNewStyleGetAttribute(object):
         if name == "method2":
             return lambda arg1: "value{}".format(arg1)
         if name == "method3":
-            return lambda kwarg1=None: "value{}".format(, kwarg1)
+            return lambda kwarg1=None: "value{}".format(kwarg1)
         if name == "method4":
             return lambda arg1, kwarg1=None: "value{}{}".format(arg1, kwarg1)
         if name == "method5":
