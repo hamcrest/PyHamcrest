@@ -24,10 +24,10 @@ has_properties/has_property
 
 .. automodule:: hamcrest.library.object.hasproperty
 
-has_callable_value
+has_return_value
 ^^^^^^^^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.object.hascallablevalue
+.. automodule:: hamcrest.library.object.hasreturnvalue
 
 instance_of
 ^^^^^^^^^^^
