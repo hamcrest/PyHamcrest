@@ -16,13 +16,12 @@ __license__ = "BSD, see License.txt"
 
 
 class MethodsOldStyle:
-
     def method1(self):
         return "value1"
-    
+
     def method2(self, arg1):
         return "value{}".format(arg1)
-    
+
     def method3(self, kwarg1=None):
         return "value{}".format(kwarg1)
 
@@ -34,13 +33,12 @@ class MethodsOldStyle:
 
 
 class MethodsNewStyle(object):
-
     def method1(self):
         return "value1"
-    
+
     def method2(self, arg1):
         return "value{}".format(arg1)
-    
+
     def method3(self, kwarg1=None):
         return "value{}".format(kwarg1)
 
@@ -68,7 +66,9 @@ class OverridingOldStyle:
         if name == "method4":
             return lambda arg1, kwarg1=None: "value{}{}".format(arg1, kwarg1)
         if name == "method5":
-            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(arg1, arg2, kwarg1, kwarg2)
+            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(
+                arg1, arg2, kwarg1, kwarg2
+            )
 
         raise AttributeError(name)
 
@@ -84,7 +84,9 @@ class OverridingNewStyleGetAttr(object):
         if name == "method4":
             return lambda arg1, kwarg1=None: "value{}{}".format(arg1, kwarg1)
         if name == "method5":
-            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(arg1, arg2, kwarg1, kwarg2)
+            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(
+                arg1, arg2, kwarg1, kwarg2
+            )
 
         raise AttributeError(name)
 
@@ -100,7 +102,9 @@ class OverridingNewStyleGetAttribute(object):
         if name == "method4":
             return lambda arg1, kwarg1=None: "value{}{}".format(arg1, kwarg1)
         if name == "method5":
-            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(arg1, arg2, kwarg1, kwarg2)
+            return lambda arg1, arg2, kwarg1=None, kwarg2=None: "value{}{}{}{}".format(
+                arg1, arg2, kwarg1, kwarg2
+            )
 
         raise AttributeError(name)
 
@@ -145,22 +149,30 @@ class HasReturnValueTest(MatcherTest, ObjectReturnValueMatcher):
 
     def testDescription(self):
         self.assert_description(
-            "an object with a method 'method1' whose return value when called with () matches not None", has_return_value("method1")
+            "an object with a method 'method1' whose return value when called with () matches not None",
+            has_return_value("method1"),
         )
         self.assert_description(
-            "an object with a method 'method1' whose return value when called with () matches 'value1'", has_return_value("method1", "value1")
+            "an object with a method 'method1' whose return value when called with () matches 'value1'",
+            has_return_value("method1", "value1"),
         )
         self.assert_description(
-            "an object with a method 'method2' whose return value when called with (1) matches 'value1'", has_return_value("method2", "value1", args=[1])
+            "an object with a method 'method2' whose return value when called with (1) matches 'value1'",
+            has_return_value("method2", "value1", args=[1]),
         )
         self.assert_description(
-            "an object with a method 'method3' whose return value when called with (kwarg1=1) matches 'value1'", has_return_value("method3", "value1", kwargs={"kwarg1": 1})
+            "an object with a method 'method3' whose return value when called with (kwarg1=1) matches 'value1'",
+            has_return_value("method3", "value1", kwargs={"kwarg1": 1}),
         )
         self.assert_description(
-            "an object with a method 'method4' whose return value when called with (1, kwarg1=1) matches 'value11'", has_return_value("method4", "value11", args=[1], kwargs={"kwarg1": 1})
+            "an object with a method 'method4' whose return value when called with (1, kwarg1=1) matches 'value11'",
+            has_return_value("method4", "value11", args=[1], kwargs={"kwarg1": 1}),
         )
         self.assert_description(
-            "an object with a method 'method5' whose return value when called with (1, 2, kwarg1=1, kwarg2=2) matches 'value1212'", has_return_value("method5", "value1212", args=[1, 2], kwargs={"kwarg1":1, "kwarg2": 2})
+            "an object with a method 'method5' whose return value when called with (1, 2, kwarg1=1, kwarg2=2) matches 'value1212'",
+            has_return_value(
+                "method5", "value1212", args=[1, 2], kwargs={"kwarg1": 1, "kwarg2": 2}
+            ),
         )
 
     def testDescribeMissingMethod(self):
@@ -201,7 +213,9 @@ class HasReturnValueTest(MatcherTest, ObjectReturnValueMatcher):
     def testReturnValueMismatchWithMultipleArgsAndKwargs(self):
         self.assert_describe_mismatch(
             "method 'method5' called with (1, 2, kwarg1=1, kwarg2=2) was 'value1212'",
-            has_return_value("method5", "not the value", args=[1, 2], kwargs={"kwarg1": 1, "kwarg2": 2}),
+            has_return_value(
+                "method5", "not the value", args=[1, 2], kwargs={"kwarg1": 1, "kwarg2": 2}
+            ),
             MethodsNewStyle(),
         )
 

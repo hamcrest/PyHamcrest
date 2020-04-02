@@ -18,11 +18,11 @@ V = TypeVar("V")
 
 class IsObjectWithCallableProducingValue(BaseMatcher[object]):
     def __init__(
-        self, 
-        method_name: str, 
-        value_matcher: Matcher[V], 
-        args: Iterable[Any] = None, 
-        kwargs: Mapping[str, Any] = None
+        self,
+        method_name: str,
+        value_matcher: Matcher[V],
+        args: Iterable[Any] = None,
+        kwargs: Mapping[str, Any] = None,
     ) -> None:
         self.method_name = method_name
         self.args = args if args is not None else []
@@ -35,8 +35,7 @@ class IsObjectWithCallableProducingValue(BaseMatcher[object]):
         kwargs_str = ""
         if self.kwargs:
             kwargs_bits = map(
-                lambda x: "=".join(map(str, x)), 
-                sorted(self.kwargs.items(), key=lambda x: x[0])
+                lambda x: "=".join(map(str, x)), sorted(self.kwargs.items(), key=lambda x: x[0])
             )
             kwargs_str = ", ".join(kwargs_bits)
 
@@ -63,7 +62,11 @@ class IsObjectWithCallableProducingValue(BaseMatcher[object]):
             self.method_name
         ).append_text("' whose return value when called with ").append_text(
             self.get_callargs_str()
-        ).append_text(" matches ").append_description_of(self.value_matcher)
+        ).append_text(
+            " matches "
+        ).append_description_of(
+            self.value_matcher
+        )
 
     def describe_mismatch(self, item: object, mismatch_description: Description) -> None:
         if item is None:
@@ -78,13 +81,9 @@ class IsObjectWithCallableProducingValue(BaseMatcher[object]):
 
         mismatch_description.append_text("method ").append_description_of(
             self.method_name
-        ).append_text(" called with ").append_text(
-            self.get_callargs_str()
-        ).append_text(" ")
+        ).append_text(" called with ").append_text(self.get_callargs_str()).append_text(" ")
 
-        self.value_matcher.describe_mismatch(
-            self.get_return_value(item), mismatch_description
-        )
+        self.value_matcher.describe_mismatch(self.get_return_value(item), mismatch_description)
 
     def __str__(self):
         d = StringDescription()
@@ -93,11 +92,11 @@ class IsObjectWithCallableProducingValue(BaseMatcher[object]):
 
 
 def has_return_value(
-        name: str, 
-        match: Union[None, Matcher[V], V] = None,
-        args: Iterable[Any] = None, 
-        kwargs: Mapping[str, Any] = None,
-    ) -> Matcher[object]:
+    name: str,
+    match: Union[None, Matcher[V], V] = None,
+    args: Iterable[Any] = None,
+    kwargs: Mapping[str, Any] = None,
+) -> Matcher[object]:
     """Matches if object has a method with a given name whose return value when
     called with the given args and kwargs satisfies a given matcher.
 
