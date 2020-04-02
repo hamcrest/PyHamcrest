@@ -34,9 +34,9 @@ class IsObjectWithCallableProducingValue(BaseMatcher[object]):
 
         kwargs_str = ""
         if self.kwargs:
-            kwargs_bits = sorted(
-                map(lambda x: "=".join(map(str, x)), self.kwargs.items()), 
-                key=lambda x: x[0],
+            kwargs_bits = map(
+                lambda x: "=".join(map(str, x)), 
+                sorted(self.kwargs.items(), key=lambda x: x[0])
             )
             kwargs_str = ", ".join(kwargs_bits)
 
