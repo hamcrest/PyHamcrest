@@ -1,4 +1,4 @@
-from typing import Any, Iterable, Mapping, TypeVar, Union, overload
+from typing import Any, Iterable, Mapping, Optional, TypeVar, Union, overload
 
 from hamcrest import described_as
 from hamcrest.core import not_none
@@ -93,7 +93,7 @@ class IsObjectWithCallableProducingValue(BaseMatcher[object]):
 
 def has_return_value(
     name: str,
-    match: Union[None, Matcher[V], V] = None,
+    match: Optional[Union[Matcher[V], V]] = None,
     args: Iterable[Any] = None,
     kwargs: Mapping[str, Any] = None,
 ) -> Matcher[object]:
