@@ -2,7 +2,7 @@ from typing import Optional, TypeVar
 
 from hamcrest.core.description import Description
 from hamcrest.core.matcher import Matcher
-from hamcrest.core.string_description import tostring
+from hamcrest.core.localized_description import tostring
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

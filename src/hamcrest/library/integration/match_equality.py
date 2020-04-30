@@ -2,7 +2,7 @@ from typing import Any
 
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 from hamcrest.core.matcher import Matcher
-from hamcrest.core.string_description import tostring
+from hamcrest.core.localized_description import tostring
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
