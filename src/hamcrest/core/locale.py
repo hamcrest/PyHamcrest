@@ -8,7 +8,6 @@ _locale = "en_US"
 
 def set_locale(new_locale):
     global _locale  # :(|)
-    print("Setting Hamcrest Locale %s -> %s." % (_locale, new_locale))
     _locale = new_locale
 
 
@@ -29,6 +28,7 @@ class LocaleLazyLoader(object):
             'Assertion failed': "Échec d'une assertion",
             'Expected: ': 'Attendu⋅e: ',
             '     but: ': '     mais: ',
+            'was ': "obtenu⋅e ",
         },
     }
 
