@@ -19,13 +19,9 @@ repos:
     rev: 3.8.0a2
     hooks:
       - id: flake8
+        exclude: >-
+          (?x)^examples/.*\.py$
 
-  - repo: https://github.com/jazzband/pip-tools
-    rev: 5.1.1
-    hooks:
-      - id: pip-compile
-        files: ^requirements.*\.(in|txt)$
-        
   - repo: https://github.com/psf/black
     rev: 19.10b0
     hooks:
