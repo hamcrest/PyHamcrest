@@ -125,13 +125,15 @@ the standard set of matchers:
  from hamcrest import *
  import unittest
 
+
  class BiscuitTest(unittest.TestCase):
      def testEquals(self):
-         theBiscuit = Biscuit('Ginger')
-         myBiscuit = Biscuit('Ginger')
+         theBiscuit = Biscuit("Ginger")
+         myBiscuit = Biscuit("Ginger")
          assert_that(theBiscuit, equal_to(myBiscuit))
 
- if __name__ == '__main__':
+
+ if __name__ == "__main__":
      unittest.main()
 
 The ``assert_that`` function is a stylized sentence for making a test
@@ -146,14 +148,14 @@ for the tested value in the assertion:
 
 .. code:: python
 
- assert_that(theBiscuit.getChocolateChipCount(), equal_to(10), 'chocolate chips')
- assert_that(theBiscuit.getHazelnutCount(), equal_to(3), 'hazelnuts')
+ assert_that(theBiscuit.getChocolateChipCount(), equal_to(10), "chocolate chips")
+ assert_that(theBiscuit.getHazelnutCount(), equal_to(3), "hazelnuts")
 
 As a convenience, assert_that can also be used to verify a boolean condition:
 
 .. code:: python
 
- assert_that(theBiscuit.isCooked(), 'cooked')
+ assert_that(theBiscuit.isCooked(), "cooked")
 
 This is equivalent to the ``assert_`` method of unittest.TestCase, but because
 it's a standalone function, it offers greater flexibility in test writing.
@@ -282,21 +284,30 @@ And here's the implementation:
  from hamcrest.core.base_matcher import BaseMatcher
  from hamcrest.core.helpers.hasmethod import hasmethod
 
- class IsGivenDayOfWeek(BaseMatcher):
 
+ class IsGivenDayOfWeek(BaseMatcher):
      def __init__(self, day):
          self.day = day  # Monday is 0, Sunday is 6
 
      def _matches(self, item):
-         if not hasmethod(item, 'weekday'):
+         if not hasmethod(item, "weekday"):
              return False
          return item.weekday() == self.day
 
      def describe_to(self, description):
-         day_as_string = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                          'Friday', 'Saturday', 'Sunday']
-         description.append_text('calendar date falling on ')    \
-                    .append_text(day_as_string[self.day])
+         day_as_string = [
+             "Monday",
+             "Tuesday",
+             "Wednesday",
+             "Thursday",
+             "Friday",
+             "Saturday",
+             "Sunday",
+         ]
+         description.append_text("calendar date falling on ").append_text(
+             day_as_string[self.day]
+         )
+
 
  def on_a_saturday():
      return IsGivenDayOfWeek(5)
@@ -326,12 +337,14 @@ could use it in our test by importing the factory function ``on_a_saturday``:
  import unittest
  from isgivendayofweek import on_a_saturday
 
+
  class DateTest(unittest.TestCase):
      def testDateIsOnASaturday(self):
          d = datetime.date(2008, 4, 26)
          assert_that(d, is_(on_a_saturday()))
 
- if __name__ == '__main__':
+
+ if __name__ == "__main__":
      unittest.main()
 
 Even though the ``on_a_saturday`` function creates a new matcher each time it
