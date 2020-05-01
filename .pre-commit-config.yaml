@@ -1,0 +1,32 @@
+repos:
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: debug-statements
+
+  - repo: https://github.com/asottile/blacken-docs
+    rev: v1.6.0
+    hooks:
+      - id: blacken-docs
+        # args: ["-l100"]
+
+  - repo: https://gitlab.com/PyCQA/flake8
+    rev: 3.8.0a2
+    hooks:
+      - id: flake8
+
+  - repo: https://github.com/jazzband/pip-tools
+    rev: 5.1.1
+    hooks:
+      - id: pip-compile
+        
+  - repo: https://github.com/psf/black
+    rev: 19.10b0
+    hooks:
+      - id: black
+        # args: ["-l100"]
