@@ -17,13 +17,19 @@ def read(fname):
 # On Python 3, we can't "from hamcrest import __version__" (get ImportError),
 # so we extract the variable assignment and execute it ourselves.
 fh = open("src/hamcrest/__init__.py")
+
+# this will be overridden
+__version__ = None
 try:
     for line in fh:
         if re.match("__version__.*", line):
             exec(line)
+
 finally:
     if fh:
         fh.close()
+
+assert __version__ is not None
 
 params = dict(
     name="PyHamcrest",
@@ -52,7 +58,6 @@ params = dict(
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
