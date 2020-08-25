@@ -13,6 +13,7 @@ __unittest = True
 __tracebackhide__ = True
 
 T = TypeVar("T")
+_unassigned = object()
 
 
 @overload
@@ -25,7 +26,7 @@ def assert_that(assertion: bool, reason: str = "") -> None:
     ...
 
 
-def assert_that(actual, matcher=None, reason=""):
+def assert_that(actual, matcher=_unassigned, reason=""):
     """Asserts that actual value satisfies matcher. (Can also assert plain
     boolean condition.)
 
@@ -52,14 +53,43 @@ def assert_that(actual, matcher=None, reason=""):
     This is equivalent to the :py:meth:`~unittest.TestCase.assertTrue` method
     of :py:class:`unittest.TestCase`, but offers greater flexibility in test
     writing by being a standalone function.
-
     """
     if isinstance(matcher, Matcher):
-        _assert_match(actual=actual, matcher=matcher, reason=reason)
-    else:
-        if isinstance(actual, Matcher):
-            warnings.warn("arg1 should be boolean, but was {}".format(type(actual)))
-        _assert_bool(assertion=cast(bool, actual), reason=cast(str, matcher))
+        return _assert_match(actual=actual, matcher=matcher, reason=reason)
+
+    # Warn if we got a Matcher first
+    if isinstance(actual, Matcher):
+        warnings.warn("arg1 should be boolean, but was {}".format(type(actual)))
+    # Or if actual and matcher are both truthy strings
+    if isinstance(actual, str) and isinstance(matcher, str) and actual:
+        warnings.warn("assert_that(<str>, <str>) only evaluates whether the "
+                      "first argument is True, so the second string is always "
+                      "ignored. Make sure to use an explicit matcher for the "
+                      "second term")
+    # If matcher is not a string (and so not a 'reason'), and is the same
+    # type as the actual, it's almost certain that assert_that was invoked
+    # with the intention that actual == matcher be evaluated. Since this will
+    # always appear to "pass" if "actual" itself evaluates to boolean True
+    # (which happens far more often than not), make this a hard error. This
+    # situation will almost always (if not always) be a buggy test.
+    if not isinstance(matcher, str) and type(matcher) is type(actual):
+        raise TypeError('matcher should be a Matcher instance, or simply '
+                        'provide a reason if you wish to evaluate the actual '
+                        'value as a boolean.')
+    # It really only makes sense for matcher to be a Matcher instance or a
+    # string (actually the 'reason'). Anything besides that is more likely to
+    # be a mistake than anything else, so properly warn.
+    if not isinstance(matcher, str):
+        warnings.warn('matcher was not an explicit Matcher instance, so the '
+                      'assert_that check will pass if the first argument '
+                      'simply evaluates to boolean True. This is unusual.')
+    # If someone provided an explicit 'reason', and passed a matcher that was
+    # not a Matcher instance, this is almost certainly a mistake.
+    if reason and matcher is not _unassigned:
+        raise TypeError('matcher should be a Matcher instance, not {}'.format(
+                        type(matcher)))
+
+    return _assert_bool(assertion=cast(bool, actual), reason=cast(str, matcher))
 
 
 def _assert_match(actual: T, matcher: Matcher[T], reason: str) -> None:

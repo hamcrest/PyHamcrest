@@ -25,11 +25,11 @@ class StringDescription(BaseDescription):
     """
 
     def __init__(self) -> None:
-        self.out = ""
+        self.out = []
 
     def __str__(self) -> str:
         """Returns the description."""
-        return self.out
+        return ''.join(self.out)
 
     def append(self, string: str) -> None:
-        self.out += str(string)
+        self.out.append(str(string))
