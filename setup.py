@@ -31,6 +31,10 @@ finally:
 
 assert __version__ is not None
 
+TESTS_BASIC = ["pytest>=5.0", "pytest-sugar", "coverage"]
+TESTS_NUMPY = ["numpy"]
+
+
 params = dict(
     name="PyHamcrest",
     version=__version__,  # flake8:noqa
@@ -52,7 +56,8 @@ params = dict(
     install_requires=[],
     extras_require={
         "docs": ["sphinx~=3.0", "sphinx_rtd_theme~=0.4"],
-        "tests": ["pytest>=5.0", "pytest-sugar", "coverage"],
+        "tests": TESTS_BASIC,
+        "tests-numpy": TESTS_BASIC + TESTS_NUMPY,
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
