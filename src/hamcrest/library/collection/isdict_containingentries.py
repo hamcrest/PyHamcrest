@@ -30,7 +30,7 @@ class IsDictContainingEntries(BaseMatcher[Mapping[K, V]]):
         for key, value_matcher in self.value_matchers:
 
             try:
-                if not key in item:
+                if key not in item:
                     if mismatch_description:
                         mismatch_description.append_text("no ").append_description_of(
                             key

@@ -1,12 +1,3 @@
-if __name__ == "__main__":
-    import sys
-
-    sys.path.insert(0, "..")
-    sys.path.insert(0, "../..")
-
-import unittest
-
-from hamcrest.core.string_description import StringDescription
 from hamcrest.library.text import string_contains_in_order
 from hamcrest_unit_test.matcher_test import MatcherTest
 

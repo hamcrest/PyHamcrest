@@ -94,7 +94,7 @@ class RaisesTest(MatcherTest):
 
         self.assert_matches(
             "Regex",
-            raises(AssertionError, "([\d, ]+)"),
+            raises(AssertionError, r"([\d, ]+)"),
             calling(raise_exception).with_args(3, 1, 4),
         )
 

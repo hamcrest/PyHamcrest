@@ -14,8 +14,7 @@ Number = Union[float, Decimal]  # Argh, https://github.com/python/mypy/issues/31
 
 
 def isnumeric(value: Any) -> bool:
-    """Confirm that 'value' can be treated numerically; duck-test accordingly
-    """
+    """Confirm that 'value' can be treated numerically; duck-test accordingly"""
     if isinstance(value, (float, complex, int)):
         return True
 
@@ -24,7 +23,7 @@ def isnumeric(value: Any) -> bool:
         return True
     except ArithmeticError:
         return True
-    except:
+    except Exception:
         return False
 
 
