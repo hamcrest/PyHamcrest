@@ -31,6 +31,7 @@ finally:
 
 assert __version__ is not None
 
+REQUIREMENTS_DOCS = ["sphinx~=3.0", "sphinx_rtd_theme~=0.4"]
 TESTS_BASIC = ["pytest>=5.0", "pytest-sugar", "coverage"]
 TESTS_NUMPY = ["numpy"]
 
@@ -55,9 +56,10 @@ params = dict(
     python_requires=">=3.5",
     install_requires=[],
     extras_require={
-        "docs": ["sphinx~=3.0", "sphinx_rtd_theme~=0.4"],
+        "docs": REQUIREMENTS_DOCS,
         "tests": TESTS_BASIC,
         "tests-numpy": TESTS_BASIC + TESTS_NUMPY,
+        "dev": REQUIREMENTS_DOCS + TESTS_BASIC + ["pytest-xdist", "pytest-mypy"],
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
