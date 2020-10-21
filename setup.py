@@ -50,6 +50,10 @@ params = dict(
     long_description=read("README.rst"),
     python_requires=">=3.5",
     install_requires=[],
+    extras_require={
+        "docs": ["sphinx~=3.0", "sphinx_rtd_theme~=0.4"],
+        "tests": ["pytest>=5.0", "pytest-sugar", "coverage"],
+    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",

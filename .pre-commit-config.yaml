@@ -20,7 +20,10 @@ repos:
     hooks:
       - id: flake8
         exclude: >-
-          (?x)^examples/.*\.py$
+          (?x)^(
+            examples/.*\.py$
+            | doc/.*\.py$
+          )
 
   - repo: https://github.com/psf/black
     rev: 19.10b0

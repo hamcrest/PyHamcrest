@@ -1,5 +1,26 @@
-include CHANGES.txt
-include LICENSE.txt
-include README.md
+include LICENSE.txt *.rst *.md *.toml *.yml *.yaml *.ini
+include requirements-*
+graft .github
+
+# Tests
+include tox.ini conftest.py
+recursive-include tests *.py
+recursive-include tests *.yml
+
+# Documentation
+include doc/Makefile doc/docutils.conf
 recursive-include examples *.py
-recursive-include doc *
+recursive-include doc *.png
+recursive-include doc *.svg
+recursive-include doc *.py
+recursive-include doc *.rst
+prune doc/_build
+
+# remove some of the random source
+prune docker
+exclude release.sh
+
+# Just to keep check-manifest happy; on releases those files are gone.
+# Last rule wins!
+exclude changelog.d/*.rst
+include changelog.d/towncrier_template.rst

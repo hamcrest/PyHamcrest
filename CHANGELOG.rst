@@ -1,12 +1,18 @@
-=== Version 2.0.2 ===
+Changelog
+=========
+
+Version 2.0.2
+-------------
 
 Various type hint bug fixes.
 
-=== Version 2.0.1 ===
+Version 2.0.1
+-------------
 
 * Make hamcrest package PEP 561 compatible, i.e. supply type hints for external use.
 
-=== Version 2.0.0 ==
+Version 2.0.0
+-------------
 
 Drop formal support for 2.x
 Drop formal support for 3.x < 3.5
@@ -18,7 +24,8 @@ Fix #128 - raises() grows support for additional matchers on exception object.
 * Type fixes.
 * Remove obsolete dependencies.
 
-=== Version 1.10.1 ==
+Version 1.10.1
+--------------
 
 Add support up to Python 3.8
 
@@ -26,36 +33,43 @@ Fix #66 - deprecate contains() in favour of contains_exactly().
 Fix #72 - make has_properties mismatch description less verbose by adding option to AllOf not to include matcher description in its mismatch messages.
 Fix #82 - include exception details in mismatch description.
 
-=== Version 1.9.0 ==
+Version 1.9.0
+-------------
 
 Drop formal support for 2.x < 2.7
 Drop formal support for 3.x < 3.4
 
 Fix #62 - Return result of a deferred call
 
-=== Version 1.8.5 ===
+Version 1.8.5
+-------------
 
 Fix #56 - incorrect handling of () in is_ matcher
 Fix #60 - correct calling API call with args
 
-=== Version 1.8.4 ==
+Version 1.8.4
+-------------
 
 * Fix #54 - Make instance_of work with tuple like isinstance and unittest's assertIsInstance
 
-=== Version 1.8.3 ===
+Version 1.8.3
+-------------
 
 * Fix #52 - bad handling when reporting mismatches for byte arrays in Python 3
 
-=== Version 1.8.2 ===
+Version 1.8.2
+-------------
 
 * [Bug] Fix unicode syntax via u() introduction (puppsman)
 
-=== Version 1.8.1 ===
+Version 1.8.1
+-------------
 
 * Added not_ alias for is_not [Matteo Bertini]
 * Added doc directory to the sdist [Alex Brandt]
 
-=== Version 1.8 ==
+Version 1.8
+-----------
 
 * Supported versions
  - Support for Python 2.5 and Jython 2.5 has been dropped. They may still work, but no promises.
@@ -67,7 +81,8 @@ Fix #60 - correct calling API call with args
  - Support for numpy numeric values in iscloseto (Alexander Beedie)
  - A matcher targeting exceptions and call results (Per Fagrell)
 
-=== Version 1.7 ==
+Version 1.7
+-----------
 
 2 Sep 2013 (Version 1.7.2)
 * Supported versions
@@ -100,7 +115,8 @@ Fix #60 - correct calling API call with args
  - README enhancements by ming13
 
 
-=== Version 1.6 ==
+Version 1.6
+-----------
 
 27 Sep 2011
 (All changes by Chris Rose unless otherwise noted.)
@@ -119,7 +135,8 @@ Fix #60 - correct calling API call with args
  - Rewrote documentation. (Jon Reid)
 
 
-== Version 1.5 ==
+Version 1.5
+-----------
 
 29 Apr 2011
 * Packaging:
@@ -138,7 +155,8 @@ Fix #60 - correct calling API call with args
  None.
 
 
-== Version 1.4 ==
+Version 1.4
+-----------
 
 13 Feb 2011
 * New matchers:
@@ -152,7 +170,8 @@ Fix #60 - correct calling API call with args
  - Consistently use articles to begin descriptions, such as "a sequence containing" instead of "sequence containing".
 
 
-== Version 1.3 ==
+Version 1.3
+-----------
 
 04 Feb 2011
 * PyHamcrest is now compatible with Python 3! To install PyHamcrest on Python 3:
@@ -171,7 +190,8 @@ Fix #60 - correct calling API call with args
   - Improved readability of several matchers.
 
 
-== Version 1.2.1 ==
+Version 1.2.1
+-------------
 
 04 Jan 2011
 * Fixed "assert_that" to describe the diagnosis of the mismatch, not just the
@@ -188,7 +208,8 @@ mismatched value. PyHamcrest will now give even more useful information.
 - Corrected manifest so install works. Thanks to: Jeong-Min Lee
 
 
-== Version 1.1 ==
+Version 1.1
+-----------
 
 28 Dec 2010
 * New matchers:
@@ -198,7 +219,8 @@ mismatched value. PyHamcrest will now give even more useful information.
 * Added Sphinx documentation support.
 
 
-== Version 1.0 ==
+Version 1.0
+-----------
 
 04 Dec 2010
 * First official release
