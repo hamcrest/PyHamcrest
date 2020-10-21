@@ -4,9 +4,10 @@ if __name__ == "__main__":
     sys.path.insert(0, "..")
     sys.path.insert(0, "../..")
 
+import re
 import unittest
 
-from hamcrest.library.text.stringmatches import *
+from hamcrest.library.text.stringmatches import matches_regexp
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Chris Rose"

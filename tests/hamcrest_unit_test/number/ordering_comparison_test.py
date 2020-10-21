@@ -7,7 +7,12 @@ if __name__ == "__main__":
 import unittest
 from datetime import date
 
-from hamcrest.library.number.ordering_comparison import *
+from hamcrest.library.number.ordering_comparison import (
+    greater_than,
+    greater_than_or_equal_to,
+    less_than,
+    less_than_or_equal_to,
+)
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"

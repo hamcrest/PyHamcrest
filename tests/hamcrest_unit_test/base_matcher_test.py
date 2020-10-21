@@ -5,8 +5,8 @@ if __name__ == "__main__":
 
 import unittest
 
-from hamcrest.core.base_matcher import *
-from hamcrest_unit_test.matcher_test import *
+from hamcrest.core.base_matcher import BaseMatcher
+from hamcrest_unit_test.matcher_test import assert_match_description, assert_mismatch_description
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

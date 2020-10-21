@@ -1,6 +1,6 @@
 import unittest
 
-from hamcrest.library.number.iscloseto import *
+from hamcrest.library.number.iscloseto import Decimal, close_to, isnumeric
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"

@@ -1,7 +1,7 @@
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.issequence_onlycontaining import *
+from hamcrest.library.collection.issequence_onlycontaining import only_contains
 from hamcrest.library.number.ordering_comparison import less_than
 from hamcrest_unit_test.matcher_test import MatcherTest
 

@@ -7,7 +7,7 @@ if __name__ == "__main__":
 import unittest
 
 from hamcrest import greater_than
-from hamcrest.library.object.hasproperty import *
+from hamcrest.library.object.hasproperty import has_properties, has_property
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Chris Rose"

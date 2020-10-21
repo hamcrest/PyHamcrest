@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
 import unittest
 
-from hamcrest.core.core.allof import *
+from hamcrest.core.core.allof import AllOf, all_of
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
 

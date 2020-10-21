@@ -1,4 +1,4 @@
-from hamcrest.library.collection.is_empty import *
+from hamcrest.library.collection.is_empty import empty
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Chris Rose"

@@ -1,6 +1,6 @@
 import unittest
 
-from hamcrest.library.text.isequal_ignoring_whitespace import *
+from hamcrest.library.text.isequal_ignoring_whitespace import equal_to_ignoring_whitespace
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"

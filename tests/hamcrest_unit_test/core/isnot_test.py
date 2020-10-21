@@ -7,7 +7,7 @@ if __name__ == "__main__":
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.core.core.isnot import *
+from hamcrest.core.core.isnot import is_not
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"

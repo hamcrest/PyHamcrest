@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
 import unittest
 
-from hamcrest.core.core.isanything import *
+from hamcrest.core.core.isanything import anything
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"

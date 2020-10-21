@@ -7,7 +7,7 @@ if __name__ == "__main__":
 import re
 import unittest
 
-from hamcrest.core.core.issame import *
+from hamcrest.core.core.issame import same_instance
 from hamcrest.core.string_description import StringDescription
 from hamcrest_unit_test.matcher_test import MatcherTest
 

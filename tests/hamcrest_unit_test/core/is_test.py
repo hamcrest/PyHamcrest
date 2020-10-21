@@ -1,6 +1,6 @@
 import unittest
 
-from hamcrest.core.core.is_ import *
+from hamcrest.core.core.is_ import is_
 from hamcrest.core.core.isequal import equal_to
 from hamcrest_unit_test.matcher_test import MatcherTest
 

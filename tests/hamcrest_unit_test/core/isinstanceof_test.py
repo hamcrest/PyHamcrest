@@ -1,7 +1,7 @@
 import sys
 import unittest
 
-from hamcrest.core.core.isinstanceof import *
+from hamcrest.core.core.isinstanceof import instance_of
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 if __name__ == "__main__":
