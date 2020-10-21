@@ -1,4 +1,4 @@
-from typing import Any, Iterable, Sequence
+from typing import Any, Iterable
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
