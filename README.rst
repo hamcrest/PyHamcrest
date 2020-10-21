@@ -1,7 +1,7 @@
 PyHamcrest
 ==========
 
-| |docs| |travis| |coveralls| |landscape| |scrutinizer|
+| |docs| |travis| |coverage| |landscape| |scrutinizer|
 | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 | |GitHub forks| |GitHub stars| |GitHub watchers| |GitHub contributors| |Lines of Code|
 | |GitHub issues| |GitHub issues-closed| |GitHub pull-requests| |GitHub pull-requests closed|
@@ -18,9 +18,9 @@ PyHamcrest
     :alt: AppVeyor Build Status
     :target: https://ci.appveyor.com/project/hamcrest/PyHamcrest
 
-.. |coveralls| image:: http://img.shields.io/coveralls/hamcrest/PyHamcrest/master.svg?style=flat
+.. |coverage| image:: https://codecov.io/github/hamcrest/PyHamcrest/coverage.svg?branch=master
     :alt: Coverage Status
-    :target: https://coveralls.io/r/hamcrest/PyHamcrest
+    :target: https://codecov.io/github/hamcrest/PyHamcrest?branch=master
 
 .. |landscape| image:: https://landscape.io/github/hamcrest/PyHamcrest/master/landscape.svg?style=flat
     :target: https://landscape.io/github/hamcrest/PyHamcrest/master
