@@ -1,7 +1,7 @@
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.issequence_containinginanyorder import *
+from hamcrest.library.collection.issequence_containinginanyorder import contains_inanyorder
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 from .quasisequence import QuasiSequence

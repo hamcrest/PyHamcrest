@@ -3,7 +3,7 @@ import unittest
 
 import pytest
 from hamcrest.core.selfdescribing import SelfDescribing
-from hamcrest.core.string_description import *
+from hamcrest.core.string_description import StringDescription
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"

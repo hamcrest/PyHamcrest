@@ -1,6 +1,6 @@
 import unittest
 
-from hamcrest.library.text.stringstartswith import *
+from hamcrest.library.text.stringstartswith import starts_with
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"

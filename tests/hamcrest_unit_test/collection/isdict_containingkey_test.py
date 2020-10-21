@@ -1,7 +1,7 @@
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.isdict_containingkey import *
+from hamcrest.library.collection.isdict_containingkey import has_key
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 from .quasidict import QuasiDictionary

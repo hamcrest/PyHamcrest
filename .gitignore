@@ -4,7 +4,7 @@ PyHamcrest.egg-info/
 build/
 dist/
 .tox
-.coverage
+.coverage*
 .idea/
 *~
 .python-version

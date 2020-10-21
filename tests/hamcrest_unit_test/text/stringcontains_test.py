@@ -1,6 +1,12 @@
 import pytest
 from hamcrest.library.text.stringcontains import contains_string
-from hamcrest_unit_test.matcher_test import *
+from hamcrest_unit_test.matcher_test import (
+    assert_description,
+    assert_does_not_match,
+    assert_matches,
+    assert_mismatch_description,
+    assert_no_mismatch_description,
+)
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -59,4 +65,6 @@ def test_mismatch_description(matcher, text):
 
 
 if __name__ == "__main__":
+    import unittest
+
     unittest.main()

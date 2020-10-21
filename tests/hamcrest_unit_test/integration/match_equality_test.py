@@ -7,7 +7,7 @@ if __name__ == "__main__":
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.integration.match_equality import *
+from hamcrest.library.integration.match_equality import match_equality, tostring
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"

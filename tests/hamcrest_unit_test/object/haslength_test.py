@@ -8,7 +8,7 @@ import unittest
 
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.library.number.ordering_comparison import greater_than
-from hamcrest.library.object.haslength import *
+from hamcrest.library.object.haslength import has_length
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"

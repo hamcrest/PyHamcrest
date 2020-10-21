@@ -1,6 +1,6 @@
 import unittest
 
-from hamcrest.core.core.described_as import *
+from hamcrest.core.core.described_as import described_as
 from hamcrest.core.core.isanything import anything
 from hamcrest_unit_test.matcher_test import MatcherTest
 

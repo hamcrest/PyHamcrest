@@ -1,6 +1,6 @@
 import unittest
 
-from hamcrest.library.collection.isin import *
+from hamcrest.library.collection.isin import is_in
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 from .sequencemixin import GeneratorForm, SequenceForm

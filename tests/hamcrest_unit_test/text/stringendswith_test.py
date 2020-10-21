@@ -1,6 +1,6 @@
 import unittest
 
-from hamcrest.library.text.stringendswith import *
+from hamcrest.library.text.stringendswith import ends_with
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"
