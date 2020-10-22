@@ -1,30 +1,20 @@
 PyHamcrest
 ==========
 
-| |docs| |travis| |coverage| |landscape| |scrutinizer|
+| |docs| |status| |coverage|
 | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
-| |GitHub forks| |GitHub stars| |GitHub watchers| |GitHub contributors| |Lines of Code|
-| |GitHub issues| |GitHub issues-closed| |GitHub pull-requests| |GitHub pull-requests closed|
 
-.. |docs| image:: https://readthedocs.org/projects/pyhamcrest/badge/
-    :target: https://pyhamcrest.readthedocs.org/
+.. |docs| image:: https://readthedocs.org/projects/pyhamcrest/badge/?version=latest
+    :target: https://pyhamcrest.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-.. |travis| image:: http://img.shields.io/travis/hamcrest/PyHamcrest/master.svg
-    :alt: Travis-CI Build Status
-    :target: https://travis-ci.org/hamcrest/PyHamcrest
-
-.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/hamcrest/PyHamcrest?branch=master&svg=true
-    :alt: AppVeyor Build Status
-    :target: https://ci.appveyor.com/project/hamcrest/PyHamcrest
+.. |status| image:: https://github.com/hamcrest/PyHamcrest/workflows/CI/badge.svg
+    :alt: CI Build Status
+    :target: https://github.com/hamcrest/PyHamcrest/actions?query=workflow%3ACI
 
 .. |coverage| image:: https://codecov.io/github/hamcrest/PyHamcrest/coverage.svg?branch=master
     :alt: Coverage Status
     :target: https://codecov.io/github/hamcrest/PyHamcrest?branch=master
-
-.. |landscape| image:: https://landscape.io/github/hamcrest/PyHamcrest/master/landscape.svg?style=flat
-    :target: https://landscape.io/github/hamcrest/PyHamcrest/master
-    :alt: Code Quality Status
 
 .. |version| image:: http://img.shields.io/pypi/v/PyHamcrest.svg?style=flat
     :alt: PyPI Package latest release
@@ -42,50 +32,9 @@ PyHamcrest
     :alt: Supported versions
     :target: https://pypi.python.org/pypi/PyHamcrest
 
-.. |GitHub forks| image:: https://img.shields.io/github/forks/hamcrest/PyHamcrest.svg?label=Fork&logo=github
-    :alt: GitHub forks
-    :target: https://github.com/hamcrest/PyHamcrest/network/members
-
-.. |GitHub stars| image:: https://img.shields.io/github/stars/hamcrest/PyHamcrest.svg?label=Star&logo=github
-    :alt: GitHub stars
-    :target: https://github.com/hamcrest/PyHamcrest/stargazers/
-
-.. |GitHub watchers| image:: https://img.shields.io/github/watchers/hamcrest/PyHamcrest.svg?label=Watch&logo=github
-    :alt: GitHub watchers
-    :target: https://github.com/hamcrest/PyHamcrest/watchers/
-
-.. |GitHub contributors| image:: https://img.shields.io/github/contributors/hamcrest/PyHamcrest.svg?logo=github
-    :alt: GitHub contributors
-    :target: https://github.com/hamcrest/PyHamcrest/graphs/contributors/
-
-.. |GitHub issues| image:: https://img.shields.io/github/issues/hamcrest/PyHamcrest.svg?logo=github
-    :alt: GitHub issues
-    :target: https://github.com/hamcrest/PyHamcrest/issues/
-
-.. |GitHub issues-closed| image:: https://img.shields.io/github/issues-closed/hamcrest/PyHamcrest.svg?logo=github
-    :alt: GitHub issues-closed
-    :target: https://github.com/hamcrest/PyHamcrest/issues?q=is%3Aissue+is%3Aclosed
-
-.. |GitHub pull-requests| image:: https://img.shields.io/github/issues-pr/hamcrest/PyHamcrest.svg?logo=github
-    :alt: GitHub pull-requests
-    :target: https://github.com/hamcrest/PyHamcrest/pulls
-
-.. |GitHub pull-requests closed| image:: https://img.shields.io/github/issues-pr-closed/hamcrest/PyHamcrest.svg?logo=github
-    :alt: GitHub pull-requests closed
-    :target: https://github.com/hamcrest/PyHamcrest/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Aclosed
-
-.. |Lines of Code| image:: https://tokei.rs/b1/github/hamcrest/PyHamcrest
-    :alt: Lines of Code
-    :target: https://github.com/hamcrest/PyHamcrest
-
 .. |supported-implementations| image:: https://pypip.in/implementation/PyHamcrest/badge.svg?style=flat
     :alt: Supported implementations
     :target: https://pypi.python.org/pypi/PyHamcrest
-
-.. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/hamcrest/PyHamcrest/master.svg?style=flat
-    :alt: Scrtinizer Status
-    :target: https://scrutinizer-ci.com/g/hamcrest/PyHamcrest/
-
 
 Introduction
 ============
