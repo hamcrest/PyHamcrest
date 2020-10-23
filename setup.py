@@ -34,6 +34,7 @@ assert __version__ is not None
 REQUIREMENTS_DOCS = ["sphinx~=3.0", "sphinx_rtd_theme~=0.4"]
 TESTS_BASIC = ["pytest>=5.0", "pytest-sugar", "coverage"]
 TESTS_NUMPY = ["numpy"]
+DEV_TOOLS = ["towncrier", "twine", "pytest-xdist", "pytest-mypy"]
 
 
 params = dict(
@@ -59,7 +60,7 @@ params = dict(
         "docs": REQUIREMENTS_DOCS,
         "tests": TESTS_BASIC,
         "tests-numpy": TESTS_BASIC + TESTS_NUMPY,
-        "dev": REQUIREMENTS_DOCS + TESTS_BASIC + ["pytest-xdist", "pytest-mypy"],
+        "dev": REQUIREMENTS_DOCS + TESTS_BASIC + DEV_TOOLS,
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",

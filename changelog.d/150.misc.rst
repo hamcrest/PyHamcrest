@@ -1,0 +1,5 @@
+Revamped the build system significantly.
+
+* Now uses github actions instead of Travis
+* Now uses codecov.io instead of coveralls
+* Generally modernized it a bunch
