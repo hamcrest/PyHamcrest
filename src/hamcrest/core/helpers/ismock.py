@@ -1,6 +1,6 @@
 from typing import Any, List, Type
 
-MOCKTYPES = []  # type: List[Type]
+MOCKTYPES: List[Type] = []
 try:
     from mock import Mock
 

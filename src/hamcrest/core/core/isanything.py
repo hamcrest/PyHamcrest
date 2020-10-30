@@ -11,7 +11,7 @@ __license__ = "BSD, see License.txt"
 
 class IsAnything(BaseMatcher[Any]):
     def __init__(self, description: Optional[str]) -> None:
-        self.description = description or "ANYTHING"  # type: str
+        self.description: str = description or "ANYTHING"
 
     def _matches(self, item: Any) -> bool:
         return True
