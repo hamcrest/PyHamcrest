@@ -22,8 +22,8 @@ class Raises(BaseMatcher[Callable[..., Any]]):
         self.pattern = pattern
         self.matcher = matching
         self.expected = expected
-        self.actual = None  # type: Optional[BaseException]
-        self.function = None  # type: Optional[Callable[..., Any]]
+        self.actual: Optional[BaseException] = None
+        self.function: Optional[Callable[..., Any]] = None
 
     def _matches(self, function: Callable[..., Any]) -> bool:
         if not callable(function):
@@ -115,8 +115,8 @@ def raises(exception: Type[Exception], pattern=None, matching=None) -> Matcher[C
 class DeferredCallable(object):
     def __init__(self, func: Callable[..., Any]):
         self.func = func
-        self.args = tuple()  # type: Tuple[Any, ...]
-        self.kwargs = {}  # type: Mapping[str, Any]
+        self.args: Tuple[Any, ...] = tuple()
+        self.kwargs: Mapping[str, Any] = {}
 
     def __call__(self):
         self.func(*self.args, **self.kwargs)
