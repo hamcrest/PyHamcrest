@@ -1,1 +1,1 @@
-Adds the tests to the sdist. Fixed by #150
+* Adds the tests to the sdist. Fixed by #150

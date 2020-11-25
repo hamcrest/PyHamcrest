@@ -34,7 +34,17 @@ assert __version__ is not None
 REQUIREMENTS_DOCS = ["sphinx~=3.0", "sphinx_rtd_theme~=0.4"]
 TESTS_BASIC = ["pytest>=5.0", "pytest-sugar", "coverage"]
 TESTS_NUMPY = ["numpy"]
-DEV_TOOLS = ["towncrier", "twine", "pytest-xdist", "pytest-mypy"]
+DEV_TOOLS = [
+    "towncrier",
+    "twine",
+    "pytest-xdist",
+    "pytest-mypy",
+    "flake8",
+    "black",
+    "tox",
+    "tox-pyenv",
+    "tox-asdf",
+]
 
 
 params = dict(

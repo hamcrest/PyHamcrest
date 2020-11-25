@@ -1,3 +1,3 @@
-Test coverage is now submitted to codecov.io.
+* Test coverage is now submitted to codecov.io.
 
-Fixed by #150
+  Fixed by #150
