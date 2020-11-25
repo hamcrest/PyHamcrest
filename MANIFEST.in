@@ -1,5 +1,5 @@
 include LICENSE.txt *.rst *.md *.toml *.yml *.yaml *.ini
-include requirements-*
+include requirements*
 graft .github
 
 # Tests
