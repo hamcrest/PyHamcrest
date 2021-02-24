@@ -1,8 +1,9 @@
 import unittest
 
+from hamcrest import starts_with
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.library.collection.isdict_containing import has_entry
-from hamcrest_unit_test.matcher_test import MatcherTest
+from hamcrest_unit_test.matcher_test import MatcherTest, assert_mismatch_description
 
 from .quasidict import QuasiDictionary
 
@@ -39,6 +40,18 @@ class IsDictContainingTest(MatcherTest):
 
     def testDescribeMismatch(self):
         self.assert_describe_mismatch("was 'bad'", has_entry("a", 1), "bad")
+
+    def test_describe_single_matching_key_mismatching_value(self):
+        assert_mismatch_description("value for 'a' was <2>", has_entry("a", 1), {"a": 2})
+        assert_mismatch_description(
+            "value for 'aa' was <2>", has_entry(starts_with("a"), 1), {"aa": 2}
+        )
+        assert_mismatch_description(
+            "was <{'ab': 2, 'ac': 3}>", has_entry(starts_with("a"), 1), {"ab": 2, "ac": 3}
+        )
+
+    # def test_describe_match(self):
+    #     assert_match_description("value for 'a' was <1>", has_entry("a", 1), {"a": 1})
 
 
 if __name__ == "__main__":
