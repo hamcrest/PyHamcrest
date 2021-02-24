@@ -3,7 +3,11 @@ import unittest
 from hamcrest import starts_with
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.library.collection.isdict_containing import has_entry
-from hamcrest_unit_test.matcher_test import MatcherTest, assert_mismatch_description
+from hamcrest_unit_test.matcher_test import (
+    MatcherTest,
+    assert_match_description,
+    assert_mismatch_description,
+)
 
 from .quasidict import QuasiDictionary
 
@@ -50,8 +54,8 @@ class IsDictContainingTest(MatcherTest):
             "was <{'ab': 2, 'ac': 3}>", has_entry(starts_with("a"), 1), {"ab": 2, "ac": 3}
         )
 
-    # def test_describe_match(self):
-    #     assert_match_description("value for 'a' was <1>", has_entry("a", 1), {"a": 1})
+    def test_describe_match(self):
+        assert_match_description("value for 'a' was <1>", has_entry("a", 1), {"a": 1, "b": 2})
 
 
 if __name__ == "__main__":

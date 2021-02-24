@@ -33,11 +33,7 @@ class IsDictContaining(BaseMatcher[Mapping[K, V]]):
         ).append_text(": ").append_description_of(self.value_matcher).append_text("]")
 
     def describe_mismatch(self, item: Mapping[K, V], mismatch_description: Description) -> None:
-        key_matches: MutableMapping[K, V] = {}
-        if hasmethod(item, "items"):
-            for key, value in item.items():
-                if self.key_matcher.matches(key):
-                    key_matches[key] = value
+        key_matches = self._matching_keys(item)
         if len(key_matches) == 1:
             key, value = key_matches.popitem()
             mismatch_description.append_text("value for ").append_description_of(key).append_text(
@@ -48,7 +44,21 @@ class IsDictContaining(BaseMatcher[Mapping[K, V]]):
             super().describe_mismatch(item, mismatch_description)
 
     def describe_match(self, item: Mapping[K, V], match_description: Description) -> None:
-        super().describe_match(item, match_description)
+        key_matches = self._matching_keys(item)
+        if len(key_matches) == 1:
+            key, value = key_matches.popitem()
+            match_description.append_text("value for ").append_description_of(key).append_text(" ")
+            self.value_matcher.describe_mismatch(value, match_description)
+        else:
+            super().describe_match(item, match_description)
+
+    def _matching_keys(self, item):
+        key_matches: MutableMapping[K, V] = {}
+        if hasmethod(item, "items"):
+            for key, value in item.items():
+                if self.key_matcher.matches(key):
+                    key_matches[key] = value
+        return key_matches
 
 
 def has_entry(
