@@ -1,0 +1,1 @@
+* Changed the documentation theme to Alabaster
