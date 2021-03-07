@@ -9,3 +9,5 @@ dist/
 *~
 .python-version
 .mypy_cache/
+requirements.txt
+requirements.in
