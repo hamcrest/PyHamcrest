@@ -31,7 +31,7 @@ finally:
 
 assert __version__ is not None
 
-REQUIREMENTS_DOCS = ["sphinx~=3.0", "sphinx_rtd_theme~=0.4"]
+REQUIREMENTS_DOCS = ["sphinx~=3.0", "alabaster~=0.7"]
 TESTS_BASIC = ["pytest>=5.0", "pytest-sugar", "coverage"]
 TESTS_NUMPY = ["numpy"]
 DEV_TOOLS = [
