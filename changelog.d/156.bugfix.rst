@@ -1,0 +1,4 @@
+Change to the ``has_entry()`` matcher - if exactly one key matches, but the value does not, report only the mismatching
+value.
+
+Fixed by #157
