@@ -1,5 +1,4 @@
 from hamcrest.core.selfdescribing import SelfDescribing
-from textwrap import shorten
 
 from .base_description import BaseDescription
 
@@ -31,10 +30,6 @@ class StringDescription(BaseDescription):
     def __str__(self) -> str:
         """Returns the description."""
         return self.out
-
-    def __repr__(self) -> str:
-        """Returns the object string representation."""
-        return "<{0}({1})>".format(self.__class__.__name__, shorten(self.out, 60, placeholder="..."))
 
     def append(self, string: str) -> None:
         self.out += str(string)
