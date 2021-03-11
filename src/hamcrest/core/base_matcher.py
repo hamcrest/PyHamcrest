@@ -1,3 +1,4 @@
+from textwrap import shorten
 from typing import Optional, TypeVar
 
 from hamcrest.core.description import Description
@@ -24,6 +25,12 @@ class BaseMatcher(Matcher[T]):
 
     def __str__(self) -> str:
         return tostring(self)
+
+    def __repr__(self) -> str:
+        """Returns matcher string representation."""
+        return "<{0}({1})>".format(
+            self.__class__.__name__, shorten(tostring(self), 60, placeholder="...")
+        )
 
     def _matches(self, item: T) -> bool:
         raise NotImplementedError("_matches")
