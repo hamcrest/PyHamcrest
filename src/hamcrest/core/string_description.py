@@ -31,5 +31,9 @@ class StringDescription(BaseDescription):
         """Returns the description."""
         return self.out
 
+    def __repr__(self) -> str:
+        """Returns the description."""
+        return self.out
+
     def append(self, string: str) -> None:
         self.out += str(string)
