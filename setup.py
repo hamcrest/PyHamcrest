@@ -36,7 +36,7 @@ TESTS_BASIC = [
     "pytest>=5.0",
     "pytest-sugar",
     "coverage",
-    "pytest-mypy-plugins; python_version<'3.10'",
+    "pytest-mypy-plugins~=1.7; python_version<'3.10'",
     "types-mock",
 ]
 TESTS_NUMPY = ["numpy"]
