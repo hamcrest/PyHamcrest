@@ -1,13 +1,6 @@
 - case: empty
-  skip: True
   main: |
     from hamcrest import assert_that, is_, empty
 
     assert_that([], empty())
-    assert_that(99, empty())
-    assert_that([], is_(empty()))
-    assert_that(99, is_(empty()))
-    is_(empty())
-  out: |
-    main:4: error: Cannot infer type argument 1 of "assert_that"
-    main:6: error: Cannot infer type argument 1 of "assert_that"
+    assert_that(99, empty())  # E: Cannot infer type argument 1 of "assert_that"
