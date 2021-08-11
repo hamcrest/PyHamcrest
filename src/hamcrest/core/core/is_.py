@@ -1,4 +1,4 @@
-from typing import Optional, Type, TypeVar, Union, overload
+from typing import Optional, Type, TypeVar, overload, Any
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -46,12 +46,17 @@ def _wrap_value_or_type(x):
 
 
 @overload
-def is_(x: Type) -> Matcher[object]:
+def is_(x: Type) -> Matcher[Any]:
     ...
 
 
 @overload
-def is_(x: Union[Matcher[T], T]) -> Matcher[T]:
+def is_(x: Matcher[T]) -> Matcher[T]:
+    ...
+
+
+@overload
+def is_(x: T) -> Matcher[T]:
     ...
 
 
