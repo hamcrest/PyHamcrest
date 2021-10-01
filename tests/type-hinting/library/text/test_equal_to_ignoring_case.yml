@@ -1,0 +1,10 @@
+- case: equal_to_ignoring_case
+  main: |
+    from hamcrest import equal_to_ignoring_case
+
+    reveal_type(equal_to_ignoring_case(""))
+    equal_to_ignoring_case("")
+    equal_to_ignoring_case(99)
+  out: |
+    main:3: note: Revealed type is "hamcrest.core.matcher.Matcher[builtins.str]"
+    main:5: error: Argument 1 to "equal_to_ignoring_case" has incompatible type "int"; expected "str"
