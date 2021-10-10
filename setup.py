@@ -36,7 +36,7 @@ TESTS_BASIC = [
     "pytest>=5.0",
     "pytest-sugar",
     "pytest-xdist",
-    "coverage",
+    "coverage[toml]",
     "pytest-mypy-plugins",
     "types-mock",
 ]
