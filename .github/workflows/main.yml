@@ -15,7 +15,7 @@ jobs:
     name: "Python ${{ matrix.python-version }} / ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}"
     env:
-      USING_COVERAGE: "3.7,3.8,3.9"
+      USING_COVERAGE: "3.7,3.8,3.9,3.10"
 
     strategy:
       matrix:
@@ -25,7 +25,7 @@ jobs:
           - "3.7"
           - "3.8"
           - "3.9"
-          - "3.10.0-alpha.5"
+          - "3.10.0"
           - "pypy2"
           # disabled due to one failing test
           # - "pypy3"
