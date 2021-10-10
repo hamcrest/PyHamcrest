@@ -35,6 +35,7 @@ REQUIREMENTS_DOCS = ["sphinx~=3.0", "alabaster~=0.7"]
 TESTS_BASIC = [
     "pytest>=5.0",
     "pytest-sugar",
+    "pytest-xdist",
     "coverage",
     "pytest-mypy-plugins",
     "types-mock",
@@ -43,7 +44,6 @@ TESTS_NUMPY = ["numpy"]
 DEV_TOOLS = [
     "towncrier",
     "twine",
-    "pytest-xdist",
     "pytest-mypy",
     "flake8",
     "black",
