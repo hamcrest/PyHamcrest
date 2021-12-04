@@ -3,7 +3,7 @@ name: CI
 
 on:
   push:
-    branches: ["main", "master", "ci-testing"]
+    branches: ["main", "master", "ci-testing-*"]
 
   pull_request:
     branches: ["main", "master"]
@@ -45,23 +45,47 @@ jobs:
       - name: "Run tox targets for ${{ matrix.python-version }}"
         run: "python -m tox"
 
-      # We always use a modern Python version for combining coverage to prevent
-      # parsing errors in older versions for modern code.
-      - uses: "actions/setup-python@v2"
+      - name: Upload coverage data
+        uses: actions/upload-artifact@v2
         with:
-          python-version: "3.8"
+          name: coverage-data
+          path: ".coverage.*"
+          if-no-files-found: ignore
 
-      - name: "Combine coverage"
-        run: |
-          python -m pip install coverage[toml]
-          python -m coverage combine
-          python -m coverage xml
-        if: "contains(env.USING_COVERAGE, matrix.python-version)"
-      - name: "Upload coverage to Codecov"
-        if: "contains(env.USING_COVERAGE, matrix.python-version)"
-        uses: "codecov/codecov-action@v1"
+  coverage:
+    needs:
+      - tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
         with:
-          fail_ci_if_error: true
+          python-version: "3.10"
+
+      - name: Install coverage
+        run: python -m pip install --upgrade coverage[toml]
+
+      - name: Download coverage data
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage-data
+
+      - name: Combine coverage
+        run: python -m coverage combine
+
+        # ignore-errors is so that we don't gag on missing code in .tox environments
+      - name: Generate the HTML report
+        run: python -m coverage html --skip-covered --skip-empty --ignore-errors
+
+      - name: Upload the HTML report
+        uses: actions/upload-artifact@v2
+        with:
+          name: html-report
+          path: htmlcov
+
+        # ignore-errors is so that we don't gag on missing code in .tox environments
+      - name: Enforce the coverage
+        run: python -m coverage report --ignore-errors --fail-under 95
 
   package:
     name: "Build & verify package"
@@ -71,7 +95,14 @@ jobs:
       - uses: "actions/checkout@v2"
       - uses: "actions/setup-python@v1"
         with:
-          python-version: "3.9"
+          python-version: "3.10"
+
+      - name: Check if we have the publish key
+        env:
+          TEST_PYPI_API_TOKEN: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        if: "${{ env.TEST_PYPI_API_TOKEN != '' }}"
+        run: |
+          echo "DO_PUBLISH=yes" >> $GITHUB_ENV
 
       - name: "Install pep517 and twine"
         run: "python -m pip install pep517 twine"
@@ -81,6 +112,14 @@ jobs:
         run: "ls -l dist"
       - name: "Check long_description"
         run: "python -m twine check dist/*"
+      - name: "Publish package to TestPyPI"
+        uses: "pypa/gh-action-pypi-publish@release/v1"
+        if: "${{ env.DO_PUBLISH == 'yes' }}"
+        with:
+          user: "__token__"
+          password: "${{ secrets.TEST_PYPI_API_TOKEN }}"
+          repository_url: "https://test.pypi.org/legacy/"
+          skip_existing: true
 
   install-dev:
     strategy:

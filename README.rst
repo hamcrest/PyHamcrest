@@ -1,8 +1,7 @@
 PyHamcrest
 ==========
 
-| |docs| |status| |coverage|
-| |version| |downloads| |wheel| |supported-versions| |supported-implementations|
+| |docs| |status| |version| |downloads|
 
 .. |docs| image:: https://readthedocs.org/projects/pyhamcrest/badge/?version=latest
     :target: https://pyhamcrest.readthedocs.io/en/latest/?badge=latest
@@ -12,10 +11,6 @@ PyHamcrest
     :alt: CI Build Status
     :target: https://github.com/hamcrest/PyHamcrest/actions?query=workflow%3ACI
 
-.. |coverage| image:: https://codecov.io/github/hamcrest/PyHamcrest/coverage.svg?branch=master
-    :alt: Coverage Status
-    :target: https://codecov.io/github/hamcrest/PyHamcrest?branch=master
-
 .. |version| image:: http://img.shields.io/pypi/v/PyHamcrest.svg?style=flat
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/PyHamcrest
@@ -24,17 +19,6 @@ PyHamcrest
     :alt: PyPI Package monthly downloads
     :target: https://pypi.python.org/pypi/PyHamcrest
 
-.. |wheel| image:: https://pypip.in/wheel/PyHamcrest/badge.svg?style=flat
-    :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/PyHamcrest
-
-.. |supported-versions| image:: https://pypip.in/py_versions/PyHamcrest/badge.svg?style=flat
-    :alt: Supported versions
-    :target: https://pypi.python.org/pypi/PyHamcrest
-
-.. |supported-implementations| image:: https://pypip.in/implementation/PyHamcrest/badge.svg?style=flat
-    :alt: Supported implementations
-    :target: https://pypi.python.org/pypi/PyHamcrest
 
 Introduction
 ============
