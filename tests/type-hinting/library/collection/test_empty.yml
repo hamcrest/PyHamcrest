@@ -1,4 +1,6 @@
 - case: empty
+  # pypy + mypy doesn't work. See https://foss.heptapod.net/pypy/pypy/-/issues/3526
+  skip: platform.python_implementation() == "PyPy"
   main: |
     from hamcrest import assert_that, is_, empty
 
