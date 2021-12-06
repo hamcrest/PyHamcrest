@@ -71,6 +71,7 @@ params = dict(
     package_data={"hamcrest": ["py.typed"]},
     provides=["hamcrest"],
     long_description=read("README.rst"),
+    long_description_content_type="text/x-rst",
     python_requires=">=3.5",
     install_requires=[],
     extras_require={
