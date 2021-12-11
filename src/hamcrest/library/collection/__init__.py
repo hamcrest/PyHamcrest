@@ -13,3 +13,18 @@ from .issequence_onlycontaining import only_contains
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2013 hamcrest.org"
 __license__ = "BSD, see License.txt"
+
+__all__ = [
+    "contains",
+    "contains_exactly",
+    "contains_inanyorder",
+    "empty",
+    "has_entries",
+    "has_entry",
+    "has_item",
+    "has_items",
+    "has_key",
+    "has_value",
+    "is_in",
+    "only_contains",
+]
