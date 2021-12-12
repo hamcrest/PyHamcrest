@@ -1,3 +1,0 @@
-* Test coverage is now submitted to codecov.io.
-
-  Fixed by #150

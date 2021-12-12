@@ -1,3 +1,45 @@
+2.0.3 (2021-12-12)
+------------------
+ 
+  Features ^^^^^^^^
+
+  - * Adds the tests to the sdist. Fixed by #150
+
+`#141 <https://github.com/hamcrest/PyHamcrest/issues/141>`_
+ - * Update the CI to test Python 3.10
+
+`#160 <https://github.com/hamcrest/PyHamcrest/issues/160>`_
+ - * Add pretty string representation for matchers objects
+
+`#170 <https://github.com/hamcrest/PyHamcrest/issues/170>`_
+
+  
+ Bugfixes ^^^^^^^^
+
+  - * Test coverage is now submitted to codecov.io.
+
+    Fixed by #150
+
+`#135 <https://github.com/hamcrest/PyHamcrest/issues/135>`_
+ - Change to the ``has_entry()`` matcher - if exactly one key matches, but the value does not, report only the mismatching
+  value.
+
+  Fixed by #157
+
+`#156 <https://github.com/hamcrest/PyHamcrest/issues/156>`_
+ - * Fix is_() type annotations
+
+`#180 <https://github.com/hamcrest/PyHamcrest/issues/180>`_
+
+  
+ Misc ^^^^
+
+ - `#150 <https://github.com/hamcrest/PyHamcrest/issues/150>`_, `#159 <https://github.com/hamcrest/PyHamcrest/issues/159>`_, `#162 <https://github.com/hamcrest/PyHamcrest/issues/162>`_, `#163 <https://github.com/hamcrest/PyHamcrest/issues/163>`_, `#166 <https://github.com/hamcrest/PyHamcrest/issues/166>`_, `#175 <https://github.com/hamcrest/PyHamcrest/issues/175>`_
+
+  
+   ----
+
+
 Changelog
 =========
 

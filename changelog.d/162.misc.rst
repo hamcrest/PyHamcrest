@@ -1,1 +1,0 @@
-* Restore numpy testing for all modern Pythons
