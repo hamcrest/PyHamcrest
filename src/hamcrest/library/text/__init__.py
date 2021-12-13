@@ -11,3 +11,13 @@ from .stringstartswith import starts_with
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
+
+__all__ = [
+    "contains_string",
+    "ends_with",
+    "equal_to_ignoring_case",
+    "equal_to_ignoring_whitespace",
+    "matches_regexp",
+    "starts_with",
+    "string_contains_in_order",
+]
