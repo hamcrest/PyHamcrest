@@ -11,3 +11,11 @@ from .ordering_comparison import (
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
+
+__all__ = [
+    "close_to",
+    "greater_than",
+    "greater_than_or_equal_to",
+    "less_than",
+    "less_than_or_equal_to",
+]
