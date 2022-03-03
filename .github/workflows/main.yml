@@ -27,7 +27,7 @@ jobs:
           - "3.9"
           - "3.10.0"
           - "pypy2"
-          - "pypy3"
+          - "pypy-3.7"
         exclude:
           - os: macos-latest
             python-version: pypy3
