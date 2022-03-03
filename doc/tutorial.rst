@@ -29,7 +29,7 @@ We'll start by writing a very simple PyUnit test, but instead of using PyUnit's
 :py:func:`~hamcrest.core.matcher_assert.assert_that` construct and the standard
 set of matchers::
 
-    from hamcrest import *
+    from hamcrest import assert_that, equal_to
     import unittest
 
     class BiscuitTest(unittest.TestCase):
