@@ -67,6 +67,9 @@ class OrderingComparisonTest(MatcherTest):
         self.assert_describe_mismatch("was <0>", greater_than_or_equal_to(1), 0)
         self.assert_describe_mismatch("was <2>", less_than_or_equal_to(1), 2)
 
+    def testIncomparableTypes(self):
+        self.assert_does_not_match("incomparable types", greater_than(1), "a")
+
 
 if __name__ == "__main__":
     unittest.main()

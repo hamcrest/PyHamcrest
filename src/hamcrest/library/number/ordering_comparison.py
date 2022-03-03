@@ -22,7 +22,10 @@ class OrderingComparison(BaseMatcher[Any]):
         self.comparison_description = comparison_description
 
     def _matches(self, item: Any) -> bool:
-        return self.comparison_function(item, self.value)
+        try:
+            return self.comparison_function(item, self.value)
+        except TypeError:
+            return False
 
     def describe_to(self, description: Description) -> None:
         description.append_text("a value ").append_text(self.comparison_description).append_text(

@@ -1,5 +1,6 @@
 import unittest
 
+from hamcrest import greater_than
 from hamcrest.core.core.isequal import equal_to
 from hamcrest.library.collection.issequence_containinginanyorder import contains_inanyorder
 from hamcrest_unit_test.matcher_test import MatcherTest
@@ -82,6 +83,16 @@ class IsSequenceContainingInAnyOrderBase(object):
         matcher.matches(self._sequence(3, 1))
         self.assert_describe_mismatch(
             "no item matches: <2> in [<3>, <1>]", matcher, self._sequence(3, 1)
+        )
+
+    def testIncomparableTypes(self):
+        self.assert_matches("Incomparable types", contains_inanyorder(*[4, "a"]), ["a", 4])
+
+    def testIncomparableTypesInNestedMatcher(self):
+        self.assert_matches(
+            "Incomparable types in nested matcher",
+            contains_inanyorder(*[greater_than(0), "a"]),
+            ["a", 4],
         )
 
 
