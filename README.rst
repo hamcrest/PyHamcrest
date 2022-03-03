@@ -55,7 +55,7 @@ the standard set of matchers:
 
 .. code:: python
 
- from hamcrest import *
+ from hamcrest import assert_that, equal_to
  import unittest
 
 
@@ -266,7 +266,7 @@ could use it in our test by importing the factory function ``on_a_saturday``:
 
 .. code:: python
 
- from hamcrest import *
+ from hamcrest import assert_that, is_
  import unittest
  from isgivendayofweek import on_a_saturday
 
