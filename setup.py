@@ -39,6 +39,8 @@ TESTS_BASIC = [
     "coverage[toml]",
     # No point on Pypy thanks to https://github.com/python/typed_ast/issues/111
     "pytest-mypy-plugins; platform_python_implementation != 'PyPy'",
+    # Can't use 0.940: https://github.com/python/mypy/issues/12339
+    "mypy!=0.940; platform_python_implementation != 'PyPy'",
     "types-mock",
 ]
 TESTS_NUMPY = ["numpy"]
