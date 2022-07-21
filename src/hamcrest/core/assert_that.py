@@ -57,7 +57,7 @@ def assert_that(actual, matcher=None, reason=""):
     if isinstance(matcher, Matcher):
         _assert_match(actual=actual, matcher=matcher, reason=reason)
     else:
-        if isinstance(actual, Matcher):
+        if not isinstance(actual, bool):
             warnings.warn("arg1 should be boolean, but was {}".format(type(actual)))
         _assert_bool(assertion=cast(bool, actual), reason=cast(str, matcher))
 
