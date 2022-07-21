@@ -1,3 +1,19 @@
+ 
+  Features ^^^^^^^^
+
+  - Added Python 3.11 testing
+
+`#206 <https://github.com/hamcrest/PyHamcrest/issues/206>`_
+
+  
+ Misc ^^^^
+
+ - `#175 <https://github.com/hamcrest/PyHamcrest/issues/175>`_
+
+  
+   ----
+
+
 2.0.3 (2021-12-12)
 ------------------
  
