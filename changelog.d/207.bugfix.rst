@@ -1,0 +1,1 @@
+``has_properties`` now returns ``Matcher[Any]`` type, which addresses type checking errors when nested as a matcher.

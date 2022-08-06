@@ -1,0 +1,27 @@
+- case: valid_has_items_has_properties
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from dataclasses import dataclass
+    from hamcrest import assert_that, has_items, has_properties
+
+    @dataclass
+    class Example:
+      name: str
+
+    items = [Example("dave"), Example("wave")]
+
+    a = assert_that(items, has_items(has_properties(name="dave")))
+
+- case: valid_has_item_has_properties
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from dataclasses import dataclass
+    from hamcrest import assert_that, has_item, has_properties
+
+    @dataclass
+    class Example:
+      name: str
+
+    items = [Example("dave"), Example("wave")]
+    matcher = has_item(has_properties(name="dave"))
+    a = assert_that(items, matcher)
