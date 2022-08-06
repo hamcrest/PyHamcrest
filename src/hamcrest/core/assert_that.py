@@ -16,16 +16,16 @@ T = TypeVar("T")
 
 
 @overload
-def assert_that(actual: T, matcher: Matcher[T], reason: str = "") -> None:
+def assert_that(actual_or_assertion: T, matcher: Matcher[T], reason: str = "") -> None:
     ...
 
 
 @overload
-def assert_that(assertion: bool, reason: str = "") -> None:
+def assert_that(actual_or_assertion: bool, reason: str = "") -> None:
     ...
 
 
-def assert_that(actual, matcher=None, reason=""):
+def assert_that(actual_or_assertion, matcher=None, reason=""):
     """Asserts that actual value satisfies matcher. (Can also assert plain
     boolean condition.)
 
@@ -55,11 +55,11 @@ def assert_that(actual, matcher=None, reason=""):
 
     """
     if isinstance(matcher, Matcher):
-        _assert_match(actual=actual, matcher=matcher, reason=reason)
+        _assert_match(actual=actual_or_assertion, matcher=matcher, reason=reason)
     else:
-        if isinstance(actual, Matcher):
-            warnings.warn("arg1 should be boolean, but was {}".format(type(actual)))
-        _assert_bool(assertion=cast(bool, actual), reason=cast(str, matcher))
+        if isinstance(actual_or_assertion, Matcher):
+            warnings.warn("arg1 should be boolean, but was {}".format(type(actual_or_assertion)))
+        _assert_bool(assertion=cast(bool, actual_or_assertion), reason=cast(str, matcher))
 
 
 def _assert_match(actual: T, matcher: Matcher[T], reason: str) -> None:

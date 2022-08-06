@@ -42,6 +42,8 @@ TESTS_BASIC = [
     # Can't use 0.940: https://github.com/python/mypy/issues/12339
     "mypy!=0.940; platform_python_implementation != 'PyPy'",
     "types-mock",
+    "dataclasses; python_version<'3.7'",
+    "types-dataclasses; python_version<'3.7'",
 ]
 TESTS_NUMPY = ["numpy"]
 DEV_TOOLS = [

@@ -94,19 +94,19 @@ def has_property(name: str, match: Union[None, Matcher[V], V] = None) -> Matcher
 
 # Keyword argument form
 @overload
-def has_properties(**keys_valuematchers: Union[Matcher[V], V]) -> Matcher[object]:
+def has_properties(**keys_valuematchers: Union[Matcher[V], V]) -> Matcher[Any]:
     ...
 
 
 # Name to matcher dict form
 @overload
-def has_properties(keys_valuematchers: Mapping[str, Union[Matcher[V], V]]) -> Matcher[object]:
+def has_properties(keys_valuematchers: Mapping[str, Union[Matcher[V], V]]) -> Matcher[Any]:
     ...
 
 
 # Alternating name/matcher form
 @overload
-def has_properties(*keys_valuematchers: Any) -> Matcher[object]:
+def has_properties(*keys_valuematchers: Any) -> Matcher[Any]:
     ...
 
 
