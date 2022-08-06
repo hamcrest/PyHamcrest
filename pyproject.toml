@@ -1,7 +1,105 @@
 [build-system]
-requires = ["setuptools>=40.6.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
+[project]
+name = "PyHamcrest"
+description = "Hamcrest framework for matcher objects"
+readme = "README.rst"
+requires-python = ">= 3.6"
+license = { file = "LICENSE.txt" }
+keywords = [
+  "hamcrest",
+  "matchers",
+  "pyunit",
+  "unit",
+  "test",
+  "testing",
+  "unittest",
+  "unittesting",
+]
+authors = [
+  { name = "Chris Rose", email="offline@offby1.net" },
+  { name = "Simon Brunning" },
+  { name = "Jon Reid" },
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: BSD License",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: Jython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Software Development :: Testing",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+docs = ["sphinx~=4.0", "alabaster~=0.7"]
+tests = [
+  "pytest>=5.0",
+  "pytest-sugar",
+  "pytest-xdist",
+  "coverage[toml]",
+  # No point on Pypy thanks to https://github.com/python/typed_ast/issues/111
+  "pytest-mypy-plugins; platform_python_implementation != 'PyPy'",
+  # Can't use 0.940: https://github.com/python/mypy/issues/12339
+  "mypy!=0.940; platform_python_implementation != 'PyPy'",
+  "types-mock",
+  "dataclasses; python_version<'3.7'",
+  "types-dataclasses; python_version<'3.7'",
+]
+tests-numpy = [
+  "PyHamcrest[tests]",
+  "numpy",
+]
+dev = [
+  "PyHamcrest[docs,tests]",
+  "towncrier",
+  "twine",
+  "pytest-mypy",
+  "flake8",
+  "black",
+  "tox",
+  "tox-asdf",
+]
+
+[project.urls]
+History = "https://github.com/hamcrest/PyHamcrest/blob/main/CHANGELOG.rst"
+Source = "https://github.com/hamcrest/PyHamcrest/"
+Issues = "https://github.com/hamcrest/PyHamcrest/issues"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/hamcrest/_version.py"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/changelog.d/*.rst",
+  "/release.sh",
+  "/.github",
+]
+[tool.hatch.build.targets.wheel]
+exclude = [
+  "/examples",
+]
+packages = [
+  "src/hamcrest",
+]
 
 [tool.coverage.run]
 parallel = true

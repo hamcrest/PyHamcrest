@@ -9,5 +9,12 @@ dist/
 *~
 .python-version
 .mypy_cache/
+.pytest_cache/
 requirements.txt
 requirements.in
+.envrc
+.direnv/
+doc/_build/
+htmlcov/
+src/hamcrest/_version.py
+.tool-versions
