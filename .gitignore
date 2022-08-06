@@ -16,3 +16,5 @@ requirements.in
 .direnv/
 doc/_build/
 htmlcov/
+src/hamcrest/_version.py
+.tool-versions

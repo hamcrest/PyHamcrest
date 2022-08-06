@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
@@ -82,7 +82,10 @@ Source = "https://github.com/hamcrest/PyHamcrest/"
 Issues = "https://github.com/hamcrest/PyHamcrest/issues"
 
 [tool.hatch.version]
-path = "src/hamcrest/__init__.py"
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/hamcrest/_version.py"
 
 [tool.hatch.build.targets.sdist]
 exclude = [
