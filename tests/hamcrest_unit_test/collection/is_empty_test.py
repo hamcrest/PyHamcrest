@@ -19,7 +19,7 @@ class EmptyCollectionTest(MatcherTest):
         matcher = empty()
         self.assert_matches("empty tuple", matcher, ())
         self.assert_matches("empty list", matcher, [])
-        self.assert_matches("emtpy dictionary", matcher, {})
+        self.assert_matches("empty dictionary", matcher, {})
 
     def testReturnsTrueForEmptyCollectionLike(self):
         matcher = empty()
@@ -29,7 +29,7 @@ class EmptyCollectionTest(MatcherTest):
         matcher = empty()
         self.assert_does_not_match("non-empty tuple", matcher, (1,))
         self.assert_does_not_match("non-empty list", matcher, [1])
-        self.assert_does_not_match("emtpy dictionary", matcher, {1: 2})
+        self.assert_does_not_match("empty dictionary", matcher, {1: 2})
 
     def testReturnsFalseForNonEmptyCollectionLike(self):
         matcher = empty()
