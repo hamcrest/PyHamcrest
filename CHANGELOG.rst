@@ -1,5 +1,17 @@
- 
-  Features ^^^^^^^^
+Hamcrest 2.0.4 (2022-08-07)
+==========================================
+
+Bugfixes
+--------
+
+- ``has_properties`` now returns ``Matcher[Any]`` type, which addresses type checking errors when nested as a matcher. (`#207 <https://github.com/hamcrest/PyHamcrest/issues/207>`_)
+
+
+`#207 <https://github.com/hamcrest/PyHamcrest/issues/207>`_
+
+  
+Features
+^^^^^^^^
 
   - Added Python 3.11 testing
 
@@ -11,13 +23,11 @@
  - `#175 <https://github.com/hamcrest/PyHamcrest/issues/175>`_
 
   
-   ----
-
-
 2.0.3 (2021-12-12)
 ------------------
  
-  Features ^^^^^^^^
+Features
+^^^^^^^^
 
   - * Adds the tests to the sdist. Fixed by #150
 
@@ -30,15 +40,16 @@
 `#170 <https://github.com/hamcrest/PyHamcrest/issues/170>`_
 
   
- Bugfixes ^^^^^^^^
+Bugfixes
+^^^^^^^^
 
-  - * Test coverage is now submitted to codecov.io.
+- Test coverage is now submitted to codecov.io.
 
     Fixed by #150
 
 `#135 <https://github.com/hamcrest/PyHamcrest/issues/135>`_
- - Change to the ``has_entry()`` matcher - if exactly one key matches, but the value does not, report only the mismatching
-  value.
+
+- Change to the ``has_entry()`` matcher - if exactly one key matches, but the value does not, report only the mismatching value.
 
   Fixed by #157
 
@@ -52,12 +63,6 @@
 
  - `#150 <https://github.com/hamcrest/PyHamcrest/issues/150>`_, `#159 <https://github.com/hamcrest/PyHamcrest/issues/159>`_, `#162 <https://github.com/hamcrest/PyHamcrest/issues/162>`_, `#163 <https://github.com/hamcrest/PyHamcrest/issues/163>`_, `#166 <https://github.com/hamcrest/PyHamcrest/issues/166>`_, `#175 <https://github.com/hamcrest/PyHamcrest/issues/175>`_
 
-  
-   ----
-
-
-Changelog
-=========
 
 Version 2.0.2
 -------------
@@ -102,7 +107,7 @@ Fix #62 - Return result of a deferred call
 Version 1.8.5
 -------------
 
-Fix #56 - incorrect handling of () in is_ matcher
+Fix #56 - incorrect handling of () in ``is_`` matcher
 Fix #60 - correct calling API call with args
 
 Version 1.8.4
@@ -123,7 +128,7 @@ Version 1.8.2
 Version 1.8.1
 -------------
 
-* Added not_ alias for is_not [Matteo Bertini]
+* Added ``not_`` alias for is_not [Matteo Bertini]
 * Added doc directory to the sdist [Alex Brandt]
 
 Version 1.8
@@ -143,34 +148,36 @@ Version 1.7
 -----------
 
 2 Sep 2013 (Version 1.7.2)
+
 * Supported versions
- - As of this version, support for Python 3.1 has been dropped due to no available CI platform.
- - Added support for Python 3.3
+   - As of this version, support for Python 3.1 has been dropped due to no available CI platform.
+   - Added support for Python 3.3
 
 * Bug fixes:
- - string_contains_in_order is now used in the test as it would be in an application, and is properly exported. (Romilly Cocking)
- - Fix mismatch description of containing_inanyorder (David Keijser)
- - added import of stringmatches to text/__init__.py (Eric Scheidemantle)
- - added matches_regexp to __all__ list to library/__init__.py (Eric Scheidemantle)
+   - string_contains_in_order is now used in the test as it would be in an application, and is properly exported. (Romilly Cocking)
+   - Fix mismatch description of containing_inanyorder (David Keijser)
+   - added import of stringmatches to text/__init__.py (Eric Scheidemantle)
+   - added matches_regexp to __all__ list to library/__init__.py (Eric Scheidemantle)
 
 5 Jan 2010 (Version 1.7.1)
+
 * Bug fixes:
- - included a fix by jaimegildesagredo for issue #28 (has_properties was not importable)
- - included a fix by keys for contains_inanyorder
+   - included a fix by jaimegildesagredo for issue #28 (has_properties was not importable)
+   - included a fix by keys for contains_inanyorder
 
 29 Dec 2012
 (All changes by Chris Rose unless otherwise noted.)
 
 * New matchers:
- - matches_regexp matches a regular expression in a string.
- - has_properties matches an object with more than one property.
- - is_empty matches any object with length 0.
+   - matches_regexp matches a regular expression in a string.
+   - has_properties matches an object with more than one property.
+   - is_empty matches any object with length 0.
 
 * Improvements:
- - Can now do matching against old-style classes.
- - Sequence matchers handle generators, as well as actual sequences and
-   pseudo-sequences.
- - README enhancements by ming13
+   - Can now do matching against old-style classes.
+   - Sequence matchers handle generators, as well as actual sequences and
+     pseudo-sequences.
+   - README enhancements by ming13
 
 
 Version 1.6
@@ -197,46 +204,48 @@ Version 1.5
 -----------
 
 29 Apr 2011
+
 * Packaging:
- - Python 3.1 support. Thanks to: Chris Rose
- - Easier installation with bootstrapping. Thanks to: Chris Rose
+   - Python 3.1 support. Thanks to: Chris Rose
+   - Easier installation with bootstrapping. Thanks to: Chris Rose
 
 * Mock integration:
- - "match_equality" wraps a matcher to define equality in terms of satisfying the matcher. This allows Hamcrest matchers to be used in libraries that are not Hamcrest-aware, such as Michael Foord's mock library. Thanks to: Chris Rose
+   - "match_equality" wraps a matcher to define equality in terms of satisfying the matcher. This allows Hamcrest matchers to be used in libraries that are not Hamcrest-aware, such as Michael Foord's mock library. Thanks to: Chris Rose
 
 * New matcher:
- - "string_contains_in_order" matches string containing given list of substrings, in order. Thanks to: Romilly Cocking
+   - "string_contains_in_order" matches string containing given list of substrings, in order. Thanks to: Romilly Cocking
 
 * Improved matchers:
- - For consistency, changed "any_of" and "all_of" to implicitly wrap non-matcher values in EqualTo. Thanks to: Chris Rose
- - Changed "sameInstance" mismatch description to omit address when describing
- None.
+   - For consistency, changed "any_of" and "all_of" to implicitly wrap non-matcher values in EqualTo. Thanks to: Chris Rose
+   - Changed "sameInstance" mismatch description to omit address when describing None.
 
 
 Version 1.4
 -----------
 
 13 Feb 2011
+
 * New matchers:
- - "has_entries" matches dictionary containing key-value pairs satisfying a given list of alternating keys and value matchers.
+   - "has_entries" matches dictionary containing key-value pairs satisfying a given list of alternating keys and value matchers.
 
 * "assert_that" can be invoked with a single boolean argument; the reason message is now optional. This is a convenience replacement for assertTrue. Thanks to: Jeong-Min Lee
 
 * Improved descriptions:
- - Reverted 1.3 change: Describe None as "<None>" after all, since it is an object.
- - "is_" no longer says "is ..." in its description, but just lets the inner description pass through.
- - Consistently use articles to begin descriptions, such as "a sequence containing" instead of "sequence containing".
+   - Reverted 1.3 change: Describe None as "<None>" after all, since it is an object.
+   - "``is_``" no longer says "is ..." in its description, but just lets the inner description pass through.
+   - Consistently use articles to begin descriptions, such as "a sequence containing" instead of "sequence containing".
 
 
 Version 1.3
 -----------
 
 04 Feb 2011
+
 * PyHamcrest is now compatible with Python 3! To install PyHamcrest on Python 3:
-  - Install the "distribute" package, http://pypi.python.org/pypi/distribute
-  - Run "python3 setup.py install"
-  Unit tests are not converted by the install procedure. Run "2to3 -nw ." separately to convert them. You may discover import statements in the __init__.py files (and one in core/base_description.py) that need dot prefixes.
-  Thanks to: Jeong-Min Lee
+   - Install the "distribute" package, http://pypi.python.org/pypi/distribute
+   - Run "python3 setup.py install"
+     Unit tests are not converted by the install procedure. Run "2to3 -nw ." separately to convert them. You may discover import statements in the __init__.py files (and one in core/base_description.py) that need dot prefixes.
+     Thanks to: Jeong-Min Lee
 
 * Improved descriptions and mismatch descriptions of several matchers, including:
   - Fixed "contains" and "contains_inanyorder" to describe mismatch if item is not a sequence.
@@ -252,15 +261,16 @@ Version 1.2.1
 -------------
 
 04 Jan 2011
+
 * Fixed "assert_that" to describe the diagnosis of the mismatch, not just the
 mismatched value. PyHamcrest will now give even more useful information.
 
 * Expanded BaseDescription.append_description_of to handle all types of values, not just self-describing values.
 
 * Deprecated:
- - Description.append_value no longer needed; call append_description_of instead.
- - BaseDescription.append_value_list no longer needed; call append_list instead.
- - SelfDescribingValue no longer needed.
+   - Description.append_value no longer needed; call append_description_of instead.
+   - BaseDescription.append_value_list no longer needed; call append_list instead.
+   - SelfDescribingValue no longer needed.
 
 1.2.1 fixes to 1.2:
 - Corrected manifest so install works. Thanks to: Jeong-Min Lee
@@ -270,9 +280,10 @@ Version 1.1
 -----------
 
 28 Dec 2010
+
 * New matchers:
-  - "contains" matches sequence containing matching items in order.
-  - "contains_inanyorder" matches sequence containing matching items in any order.
+    - "contains" matches sequence containing matching items in order.
+    - "contains_inanyorder" matches sequence containing matching items in any order.
 
 * Added Sphinx documentation support.
 
