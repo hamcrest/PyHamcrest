@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          # Fetch all tags
+          # Fetch all tags; this is needed for hatch-vcs
           fetch-depth: 0
 
       - name: Install build dependencies
@@ -38,7 +38,9 @@ jobs:
     needs:
       - pure-python-wheel-and-sdist
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+    if: |
+      (github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')) ||
+      (github.event_name == 'workflow_dispatch' && startsWith(github.event.ref, 'refs/tags'))
 
     steps:
       - uses: actions/download-artifact@v2
@@ -51,5 +53,4 @@ jobs:
         with:
           skip_existing: true
           user: __token__
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: "https://test.pypi.org/legacy/"
+          password: ${{ secrets.PYPI_API_TOKEN }}
