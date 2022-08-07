@@ -38,7 +38,9 @@ jobs:
     needs:
       - pure-python-wheel-and-sdist
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+    if: |
+      (github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')) ||
+      (github.event_name == 'workflow_dispatch' && startsWith(github.event.ref, 'refs/tags'))
 
     steps:
       - uses: actions/download-artifact@v2
