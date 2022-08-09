@@ -16,7 +16,7 @@ repos:
         # args: ["-l100"]
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 4.0.1
+    rev: 5.0.4
     hooks:
       - id: flake8
         exclude: >-
