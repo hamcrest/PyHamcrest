@@ -1,0 +1,1 @@
+Use the correct generic type in the internal ``describe_keyvalue`` method
