@@ -104,9 +104,6 @@ jobs:
           # We want our tags here
           fetch-depth: 0
       - uses: hynek/build-and-inspect-python-package@v1.1
-      - uses: "actions/setup-python@v4"
-        with:
-          python-version: "3.10"
 
   install-dev:
     strategy:
