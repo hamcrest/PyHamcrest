@@ -52,7 +52,7 @@ class IsDictContaining(BaseMatcher[Mapping[K, V]]):
         else:
             super().describe_match(item, match_description)
 
-    def _matching_keys(self, item):
+    def _matching_keys(self, item) -> MutableMapping[K, V]:
         key_matches: MutableMapping[K, V] = {}
         if hasmethod(item, "items"):
             for key, value in item.items():

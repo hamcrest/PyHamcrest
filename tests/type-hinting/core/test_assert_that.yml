@@ -8,4 +8,4 @@
     assert_that("str", instance_of(str))
     assert_that(99, starts_with("str"))
   out: |
-    main:5: error: Cannot infer type argument 1 of "assert_that"
+    main:5: error: Cannot infer type argument 1 of "assert_that"  [misc]
