@@ -5,4 +5,4 @@
     from hamcrest import assert_that, is_, empty
 
     assert_that([], empty())
-    assert_that(99, empty())  # E: Cannot infer type argument 1 of "assert_that"
+    assert_that(99, empty())  # E: Cannot infer type argument 1 of "assert_that"  [misc]

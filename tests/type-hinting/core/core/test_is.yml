@@ -9,4 +9,4 @@
     b = 99
 
     assert_that(a, is_(empty()))
-    assert_that(b, is_(empty()))  # E: Cannot infer type argument 1 of "assert_that"
+    assert_that(b, is_(empty()))  # E: Cannot infer type argument 1 of "assert_that"  [misc]
