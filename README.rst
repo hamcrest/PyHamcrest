@@ -46,6 +46,12 @@ Hamcrest can be installed using the usual Python packaging tools. It depends on
 distribute, but as long as you have a network connection when you install, the
 installation process will take care of that for you.
 
+For example:
+
+.. code::
+
+ pip install PyHamcrest
+
 My first PyHamcrest test
 ========================
 
