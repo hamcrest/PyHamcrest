@@ -60,6 +60,7 @@ tests = [
   "types-mock",
   "dataclasses; python_version<'3.7'",
   "types-dataclasses; python_version<'3.7'",
+  "pyyaml",
 ]
 tests-numpy = [
   "PyHamcrest[tests]",
@@ -74,6 +75,7 @@ dev = [
   "black",
   "tox",
   "tox-asdf",
+  "doc2dash",
 ]
 
 [project.urls]
@@ -107,7 +109,7 @@ branch = true
 source = ["hamcrest"]
 
 [tool.coverage.paths]
-source = ["src", ".tox/*/site-packages"]
+source = ["src", ".tox/*/lib/*/site-packages"]
 
 [tool.coverage.report]
 show_missing = true
