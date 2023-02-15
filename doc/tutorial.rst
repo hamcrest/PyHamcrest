@@ -89,6 +89,39 @@ assure that the right issue was found::
     # assert_that(23, raises(IOError))
 
 
+Asserting exceptions from async methods
+---------------------------------------
+
+An async method does not directly return the result or raise an exception but
+instead returns a Future-object that represent the async operation that can
+later be resolved with the `await` keyword. The
+:py:func:`~hamcrest.core.core.future.resolved` utility function can be used to
+wait for a future to be done but without retrieving the value or raising the
+exception. The :py:func:`~hamcrest.core.core.future.future_raising` matcher can
+be used with any future object but combined lets you assert that calling some
+async method, and waiting for the result, causes an exception to be raised.
+
+This is best used together with an async test runner like IsolatedAsyncioTestCase or pytest-asyncio::
+
+    async def parse(input: str):
+        ...
+
+    class Test(unittest.IsolatedAsyncioTestCase):
+
+        async def testParse(self):
+            future = parse("some bad data")
+            assert_that(await resolved(future), future_raising(ValueError))
+
+But it's possible to use with an async unware runner by explicitly running the event loop in the test::
+
+    class Test(unittest.TestCase):
+        def test_parse(self):
+            async def test():
+                future = parse("some bad data")
+                assert_that(await resolved(future), future_raising(ValueError))
+
+            asyncio.get_event_loop().run_until_complete(test())
+
 
 Predefined matchers
 -------------------
