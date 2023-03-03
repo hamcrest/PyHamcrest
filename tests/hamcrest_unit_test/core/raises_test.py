@@ -171,20 +171,14 @@ def raise_error(msg):
 
 
 class ParensTest(unittest.TestCase):
-
     def test_literal_parens(self):
 
-        message = 'Message with (parens)'
-        assert_that(
-            calling(raise_error).with_args(message),
-            raises(AssertionError, message)
-        )
+        message = "Message with (parens)"
+        assert_that(calling(raise_error).with_args(message), raises(AssertionError, message))
 
     def test_parens_in_regex(self):
-        assert_that(
-            calling(raise_error).with_args('abab'),
-            raises(AssertionError, r'(ab)+')
-        )
+        assert_that(calling(raise_error).with_args("abab"), raises(AssertionError, r"(ab)+"))
+
 
 class CallingTest(unittest.TestCase):
     def testCallingDoesNotImmediatelyExecuteFunction(self):
