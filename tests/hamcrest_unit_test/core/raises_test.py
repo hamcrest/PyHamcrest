@@ -2,7 +2,7 @@ import sys
 import unittest
 
 import pytest
-from hamcrest import has_properties, not_
+from hamcrest import has_properties, not_, assert_that
 from hamcrest.core.core.raises import calling, raises
 from hamcrest_unit_test.matcher_test import MatcherTest, assert_mismatch_description
 
@@ -165,6 +165,26 @@ def test_gives_correct_message_when_wrapped_with_is_not(expected_message):
         expected_message, not_(raises(AssertionError)), calling(raise_exception)
     )
 
+
+def raise_error(msg):
+    raise AssertionError(msg)
+
+
+class ParensTest(unittest.TestCase):
+
+    def test_literal_parens(self):
+
+        message = 'Message with (parens)'
+        assert_that(
+            calling(raise_error).with_args(message),
+            raises(AssertionError, message)
+        )
+
+    def test_parens_in_regex(self):
+        assert_that(
+            calling(raise_error).with_args('abab'),
+            raises(AssertionError, r'(ab)+')
+        )
 
 class CallingTest(unittest.TestCase):
     def testCallingDoesNotImmediatelyExecuteFunction(self):
