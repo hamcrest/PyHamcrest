@@ -41,8 +41,8 @@ class Raises(BaseMatcher[Callable[..., Any]]):
 
             if isinstance(self.actual, self.expected):
                 if self.pattern is not None:
-                    if re.search(self.pattern, str(self.actual)) is None
-                            and self.pattern != str(self.actual):
+                    if (re.search(self.pattern, str(self.actual)) is None
+                            and self.pattern != str(self.actual)):
                         return False
                 if self.matcher is not None:
                     if not self.matcher.matches(self.actual):
