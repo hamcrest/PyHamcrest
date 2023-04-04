@@ -214,6 +214,7 @@ latex_documents = [
 # If false, no module index is generated.
 # latex_domain_indices = True
 
+
 # PyHamcrest customization: Don't skip BaseMatcher's _matches method
 def skip_member(app, what, name, obj, skip, options):
     if skip and str(obj).find("BaseMatcher._matches") >= 0:

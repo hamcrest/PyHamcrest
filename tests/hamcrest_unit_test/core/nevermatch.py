@@ -6,7 +6,6 @@ __license__ = "BSD, see License.txt"
 
 
 class NeverMatch(BaseMatcher):
-
     mismatch_description = "NEVERMATCH"
 
     def matches(self, item, mismatch_description=None):
