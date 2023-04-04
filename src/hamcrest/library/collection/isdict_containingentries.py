@@ -28,7 +28,6 @@ class IsDictContainingEntries(BaseMatcher[Mapping[K, V]]):
         self, item: Mapping[K, V], mismatch_description: Optional[Description] = None
     ) -> bool:
         for key, value_matcher in self.value_matchers:
-
             try:
                 if key not in item:
                     if mismatch_description:
