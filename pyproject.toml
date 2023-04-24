@@ -85,6 +85,7 @@ Issues = "https://github.com/hamcrest/PyHamcrest/issues"
 
 [tool.hatch.version]
 source = "vcs"
+raw_options = { local_scheme = "no-local-version" }
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/hamcrest/_version.py"
