@@ -18,7 +18,7 @@ jobs:
     name: "Python ${{ matrix.python-version }} / ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}"
     env:
-      USING_COVERAGE: "3.7,3.8,3.9,3.10"
+      USING_COVERAGE: "3.8,3.9,3.10,3.11"
 
     strategy:
       matrix:
@@ -28,7 +28,8 @@ jobs:
           - "3.8"
           - "3.9"
           - "3.10"
-          - "3.11.0-beta.5"
+          - "3.11"
+          - "3.12.0-alpha.7"
           - "pypy3.9"
         exclude:
           - os: macos-latest
@@ -67,7 +68,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install coverage
         run: python -m pip install --upgrade coverage[toml]
@@ -117,7 +118,7 @@ jobs:
       - uses: "actions/checkout@v3"
       - uses: "actions/setup-python@v4"
         with:
-          python-version: "3.10"
+          python-version: "3.11"
       - name: "Install in dev mode"
         run: "python -m pip install -e .[dev]"
       - name: "Import package"
