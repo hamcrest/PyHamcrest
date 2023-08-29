@@ -7,9 +7,15 @@ Matchers that perform numeric comparisons.
 close_to
 ^^^^^^^^
 
-.. automodule:: hamcrest.library.number.iscloseto
+.. currentmodule:: hamcrest.library.number.iscloseto
+.. autofunction:: close_to
 
 greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.number.ordering_comparison
+.. currentmodule:: hamcrest.library.number.ordering_comparison
+.. autofunction:: greater_than
+.. autofunction:: greater_than_or_equal_to
+.. autofunction:: less_than
+.. autofunction:: less_than_or_equal_to
+

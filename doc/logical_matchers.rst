@@ -7,25 +7,23 @@ Boolean logic using other matchers.
 all_of
 ^^^^^^
 
-.. automodule:: hamcrest.core.core.allof
-    :exclude-members: all_of
-.. autofunction:: all_of(matcher1[, matcher2[, ...]])
+.. currentmodule:: hamcrest.core.core.allof
+.. autofunction:: all_of
 
 any_of
 ^^^^^^
 
-.. automodule:: hamcrest.core.core.anyof
-    :exclude-members: any_of
-.. autofunction:: any_of(matcher1[, matcher2[, ...]])
+.. currentmodule:: hamcrest.core.core.anyof
+.. autofunction:: any_of
 
 anything
 ^^^^^^^^
 
-.. automodule:: hamcrest.core.core.isanything
-    :exclude-members: anything
-.. autofunction:: anything([description])
+.. currentmodule:: hamcrest.core.core.isanything
+.. autofunction:: anything
 
 is_not
 ^^^^^^
 
-.. automodule:: hamcrest.core.core.isnot
+.. currentmodule:: hamcrest.core.core.isnot
+.. autofunction:: is_not 

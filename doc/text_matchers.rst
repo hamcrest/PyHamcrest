@@ -7,37 +7,44 @@ Matchers that perform text comparisons.
 contains_string
 ^^^^^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.text.stringcontains
+.. currentmodule:: hamcrest.library.text.stringcontains
+.. autofunction:: contains_string
 
 
 ends_with
 ^^^^^^^^^
 
-.. automodule:: hamcrest.library.text.stringendswith
+.. currentmodule:: hamcrest.library.text.stringendswith
+.. autofunction:: ends_with
+
 
 equal_to_ignoring_case
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.text.isequal_ignoring_case
+.. currentmodule:: hamcrest.library.text.isequal_ignoring_case
+.. autofunction:: equal_to_ignoring_case
+
 
 equal_to_ignoring_whitespace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.text.isequal_ignoring_whitespace
+.. currentmodule:: hamcrest.library.text.isequal_ignoring_whitespace
+.. autofunction:: equal_to_ignoring_whitespace
 
 matches_regexp
 ^^^^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.text.stringmatches
+.. currentmodule:: hamcrest.library.text.stringmatches
+.. autofunction:: matches_regexp
 
 starts_with
 ^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.text.stringstartswith
+.. currentmodule:: hamcrest.library.text.stringstartswith
+.. autofunction:: starts_with
 
 string_contains_in_order
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.text.stringcontainsinorder
-    :exclude-members: string_contains_in_order
-.. autofunction:: string_contains_in_order(string1[, string2[, ...]])
+.. currentmodule:: hamcrest.library.text.stringcontainsinorder
+.. autofunction:: string_contains_in_order

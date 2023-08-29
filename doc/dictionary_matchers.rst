@@ -7,21 +7,23 @@ Matchers of dictionaries.
 has_entries
 ^^^^^^^^^^^
 
-.. automodule:: hamcrest.library.collection.isdict_containingentries
-    :exclude-members: has_entries
-.. autofunction:: has_entries(matcher_dict)
+.. currentmodule:: hamcrest.library.collection.isdict_containingentries
+.. autofunction:: has_entries
 
 has_entry
 ^^^^^^^^^
 
-.. automodule:: hamcrest.library.collection.isdict_containing
+.. currentmodule:: hamcrest.library.collection.isdict_containing
+.. autofunction:: has_entry
 
 has_key
 ^^^^^^^
 
-.. automodule:: hamcrest.library.collection.isdict_containingkey
+.. currentmodule:: hamcrest.library.collection.isdict_containingkey
+.. autofunction:: has_key
 
 has_value
 ^^^^^^^^^
 
-.. automodule:: hamcrest.library.collection.isdict_containingvalue
+.. currentmodule:: hamcrest.library.collection.isdict_containingvalue
+.. autofunction:: has_value
