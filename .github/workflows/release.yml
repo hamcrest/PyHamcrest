@@ -3,11 +3,6 @@ on:
   push:
     tags:
       - V*
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
   release:
