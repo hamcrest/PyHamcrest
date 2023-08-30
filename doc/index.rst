@@ -9,6 +9,7 @@ Contents:
     tutorial
     custom_matchers
     library
+    internals
     integration
     core
 

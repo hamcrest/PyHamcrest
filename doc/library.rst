@@ -5,10 +5,10 @@ Library of Matcher implementations.
 
 .. toctree::
 
-    object_matchers
-    number_matchers
-    text_matchers
-    logical_matchers
-    sequence_matchers
-    dictionary_matchers
-    decorator_matchers
+    matcher_library/object_matchers
+    matcher_library/number_matchers
+    matcher_library/text_matchers
+    matcher_library/logical_matchers
+    matcher_library/sequence_matchers
+    matcher_library/dictionary_matchers
+    matcher_library/decorator_matchers
