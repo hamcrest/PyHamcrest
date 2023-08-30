@@ -3,6 +3,8 @@ Logical Matchers
 
 Boolean logic using other matchers.
 
+See also, :ref:`Logical matcher internals<logical-matcher-internals>`
+
 
 all_of
 ^^^^^^

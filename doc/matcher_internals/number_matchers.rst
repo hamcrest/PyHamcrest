@@ -1,3 +1,5 @@
+.. _number-matcher-internals:
+
 Number Matchers
 ---------------
 

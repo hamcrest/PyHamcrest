@@ -1,3 +1,5 @@
+.. _dictionary-matcher-internals:
+
 Dictionary Matchers
 -------------------
 

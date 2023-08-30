@@ -1,3 +1,5 @@
+.. _logical-matcher-internals:
+
 Logical Matchers
 ----------------
 

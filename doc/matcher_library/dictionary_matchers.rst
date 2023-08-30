@@ -3,6 +3,8 @@ Dictionary Matchers
 
 Matchers of dictionaries.
 
+See also, :ref:`Dictionary matcher internals<dictionary-matcher-internals>`
+
 
 has_entries
 ^^^^^^^^^^^

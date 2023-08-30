@@ -3,6 +3,8 @@ Sequence Matchers
 
 Matchers of sequences.
 
+See also, :ref:`Sequence matcher internals<sequence-matcher-internals>`.
+
 
 contains_exactly
 ^^^^^^^^^^^^^^^^

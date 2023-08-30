@@ -3,6 +3,8 @@ Number Matchers
 
 Matchers that perform numeric comparisons.
 
+See also, :ref:`Number matcher internals<number-matcher-internals>`
+
 
 close_to
 ^^^^^^^^

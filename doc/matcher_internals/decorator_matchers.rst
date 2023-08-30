@@ -1,3 +1,5 @@
+.. _decorator-matcher-internals:
+
 Decorator Matchers
 ------------------
 

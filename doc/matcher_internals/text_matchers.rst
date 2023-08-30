@@ -1,3 +1,5 @@
+.. _text-matcher-internals:
+
 Text Matchers
 -------------
 

@@ -1,3 +1,5 @@
+.. _sequence-matcher-internals:
+
 Sequence Matchers
 -----------------
 

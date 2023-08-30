@@ -3,6 +3,8 @@ Object Matchers
 
 Matchers that inspect objects.
 
+See also, :ref:`Object matcher internals<object-matcher-internals>`
+
 
 equal_to
 ^^^^^^^^

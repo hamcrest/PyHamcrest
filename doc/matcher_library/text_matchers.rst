@@ -3,6 +3,8 @@ Text Matchers
 
 Matchers that perform text comparisons.
 
+See also, :ref:`Text matcher internals<text-matcher-internals>`.
+
 
 contains_string
 ^^^^^^^^^^^^^^^

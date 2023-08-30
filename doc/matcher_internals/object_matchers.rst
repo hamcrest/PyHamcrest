@@ -1,3 +1,5 @@
+.. _object-matcher-internals:
+
 Object Matchers
 ---------------
 
