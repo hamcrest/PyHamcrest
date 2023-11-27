@@ -1,7 +1,6 @@
 import sys
 import unittest
 
-import pytest
 from hamcrest import has_properties, not_
 from hamcrest.core.core.raises import calling, raises
 from hamcrest_unit_test.matcher_test import MatcherTest, assert_mismatch_description
@@ -42,19 +41,6 @@ class RaisesTest(MatcherTest):
     def testDoesNotMatchTypeErrorIfActualIsNotCallable(self):
         self.assert_does_not_match("Not callable", raises(TypeError), 23)
 
-    @pytest.mark.skipif(
-        not (3, 0) <= sys.version_info < (3, 7), reason="Message differs between Python versions"
-    )
-    def testDoesNotMatchIfTheWrongExceptionTypeIsRaisedPy3(self):
-        self.assert_does_not_match("Wrong exception", raises(IOError), calling(raise_exception))
-        expected_message = (
-            "AssertionError('(){}',) of type <class 'AssertionError'> was raised instead"
-        )
-        self.assert_mismatch_description(
-            expected_message, raises(TypeError), calling(raise_exception)
-        )
-
-    @pytest.mark.skipif(sys.version_info < (3, 7), reason="Message differs between Python versions")
     def testDoesNotMatchIfTheWrongExceptionTypeIsRaisedPy37(self):
         self.assert_does_not_match("Wrong exception", raises(IOError), calling(raise_exception))
         expected_message = (
@@ -136,33 +122,11 @@ class RaisesTest(MatcherTest):
         self.assertTrue(function.called)
 
 
-@pytest.mark.parametrize(
-    "expected_message",
-    [
-        pytest.param(
-            "but AssertionError('(){}',) of type <type 'exceptions.AssertionError'> was raised.",
-            marks=pytest.mark.skipif(
-                sys.version_info >= (3, 0), reason="Message differs between Python versions"
-            ),
-        ),
-        pytest.param(
-            "but AssertionError('(){}',) of type <class 'AssertionError'> was raised.",
-            marks=pytest.mark.skipif(
-                not (3, 0) <= sys.version_info < (3, 7),
-                reason="Message differs between Python versions",
-            ),
-        ),
-        pytest.param(
-            "but AssertionError('(){}') of type <class 'AssertionError'> was raised.",
-            marks=pytest.mark.skipif(
-                sys.version_info < (3, 7), reason="Message differs between Python versions"
-            ),
-        ),
-    ],
-)
-def test_gives_correct_message_when_wrapped_with_is_not(expected_message):
+def test_gives_correct_message_when_wrapped_with_is_not():
     assert_mismatch_description(
-        expected_message, not_(raises(AssertionError)), calling(raise_exception)
+        "but AssertionError('(){}') of type <class 'AssertionError'> was raised.",
+        not_(raises(AssertionError)),
+        calling(raise_exception),
     )
 
 
