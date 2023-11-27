@@ -1,6 +1,5 @@
 import sys
 
-import pytest
 import asyncio
 from hamcrest import has_properties
 from hamcrest.core.core.future import resolved, future_raising
@@ -58,24 +57,6 @@ class FutureExceptionTest(MatcherTest):
         future.cancel()
         self.assert_does_not_match("Cancelled future", future_raising(TypeError), future)
 
-    @pytest.mark.skipif(
-        not (3, 0) <= sys.version_info < (3, 7), reason="Message differs between Python versions"
-    )
-    def testDoesNotMatchIfFutureHasTheWrongExceptionTypePy3(self):
-        async def test():
-            self.assert_does_not_match(
-                "Wrong exception", future_raising(IOError), await resolved(raise_exception())
-            )
-            expected_message = (
-                "AssertionError('(){}',) of type <class 'AssertionError'> was raised instead"
-            )
-            self.assert_mismatch_description(
-                expected_message, future_raising(TypeError), await resolved(raise_exception())
-            )
-
-        asyncio.get_event_loop().run_until_complete(test())
-
-    @pytest.mark.skipif(sys.version_info < (3, 7), reason="Message differs between Python versions")
     def testDoesNotMatchIfFutureHasTheWrongExceptionTypePy37(self):
         async def test():
             self.assert_does_not_match(

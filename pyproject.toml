@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "PyHamcrest"
 description = "Hamcrest framework for matcher objects"
 readme = "README.rst"
-requires-python = ">= 3.6"
+requires-python = ">= 3.8"
 license = { file = "LICENSE.txt" }
 keywords = [
   "hamcrest",
@@ -20,7 +20,7 @@ keywords = [
 ]
 authors = [
   { name = "Chris Rose", email="offline@offby1.net" },
-  { name = "Simon Brunning" },
+  { name = "Simon Brunning", email="simon@brunningonline.net" },
   { name = "Jon Reid" },
 ]
 classifiers = [
@@ -31,12 +31,11 @@ classifiers = [
   "Natural Language :: English",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.6",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: Jython",
   "Programming Language :: Python :: Implementation :: PyPy",
@@ -58,8 +57,6 @@ tests = [
   # Can't use 0.940: https://github.com/python/mypy/issues/12339
   "mypy!=0.940; platform_python_implementation != 'PyPy'",
   "types-mock",
-  "dataclasses; python_version<'3.7'",
-  "types-dataclasses; python_version<'3.7'",
   "pyyaml",
 ]
 tests-numpy = [
@@ -138,6 +135,7 @@ exclude_lines = [
     "^ +\\.\\.\\.$",
     "-> ['\"]?NoReturn['\"]?:",
 ]
+
 [tool.black]
 line_length = 100
 
@@ -145,7 +143,6 @@ line_length = 100
 verbose = 2
 fail-under = 100
 whitelist-regex = ["test_.*"]
-
 
 [tool.isort]
 profile = "hamcrests"
