@@ -5,7 +5,7 @@ build:
   os: ubuntu-22.04
   tools:
     # Keep version in sync with tox.ini (docs and gh-actions).
-    python: "3.11"
+    python: "3.12"
 
 sphinx:
   configuration: doc/conf.py
