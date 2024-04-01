@@ -30,6 +30,12 @@ class StaticMethodGetter:
 class NonCallableProperty:
     field = "value"
 
+    def __repr__(self):
+        return self.__class__.__name__
+
+    def __str__(self):
+        return repr(self)
+
 
 class MethodGetter:
     def field(self) -> str:
@@ -42,7 +48,7 @@ class MethodGetter:
         return "value3"
 
     def __repr__(self):
-        return "ThreePropertiesNewStyle"
+        return self.__class__.__name__
 
     def __str__(self):
         return repr(self)
@@ -68,7 +74,7 @@ class OverridingGetAttribute:
         raise AttributeError(name)
 
 
-class ObjectPropertyMatcher(object):
+class ObjectGetterMatcher(object):
     match_sets: typing.Tuple[typing.Tuple[str, typing.Type]] = (
         ("static-method: {}", StaticMethodGetter),
         ("method: {}", MethodGetter),
@@ -85,23 +91,28 @@ class ObjectPropertyMatcher(object):
             self.assert_does_not_match(description_fmt.format(description), matcher, target_class())
 
 
-class HasPropertyTest(MatcherTest, ObjectPropertyMatcher):
+class HasGetterTest(MatcherTest, ObjectGetterMatcher):
     def testHasPropertyWithoutValueMatcher(self):
         self.assert_matches_for_all_types("has getter with name", has_getter("field"))
 
-    def testHasPropertyWithoutValueMatcherNegative(self):
-        self.assert_does_not_match_for_all_types(
-            "has getter with name", has_getter("not_there")
-        )
+    def testHasGetterWithoutValueMatcherNegative(self):
+        self.assert_does_not_match_for_all_types("has getter with name", has_getter("not_there"))
 
-    def testHasPropertyWithValueMatcher(self):
+    def testHasGetterWithValueMatcher(self):
         self.assert_matches_for_all_types(
             "has getter with name and value", has_getter("field", "value")
         )
 
-    def testHasPropertyWithValueMatcherNegative(self):
+    def testHasGetterWithValueMatcherNegative(self):
         self.assert_does_not_match_for_all_types(
             "has getter with name", has_getter("field", "not the value")
+        )
+
+    def testHasGetterWithNonCallableProperty(self):
+        self.assert_does_not_match(
+            "<NonCallableProperty> attribute 'field' is not callable",
+            has_getter("field"),
+            NonCallableProperty(),
         )
 
     def testDescription(self):
@@ -112,14 +123,21 @@ class HasPropertyTest(MatcherTest, ObjectPropertyMatcher):
             "an object with a getter 'field' returning 'value'", has_getter("field", "value")
         )
 
-    def testDescribeMissingProperty(self):
+    def testDescribeMissingGetter(self):
         self.assert_mismatch_description(
-            "<ThreePropertiesNewStyle> did not have the 'not_there' getter",
+            "<MethodGetter> did not have the 'not_there' getter",
             has_getter("not_there"),
             MethodGetter(),
         )
 
-    def testDescribePropertyValueMismatch(self):
+    def testDescribeNonCallableProperty(self):
+        self.assert_mismatch_description(
+            "<NonCallableProperty> attribute 'field' is not callable",
+            has_getter("field"),
+            NonCallableProperty(),
+        )
+
+    def testDescribeGetterValueMismatch(self):
         self.assert_mismatch_description(
             "getter 'field' return value was 'value'",
             has_getter("field", "another_value"),
@@ -128,18 +146,16 @@ class HasPropertyTest(MatcherTest, ObjectPropertyMatcher):
 
     def testMismatchDescription(self):
         self.assert_describe_mismatch(
-            "<ThreePropertiesNewStyle> did not have the 'not_there' getter",
+            "<MethodGetter> did not have the 'not_there' getter",
             has_getter("not_there"),
             MethodGetter(),
         )
 
     def testNoMismatchDescriptionOnMatch(self):
-        self.assert_no_mismatch_description(
-            has_getter("field", "value"), MethodGetter()
-        )
+        self.assert_no_mismatch_description(has_getter("field", "value"), MethodGetter())
 
 
-class HasPropertiesTest(MatcherTest, ObjectPropertyMatcher):
+class HasPropertiesTest(MatcherTest, ObjectGetterMatcher):
     def testMatcherCreationRequiresEvenNumberOfPositionalArguments(self):
         self.assertRaises(ValueError, has_getters, "a", "b", "c")
 
