@@ -70,7 +70,7 @@ class IsObjectWithGetter(BaseMatcher[object]):
         return str(d)
 
 
-def has_getter(name: str, match: Union[None, Matcher[V], V] = None) -> Matcher[object]:
+def has_getter(name: str, match: Union[None, Matcher[V], V] = None) -> Matcher[Any]:
     """Matches if object has a callable getter with a given name whose return value satisfies
     a given matcher.
 
@@ -122,7 +122,7 @@ def has_getters(*keys_valuematchers: Any) -> Matcher[Any]:
     ...
 
 
-def has_getters(*keys_valuematchers, **kv_args):
+def has_getters(*keys_valuematchers, **kv_args) -> Matcher[Any]:
     """Matches if an object has callable getters satisfying all of a dictionary
     of string getter names and corresponding value matchers.
 
