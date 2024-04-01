@@ -18,3 +18,4 @@ doc/_build/
 htmlcov/
 src/hamcrest/_version.py
 .tool-versions
+venv
