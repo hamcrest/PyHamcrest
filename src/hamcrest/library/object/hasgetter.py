@@ -58,9 +58,9 @@ class IsObjectWithGetter(BaseMatcher[object]):
             ).append_description_of(self.property_name).append_text(" is not callable")
             return
 
-        mismatch_description.append_text("result of getter ").append_description_of(
+        mismatch_description.append_text("getter ").append_description_of(
             self.property_name
-        ).append_text(" expected to return ")
+        ).append_text(" return value ")
         value = getter()
         self.value_matcher.describe_mismatch(value, mismatch_description)
 
