@@ -103,7 +103,7 @@ jobs:
         with:
           # We want our tags here
           fetch-depth: 0
-      - uses: hynek/build-and-inspect-python-package@v1.1
+      - uses: hynek/build-and-inspect-python-package@v2
 
   install-dev:
     strategy:
