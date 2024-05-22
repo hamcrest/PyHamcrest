@@ -1,4 +1,4 @@
-from typing import Sequence, TypeVar, Union
+from typing import Iterable, TypeVar, Union
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.anyof import any_of
@@ -13,11 +13,11 @@ __license__ = "BSD, see License.txt"
 T = TypeVar("T")
 
 
-class IsSequenceOnlyContaining(BaseMatcher[Sequence[T]]):
+class IsIterableOnlyContaining(BaseMatcher[Iterable[T]]):
     def __init__(self, matcher: Matcher[T]) -> None:
         self.matcher = matcher
 
-    def _matches(self, item: Sequence[T]) -> bool:
+    def _matches(self, item: Iterable[T]) -> bool:
         try:
             sequence = list(item)
             if len(sequence) == 0:
@@ -35,7 +35,7 @@ class IsSequenceOnlyContaining(BaseMatcher[Sequence[T]]):
         )
 
 
-def only_contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
+def only_contains(*items: Union[Matcher[T], T]) -> Matcher[Iterable[T]]:
     """Matches if each element of sequence satisfies any of the given matchers.
 
     :param match1,...: A comma-separated list of matchers.
@@ -57,4 +57,4 @@ def only_contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     matchers = []
     for item in items:
         matchers.append(wrap_matcher(item))
-    return IsSequenceOnlyContaining(any_of(*matchers))
+    return IsIterableOnlyContaining(any_of(*matchers))

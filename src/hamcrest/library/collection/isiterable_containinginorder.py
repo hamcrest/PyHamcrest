@@ -1,5 +1,5 @@
 import warnings
-from typing import Optional, Sequence, TypeVar, Union
+from typing import Iterable, Optional, TypeVar, Union
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -15,9 +15,9 @@ T = TypeVar("T")
 
 class MatchingInOrder(object):
     def __init__(
-        self, matchers: Sequence[Matcher[T]], mismatch_description: Optional[Description]
+        self, matchers: Iterable[Matcher[T]], mismatch_description: Optional[Description]
     ) -> None:
-        self.matchers = matchers
+        self.matchers = tuple(matchers)
         self.mismatch_description = mismatch_description
         self.next_match_index = 0
 
@@ -51,12 +51,12 @@ class MatchingInOrder(object):
         return True
 
 
-class IsSequenceContainingInOrder(BaseMatcher[Sequence[T]]):
-    def __init__(self, matchers: Sequence[Matcher[T]]) -> None:
+class IsIterableContainingInOrder(BaseMatcher[Iterable[T]]):
+    def __init__(self, matchers: Iterable[Matcher[T]]) -> None:
         self.matchers = matchers
 
     def matches(
-        self, item: Sequence[T], mismatch_description: Optional[Description] = None
+        self, item: Iterable[T], mismatch_description: Optional[Description] = None
     ) -> bool:
         try:
             matchsequence = MatchingInOrder(self.matchers, mismatch_description)
@@ -66,19 +66,19 @@ class IsSequenceContainingInOrder(BaseMatcher[Sequence[T]]):
             return matchsequence.isfinished()
         except TypeError:
             if mismatch_description:
-                super(IsSequenceContainingInOrder, self).describe_mismatch(
+                super(IsIterableContainingInOrder, self).describe_mismatch(
                     item, mismatch_description
                 )
             return False
 
-    def describe_mismatch(self, item: Sequence[T], mismatch_description: Description) -> None:
+    def describe_mismatch(self, item: Iterable[T], mismatch_description: Description) -> None:
         self.matches(item, mismatch_description)
 
     def describe_to(self, description: Description) -> None:
         description.append_text("a sequence containing ").append_list("[", ", ", "]", self.matchers)
 
 
-def contains_exactly(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
+def contains_exactly(*items: Union[Matcher[T], T]) -> Matcher[Iterable[T]]:
     """Matches if sequence's elements satisfy a given list of matchers, in order.
 
     :param match1,...: A comma-separated list of matchers.
@@ -94,10 +94,10 @@ def contains_exactly(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     matchers = []
     for item in items:
         matchers.append(wrap_matcher(item))
-    return IsSequenceContainingInOrder(matchers)
+    return IsIterableContainingInOrder(matchers)
 
 
-def contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
+def contains(*items: Union[Matcher[T], T]) -> Matcher[Iterable[T]]:
     """Deprecated - use contains_exactly(*items)"""
     warnings.warn("deprecated - use contains_exactly(*items)", DeprecationWarning)
     return contains_exactly(*items)

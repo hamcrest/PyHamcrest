@@ -1,12 +1,12 @@
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.issequence_onlycontaining import only_contains
+from hamcrest.library.collection.isiterable_onlycontaining import only_contains
 from hamcrest.library.number.ordering_comparison import less_than
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 from .quasisequence import QuasiSequence
-from .sequencemixin import GeneratorForm, SequenceForm
+from .sequencemixin import CollectionForm, GeneratorForm, SequenceForm
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -73,6 +73,12 @@ class IsConcreteSequenceOnlyContainingTest(
 
 class IsGeneratorSequenceOnlyContainingTest(
     MatcherTest, IsSequenceOnlyContainingTestBase, GeneratorForm
+):
+    pass
+
+
+class IsCollectionOnlyContainingTest(
+    MatcherTest, IsSequenceOnlyContainingTestBase, CollectionForm
 ):
     pass
 

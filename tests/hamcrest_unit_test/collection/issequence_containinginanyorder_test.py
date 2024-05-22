@@ -2,11 +2,11 @@ import unittest
 
 from hamcrest import greater_than
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.issequence_containinginanyorder import contains_inanyorder
+from hamcrest.library.collection.isiterable_containinginanyorder import contains_inanyorder
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 from .quasisequence import QuasiSequence
-from .sequencemixin import GeneratorForm, SequenceForm
+from .sequencemixin import CollectionForm, GeneratorForm, SequenceForm
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -79,10 +79,8 @@ class IsSequenceContainingInAnyOrderBase(object):
         self.assert_describe_mismatch("was <3>", contains_inanyorder(1, 2), 3)
 
     def testDescribeMismatchAfterMatch(self):
-        matcher = contains_inanyorder(1, 2, 3)
-        matcher.matches(self._sequence(3, 1))
         self.assert_describe_mismatch(
-            "no item matches: <2> in [<3>, <1>]", matcher, self._sequence(3, 1)
+            "no item matches: <2> in [<3>, <1>]", contains_inanyorder(1, 2, 3), self._sequence(3, 1)
         )
 
     def testIncomparableTypes(self):
@@ -104,6 +102,12 @@ class IsConcreteSequenceContainingInAnyOrderTest(
 
 class IsGeneratorSequenceContainingInAnyOrderTest(
     MatcherTest, IsSequenceContainingInAnyOrderBase, GeneratorForm
+):
+    pass
+
+
+class IsCollectionContainingInAnyOrderTest(
+    MatcherTest, IsSequenceContainingInAnyOrderBase, CollectionForm
 ):
     pass
 

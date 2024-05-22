@@ -1,11 +1,11 @@
 import unittest
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.issequence_containing import has_item, has_items
+from hamcrest.library.collection.isiterable_containing import has_item, has_items
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 from .quasisequence import QuasiSequence
-from .sequencemixin import GeneratorForm, SequenceForm
+from .sequencemixin import CollectionForm, GeneratorForm, SequenceForm
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -50,6 +50,10 @@ class IsConcreteSequenceContaining(MatcherTest, SequenceForm, IsSequenceContaini
 
 
 class IsGeneratorContaining(MatcherTest, GeneratorForm, IsSequenceContainingTestBase):
+    pass
+
+
+class IsCollectionContaining(MatcherTest, CollectionForm, IsSequenceContainingTestBase):
     pass
 
 
@@ -110,6 +114,12 @@ class IsConcreteSequenceContainingItemsTest(
 
 class IsGeneratorSequenceContainingItemsTest(
     MatcherTest, IsSequenceContainingItemsTestBase, GeneratorForm
+):
+    pass
+
+
+class IsCollectionContainingItemsTest(
+    MatcherTest, IsSequenceContainingItemsTestBase, CollectionForm
 ):
     pass
 

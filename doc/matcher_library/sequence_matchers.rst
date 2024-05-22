@@ -1,27 +1,27 @@
-Sequence Matchers
+Iterable Matchers
 -----------------
 
-Matchers of sequences.
+Matchers of iterables.
 
-See also, :ref:`Sequence matcher internals<sequence-matcher-internals>`.
+See also, :ref:`Iterable matcher internals<iterable-matcher-internals>`.
 
 
 contains_exactly
 ^^^^^^^^^^^^^^^^
 
-.. currentmodule:: hamcrest.library.collection.issequence_containinginorder
+.. currentmodule:: hamcrest.library.collection.isiterable_containinginorder
 .. autofunction:: contains_exactly
 
 contains_inanyorder
 ^^^^^^^^^^^^^^^^^^^
 
-.. currentmodule:: hamcrest.library.collection.issequence_containinginanyorder
+.. currentmodule:: hamcrest.library.collection.isiterable_containinginanyorder
 .. autofunction:: contains_inanyorder
 
 has_item, has_items
 ^^^^^^^^^^^^^^^^^^^
 
-.. currentmodule:: hamcrest.library.collection.issequence_containing
+.. currentmodule:: hamcrest.library.collection.isiterable_containing
 .. autofunction:: has_items
 
 is_in
@@ -33,7 +33,7 @@ is_in
 only_contains
 ^^^^^^^^^^^^^
 
-.. currentmodule:: hamcrest.library.collection.issequence_onlycontaining
+.. currentmodule:: hamcrest.library.collection.isiterable_onlycontaining
 .. autofunction:: only_contains
 
 empty

@@ -1,4 +1,4 @@
-from typing import MutableSequence, Optional, Sequence, TypeVar, Union, cast
+from typing import Iterable, Optional, TypeVar, Union
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -14,15 +14,15 @@ T = TypeVar("T")
 
 class MatchInAnyOrder(object):
     def __init__(
-        self, matchers: Sequence[Matcher[T]], mismatch_description: Optional[Description]
+        self, matchers: Iterable[Matcher[T]], mismatch_description: Optional[Description]
     ) -> None:
-        self.matchers = cast(MutableSequence[Matcher[T]], matchers[:])
+        self.matchers = list(matchers)
         self.mismatch_description = mismatch_description
 
     def matches(self, item: T) -> bool:
         return self.isnotsurplus(item) and self.ismatched(item)
 
-    def isfinished(self, item: Sequence[T]) -> bool:
+    def isfinished(self, item: Iterable[T]) -> bool:
         if not self.matchers:
             return True
         if self.mismatch_description:
@@ -49,12 +49,12 @@ class MatchInAnyOrder(object):
         return False
 
 
-class IsSequenceContainingInAnyOrder(BaseMatcher[Sequence[T]]):
-    def __init__(self, matchers: Sequence[Matcher[T]]) -> None:
+class IsIterableContainingInAnyOrder(BaseMatcher[Iterable[T]]):
+    def __init__(self, matchers: Iterable[Matcher[T]]) -> None:
         self.matchers = matchers
 
     def matches(
-        self, item: Sequence[T], mismatch_description: Optional[Description] = None
+        self, item: Iterable[T], mismatch_description: Optional[Description] = None
     ) -> bool:
         try:
             sequence = list(item)
@@ -65,12 +65,12 @@ class IsSequenceContainingInAnyOrder(BaseMatcher[Sequence[T]]):
             return matchsequence.isfinished(sequence)
         except TypeError:
             if mismatch_description:
-                super(IsSequenceContainingInAnyOrder, self).describe_mismatch(
+                super(IsIterableContainingInAnyOrder, self).describe_mismatch(
                     item, mismatch_description
                 )
             return False
 
-    def describe_mismatch(self, item: Sequence[T], mismatch_description: Description) -> None:
+    def describe_mismatch(self, item: Iterable[T], mismatch_description: Description) -> None:
         self.matches(item, mismatch_description)
 
     def describe_to(self, description: Description) -> None:
@@ -79,7 +79,7 @@ class IsSequenceContainingInAnyOrder(BaseMatcher[Sequence[T]]):
         ).append_text(" in any order")
 
 
-def contains_inanyorder(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
+def contains_inanyorder(*items: Union[Matcher[T], T]) -> Matcher[Iterable[T]]:
     """Matches if sequences's elements, in any order, satisfy a given list of
     matchers.
 
@@ -100,4 +100,4 @@ def contains_inanyorder(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     matchers = []
     for item in items:
         matchers.append(wrap_matcher(item))
-    return IsSequenceContainingInAnyOrder(matchers)
+    return IsIterableContainingInAnyOrder(matchers)
