@@ -77,9 +77,7 @@ class IsGeneratorSequenceOnlyContainingTest(
     pass
 
 
-class IsCollectionOnlyContainingTest(
-    MatcherTest, IsSequenceOnlyContainingTestBase, CollectionForm
-):
+class IsCollectionOnlyContainingTest(MatcherTest, IsSequenceOnlyContainingTestBase, CollectionForm):
     pass
 
 
