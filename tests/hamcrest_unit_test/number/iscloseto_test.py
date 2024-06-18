@@ -101,10 +101,6 @@ class IsNumericTest(unittest.TestCase):
         self.assertTrue(isnumeric(np.uint64(1)), "Unsigned integer (0 to 18446744073709551615)")
 
     @unittest.skipUnless(NUMPY_AVAILABLE, "Skipped because it needs NumPy")
-    def test_numpy_numeric_type_float(self):
-        self.assertTrue(isnumeric(np.float_(1)), "Shorthand for float64.")
-
-    @unittest.skipUnless(NUMPY_AVAILABLE, "Skipped because it needs NumPy")
     def test_numpy_numeric_type_float16(self):
         self.assertTrue(
             isnumeric(np.float16(1)),
@@ -124,10 +120,6 @@ class IsNumericTest(unittest.TestCase):
             isnumeric(np.float64(1)),
             "Double precision float: sign bit, 11 bits exponent, 52 bits mantissa",
         )
-
-    @unittest.skipUnless(NUMPY_AVAILABLE, "Skipped because it needs NumPy")
-    def test_numpy_numeric_type_complex(self):
-        self.assertTrue(isnumeric(np.complex_(1)), "Shorthand for complex128.")
 
     @unittest.skipUnless(NUMPY_AVAILABLE, "Skipped because it needs NumPy")
     def test_numpy_numeric_type_complex64(self):
