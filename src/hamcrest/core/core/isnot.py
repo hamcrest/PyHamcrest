@@ -30,13 +30,11 @@ class IsNot(BaseMatcher[T]):
 
 
 @overload
-def _wrap_value_or_type(x: Type) -> Matcher[object]:
-    ...
+def _wrap_value_or_type(x: Type) -> Matcher[object]: ...
 
 
 @overload
-def _wrap_value_or_type(x: T) -> Matcher[T]:
-    ...
+def _wrap_value_or_type(x: T) -> Matcher[T]: ...
 
 
 def _wrap_value_or_type(x):
@@ -47,13 +45,11 @@ def _wrap_value_or_type(x):
 
 
 @overload
-def is_not(match: Type) -> Matcher[object]:
-    ...
+def is_not(match: Type) -> Matcher[object]: ...
 
 
 @overload
-def is_not(match: Union[Matcher[T], T]) -> Matcher[T]:
-    ...
+def is_not(match: Union[Matcher[T], T]) -> Matcher[T]: ...
 
 
 def is_not(match):
