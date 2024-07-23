@@ -55,7 +55,7 @@ tests = [
   # No point on Pypy thanks to https://github.com/python/typed_ast/issues/111
   "pytest-mypy-plugins; platform_python_implementation != 'PyPy'",
   # Can't use 0.940: https://github.com/python/mypy/issues/12339
-  "mypy!=0.940; platform_python_implementation != 'PyPy'",
+  "mypy<=1.10.1; platform_python_implementation != 'PyPy'",
   "types-mock",
   "pyyaml",
 ]
@@ -67,6 +67,7 @@ dev = [
   "PyHamcrest[docs,tests]",
   "towncrier",
   "twine",
+  "mypy<=1.10.1",
   "pytest-mypy",
   "flake8",
   "black",
