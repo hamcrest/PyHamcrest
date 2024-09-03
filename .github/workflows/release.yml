@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Download packages built by build-and-inspect-python-package
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: Packages
           path: dist
@@ -64,7 +64,7 @@ jobs:
       (github.event_name == 'workflow_dispatch' && startsWith(github.event.ref, 'refs/tags'))
 
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: Packages
           path: dist
