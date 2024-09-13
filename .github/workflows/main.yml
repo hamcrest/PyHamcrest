@@ -35,11 +35,11 @@ jobs:
             python-version: pypy3
 
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: actions/checkout@v4
         with:
           # We want our tags here
           fetch-depth: 0
-      - uses: "actions/setup-python@v4"
+      - uses: actions/setup-python@v5
         with:
           python-version: "${{ matrix.python-version }}"
       - name: "Install dependencies"
@@ -53,19 +53,21 @@ jobs:
         run: "python -m tox"
 
       - name: Upload coverage data
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: coverage-data
-          path: ".coverage.*"
+          name: coverage-data-${{ matrix.python-version }}-${{ matrix.os }}
+          path: ".coverage*"
           if-no-files-found: ignore
+          include-hidden-files: true
+
 
   coverage:
     needs:
       - tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
@@ -73,9 +75,10 @@ jobs:
         run: python -m pip install --upgrade coverage[toml]
 
       - name: Download coverage data
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: coverage-data
+          pattern: coverage-data-*
+          merge-multiple: true
 
       - name: Combine coverage
         run: python -m coverage combine
@@ -85,7 +88,7 @@ jobs:
         run: python -m coverage html --skip-covered --skip-empty --ignore-errors
 
       - name: Upload the HTML report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: html-report
           path: htmlcov
@@ -99,7 +102,7 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: actions/checkout@v4
         with:
           # We want our tags here
           fetch-depth: 0
@@ -114,8 +117,8 @@ jobs:
     runs-on: "${{ matrix.os }}"
 
     steps:
-      - uses: "actions/checkout@v3"
-      - uses: "actions/setup-python@v4"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: "Install in dev mode"
