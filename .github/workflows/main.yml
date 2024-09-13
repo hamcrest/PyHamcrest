@@ -74,18 +74,11 @@ jobs:
       - name: Install coverage
         run: python -m pip install --upgrade coverage[toml]
 
-      - name: Merge coverage data
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: coverage-data
-          pattern: coverage-data-*
-          delete-merged: true
-          include-hidden-files: true
-
       - name: Download coverage data
         uses: actions/download-artifact@v4
         with:
-          name: coverage-data
+          pattern: coverage-data-*
+          merge-multiple: true
 
       - name: Combine coverage
         run: python -m coverage combine
