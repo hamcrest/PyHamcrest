@@ -33,7 +33,7 @@ jobs:
           - "pypy3.9"
         exclude:
           - os: macos-latest
-            python-version: pypy3
+            python-version: pypy3.9
 
     steps:
       - uses: actions/checkout@v4
@@ -45,12 +45,11 @@ jobs:
         uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
-      - name: "Install dependencies"
-        run: |
-          set -x
-          uv python install ${{ matrix.python-version }}
       - name: "Run tox targets for ${{ matrix.python-version }}"
-        run: "uvx --with tox-uv --with tox-gh tox"
+        run: |
+          uvx --with tox-uv --with tox-gh \
+            --python ${{ matrix.python-version }} \
+            tox
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
