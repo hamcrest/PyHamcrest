@@ -1,5 +1,6 @@
 """Library of Matcher implementations."""
 
+# ruff: noqa: F405, F403
 from hamcrest.core import *
 from hamcrest.library.collection import *
 from hamcrest.library.integration import *
