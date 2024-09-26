@@ -46,10 +46,7 @@ jobs:
         with:
           enable-cache: true
       - name: "Run tox targets for ${{ matrix.python-version }}"
-        run: |
-          uvx --with tox-uv --with tox-gh \
-            --python ${{ matrix.python-version }} \
-            tox
+        run: uvx --with tox-uv --with tox-gh tox
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
@@ -78,7 +75,9 @@ jobs:
           merge-multiple: true
 
       - name: Combine coverage
-        run: uvx --with coverage[toml] coverage combine
+        run: |
+          find .
+          uvx --with coverage[toml] coverage combine
 
         # ignore-errors is so that we don't gag on missing code in .tox environments
       - name: Generate the HTML report
