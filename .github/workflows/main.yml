@@ -47,9 +47,10 @@ jobs:
           enable-cache: true
       - name: "Install dependencies"
         run: |
+          set -x
           uv python install ${{ matrix.python-version }}
       - name: "Run tox targets for ${{ matrix.python-version }}"
-        run: "uvx --with tox-uv tox"
+        run: "uvx --with tox-uv --with tox-gh tox"
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
