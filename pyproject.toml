@@ -137,6 +137,9 @@ exclude_lines = [
     "-> ['\"]?NoReturn['\"]?:",
 ]
 
+[tool.ruff]
+line-length = 100
+
 [tool.black]
 line_length = 100
 
