@@ -45,7 +45,10 @@ jobs:
         uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
+
       - name: "Run tox targets for ${{ matrix.python-version }}"
+        env:
+          TOX_GH_MAJOR_MINOR: ${{ matrix.python-version }}
         run: uvx --with tox-uv --with tox-gh tox
 
       - name: Upload coverage data
