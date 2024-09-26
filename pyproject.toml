@@ -138,7 +138,18 @@ exclude_lines = [
 ]
 
 [tool.ruff]
+exclude = [
+    # re-ordering in this can lead to circular imports. No good!
+    "src/hamcrest/__init__.py",
+]
 line-length = 100
+
+[tool.ruff.lint]
+ignore = [
+       # We use star imports everywhere in this damn codebase
+       "F405",
+       "F403"
+]
 
 [tool.black]
 line_length = 100
