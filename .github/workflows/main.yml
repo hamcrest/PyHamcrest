@@ -79,7 +79,6 @@ jobs:
 
       - name: Combine coverage
         run: |
-          find .
           uvx --with coverage[toml] coverage combine
 
         # ignore-errors is so that we don't gag on missing code in .tox environments
