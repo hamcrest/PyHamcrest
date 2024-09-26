@@ -62,13 +62,11 @@ class IsCloseTo(BaseMatcher[Number]):
 
 
 @overload
-def close_to(value: float, delta: float) -> Matcher[float]:
-    ...
+def close_to(value: float, delta: float) -> Matcher[float]: ...
 
 
 @overload
-def close_to(value: Decimal, delta: Decimal) -> Matcher[Decimal]:
-    ...
+def close_to(value: Decimal, delta: Decimal) -> Matcher[Decimal]: ...
 
 
 def close_to(value, delta):

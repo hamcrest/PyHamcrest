@@ -20,5 +20,4 @@ class SubstringMatcher(BaseMatcher[str], metaclass=ABCMeta):
         ).append_description_of(self.substring)
 
     @abstractmethod
-    def relationship(self):
-        ...
+    def relationship(self): ...
