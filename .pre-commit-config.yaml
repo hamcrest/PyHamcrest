@@ -15,18 +15,12 @@ repos:
       - id: blacken-docs
         # args: ["-l100"]
 
-  - repo: https://github.com/PyCQA/flake8
-    rev: 7.1.1
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.6.8
     hooks:
-      - id: flake8
-        exclude: >-
-          (?x)^(
-            examples/.*\.py$
-            | doc/.*\.py$
-          )
-
-  - repo: https://github.com/psf/black
-    rev: 24.8.0
-    hooks:
-      - id: black
-        # args: ["-l100"]
+      # Run the linter.
+      - id: ruff
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format

@@ -42,8 +42,8 @@ def test_append_text_delegates(desc):
         ("unicode-py3", "'unicode-py3'"),
         (b"bytes-py3", "<b'bytes-py3'>"),
         pytest.param(
-            "\U0001F4A9",
-            "'{0}'".format("\U0001F4A9"),
+            "\U0001f4a9",
+            "'{0}'".format("\U0001f4a9"),
             marks=pytest.mark.skipif(
                 platform.python_implementation() == "PyPy",
                 reason="Inexplicable failure on PyPy. Not super important, I hope!",

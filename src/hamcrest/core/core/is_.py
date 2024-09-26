@@ -29,13 +29,11 @@ class Is(BaseMatcher[T]):
 
 
 @overload
-def _wrap_value_or_type(x: Type) -> Matcher[object]:
-    ...
+def _wrap_value_or_type(x: Type) -> Matcher[object]: ...
 
 
 @overload
-def _wrap_value_or_type(x: T) -> Matcher[T]:
-    ...
+def _wrap_value_or_type(x: T) -> Matcher[T]: ...
 
 
 def _wrap_value_or_type(x):
@@ -46,18 +44,15 @@ def _wrap_value_or_type(x):
 
 
 @overload
-def is_(x: Type) -> Matcher[Any]:
-    ...
+def is_(x: Type) -> Matcher[Any]: ...
 
 
 @overload
-def is_(x: Matcher[T]) -> Matcher[T]:
-    ...
+def is_(x: Matcher[T]) -> Matcher[T]: ...
 
 
 @overload
-def is_(x: T) -> Matcher[T]:
-    ...
+def is_(x: T) -> Matcher[T]: ...
 
 
 def is_(x):
