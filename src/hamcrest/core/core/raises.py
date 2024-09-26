@@ -88,7 +88,9 @@ class Raises(BaseMatcher[Callable[..., Any]]):
         )
 
 
-def raises(exception: Type[Exception], pattern=None, matching=None) -> Matcher[Callable[..., Any]]:
+def raises(
+    exception: Type[Exception], pattern: Optional[str] = None, matching: Optional[Matcher] = None
+) -> Matcher[Callable[..., Any]]:
     """Matches if the called function raised the expected exception.
 
     :param exception:  The class of the expected exception
@@ -121,7 +123,7 @@ class DeferredCallable(object):
     def __call__(self):
         self.func(*self.args, **self.kwargs)
 
-    def with_args(self, *args, **kwargs):
+    def with_args(self, *args: Any, **kwargs: Any):
         self.args = args
         self.kwargs = kwargs
         return self
