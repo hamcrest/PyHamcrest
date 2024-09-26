@@ -1,3 +1,18 @@
+Hamcrest 2.1.0 (2023-10-22)
+===========================
+
+Features
+--------
+
+- Add a matcher for exceptions in asyncio future (`#171 <https://github.com/hamcrest/PyHamcrest/issues/171>`_)
+
+
+Bugfixes
+--------
+
+- Use the correct generic type in the internal ``describe_keyvalue`` method (`#182 <https://github.com/hamcrest/PyHamcrest/issues/182>`_)
+
+
 Hamcrest 2.0.4 (2022-08-07)
 ==========================================
 

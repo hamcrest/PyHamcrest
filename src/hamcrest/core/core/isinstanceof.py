@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, Any
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -23,7 +23,7 @@ class IsInstanceOf(BaseMatcher[object]):
         description.append_text("an instance of ").append_text(self.expected_type.__name__)
 
 
-def instance_of(atype: Type) -> Matcher[object]:
+def instance_of(atype: Type[Any]) -> Matcher[object]:
     """Matches if object is an instance of, or inherits from, a given type.
 
     :param atype: The type to compare against as the expected type.

@@ -18,92 +18,93 @@ jobs:
     name: "Python ${{ matrix.python-version }} / ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}"
     env:
-      USING_COVERAGE: "3.7,3.8,3.9,3.10"
+      USING_COVERAGE: "3.8,3.9,3.10,3.11,3.12"
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version:
-          - "3.7"
           - "3.8"
           - "3.9"
           - "3.10"
-          - "3.11.0-beta.5"
+          - "3.11"
+          - "3.12"
           - "pypy3.9"
         exclude:
           - os: macos-latest
-            python-version: pypy3
+            python-version: pypy3.9
 
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: actions/checkout@v4
         with:
           # We want our tags here
           fetch-depth: 0
-      - uses: "actions/setup-python@v4"
+      - name: Install the latest version of uv
+        id: setup-uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: "${{ matrix.python-version }}"
-      - name: "Install dependencies"
-        run: |
-          python -VV
-          python -msite
-          python -m pip install --upgrade pip setuptools wheel
-          python -m pip install --upgrade coverage[toml] virtualenv tox tox-gh-actions
+          enable-cache: true
 
       - name: "Run tox targets for ${{ matrix.python-version }}"
-        run: "python -m tox"
+        env:
+          TOX_GH_MAJOR_MINOR: ${{ matrix.python-version }}
+        run: uvx --with tox-uv --with tox-gh tox
 
       - name: Upload coverage data
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: coverage-data
-          path: ".coverage.*"
+          name: coverage-data-${{ matrix.python-version }}-${{ matrix.os }}
+          path: ".coverage*"
           if-no-files-found: ignore
+          include-hidden-files: true
 
   coverage:
     needs:
       - tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - name: Install the latest version of uv
+        id: setup-uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: "3.10"
-
-      - name: Install coverage
-        run: python -m pip install --upgrade coverage[toml]
+          enable-cache: true
 
       - name: Download coverage data
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: coverage-data
+          pattern: coverage-data-*
+          merge-multiple: true
 
       - name: Combine coverage
-        run: python -m coverage combine
+        run: |
+          uvx --with coverage[toml] coverage combine
 
         # ignore-errors is so that we don't gag on missing code in .tox environments
       - name: Generate the HTML report
-        run: python -m coverage html --skip-covered --skip-empty --ignore-errors
+        run: uvx --with coverage[toml] coverage html --skip-covered --skip-empty --ignore-errors
 
       - name: Upload the HTML report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: html-report
           path: htmlcov
 
         # ignore-errors is so that we don't gag on missing code in .tox environments
       - name: Enforce the coverage
-        run: python -m coverage report --ignore-errors --fail-under 95
+        run: uvx --with coverage[toml] coverage report --ignore-errors --fail-under 95
 
   package:
     name: "Build & verify package"
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: actions/checkout@v4
         with:
           # We want our tags here
           fetch-depth: 0
-      - uses: hynek/build-and-inspect-python-package@v1.1
+      - uses: hynek/build-and-inspect-python-package@v2
 
   install-dev:
     strategy:
@@ -114,11 +115,15 @@ jobs:
     runs-on: "${{ matrix.os }}"
 
     steps:
-      - uses: "actions/checkout@v3"
-      - uses: "actions/setup-python@v4"
+      - uses: actions/checkout@v4
+      - name: Install the latest version of uv
+        id: setup-uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: "3.10"
+          enable-cache: true
       - name: "Install in dev mode"
-        run: "python -m pip install -e .[dev]"
+        run: |
+          uv venv
+          uv pip install -e .[dev]
       - name: "Import package"
-        run: "python -c 'import hamcrest; print(hamcrest.__version__)'"
+        run: "uv run python -c 'import hamcrest; print(hamcrest.__version__)'"

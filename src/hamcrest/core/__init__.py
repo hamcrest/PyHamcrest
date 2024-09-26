@@ -1,3 +1,5 @@
+# ruff: noqa: F405, F403
+
 from hamcrest.core.assert_that import assert_that
 from hamcrest.core.core import *
 

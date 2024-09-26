@@ -1,9 +1,16 @@
 ---
 version: 2
-python:
-  # Keep version in sync with tox.ini (docs and gh-actions).
-  version: 3.7
 
+build:
+  os: ubuntu-22.04
+  tools:
+    # Keep version in sync with tox.ini (docs and gh-actions).
+    python: "3.12"
+
+sphinx:
+  configuration: doc/conf.py
+
+python:
   install:
     - method: pip
       path: .

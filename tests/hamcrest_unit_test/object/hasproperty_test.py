@@ -16,13 +16,11 @@ __license__ = "BSD, see License.txt"
 
 
 class OnePropertyOldStyle:
-
     field = "value"
     field2 = "value2"
 
 
 class ThreePropertiesNewStyle(object):
-
     field = "value"
     field2 = "value2"
     field3 = "value3"
@@ -65,7 +63,6 @@ class OverridingNewStyleGetAttribute(object):
 
 
 class ObjectPropertyMatcher(object):
-
     match_sets = (
         ("old-style: %s", OnePropertyOldStyle),
         ("new-style: %s", ThreePropertiesNewStyle),

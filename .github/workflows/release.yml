@@ -10,31 +10,52 @@ on:
       - main
   workflow_dispatch:
 
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+  # Needed for trusted publishing.
+  id-token: write
+
 jobs:
   pure-python-wheel-and-sdist:
     name: Build a pure Python wheel and source distribution
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           # Fetch all tags; this is needed for hatch-vcs
           fetch-depth: 0
 
-      - name: Install build dependencies
-        run: python -m pip install --upgrade build
+      - uses: hynek/build-and-inspect-python-package@v2
 
-      - name: Build
-        run: python -m build
+  # Upload to Test PyPI on every commit on main.
+  publish-test-release:
+    name: Publish in-dev package to test.pypi.org
+    environment: publish-test-release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs:
+      - pure-python-wheel-and-sdist
 
-      - uses: actions/upload-artifact@v3
+    steps:
+      - name: Download packages built by build-and-inspect-python-package
+        uses: actions/download-artifact@v4
         with:
-          name: artifacts
-          path: dist/*
-          if-no-files-found: error
+          name: Packages
+          path: dist
 
-  publish:
+      - name: Upload package to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+  publish-release:
     name: Publish release
+    environment: publish-release
     needs:
       - pure-python-wheel-and-sdist
     runs-on: ubuntu-latest
@@ -43,13 +64,13 @@ jobs:
       (github.event_name == 'workflow_dispatch' && startsWith(github.event.ref, 'refs/tags'))
 
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
-          name: artifacts
+          name: Packages
           path: dist
 
       - name: Push build artifacts to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.4.2
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           skip_existing: true
           user: __token__

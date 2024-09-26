@@ -11,7 +11,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
+import sys
+import os
 import alabaster
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -213,6 +214,7 @@ latex_documents = [
 
 # If false, no module index is generated.
 # latex_domain_indices = True
+
 
 # PyHamcrest customization: Don't skip BaseMatcher's _matches method
 def skip_member(app, what, name, obj, skip, options):

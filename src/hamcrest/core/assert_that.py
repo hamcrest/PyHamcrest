@@ -16,13 +16,11 @@ T = TypeVar("T")
 
 
 @overload
-def assert_that(actual_or_assertion: T, matcher: Matcher[T], reason: str = "") -> None:
-    ...
+def assert_that(actual_or_assertion: T, matcher: Matcher[T], reason: str = "") -> None: ...
 
 
 @overload
-def assert_that(actual_or_assertion: bool, reason: str = "") -> None:
-    ...
+def assert_that(actual_or_assertion: bool, reason: str = "") -> None: ...
 
 
 def assert_that(actual_or_assertion, matcher=None, reason=""):
