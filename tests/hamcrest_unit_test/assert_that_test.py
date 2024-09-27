@@ -43,7 +43,7 @@ class AssertThatTest(unittest.TestCase):
 
     def testAssertionUnicodeEncodesProperly(self):
         expected = "EXPECTED"
-        actual = u("\xdcnic\N{Latin Small Letter O with diaeresis}de")
+        actual = u("\xdcnic\N{LATIN SMALL LETTER O WITH DIAERESIS}de")
 
         with self.assertRaises(AssertionError):
             assert_that(actual, equal_to(expected), "REASON")
