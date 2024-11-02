@@ -40,6 +40,8 @@ jobs:
         with:
           # We want our tags here
           fetch-depth: 0
+          persist-credentials: false
+
       - name: Install the latest version of uv
         id: setup-uv
         uses: astral-sh/setup-uv@v3
@@ -65,6 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Install the latest version of uv
         id: setup-uv
         uses: astral-sh/setup-uv@v3
@@ -104,6 +108,7 @@ jobs:
         with:
           # We want our tags here
           fetch-depth: 0
+          persist-credentials: false
       - uses: hynek/build-and-inspect-python-package@v2
 
   install-dev:
@@ -116,6 +121,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Install the latest version of uv
         id: setup-uv
         uses: astral-sh/setup-uv@v3
