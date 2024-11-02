@@ -16,8 +16,6 @@ on:
 
 permissions:
   contents: read
-  # Needed for trusted publishing.
-  id-token: write
 
 jobs:
   pure-python-wheel-and-sdist:
@@ -29,11 +27,17 @@ jobs:
         with:
           # Fetch all tags; this is needed for hatch-vcs
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: hynek/build-and-inspect-python-package@v2
 
   # Upload to Test PyPI on every commit on main.
   publish-test-release:
+    permissions:
+      contents: read
+      # Needed for trusted publishing.
+      id-token: write
+
     name: Publish in-dev package to test.pypi.org
     environment: publish-test-release
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -54,6 +58,11 @@ jobs:
           repository-url: https://test.pypi.org/legacy/
 
   publish-release:
+    permissions:
+      contents: read
+      # Needed for trusted publishing.
+      id-token: write
+
     name: Publish release
     environment: publish-release
     needs:
