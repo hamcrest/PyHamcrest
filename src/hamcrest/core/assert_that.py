@@ -1,8 +1,9 @@
 import warnings
 from typing import Optional, TypeVar, cast, overload
 
+from hamcrest.core.locale import get_locale
 from hamcrest.core.matcher import Matcher
-from hamcrest.core.string_description import StringDescription
+from hamcrest.core.localized_description import LocalizedDescription
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -62,10 +63,10 @@ def assert_that(actual_or_assertion, matcher=None, reason=""):
 
 def _assert_match(actual: T, matcher: Matcher[T], reason: str) -> None:
     if not matcher.matches(actual):
-        description = StringDescription()
-        description.append_text(reason).append_text("\nExpected: ").append_description_of(
-            matcher
-        ).append_text("\n     but: ")
+        description = LocalizedDescription(locale=get_locale())
+        description.append_text(reason).append_text("\n") \
+            .append_text("Expected: ").append_description_of(matcher) \
+            .append_text("\n").append_text("     but: ")
         matcher.describe_mismatch(actual, description)
         description.append_text("\n")
         raise AssertionError(description)
