@@ -76,3 +76,21 @@ def _assert_bool(assertion: bool, reason: Optional[str] = None) -> None:
         if not reason:
             reason = "Assertion failed"
         raise AssertionError(reason)
+
+
+class DeferAssertContextManager:
+    def __init__(self):
+        self.exceptions = []
+
+    def assert_that(self, *args, **kwargs):
+        try:
+            assert_that(*args, **kwargs)
+        except AssertionError as e:
+            self.exceptions.append(e)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if len(self.exceptions) > 0:
+            raise self.exceptions.pop(0)
