@@ -1,4 +1,4 @@
-from typing import TypeVar, Union
+from typing import TypeVar, Union, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -24,6 +24,12 @@ class AnyOf(BaseMatcher[T]):
 
     def describe_to(self, description: Description) -> None:
         description.append_list("(", " or ", ")", self.matchers)
+
+
+@overload
+def any_of(*items: Matcher[T]) -> Matcher[T]: ...
+@overload
+def any_of(*items: T) -> Matcher[T]: ...
 
 
 def any_of(*items: Union[Matcher[T], T]) -> Matcher[T]:

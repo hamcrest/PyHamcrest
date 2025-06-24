@@ -1,4 +1,4 @@
-from typing import Any, Hashable, Mapping, Optional, TypeVar, Union, overload
+from typing import Any, Hashable, Mapping, Optional, TypeVar, Union, cast, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -73,12 +73,16 @@ class IsDictContainingEntries(BaseMatcher[Mapping[K, V]]):
 
 # Keyword argument form
 @overload
-def has_entries(**keys_valuematchers: Union[Matcher[V], V]) -> Matcher[Mapping[str, V]]: ...
+def has_entries(**keys_valuematchers: Matcher[V]) -> Matcher[Mapping[str, V]]: ...
+@overload
+def has_entries(**keys_valuematchers: V) -> Matcher[Mapping[str, V]]: ...
 
 
 # Key to matcher dict form
 @overload
-def has_entries(keys_valuematchers: Mapping[K, Union[Matcher[V], V]]) -> Matcher[Mapping[K, V]]: ...
+def has_entries(keys_valuematchers: Mapping[K, Matcher[V]], /) -> Matcher[Mapping[K, V]]: ...
+@overload
+def has_entries(keys_valuematchers: Mapping[K, V], /) -> Matcher[Mapping[K, V]]: ...
 
 
 # Alternating key/matcher form
@@ -86,7 +90,9 @@ def has_entries(keys_valuematchers: Mapping[K, Union[Matcher[V], V]]) -> Matcher
 def has_entries(*keys_valuematchers: Any) -> Matcher[Mapping[Any, Any]]: ...
 
 
-def has_entries(*keys_valuematchers, **kv_args):
+def has_entries(
+    *keys_valuematchers: Mapping[K, Union[Matcher[V], V]], **kv_args: Union[Matcher[V], V]
+) -> Matcher[Mapping[K, V]]:
     """Matches if dictionary contains entries satisfying a dictionary of keys
     and corresponding value matchers.
 
@@ -132,11 +138,13 @@ def has_entries(*keys_valuematchers, **kv_args):
         has_entries('foo', 1, 'bar', 2)
 
     """
+    base_dict: dict[K, Matcher[V]] = {}
+    key: K
+    value: Union[Matcher[V], V]
     if len(keys_valuematchers) == 1:
         try:
-            base_dict = keys_valuematchers[0].copy()
-            for key in base_dict:
-                base_dict[key] = wrap_matcher(base_dict[key])
+            for key, value in keys_valuematchers[0].items():
+                base_dict[key] = wrap_matcher(value)
         except AttributeError:
             raise ValueError(
                 "single-argument calls to has_entries must pass a dict as the argument"
@@ -146,11 +154,12 @@ def has_entries(*keys_valuematchers, **kv_args):
             raise ValueError("has_entries requires key-value pairs")
         base_dict = {}
         for index in range(int(len(keys_valuematchers) / 2)):
-            base_dict[keys_valuematchers[2 * index]] = wrap_matcher(
-                keys_valuematchers[2 * index + 1]
-            )
+            key = cast(K, keys_valuematchers[2 * index])
+            value = cast(V, keys_valuematchers[2 * index + 1])
+            base_dict[key] = wrap_matcher(value)
 
-    for key, value in kv_args.items():
+    for key_name, value in kv_args.items():
+        key = cast(K, key_name)
         base_dict[key] = wrap_matcher(value)
 
     return IsDictContainingEntries(base_dict)

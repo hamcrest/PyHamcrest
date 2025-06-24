@@ -1,4 +1,4 @@
-from typing import MutableSequence, Optional, Sequence, TypeVar, Union, cast
+from typing import Generic, MutableSequence, Optional, Sequence, TypeVar, Union, cast, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -12,7 +12,7 @@ __license__ = "BSD, see License.txt"
 T = TypeVar("T")
 
 
-class MatchInAnyOrder(object):
+class MatchInAnyOrder(Generic[T]):
     def __init__(
         self, matchers: Sequence[Matcher[T]], mismatch_description: Optional[Description]
     ) -> None:
@@ -77,6 +77,12 @@ class IsSequenceContainingInAnyOrder(BaseMatcher[Sequence[T]]):
         description.append_text("a sequence over ").append_list(
             "[", ", ", "]", self.matchers
         ).append_text(" in any order")
+
+
+@overload
+def contains_inanyorder(*items: Matcher[T]) -> Matcher[Sequence[T]]: ...
+@overload
+def contains_inanyorder(*items: T) -> Matcher[Sequence[T]]: ...
 
 
 def contains_inanyorder(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:

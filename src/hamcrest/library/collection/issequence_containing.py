@@ -1,4 +1,4 @@
-from typing import Sequence, TypeVar, Union, cast
+from typing import Sequence, TypeVar, Union, cast, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.allof import all_of
@@ -54,6 +54,12 @@ class IsSequenceContainingEvery(BaseMatcher[Sequence[T]]):
         self.matcher.describe_to(description)
 
 
+@overload
+def has_item(match: Matcher[T]) -> Matcher[Sequence[T]]: ...
+@overload
+def has_item(match: T) -> Matcher[Sequence[T]]: ...
+
+
 def has_item(match: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     """Matches if any element of sequence satisfies a given matcher.
 
@@ -70,6 +76,12 @@ def has_item(match: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
 
     """
     return IsSequenceContaining(wrap_matcher(match))
+
+
+@overload
+def has_items(*items: Matcher[T]) -> Matcher[Sequence[T]]: ...
+@overload
+def has_items(*items: T) -> Matcher[Sequence[T]]: ...
 
 
 def has_items(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:

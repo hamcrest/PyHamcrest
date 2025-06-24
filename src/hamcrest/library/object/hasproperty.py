@@ -59,7 +59,15 @@ class IsObjectWithProperty(BaseMatcher[object]):
         return str(d)
 
 
-def has_property(name: str, match: Union[None, Matcher[V], V] = None) -> Matcher[object]:
+@overload
+def has_property(name: str, match: None = None) -> Matcher[object]: ...
+@overload
+def has_property(name: str, match: Matcher[object]) -> Matcher[object]: ...
+@overload
+def has_property(name: str, match: object) -> Matcher[object]: ...
+
+
+def has_property(name: str, match: Union[None, Matcher[object], object] = None) -> Matcher[object]:
     """Matches if object has a property with a given name whose value satisfies
     a given matcher.
 

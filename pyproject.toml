@@ -171,3 +171,6 @@ known_third_party = ["hypothesis", "pytest", "setuptools", "six"]
     filename = "CHANGELOG.rst"
     directory = "changelog.d"
     issue_format = "`#{issue} <https://github.com/hamcrest/PyHamcrest/issues/{issue}>`_"
+
+[dependency-groups]
+dev = [ "PyHamcrest[dev]" ]

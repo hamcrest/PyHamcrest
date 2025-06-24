@@ -1,4 +1,4 @@
-from typing import Optional, TypeVar, Union
+from typing import Optional, TypeVar, Union, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -40,6 +40,12 @@ class AllOf(BaseMatcher[T]):
 
     def describe_to(self, description: Description) -> None:
         description.append_list("(", " and ", ")", self.matchers)
+
+
+@overload
+def all_of(*items: Matcher[T]) -> Matcher[T]: ...
+@overload
+def all_of(*items: T) -> Matcher[T]: ...
 
 
 def all_of(*items: Union[Matcher[T], T]) -> Matcher[T]:
