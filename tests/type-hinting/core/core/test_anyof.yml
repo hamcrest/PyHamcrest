@@ -1,0 +1,11 @@
+- case: any_of
+  # pypy + mypy doesn't work. See https://foss.heptapod.net/pypy/pypy/-/issues/3526
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import is_, any_of
+
+    reveal_type(any_of(98))                # N: Revealed type is "hamcrest.core.matcher.Matcher[builtins.int]"
+    reveal_type(any_of(is_(98)))           # N: Revealed type is "hamcrest.core.matcher.Matcher[builtins.int]"
+    reveal_type(any_of(98, 99))            # N: Revealed type is "hamcrest.core.matcher.Matcher[builtins.int]"
+    reveal_type(any_of(is_(98), is_(99)))  # N: Revealed type is "hamcrest.core.matcher.Matcher[builtins.int]"
+    reveal_type(any_of(98, is_(99)))       # N: Revealed type is "hamcrest.core.matcher.Matcher[builtins.object]"

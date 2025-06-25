@@ -1,5 +1,5 @@
 import warnings
-from typing import Generic, Optional, Sequence, TypeVar, Union, cast, overload
+from typing import Generic, Optional, Sequence, Tuple, TypeVar, Union, cast, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -112,4 +112,4 @@ def contains(*items: T) -> Matcher[Sequence[T]]: ...
 def contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     """Deprecated - use contains_exactly(*items)"""
     warnings.warn("deprecated - use contains_exactly(*items)", DeprecationWarning)
-    return contains_exactly(*cast(tuple[T, ...], items))
+    return contains_exactly(*cast(Tuple[T, ...], items))

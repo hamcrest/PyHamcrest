@@ -1,6 +1,6 @@
-from typing import Any, Mapping, TypeVar, Union, overload
+from typing import Dict, Mapping, Union, overload
 
-from hamcrest import described_as
+from hamcrest.core.core.described_as import DescribedAs
 from hamcrest.core import anything
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.allof import AllOf
@@ -13,11 +13,9 @@ __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
 __license__ = "BSD, see License.txt"
 
-V = TypeVar("V")
-
 
 class IsObjectWithProperty(BaseMatcher[object]):
-    def __init__(self, property_name: str, value_matcher: Matcher[V]) -> None:
+    def __init__(self, property_name: str, value_matcher: Matcher[object]) -> None:
         self.property_name = property_name
         self.value_matcher = value_matcher
 
@@ -100,22 +98,73 @@ def has_property(name: str, match: Union[None, Matcher[object], object] = None) 
     return IsObjectWithProperty(name, wrap_shortcut(match))
 
 
+class IsObjectWithProperties(DescribedAs[object]):
+    def __init__(self, base_dict: Mapping[str, Matcher[object]]) -> None:
+        if len(base_dict) == 1:
+            properties = "a property"
+        else:
+            properties = "properties"
+
+        description = StringDescription().append_text(f"an object with {properties} ")
+        for i, (property_name, property_value_matcher) in enumerate(sorted(base_dict.items())):
+            description.append_description_of(property_name).append_text(
+                " matching "
+            ).append_description_of(property_value_matcher)
+            if i < len(base_dict) - 1:
+                description.append_text(" and ")
+
+        super().__init__(
+            description_template=str(description),
+            matcher=AllOf(
+                *[
+                    has_property(property_name, property_value_matcher)
+                    for property_name, property_value_matcher in sorted(base_dict.items())
+                ],
+                describe_all_mismatches=True,
+                describe_matcher_in_mismatch=False,
+            ),
+        )
+
+
+class Unset:
+    def __repr__(self):
+        return "UNSET"
+
+
+UNSET = Unset()
+
+
 # Keyword argument form
 @overload
-def has_properties(**keys_valuematchers: Union[Matcher[V], V]) -> Matcher[Any]: ...
+def has_properties(**keys_valuematchers: Matcher[object]) -> Matcher[object]: ...
+@overload
+def has_properties(**keys_valuematchers: object) -> Matcher[object]: ...
 
 
 # Name to matcher dict form
 @overload
-def has_properties(keys_valuematchers: Mapping[str, Union[Matcher[V], V]]) -> Matcher[Any]: ...
+def has_properties(
+    __keys_valuematcher: Mapping[str, Union[Matcher[object], object]],
+    **keys_valuematchers: Union[Matcher[object], object],
+) -> Matcher[object]: ...
 
 
 # Alternating name/matcher form
 @overload
-def has_properties(*keys_valuematchers: Any) -> Matcher[Any]: ...
+def has_properties(
+    __key: str,
+    __value: object,
+    *key_or_valuematchers: Union[str, object],
+    **keys_valuematchers: Union[Matcher[object], object],
+) -> Matcher[object]: ...
 
 
-def has_properties(*keys_valuematchers, **kv_args):
+def has_properties(
+    __key_or_valuematcher: Union[Mapping[str, Union[Matcher[object], object]], str, Unset] = UNSET,
+    __value: Union[Matcher[object], object, Unset] = UNSET,
+    *key_or_valuematchers: Union[str, Matcher[object], object],
+    **keys_valuematchers: Union[Matcher[object], object],
+) -> Matcher[object]:
     """Matches if an object has properties satisfying all of a dictionary
     of string property names and corresponding value matchers.
 
@@ -161,47 +210,43 @@ def has_properties(*keys_valuematchers, **kv_args):
         has_properties('foo', 1, 'bar', 2)
 
     """
-    if len(keys_valuematchers) == 1:
-        try:
-            base_dict = keys_valuematchers[0].copy()
-            for key in base_dict:
-                base_dict[key] = wrap_shortcut(base_dict[key])
-        except AttributeError:
-            raise ValueError(
-                "single-argument calls to has_properties must pass a dict as the argument"
-            )
-    else:
-        if len(keys_valuematchers) % 2:
-            raise ValueError("has_properties requires key-value pairs")
-        base_dict = {}
-        for index in range(int(len(keys_valuematchers) / 2)):
-            base_dict[keys_valuematchers[2 * index]] = wrap_shortcut(
-                keys_valuematchers[2 * index + 1]
-            )
+    base_dict: Dict[str, Matcher[object]] = {}
+    key: str
+    value: Union[Matcher[object], object]
 
-    for key, value in kv_args.items():
+    if not isinstance(__value, Unset):  # Alternating key/value form
+        value = __value
+        value_type = type(value)
+        if len(key_or_valuematchers) % 2:
+            raise ValueError(f"has_properties requires key-value pairs: odd number of arguments")
+        elif isinstance(__key_or_valuematcher, (Mapping, Unset)):
+            key_type = type(__key_or_valuematcher)
+            raise ValueError(f"has_properties requires key-value pairs: key has type {key_type}")
+        else:
+            base_dict[__key_or_valuematcher] = wrap_shortcut(__value)
+
+        for k, v in zip(key_or_valuematchers[::2], key_or_valuematchers[1::2]):
+            if not isinstance(k, str):
+                raise ValueError(f"has_properties requires key-value pairs: key has type {type(k)}")
+            elif not isinstance(v, value_type):
+                raise ValueError(
+                    f"has_properties requires key-value pairs: value has type {type(v)}"
+                )
+            else:
+                base_dict[k] = wrap_shortcut(value)
+
+    elif isinstance(__key_or_valuematcher, Mapping):  # Name to matcher dict form
+        for key, value in __key_or_valuematcher.items():
+            base_dict[key] = wrap_shortcut(value)
+
+    elif not isinstance(__key_or_valuematcher, Unset):
+        raise ValueError("single-argument calls to has_properties must pass a dict as the argument")
+
+    # else:  # Keyword argument form
+    #     reveal_type(__key_or_valuematcher)  # unset
+    #     reveal_type(__value)  # unset
+
+    for key, value in keys_valuematchers.items():
         base_dict[key] = wrap_shortcut(value)
 
-    if len(base_dict) > 1:
-        description = StringDescription().append_text("an object with properties ")
-        for i, (property_name, property_value_matcher) in enumerate(sorted(base_dict.items())):
-            description.append_description_of(property_name).append_text(
-                " matching "
-            ).append_description_of(property_value_matcher)
-            if i < len(base_dict) - 1:
-                description.append_text(" and ")
-
-        return described_as(
-            str(description),
-            AllOf(
-                *[
-                    has_property(property_name, property_value_matcher)
-                    for property_name, property_value_matcher in sorted(base_dict.items())
-                ],
-                describe_all_mismatches=True,
-                describe_matcher_in_mismatch=False,
-            ),
-        )
-    else:
-        property_name, property_value_matcher = base_dict.popitem()
-        return has_property(property_name, property_value_matcher)
+    return IsObjectWithProperties(base_dict)
