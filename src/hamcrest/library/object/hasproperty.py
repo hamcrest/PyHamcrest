@@ -5,7 +5,7 @@ from hamcrest.core import anything
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.allof import AllOf
 from hamcrest.core.description import Description
-from hamcrest.core.helpers.wrap_matcher import wrap_matcher as wrap_shortcut
+from hamcrest.core.helpers.wrap_matcher import wrap_matcher
 from hamcrest.core.matcher import Matcher
 from hamcrest.core.string_description import StringDescription
 
@@ -57,14 +57,6 @@ class IsObjectWithProperty(BaseMatcher[object]):
         return str(d)
 
 
-@overload
-def has_property(name: str, match: None = None) -> Matcher[object]: ...
-@overload
-def has_property(name: str, match: Matcher[object]) -> Matcher[object]: ...
-@overload
-def has_property(name: str, match: object) -> Matcher[object]: ...
-
-
 def has_property(name: str, match: Union[None, Matcher[object], object] = None) -> Matcher[object]:
     """Matches if object has a property with a given name whose value satisfies
     a given matcher.
@@ -95,35 +87,26 @@ def has_property(name: str, match: Union[None, Matcher[object], object] = None) 
     if match is None:
         match = anything()
 
-    return IsObjectWithProperty(name, wrap_shortcut(match))
-
-
-# Keyword argument form
-@overload
-def has_properties(**keys_valuematchers: Matcher[object]) -> Matcher[object]: ...
-@overload
-def has_properties(**keys_valuematchers: object) -> Matcher[object]: ...
+    return IsObjectWithProperty(name, wrap_matcher(match))
 
 
 # Name to matcher dict form
 @overload
 def has_properties(
-    __keys_valuematcher: Mapping[str, Union[Matcher[object], object]],
-    **keys_valuematchers: Union[Matcher[object], object],
+    __matchermap: Mapping[str, Union[Matcher[object], object]],
+    **matchermap: Union[Matcher[object], object],
 ) -> Matcher[object]: ...
 
 
 # Alternating name/matcher form
 @overload
 def has_properties(
-    __key: str,
-    __value: object,
-    *key_or_valuematchers: Union[str, object],
-    **keys_valuematchers: Union[Matcher[object], object],
+    *key_or_valuematchers: Union[str, Matcher[object], object],
+    **matchermap: Union[Matcher[object], object],
 ) -> Matcher[object]: ...
 
 
-def has_properties(*keys_valuematchers, **kv_args):
+def has_properties(*key_or_valuematcher_or_matchermaps, **matchermap):
     """Matches if an object has properties satisfying all of a dictionary
     of string property names and corresponding value matchers.
 
@@ -169,26 +152,28 @@ def has_properties(*keys_valuematchers, **kv_args):
         has_properties('foo', 1, 'bar', 2)
 
     """
-    if len(keys_valuematchers) == 1:
+    if len(key_or_valuematcher_or_matchermaps) == 1:
+        matchermap0 = key_or_valuematcher_or_matchermaps[0]
         try:
-            base_dict = keys_valuematchers[0].copy()
+            base_dict = matchermap0.copy()
             for key in base_dict:
-                base_dict[key] = wrap_shortcut(base_dict[key])
+                base_dict[key] = wrap_matcher(base_dict[key])
         except AttributeError:
             raise ValueError(
                 "single-argument calls to has_properties must pass a dict as the argument"
             )
     else:
-        if len(keys_valuematchers) % 2:
+        key_or_valuematchers = key_or_valuematcher_or_matchermaps
+        if len(key_or_valuematchers) % 2:
             raise ValueError("has_properties requires key-value pairs")
         base_dict = {}
-        for index in range(int(len(keys_valuematchers) / 2)):
-            base_dict[keys_valuematchers[2 * index]] = wrap_shortcut(
-                keys_valuematchers[2 * index + 1]
-            )
+        for index in range(int(len(key_or_valuematchers) / 2)):
+            key = key_or_valuematchers[2 * index]
+            valuematcher = key_or_valuematchers[2 * index + 1]
+            base_dict[key] = wrap_matcher(valuematcher)
 
-    for key, value in kv_args.items():
-        base_dict[key] = wrap_shortcut(value)
+    for key, value in matchermap.items():
+        base_dict[key] = wrap_matcher(value)
 
     if len(base_dict) > 1:
         description = StringDescription().append_text("an object with properties ")
