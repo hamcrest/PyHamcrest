@@ -1,4 +1,4 @@
-from typing import Generic, MutableSequence, Optional, Sequence, TypeVar, Union, cast, overload
+from typing import MutableSequence, Optional, Sequence, TypeVar, Union, cast, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -12,7 +12,7 @@ __license__ = "BSD, see License.txt"
 T = TypeVar("T")
 
 
-class MatchInAnyOrder(Generic[T]):
+class MatchInAnyOrder(object):
     def __init__(
         self, matchers: Sequence[Matcher[T]], mismatch_description: Optional[Description]
     ) -> None:
