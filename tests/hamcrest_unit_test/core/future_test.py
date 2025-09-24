@@ -49,11 +49,11 @@ class FutureExceptionTest(MatcherTest):
         asyncio.new_event_loop().run_until_complete(test())
 
     def testDoesNotMatchIfFutureIsNotDone(self):
-        future = asyncio.Future()
+        future = asyncio.Future(loop=asyncio.new_event_loop())
         self.assert_does_not_match("Unresolved future", future_raising(TypeError), future)
 
     def testDoesNotMatchIfFutureIsCancelled(self):
-        future = asyncio.Future()
+        future = asyncio.Future(loop=asyncio.new_event_loop())
         future.cancel()
         self.assert_does_not_match("Cancelled future", future_raising(TypeError), future)
 
