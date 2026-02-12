@@ -1,4 +1,4 @@
-from typing import MutableSequence, Optional, Sequence, TypeVar, Union, cast
+from typing import Generic, Optional, Sequence, TypeVar, Union
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -12,11 +12,11 @@ __license__ = "BSD, see License.txt"
 T = TypeVar("T")
 
 
-class MatchInAnyOrder(object):
+class MatchInAnyOrder(Generic[T]):
     def __init__(
         self, matchers: Sequence[Matcher[T]], mismatch_description: Optional[Description]
     ) -> None:
-        self.matchers = cast(MutableSequence[Matcher[T]], matchers[:])
+        self.matchers = list(matchers)
         self.mismatch_description = mismatch_description
 
     def matches(self, item: T) -> bool:
