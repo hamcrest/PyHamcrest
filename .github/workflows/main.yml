@@ -18,22 +18,22 @@ jobs:
     name: "Python ${{ matrix.python-version }} / ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}"
     env:
-      USING_COVERAGE: "3.8,3.9,3.10,3.11,3.12"
+      USING_COVERAGE: "3.10,3.11,3.12,3.13,3.14"
 
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version:
-          - "3.8"
-          - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
-          - "pypy3.9"
+          - "3.13"
+          - "3.14"
+          - "pypy3.11"
         exclude:
           - os: macos-latest
-            python-version: pypy3.9
+            python-version: pypy3.11
 
     steps:
       - uses: actions/checkout@v4
