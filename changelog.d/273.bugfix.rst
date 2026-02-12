@@ -1,0 +1,1 @@
+Make Matcher contravariant to fix type checking issues with generic matchers like has_length().
