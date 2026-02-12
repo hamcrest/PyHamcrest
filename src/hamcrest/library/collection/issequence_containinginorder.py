@@ -1,5 +1,5 @@
 import warnings
-from typing import Optional, Sequence, TypeVar, Union
+from typing import Optional, Sequence, Tuple, TypeVar, Union, cast, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -78,6 +78,12 @@ class IsSequenceContainingInOrder(BaseMatcher[Sequence[T]]):
         description.append_text("a sequence containing ").append_list("[", ", ", "]", self.matchers)
 
 
+@overload
+def contains_exactly(*items: Matcher[T]) -> Matcher[Sequence[T]]: ...
+@overload
+def contains_exactly(*items: T) -> Matcher[Sequence[T]]: ...
+
+
 def contains_exactly(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     """Matches if sequence's elements satisfy a given list of matchers, in order.
 
@@ -97,7 +103,13 @@ def contains_exactly(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     return IsSequenceContainingInOrder(matchers)
 
 
+@overload
+def contains(*items: Matcher[T]) -> Matcher[Sequence[T]]: ...
+@overload
+def contains(*items: T) -> Matcher[Sequence[T]]: ...
+
+
 def contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     """Deprecated - use contains_exactly(*items)"""
     warnings.warn("deprecated - use contains_exactly(*items)", DeprecationWarning)
-    return contains_exactly(*items)
+    return contains_exactly(*cast(Tuple[T, ...], items))

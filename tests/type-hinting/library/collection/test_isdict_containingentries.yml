@@ -1,0 +1,57 @@
+- case: has_entries_keywords
+  # pypy + mypy doesn't work. See https://foss.heptapod.net/pypy/pypy/-/issues/3526
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import is_, has_entries
+
+    a: int = 99
+    b = a
+
+    reveal_type(has_entries(a=a))                       # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries(b=is_(b)))                  # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries(a=a, b=b))                  # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries(a=is_(a), b=is_(b)))        # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries(a=a, b=is_(b)))             # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.object]]"
+
+- case: has_entries_key_valuematchers
+  # pypy + mypy doesn't work. See https://foss.heptapod.net/pypy/pypy/-/issues/3526
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import is_, has_entries
+
+    a: int = 99
+    b = a
+
+    reveal_type(has_entries({a: a}))                    # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.int, builtins.int]]"
+    reveal_type(has_entries({b: is_(b)}))               # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.int, builtins.int]]"
+    reveal_type(has_entries({a: a, b: b}))              # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.int, builtins.int]]"
+    reveal_type(has_entries({a: is_(a), b: is_(b)}))    # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.int, builtins.int]]"
+    reveal_type(has_entries({a: a, b: is_(b)}))         # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.int, builtins.object]]"
+
+- case: has_entries_alternating
+  # pypy + mypy doesn't work. See https://foss.heptapod.net/pypy/pypy/-/issues/3526
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import is_, has_entries
+
+    a: int = 99
+    b = a
+
+    reveal_type(has_entries("a", a))                    # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries("b", is_(b)))               # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries("a", a, "b", b))            # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries("a", is_(a), "b", is_(b)))  # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries("a", a, "b", is_(b)))       # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+    reveal_type(has_entries("a", is_(a), "b", b))       # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, builtins.int]]"
+
+- case: has_entries_none
+  main: |
+    from hamcrest import is_, has_entries
+
+    a: int = 99
+    b = a
+
+    reveal_type(has_entries(a=None, b=is_(None)))       # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.str, Union[hamcrest.core.matcher.Matcher[None], None]]]"
+    reveal_type(has_entries({a: None, b: is_(None)}))   # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.int, Union[hamcrest.core.matcher.Matcher[None], None]]]"
+    reveal_type(has_entries(a, None, b, is_(None)))     # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.int, None]]"
+    reveal_type(has_entries(a, is_(None), b, None))     # N: Revealed type is "hamcrest.core.matcher.Matcher[typing.Mapping[builtins.int, None]]"

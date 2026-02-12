@@ -1,4 +1,4 @@
-from typing import Sequence, TypeVar, Union
+from typing import Sequence, TypeVar, Union, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.anyof import any_of
@@ -33,6 +33,12 @@ class IsSequenceOnlyContaining(BaseMatcher[Sequence[T]]):
         description.append_text("a sequence containing items matching ").append_description_of(
             self.matcher
         )
+
+
+@overload
+def only_contains(*items: Matcher[T]) -> Matcher[Sequence[T]]: ...
+@overload
+def only_contains(*items: T) -> Matcher[Sequence[T]]: ...
 
 
 def only_contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:

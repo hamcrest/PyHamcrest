@@ -1,4 +1,4 @@
-from typing import Any, Hashable, Mapping, Optional, TypeVar, Union, overload
+from typing import Hashable, Mapping, Optional, TypeVar, Union, overload
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -14,7 +14,7 @@ V = TypeVar("V")
 
 
 class IsDictContainingEntries(BaseMatcher[Mapping[K, V]]):
-    def __init__(self, value_matchers) -> None:
+    def __init__(self, value_matchers: Mapping[K, Matcher[V]]) -> None:
         self.value_matchers = sorted(value_matchers.items())
 
     def _not_a_dictionary(
@@ -56,7 +56,7 @@ class IsDictContainingEntries(BaseMatcher[Mapping[K, V]]):
     def describe_mismatch(self, item: Mapping[K, V], mismatch_description: Description) -> None:
         self.matches(item, mismatch_description)
 
-    def describe_keyvalue(self, index: K, value: V, description: Description) -> None:
+    def describe_keyvalue(self, index: K, value: Matcher[V], description: Description) -> None:
         """Describes key-value pair at given index."""
         description.append_description_of(index).append_text(": ").append_description_of(value)
 
@@ -73,20 +73,34 @@ class IsDictContainingEntries(BaseMatcher[Mapping[K, V]]):
 
 # Keyword argument form
 @overload
-def has_entries(**keys_valuematchers: Union[Matcher[V], V]) -> Matcher[Mapping[str, V]]: ...
+def has_entries(**matchermap: Matcher[V]) -> Matcher[Mapping[str, V]]: ...
+@overload
+def has_entries(**matchermap: V) -> Matcher[Mapping[str, V]]: ...
 
 
 # Key to matcher dict form
 @overload
-def has_entries(keys_valuematchers: Mapping[K, Union[Matcher[V], V]]) -> Matcher[Mapping[K, V]]: ...
+def has_entries(__matchermap: Mapping[K, Matcher[V]]) -> Matcher[Mapping[K, V]]: ...
+@overload
+def has_entries(__matchermap: Mapping[K, V]) -> Matcher[Mapping[K, V]]: ...
 
 
 # Alternating key/matcher form
 @overload
-def has_entries(*keys_valuematchers: Any) -> Matcher[Mapping[Any, Any]]: ...
+def has_entries(
+    __key: K,
+    __value: Matcher[V],
+    *key_or_valuematchers: Union[K, Matcher[V], V],
+) -> Matcher[Mapping[K, V]]: ...
+@overload
+def has_entries(
+    __key: K,
+    __value: V,
+    *key_or_valuematchers: Union[K, Matcher[V], V],
+) -> Matcher[Mapping[K, V]]: ...
 
 
-def has_entries(*keys_valuematchers, **kv_args):
+def has_entries(*key_or_valuematcher_or_matchermaps, **matchermap):
     """Matches if dictionary contains entries satisfying a dictionary of keys
     and corresponding value matchers.
 
@@ -132,9 +146,10 @@ def has_entries(*keys_valuematchers, **kv_args):
         has_entries('foo', 1, 'bar', 2)
 
     """
-    if len(keys_valuematchers) == 1:
+    if len(key_or_valuematcher_or_matchermaps) == 1:
+        matchermap0 = key_or_valuematcher_or_matchermaps[0]
         try:
-            base_dict = keys_valuematchers[0].copy()
+            base_dict = matchermap0.copy()
             for key in base_dict:
                 base_dict[key] = wrap_matcher(base_dict[key])
         except AttributeError:
@@ -142,15 +157,16 @@ def has_entries(*keys_valuematchers, **kv_args):
                 "single-argument calls to has_entries must pass a dict as the argument"
             )
     else:
-        if len(keys_valuematchers) % 2:
+        key_or_valuematchers = key_or_valuematcher_or_matchermaps
+        if len(key_or_valuematchers) % 2:
             raise ValueError("has_entries requires key-value pairs")
         base_dict = {}
-        for index in range(int(len(keys_valuematchers) / 2)):
-            base_dict[keys_valuematchers[2 * index]] = wrap_matcher(
-                keys_valuematchers[2 * index + 1]
-            )
+        for index in range(int(len(key_or_valuematchers) / 2)):
+            key = key_or_valuematchers[2 * index]
+            valuematcher = key_or_valuematchers[2 * index + 1]
+            base_dict[key] = wrap_matcher(valuematcher)
 
-    for key, value in kv_args.items():
+    for key, value in matchermap.items():
         base_dict[key] = wrap_matcher(value)
 
     return IsDictContainingEntries(base_dict)
