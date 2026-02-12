@@ -1,5 +1,5 @@
 import re
-from typing import Any, Optional, Tuple
+from typing import Optional, Tuple, TypeVar
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -11,19 +11,21 @@ __license__ = "BSD, see License.txt"
 
 ARG_PATTERN = re.compile("%([0-9]+)")
 
+T = TypeVar("T")
 
-class DescribedAs(BaseMatcher[Any]):
+
+class DescribedAs(BaseMatcher[T]):
     def __init__(
-        self, description_template: str, matcher: Matcher[Any], *values: Tuple[Any, ...]
+        self, description_template: str, matcher: Matcher[T], *values: Tuple[T, ...]
     ) -> None:
         self.template = description_template
         self.matcher = matcher
         self.values = values
 
-    def matches(self, item: Any, mismatch_description: Optional[Description] = None) -> bool:
+    def matches(self, item: T, mismatch_description: Optional[Description] = None) -> bool:
         return self.matcher.matches(item, mismatch_description)
 
-    def describe_mismatch(self, item: Any, mismatch_description: Description) -> None:
+    def describe_mismatch(self, item: T, mismatch_description: Description) -> None:
         self.matcher.describe_mismatch(item, mismatch_description)
 
     def describe_to(self, description: Description) -> None:
@@ -38,7 +40,7 @@ class DescribedAs(BaseMatcher[Any]):
             description.append_text(self.template[text_start:])
 
 
-def described_as(description: str, matcher: Matcher[Any], *values) -> Matcher[Any]:
+def described_as(description: str, matcher: Matcher[T], *values) -> Matcher[T]:
     """Adds custom failure description to a given matcher.
 
     :param description: Overrides the matcher's description.
