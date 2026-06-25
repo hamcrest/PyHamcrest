@@ -107,6 +107,27 @@ class IsDictContainingEntriesTest(MatcherTest):
     def testDescribeMismatchOfDictionaryWithNonMatchingValue(self):
         self.assert_describe_mismatch("value for 'a' was <2>", has_entries("a", 1), {"a": 2})
 
+    def testHasEntriesWithNonSortableKeys(self):
+        # Regression: has_entries must not crash for keys that do not support
+        # comparison (<) since the internal sorted() call fails with TypeError.
+        # See: https://github.com/hamcrest/PyHamcrest/issues/271
+
+        class NonComparable:
+            def __init__(self, val):
+                self.val = val
+
+            def __hash__(self):
+                return hash(self.val)
+
+            def __eq__(self, other):
+                return isinstance(other, NonComparable) and self.val == other.val
+
+        k1, k2 = NonComparable(1), NonComparable(2)
+        # Construction must not raise TypeError
+        matcher = has_entries({k1: 1, k2: 2})
+        self.assertTrue(matcher.matches({k1: 1, k2: 2}))
+        self.assertFalse(matcher.matches({k1: 1, k2: 99}))
+
 
 if __name__ == "__main__":
     unittest.main()
