@@ -128,9 +128,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
-      - name: "Install in dev mode"
-        run: |
-          uv venv
-          uv pip install -e .[dev]
+      - name: "Install development environment"
+        run: uv sync --locked
       - name: "Import package"
         run: "uv run python -c 'import hamcrest; print(hamcrest.__version__)'"

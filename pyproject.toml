@@ -47,33 +47,28 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 docs = ["sphinx~=7.0", "alabaster~=0.7"]
-tests = [
-  "pytest>=5.0",
-  "pytest-sugar",
-  "pytest-xdist",
-  "coverage[toml]",
-  # No point on Pypy thanks to https://github.com/python/typed_ast/issues/111
-  "pytest-mypy-plugins; platform_python_implementation != 'PyPy'",
-  # Can't use 0.940: https://github.com/python/mypy/issues/12339
+
+[dependency-groups]
+typing = [
   "mypy<=1.10.1; platform_python_implementation != 'PyPy'",
   "types-mock",
+]
+test = [
+  { include-group = "typing" },
+  "coverage[toml]",
+  "pytest",
+  "pytest-mypy-plugins; platform_python_implementation != 'PyPy'",
+  "pytest-sugar",
+  "pytest-xdist",
   "pyyaml",
 ]
-tests-numpy = [
-  "PyHamcrest[tests]",
+test-numpy = [
+  { include-group = "test" },
   "numpy",
 ]
 dev = [
-  "PyHamcrest[docs,tests]",
+  { include-group = "test" },
   "towncrier",
-  "twine",
-  "mypy<=1.10.1",
-  "pytest-mypy",
-  "flake8",
-  "black",
-  "tox",
-  "tox-uv",
-  "doc2dash",
 ]
 
 [project.urls]
