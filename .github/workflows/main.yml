@@ -18,22 +18,22 @@ jobs:
     name: "Python ${{ matrix.python-version }} / ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}"
     env:
-      USING_COVERAGE: "3.8,3.9,3.10,3.11,3.12"
+      USING_COVERAGE: "3.10,3.11,3.12,3.13,3.14"
 
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version:
-          - "3.8"
-          - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
-          - "pypy3.9"
+          - "3.13"
+          - "3.14"
+          - "pypy3.11"
         exclude:
           - os: macos-latest
-            python-version: pypy3.9
+            python-version: pypy3.11
 
     steps:
       - uses: actions/checkout@v4
@@ -109,7 +109,7 @@ jobs:
           # We want our tags here
           fetch-depth: 0
           persist-credentials: false
-      - uses: hynek/build-and-inspect-python-package@v2
+      - uses: hynek/build-and-inspect-python-package@2abe76da66d0a6a4a227101f9348ee855797cfa5 # v3.0.1
 
   install-dev:
     strategy:
