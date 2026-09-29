@@ -43,8 +43,7 @@ This ensures code style checks run automatically before each commit.
 With `uv` installed, prefixing all commands with `uv run` ensures they run with the project dependencies. If you want to work in a virtualenv, so that you can run bare commands, you can do so this way:
 
 ```shell
-uv venv 
-uv pip install -e '.[dev]'
+uv sync
 . .venv/bin/activate
 ```
 
