@@ -44,11 +44,11 @@ def _wrap_value_or_type(x):
 
 
 @overload
-def is_(x: Type) -> Matcher[Any]: ...
+def is_(x: Matcher[T]) -> Matcher[T]: ...  # type: ignore[overload-overlap]
 
 
 @overload
-def is_(x: Matcher[T]) -> Matcher[T]: ...
+def is_(x: Type) -> Matcher[Any]: ...
 
 
 @overload

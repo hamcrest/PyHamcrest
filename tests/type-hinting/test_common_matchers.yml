@@ -1,0 +1,232 @@
+- case: core_matchers_basic
+  # Test basic core matchers work with contravariant Matcher
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import (
+        assert_that, equal_to, is_, is_not, none, not_none,
+        same_instance, instance_of, anything
+    )
+
+    # equal_to
+    assert_that("hello", equal_to("hello"))
+    assert_that(42, equal_to(42))
+
+    # is_
+    assert_that("hello", is_("hello"))
+    assert_that(42, is_(42))
+
+    # is_not
+    assert_that("hello", is_not("world"))
+    assert_that(42, is_not(0))
+
+    # none / not_none
+    assert_that(None, none())
+    assert_that("hello", not_none())
+
+    # same_instance
+    obj = object()
+    assert_that(obj, same_instance(obj))
+
+    # instance_of
+    assert_that("hello", instance_of(str))
+    assert_that(42, instance_of(int))
+
+    # anything
+    assert_that("hello", anything())
+    assert_that(42, anything())
+
+- case: logical_matchers
+  # Test logical combinators work with contravariant Matcher
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import (
+        assert_that, all_of, any_of, is_not,
+        equal_to, greater_than, less_than, instance_of
+    )
+
+    # all_of
+    assert_that(5, all_of(greater_than(0), less_than(10)))
+
+    # any_of
+    assert_that(5, any_of(equal_to(5), equal_to(10)))
+
+    # not_ (via is_not)
+    assert_that(5, is_not(equal_to(10)))
+
+- case: collection_matchers_lists
+  # Test list/sequence matchers work with contravariant Matcher
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import (
+        assert_that, has_item, has_items, contains_exactly,
+        contains_inanyorder, only_contains, empty, is_in
+    )
+
+    # has_item
+    assert_that([1, 2, 3], has_item(2))
+    assert_that(["a", "b"], has_item("a"))
+
+    # has_items
+    assert_that([1, 2, 3], has_items(1, 3))
+
+    # contains_exactly
+    assert_that([1, 2, 3], contains_exactly(1, 2, 3))
+
+    # contains_inanyorder
+    assert_that([3, 1, 2], contains_inanyorder(1, 2, 3))
+
+    # only_contains
+    assert_that([1, 1, 2], only_contains(1, 2))
+
+    # empty
+    assert_that([], empty())
+    assert_that("", empty())
+
+    # is_in
+    assert_that(2, is_in([1, 2, 3]))
+
+- case: collection_matchers_dicts
+  # Test dictionary matchers work with contravariant Matcher
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import (
+        assert_that, has_entry, has_entries, has_key, has_value
+    )
+
+    d = {"a": 1, "b": 2, "c": 3}
+
+    # has_entry
+    assert_that(d, has_entry("a", 1))
+
+    # has_entries
+    assert_that(d, has_entries({"a": 1, "b": 2}))
+    assert_that(d, has_entries(a=1, b=2))
+
+    # has_key
+    assert_that(d, has_key("a"))
+
+    # has_value
+    assert_that(d, has_value(1))
+
+- case: number_matchers
+  # Test number comparison matchers work with contravariant Matcher
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import (
+        assert_that, greater_than, greater_than_or_equal_to,
+        less_than, less_than_or_equal_to, close_to
+    )
+
+    # greater_than
+    assert_that(5, greater_than(3))
+
+    # greater_than_or_equal_to
+    assert_that(5, greater_than_or_equal_to(5))
+    assert_that(5, greater_than_or_equal_to(3))
+
+    # less_than
+    assert_that(3, less_than(5))
+
+    # less_than_or_equal_to
+    assert_that(3, less_than_or_equal_to(3))
+    assert_that(3, less_than_or_equal_to(5))
+
+    # close_to
+    assert_that(1.0, close_to(1.01, 0.02))
+
+- case: object_matchers
+  # Test object property matchers work with contravariant Matcher
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import (
+        assert_that, has_property, has_properties,
+        has_length, has_string
+    )
+
+    class Obj:
+        def __init__(self):
+            self.name = "test"
+            self.value = 42
+        def __str__(self):
+            return "Obj(test)"
+
+    obj = Obj()
+
+    # has_property
+    assert_that(obj, has_property("name", "test"))
+    assert_that(obj, has_property("value", 42))
+
+    # has_properties
+    assert_that(obj, has_properties(name="test", value=42))
+    assert_that(obj, has_properties({"name": "test"}))
+
+    # has_length
+    assert_that([1, 2, 3], has_length(3))
+    assert_that("hello", has_length(5))
+
+    # has_string
+    assert_that(obj, has_string("test"))
+
+- case: text_matchers
+  # Test string matchers work with contravariant Matcher
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import (
+        assert_that, contains_string, starts_with, ends_with,
+        matches_regexp, equal_to_ignoring_case, equal_to_ignoring_whitespace,
+        string_contains_in_order
+    )
+
+    # contains_string
+    assert_that("hello world", contains_string("world"))
+
+    # starts_with
+    assert_that("hello world", starts_with("hello"))
+
+    # ends_with
+    assert_that("hello world", ends_with("world"))
+
+    # matches_regexp
+    assert_that("hello123", matches_regexp(r"hello\d+"))
+
+    # equal_to_ignoring_case
+    assert_that("HELLO", equal_to_ignoring_case("hello"))
+
+    # equal_to_ignoring_whitespace
+    assert_that("hello  world", equal_to_ignoring_whitespace("hello world"))
+
+    # string_contains_in_order
+    assert_that("hello beautiful world", string_contains_in_order("hello", "world"))
+
+- case: matcher_assignment_contravariance
+  # Test that contravariance works for matcher assignment
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import has_length, greater_than, has_item, equal_to
+    from hamcrest.core.matcher import Matcher
+    from typing import Sized, Sequence
+
+    # str is Sized, so Matcher[Sized] should be assignable to Matcher[str]
+    m1: Matcher[str] = has_length(greater_than(0))
+
+    # list[int] is Sequence, so Matcher[Sequence] should be assignable to Matcher[list[int]]
+    m2: Matcher[list[int]] = has_item(1)
+
+    # int is object, so Matcher[object] should be assignable to Matcher[int]
+    m3: Matcher[int] = equal_to(42)
+
+- case: nested_matchers
+  # Test nested matchers work with contravariant Matcher
+  skip: platform.python_implementation() == "PyPy"
+  main: |
+    from hamcrest import (
+        assert_that, has_item, has_items, all_of,
+        greater_than, less_than, instance_of
+    )
+
+    # Nested matchers in collections
+    assert_that([1, 2, 3, 4], has_item(greater_than(3)))
+    assert_that([1, 2, 3, 4], has_items(greater_than(0), less_than(5)))
+
+    # Nested matchers in logical combinators
+    assert_that(5, all_of(greater_than(0), less_than(10), instance_of(int)))
