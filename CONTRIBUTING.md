@@ -18,6 +18,8 @@ Thank you for your interest in contributing to PyHamcrest! This guide will help 
 
 - Python 3.10 or later (Python 3.14 recommended for development)
 - Git
+- `uv` (installed according to the [uv installation instructions](https://docs.astral.sh/uv/#installation))
+- [prek](https://prek.j178.dev/) (or [pre-commit](https://pre-commit.com/), optionally)
 
 ### Installation
 
@@ -28,28 +30,25 @@ git clone https://github.com/YOUR-USERNAME/PyHamcrest.git
 cd PyHamcrest
 ```
 
-2. Install development dependencies:
-
-We recommend using [uv](https://github.com/astral-sh/uv) for fast dependency resolution:
+2. Install pre-commit hooks:
 
 ```bash
-pip install uv
-uv pip install -e ".[dev]"
-```
-
-Or using pip directly:
-
-```bash
-pip install -e ".[dev]"
-```
-
-3. Install pre-commit hooks:
-
-```bash
-pre-commit install
+prek install
 ```
 
 This ensures code style checks run automatically before each commit.
+
+### (Optional) use a virtualenv
+
+With `uv` installed, prefixing all commands with `uv run` ensures they run with the project dependencies. If you want to work in a virtualenv, so that you can run bare commands, you can do so this way:
+
+```shell
+uv venv 
+uv pip install -e '.[dev]'
+. .venv/bin/activate
+```
+
+In all instructions below, you can remove the `uv run` and `uv tool run` prefixes.
 
 ## Running Tests
 
@@ -58,19 +57,19 @@ This ensures code style checks run automatically before each commit.
 Run tests with pytest:
 
 ```bash
-pytest
+uv run pytest
 ```
 
 Run a specific test file:
 
 ```bash
-pytest tests/hamcrest_unit_test/core/isequal_test.py
+uv run pytest tests/hamcrest_unit_test/core/isequal_test.py
 ```
 
 Run a specific test:
 
 ```bash
-pytest tests/hamcrest_unit_test/core/isequal_test.py::TestClass::test_name
+uv run pytest tests/hamcrest_unit_test/core/isequal_test.py::TestClass::test_name
 ```
 
 ### Test Coverage
@@ -78,8 +77,8 @@ pytest tests/hamcrest_unit_test/core/isequal_test.py::TestClass::test_name
 Run tests with coverage:
 
 ```bash
-coverage run -m pytest
-coverage report
+uv run coverage run -m pytest
+uv run coverage report
 ```
 
 ### Testing Across Python Versions
@@ -88,16 +87,16 @@ We use [tox](https://tox.wiki/) to test across multiple Python versions:
 
 ```bash
 # Test all available Python versions (skips missing interpreters)
-tox -s
+uv tool run tox -s
 
 # Test specific Python version
-tox -e py312
+uv tool run tox -e py312
 
 # Test with numpy support
-tox -e py312-numpy
+uv tool run tox -e py312-numpy
 ```
 
-**IMPORTANT**: Always run `tox -s` before submitting a pull request to verify tests pass across all available Python versions. The `-s` flag skips missing interpreters.
+**IMPORTANT**: Always run `uv tool run tox -s` before submitting a pull request to verify tests pass across all available Python versions. The `-s` flag skips missing interpreters.
 
 ### Supported Python Versions
 
@@ -115,13 +114,13 @@ Code is formatted with [Black](https://black.readthedocs.io/) and [Ruff](https:/
 Run pre-commit hooks on all files:
 
 ```bash
-pre-commit run --all-files
+prek run --all-files
 ```
 
 Or via tox:
 
 ```bash
-tox -e lint
+uv tool run tox -e lint
 ```
 
 ### Style Notes
@@ -137,13 +136,13 @@ PyHamcrest includes type annotations and is checked with [mypy](https://mypy-lan
 Run type checking:
 
 ```bash
-mypy src/
+uv run mypy src/
 ```
 
 Or via tox:
 
 ```bash
-tox -e typing
+uv tool run tox -e typing
 ```
 
 ### Type Hint Tests
@@ -186,9 +185,9 @@ Add support for matching custom objects with has_attributes matcher.
 
 ### Before Submitting
 
-1. ✅ Run tests: `tox -s`
-2. ✅ Run linting: `pre-commit run --all-files`
-3. ✅ Run type checking: `tox -e typing`
+1. ✅ Run tests: `uv tool run tox -s`
+2. ✅ Run linting: `prek run --all-files`
+3. ✅ Run type checking: `uv tool run tox -e typing`
 4. ✅ **Add changelog entry (REQUIRED for code changes)** - see [Adding Changelog Entries](#adding-changelog-entries)
 5. ✅ Update documentation if needed
 
@@ -230,7 +229,7 @@ PyHamcrest uses automated releases via git tags.
 
 This script:
 - Creates a git tag (e.g., `V2.2.0`)
-- Runs `towncrier build` to generate the changelog from fragments in `changelog.d/`
+- Runs `uv run towncrier build` to generate the changelog from fragments in `changelog.d/`
 - Re-tags to include the changelog changes
 - Prompts you to push the tag
 
