@@ -1,0 +1,1 @@
+Update Python version support to 3.10-3.14 and PyPy 3.11. Drop Python 3.8/3.9 support.

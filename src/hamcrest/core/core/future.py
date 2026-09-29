@@ -1,4 +1,3 @@
-import sys
 import re
 import asyncio
 from typing import (
@@ -19,14 +18,8 @@ __license__ = "BSD, see License.txt"
 
 T = TypeVar("T")
 
-if sys.version_info > (3, 9):
-    # Same as used in typeshed for asyncio.ensure_future
-    FutureT = asyncio.Future[T]
-    FutureLike = Union[asyncio.Future[T], Awaitable[T]]
-else:
-    # Future is not a parametrised type in earlier version of python
-    FutureT = asyncio.Future
-    FutureLike = Union[asyncio.Future, Awaitable]
+FutureT = asyncio.Future[T]
+FutureLike = Union[asyncio.Future[T], Awaitable[T]]
 
 
 class FutureRaising(BaseMatcher[asyncio.Future]):
