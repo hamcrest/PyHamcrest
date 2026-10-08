@@ -15,7 +15,12 @@ V = TypeVar("V")
 
 class IsDictContainingEntries(BaseMatcher[Mapping[K, V]]):
     def __init__(self, value_matchers) -> None:
-        self.value_matchers = sorted(value_matchers.items())
+        items = list(value_matchers.items())
+        try:
+            ordered_items = sorted(items)
+        except TypeError:
+            ordered_items = items
+        self.value_matchers = ordered_items
 
     def _not_a_dictionary(
         self, item: Mapping[K, V], mismatch_description: Optional[Description]
