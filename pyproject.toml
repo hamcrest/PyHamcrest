@@ -50,7 +50,7 @@ docs = ["sphinx~=7.0", "alabaster~=0.7"]
 
 [dependency-groups]
 typing = [
-  "mypy<=1.10.1; platform_python_implementation != 'PyPy'",
+  "mypy<=2.4.0; platform_python_implementation != 'PyPy'",
   "types-mock",
 ]
 test = [
