@@ -36,7 +36,7 @@ jobs:
             python-version: pypy3.11
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # We want our tags here
           fetch-depth: 0
@@ -44,7 +44,7 @@ jobs:
 
       - name: Install the latest version of uv
         id: setup-uv
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
 
@@ -54,7 +54,7 @@ jobs:
         run: uvx --with tox-uv --with tox-gh tox
 
       - name: Upload coverage data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-data-${{ matrix.python-version }}-${{ matrix.os }}
           path: ".coverage*"
@@ -66,17 +66,17 @@ jobs:
       - tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Install the latest version of uv
         id: setup-uv
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
 
       - name: Download coverage data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           pattern: coverage-data-*
           merge-multiple: true
@@ -90,7 +90,7 @@ jobs:
         run: uvx --with coverage[toml] coverage html --skip-covered --skip-empty --ignore-errors
 
       - name: Upload the HTML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: html-report
           path: htmlcov
@@ -104,7 +104,7 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # We want our tags here
           fetch-depth: 0
@@ -120,12 +120,12 @@ jobs:
     runs-on: "${{ matrix.os }}"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Install the latest version of uv
         id: setup-uv
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
       - name: "Install development environment"
