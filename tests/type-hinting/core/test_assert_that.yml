@@ -8,7 +8,7 @@
     assert_that("str", instance_of(str))
     assert_that(99, starts_with("str"))
   out: |
-    main:5: error: Cannot infer type argument 1 of "assert_that"  [misc]
+    main:5: error: Cannot infer value of type parameter "T" of "assert_that"  [misc]
 
 - case: matcher_contravariance_issue_222
   # Issue 222: Matchers should be contravariant

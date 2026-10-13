@@ -4,4 +4,4 @@
   main: |
     from hamcrest import is_, described_as
 
-    reveal_type(described_as("oh, hi", is_(98)))  # N: Revealed type is "hamcrest.core.matcher.Matcher[builtins.int]"
+    reveal_type(described_as("oh, hi", is_(98)))  # N: Revealed type is "hamcrest.core.matcher.Matcher[int]"
