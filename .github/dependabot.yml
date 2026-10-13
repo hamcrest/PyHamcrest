@@ -16,12 +16,6 @@ updates:
       prefix: "chore (dependencies)"
     cooldown:
       default-days: 7
-    groups:
-      development:
-        dependency-type: "development"
-      boto:
-        patterns:
-          - "boto*"
 
   # CI/CD - Github Actions
   - package-ecosystem: "github-actions"
