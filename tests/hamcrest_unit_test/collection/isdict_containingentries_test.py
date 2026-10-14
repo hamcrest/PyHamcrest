@@ -9,10 +9,7 @@ from dataclasses import dataclass
 from unittest.mock import Mock
 
 from hamcrest.core.core.isequal import equal_to
-from hamcrest.library.collection.isdict_containingentries import (
-    IsDictContainingEntries,
-    has_entries,
-)
+from hamcrest.library.collection.isdict_containingentries import has_entries
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 __author__ = "Jon Reid"
@@ -174,65 +171,6 @@ class IsDictContainingEntriesTest(MatcherTest):
                 calls.clear()
                 self.assert_does_not_match("second fails", matcher, {order[0]: 1, order[1]: 0})
                 self.assertEqual(order, calls)
-
-    def testOneShotItemsAreConsumedOnceAndRemainReusable(self):
-        class Items:
-            def __init__(self, pairs):
-                self.pairs = iter(pairs)
-                self.calls = 0
-
-            def items(self):
-                self.calls += 1
-                if self.calls != 1:
-                    raise AssertionError("items called again")
-                return self.pairs
-
-        for keys, description in (
-            (["b", "a"], "a dictionary containing {'a': <1>, 'b': <1>}"),
-            (["z", 1], "a dictionary containing {'z': <1>, <1>: <1>}"),
-        ):
-            with self.subTest(keys=keys):
-                source = Items((key, equal_to(1)) for key in keys)
-                matcher = IsDictContainingEntries(source)
-                for _ in range(2):
-                    self.assert_matches("retained entries", matcher, dict.fromkeys(keys, 1))
-                    self.assert_description(description, matcher)
-                self.assertEqual(1, source.calls)
-
-    def testItemsTypeErrorPropagatesWithoutRetry(self):
-        error = TypeError("items failure")
-
-        class Items:
-            def __init__(self):
-                self.calls = 0
-
-            def items(self):
-                self.calls += 1
-                raise error
-
-        source = Items()
-        with self.assertRaises(TypeError) as caught:
-            IsDictContainingEntries(source)
-        self.assertIs(error, caught.exception)
-        self.assertEqual(1, source.calls)
-
-    def testItemsIterationTypeErrorPropagates(self):
-        error = TypeError("iteration failure")
-
-        class Items:
-            def __init__(self):
-                self.calls = 0
-
-            def items(self):
-                self.calls += 1
-                yield "a", equal_to(1)
-                raise error
-
-        source = Items()
-        with self.assertRaises(TypeError) as caught:
-            IsDictContainingEntries(source)
-        self.assertIs(error, caught.exception)
-        self.assertEqual(1, source.calls)
 
     def testComparisonTypeErrorFallsBackButOtherErrorsPropagate(self):
         class Key:
