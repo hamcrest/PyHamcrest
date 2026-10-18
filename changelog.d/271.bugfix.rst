@@ -1,0 +1,2 @@
+Fixed ``has_entries`` to retain input order when item comparisons raised
+``TypeError``, while preserving sorted order when sorting succeeded.
