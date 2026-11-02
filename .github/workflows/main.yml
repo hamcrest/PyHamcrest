@@ -54,7 +54,7 @@ jobs:
         run: uvx --with tox-uv --with tox-gh tox
 
       - name: Upload coverage data
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-data-${{ matrix.python-version }}-${{ matrix.os }}
           path: ".coverage*"
@@ -76,7 +76,7 @@ jobs:
           enable-cache: true
 
       - name: Download coverage data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           pattern: coverage-data-*
           merge-multiple: true
@@ -90,7 +90,7 @@ jobs:
         run: uvx --with coverage[toml] coverage html --skip-covered --skip-empty --ignore-errors
 
       - name: Upload the HTML report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: html-report
           path: htmlcov
@@ -109,7 +109,7 @@ jobs:
           # We want our tags here
           fetch-depth: 0
           persist-credentials: false
-      - uses: hynek/build-and-inspect-python-package@2abe76da66d0a6a4a227101f9348ee855797cfa5 # v3.0.1
+      - uses: hynek/build-and-inspect-python-package@67230f7b8410ae0052b39c1efc89d89fff43ff10 # v3.0.2
 
   install-dev:
     strategy:
