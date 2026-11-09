@@ -973,7 +973,7 @@ wheels = [
 
 [[package]]
 name = "pytest-mypy-plugins"
-version = "3.1.2"
+version = "4.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "decorator" },
@@ -986,9 +986,9 @@ dependencies = [
     { name = "regex" },
     { name = "tomlkit" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/95/36/5411148fa0ad3242e38364152016a9d56758c0e0808fcb1909562f85b328/pytest-mypy-plugins-3.1.2.tar.gz", hash = "sha256:14fa9b00e59713a6fdb88fcf04e8139b9467e117b98d61fc12038c60afb7febe", size = 26202, upload-time = "2024-03-31T17:47:57.294Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/01/6b/e61a29255c408efc7ab3a1b73e97d937eeae9c03360dae2e891abe0f5ec5/pytest_mypy_plugins-4.1.0.tar.gz", hash = "sha256:2a57374079018cba855339680d1d7cc97093c9921ecb6b896ecb34d1af89aa47", size = 32278, upload-time = "2026-10-23T06:07:12.865Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6c/c2/a75ad669251e71204c4bc06386d1d3cf1ff0593f85138ab4ccf28db792da/pytest_mypy_plugins-3.1.2-py3-none-any.whl", hash = "sha256:3478ccb68e26a159e1287c4614c60f84cd0720e3895f174365c7440498234b9f", size = 19976, upload-time = "2024-03-31T17:47:55.713Z" },
+    { url = "https://files.pythonhosted.org/packages/da/c2/1d5a4345eecb1316025246d690040a9cdc859600a71c437284e138d96476/pytest_mypy_plugins-4.1.0-py3-none-any.whl", hash = "sha256:45ca69b5956b7bd48d57b191c7e1635742193fa4ad9f101f033069c6a97bd402", size = 36652, upload-time = "2026-10-23T06:07:11.765Z" },
 ]
 
 [[package]]
