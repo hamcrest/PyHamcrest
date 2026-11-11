@@ -1,4 +1,4 @@
-from typing import Sequence, TypeVar
+from typing import Collection, TypeVar
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -12,7 +12,7 @@ T = TypeVar("T")
 
 
 class IsIn(BaseMatcher[T]):
-    def __init__(self, sequence: Sequence[T]) -> None:
+    def __init__(self, sequence: Collection[T]) -> None:
         self.sequence = sequence
 
     def _matches(self, item: T) -> bool:
@@ -22,13 +22,13 @@ class IsIn(BaseMatcher[T]):
         description.append_text("one of ").append_list("(", ", ", ")", self.sequence)
 
 
-def is_in(sequence: Sequence[T]) -> Matcher[T]:
-    """Matches if evaluated object is present in a given sequence.
+def is_in(sequence: Collection[T]) -> Matcher[T]:
+    """Matches if evaluated object is present in a given collection.
 
-    :param sequence: The sequence to search.
+    :param sequence: The collection to search.
 
     This matcher invokes the ``in`` membership operator to determine if the
-    evaluated object is a member of the sequence.
+    evaluated object is a member of the collection.
 
     """
     return IsIn(sequence)
