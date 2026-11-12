@@ -1,4 +1,4 @@
-from typing import Sequence, TypeVar, Union
+from typing import Collection, TypeVar, Union
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.anyof import any_of
@@ -13,16 +13,16 @@ __license__ = "BSD, see License.txt"
 T = TypeVar("T")
 
 
-class IsSequenceOnlyContaining(BaseMatcher[Sequence[T]]):
+class IsCollectionOnlyContaining(BaseMatcher[Collection[T]]):
     def __init__(self, matcher: Matcher[T]) -> None:
         self.matcher = matcher
 
-    def _matches(self, item: Sequence[T]) -> bool:
+    def _matches(self, item: Collection[T]) -> bool:
         try:
-            sequence = list(item)
-            if len(sequence) == 0:
+            collection = list(item)
+            if len(collection) == 0:
                 return False
-            for element in sequence:
+            for element in collection:
                 if not self.matcher.matches(element):
                     return False
             return True
@@ -35,12 +35,12 @@ class IsSequenceOnlyContaining(BaseMatcher[Sequence[T]]):
         )
 
 
-def only_contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
-    """Matches if each element of sequence satisfies any of the given matchers.
+def only_contains(*items: Union[Matcher[T], T]) -> Matcher[Collection[T]]:
+    """Matches if each element of collection satisfies any of the given matchers.
 
     :param match1,...: A comma-separated list of matchers.
 
-    This matcher iterates the evaluated sequence, confirming whether each
+    This matcher iterates the evaluated collection, confirming whether each
     element satisfies any of the given matchers.
 
     Example::
@@ -57,4 +57,7 @@ def only_contains(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     matchers = []
     for item in items:
         matchers.append(wrap_matcher(item))
-    return IsSequenceOnlyContaining(any_of(*matchers))
+    return IsCollectionOnlyContaining(any_of(*matchers))
+
+
+IsSequenceOnlyContaining = IsCollectionOnlyContaining

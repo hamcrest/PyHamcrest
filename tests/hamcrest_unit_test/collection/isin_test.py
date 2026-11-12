@@ -3,7 +3,7 @@ import unittest
 from hamcrest.library.collection.isin import is_in
 from hamcrest_unit_test.matcher_test import MatcherTest
 
-from .sequencemixin import GeneratorForm, SequenceForm
+from .sequencemixin import CollectionForm, GeneratorForm, SequenceForm
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -40,6 +40,10 @@ class IsInConcreteSequenceTest(MatcherTest, IsInTestBase, SequenceForm):
 
 
 class IsInGeneratorTest(MatcherTest, IsInTestBase, GeneratorForm):
+    pass
+
+
+class IsInCollectionTest(MatcherTest, IsInTestBase, CollectionForm):
     pass
 
 

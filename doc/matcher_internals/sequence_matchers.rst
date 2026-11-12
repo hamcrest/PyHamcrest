@@ -3,7 +3,7 @@
 Sequence Matchers
 -----------------
 
-Matchers of sequences.
+Matchers of sequences and other collections, such as sets or dictionaries.
 
 
 .. automodule:: hamcrest.library.collection.issequence_containinginorder
