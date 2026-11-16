@@ -6,7 +6,7 @@ from hamcrest.library.collection.issequence_containinginanyorder import contains
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 from .quasisequence import QuasiSequence
-from .sequencemixin import GeneratorForm, SequenceForm
+from .sequencemixin import CollectionForm, GeneratorForm, SequenceForm
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -104,6 +104,12 @@ class IsConcreteSequenceContainingInAnyOrderTest(
 
 class IsGeneratorSequenceContainingInAnyOrderTest(
     MatcherTest, IsSequenceContainingInAnyOrderBase, GeneratorForm
+):
+    pass
+
+
+class IsCollectionContainingInAnyOrderTest(
+    MatcherTest, IsSequenceContainingInAnyOrderBase, CollectionForm
 ):
     pass
 

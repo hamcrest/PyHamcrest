@@ -1,4 +1,4 @@
-from typing import Sequence, TypeVar, Union, cast
+from typing import Collection, TypeVar, Union, cast
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.allof import all_of
@@ -13,11 +13,11 @@ __license__ = "BSD, see License.txt"
 T = TypeVar("T")
 
 
-class IsSequenceContaining(BaseMatcher[Sequence[T]]):
+class IsCollectionContaining(BaseMatcher[Collection[T]]):
     def __init__(self, element_matcher: Matcher[T]) -> None:
         self.element_matcher = element_matcher
 
-    def _matches(self, item: Sequence[T]) -> bool:
+    def _matches(self, item: Collection[T]) -> bool:
         try:
             for element in item:
                 if self.element_matcher.matches(element):
@@ -36,31 +36,31 @@ class IsSequenceContaining(BaseMatcher[Sequence[T]]):
 # be seeing a one-time sequence here (like a generator); see issue #20
 # Instead, we wrap it inside a class that will convert the sequence into
 # a concrete list and then hand it off to the all_of matcher.
-class IsSequenceContainingEvery(BaseMatcher[Sequence[T]]):
+class IsCollectionContainingEvery(BaseMatcher[Collection[T]]):
     def __init__(self, *element_matchers: Matcher[T]) -> None:
-        delegates = [cast(Matcher[Sequence[T]], has_item(e)) for e in element_matchers]
-        self.matcher: Matcher[Sequence[T]] = all_of(*delegates)
+        delegates = [cast(Matcher[Collection[T]], has_item(e)) for e in element_matchers]
+        self.matcher: Matcher[Collection[T]] = all_of(*delegates)
 
-    def _matches(self, item: Sequence[T]) -> bool:
+    def _matches(self, item: Collection[T]) -> bool:
         try:
             return self.matcher.matches(list(item))
         except TypeError:
             return False
 
-    def describe_mismatch(self, item: Sequence[T], mismatch_description: Description) -> None:
+    def describe_mismatch(self, item: Collection[T], mismatch_description: Description) -> None:
         self.matcher.describe_mismatch(item, mismatch_description)
 
     def describe_to(self, description: Description) -> None:
         self.matcher.describe_to(description)
 
 
-def has_item(match: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
-    """Matches if any element of sequence satisfies a given matcher.
+def has_item(match: Union[Matcher[T], T]) -> Matcher[Collection[T]]:
+    """Matches if any element of collection satisfies a given matcher.
 
     :param match: The matcher to satisfy, or an expected value for
         :py:func:`~hamcrest.core.core.isequal.equal_to` matching.
 
-    This matcher iterates the evaluated sequence, searching for any element
+    This matcher iterates the evaluated collection, searching for any element
     that satisfies a given matcher. If a matching element is found,
     ``has_item`` is satisfied.
 
@@ -69,17 +69,17 @@ def has_item(match: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     equality.
 
     """
-    return IsSequenceContaining(wrap_matcher(match))
+    return IsCollectionContaining(wrap_matcher(match))
 
 
-def has_items(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
+def has_items(*items: Union[Matcher[T], T]) -> Matcher[Collection[T]]:
     """Matches if all of the given matchers are satisfied by any elements of
-    the sequence.
+    the collection.
 
     :param match1,...: A comma-separated list of matchers.
 
     This matcher iterates the given matchers, searching for any elements in the
-    evaluated sequence that satisfy them. If each matcher is satisfied, then
+    evaluated collection that satisfy them. If each matcher is satisfied, then
     ``has_items`` is satisfied.
 
     Any argument that is not a matcher is implicitly wrapped in an
@@ -90,4 +90,8 @@ def has_items(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     matchers = []
     for item in items:
         matchers.append(wrap_matcher(item))
-    return IsSequenceContainingEvery(*matchers)
+    return IsCollectionContainingEvery(*matchers)
+
+
+IsSequenceContaining = IsCollectionContaining
+IsSequenceContainingEvery = IsCollectionContainingEvery

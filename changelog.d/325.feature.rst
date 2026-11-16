@@ -1,0 +1,1 @@
+Widened the type hints of ``has_item``, ``has_items``, ``contains_inanyorder``, ``only_contains`` and ``is_in`` to accept any ``Collection`` (sets, dicts...), not only sequences. Added ``IsCollection*`` matcher classes, keeping the ``IsSequence*`` names as aliases.

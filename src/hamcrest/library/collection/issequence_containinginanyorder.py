@@ -1,4 +1,4 @@
-from typing import Generic, Optional, Sequence, TypeVar, Union
+from typing import Collection, Generic, Optional, TypeVar, Union
 
 from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.description import Description
@@ -14,7 +14,7 @@ T = TypeVar("T")
 
 class MatchInAnyOrder(Generic[T]):
     def __init__(
-        self, matchers: Sequence[Matcher[T]], mismatch_description: Optional[Description]
+        self, matchers: Collection[Matcher[T]], mismatch_description: Optional[Description]
     ) -> None:
         self.matchers = list(matchers)
         self.mismatch_description = mismatch_description
@@ -22,7 +22,7 @@ class MatchInAnyOrder(Generic[T]):
     def matches(self, item: T) -> bool:
         return self.isnotsurplus(item) and self.ismatched(item)
 
-    def isfinished(self, item: Sequence[T]) -> bool:
+    def isfinished(self, item: Collection[T]) -> bool:
         if not self.matchers:
             return True
         if self.mismatch_description:
@@ -49,28 +49,28 @@ class MatchInAnyOrder(Generic[T]):
         return False
 
 
-class IsSequenceContainingInAnyOrder(BaseMatcher[Sequence[T]]):
-    def __init__(self, matchers: Sequence[Matcher[T]]) -> None:
+class IsCollectionContainingInAnyOrder(BaseMatcher[Collection[T]]):
+    def __init__(self, matchers: Collection[Matcher[T]]) -> None:
         self.matchers = matchers
 
     def matches(
-        self, item: Sequence[T], mismatch_description: Optional[Description] = None
+        self, item: Collection[T], mismatch_description: Optional[Description] = None
     ) -> bool:
         try:
-            sequence = list(item)
-            matchsequence = MatchInAnyOrder(self.matchers, mismatch_description)
-            for element in sequence:
-                if not matchsequence.matches(element):
+            collection = list(item)
+            matchcollection = MatchInAnyOrder(self.matchers, mismatch_description)
+            for element in collection:
+                if not matchcollection.matches(element):
                     return False
-            return matchsequence.isfinished(sequence)
+            return matchcollection.isfinished(collection)
         except TypeError:
             if mismatch_description:
-                super(IsSequenceContainingInAnyOrder, self).describe_mismatch(
+                super(IsCollectionContainingInAnyOrder, self).describe_mismatch(
                     item, mismatch_description
                 )
             return False
 
-    def describe_mismatch(self, item: Sequence[T], mismatch_description: Description) -> None:
+    def describe_mismatch(self, item: Collection[T], mismatch_description: Description) -> None:
         self.matches(item, mismatch_description)
 
     def describe_to(self, description: Description) -> None:
@@ -79,13 +79,13 @@ class IsSequenceContainingInAnyOrder(BaseMatcher[Sequence[T]]):
         ).append_text(" in any order")
 
 
-def contains_inanyorder(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
-    """Matches if sequences's elements, in any order, satisfy a given list of
+def contains_inanyorder(*items: Union[Matcher[T], T]) -> Matcher[Collection[T]]:
+    """Matches if collection's elements, in any order, satisfy a given list of
     matchers.
 
     :param match1,...: A comma-separated list of matchers.
 
-    This matcher iterates the evaluated sequence, seeing if each element
+    This matcher iterates the evaluated collection, seeing if each element
     satisfies any of the given matchers. The matchers are tried from left to
     right, and when a satisfied matcher is found, it is no longer a candidate
     for the remaining elements. If a one-to-one correspondence is established
@@ -100,4 +100,7 @@ def contains_inanyorder(*items: Union[Matcher[T], T]) -> Matcher[Sequence[T]]:
     matchers = []
     for item in items:
         matchers.append(wrap_matcher(item))
-    return IsSequenceContainingInAnyOrder(matchers)
+    return IsCollectionContainingInAnyOrder(matchers)
+
+
+IsSequenceContainingInAnyOrder = IsCollectionContainingInAnyOrder

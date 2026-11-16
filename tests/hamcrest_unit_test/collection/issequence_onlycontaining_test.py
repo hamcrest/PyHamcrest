@@ -6,7 +6,7 @@ from hamcrest.library.number.ordering_comparison import less_than
 from hamcrest_unit_test.matcher_test import MatcherTest
 
 from .quasisequence import QuasiSequence
-from .sequencemixin import GeneratorForm, SequenceForm
+from .sequencemixin import CollectionForm, GeneratorForm, SequenceForm
 
 __author__ = "Jon Reid"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -74,6 +74,10 @@ class IsConcreteSequenceOnlyContainingTest(
 class IsGeneratorSequenceOnlyContainingTest(
     MatcherTest, IsSequenceOnlyContainingTestBase, GeneratorForm
 ):
+    pass
+
+
+class IsCollectionOnlyContainingTest(MatcherTest, IsSequenceOnlyContainingTestBase, CollectionForm):
     pass
 
 

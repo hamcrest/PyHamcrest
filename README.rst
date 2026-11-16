@@ -140,15 +140,18 @@ PyHamcrest comes with a library of useful matchers:
   * ``anything`` - match anything, useful in composite matchers when you don't care about a particular value
   * ``is_not``, ``not_`` - negate the matcher
 
+* Collection
+
+  * ``contains_inanyorder`` - match the entire collection, but in any order
+  * ``has_item`` - match if given item appears in the collection
+  * ``has_items`` - match if all given items appear in the collection, in any order
+  * ``is_in`` - match if item appears in the given collection
+  * ``only_contains`` - match if collection's items appear in given list
+  * ``empty`` - match if the collection is empty
+
 * Sequence
 
   * ``contains`` - exactly match the entire sequence
-  * ``contains_inanyorder`` - match the entire sequence, but in any order
-  * ``has_item`` - match if given item appears in the sequence
-  * ``has_items`` - match if all given items appear in the sequence, in any order
-  * ``is_in`` - match if item appears in the given sequence
-  * ``only_contains`` - match if sequence's items appear in given list
-  * ``empty`` - match if the sequence is empty
 
 * Dictionary
 
@@ -166,7 +169,7 @@ PyHamcrest comes with a library of useful matchers:
 
 The arguments for many of these matchers accept not just a matching value, but
 another matcher, so matchers can be composed for greater flexibility. For
-example, ``only_contains(less_than(5))`` will match any sequence where every
+example, ``only_contains(less_than(5))`` will match any collection where every
 item is less than 5.
 
 
