@@ -1,6 +1,6 @@
 # ruff: noqa: F405, F403
 
-from hamcrest.core.assert_that import assert_that
+from hamcrest.core.assert_that import assert_that, DeferAssertContextManager
 from hamcrest.core.core import *
 
 __author__ = "Jon Reid"
@@ -23,4 +23,5 @@ __all__ = [
     "not_none",
     "raises",
     "same_instance",
+    "DeferAssertContextManager",
 ]
