@@ -6,8 +6,8 @@ from hamcrest.core.base_matcher import BaseMatcher
 from hamcrest.core.core.allof import AllOf
 from hamcrest.core.description import Description
 from hamcrest.core.helpers.wrap_matcher import wrap_matcher as wrap_shortcut
+from hamcrest.core.localized_description import LocalizedDescription
 from hamcrest.core.matcher import Matcher
-from hamcrest.core.string_description import StringDescription
 
 __author__ = "Chris Rose"
 __copyright__ = "Copyright 2011 hamcrest.org"
@@ -54,7 +54,7 @@ class IsObjectWithProperty(BaseMatcher[object]):
         self.value_matcher.describe_mismatch(value, mismatch_description)
 
     def __str__(self):
-        d = StringDescription()
+        d = LocalizedDescription()
         self.describe_to(d)
         return str(d)
 
@@ -175,7 +175,7 @@ def has_properties(*keys_valuematchers, **kv_args):
         base_dict[key] = wrap_shortcut(value)
 
     if len(base_dict) > 1:
-        description = StringDescription().append_text("an object with properties ")
+        description = LocalizedDescription().append_text("an object with properties ")
         for i, (property_name, property_value_matcher) in enumerate(sorted(base_dict.items())):
             description.append_description_of(property_name).append_text(
                 " matching "
